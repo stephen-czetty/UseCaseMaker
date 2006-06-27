@@ -222,7 +222,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Extarnal Libraries\ApacheFop.Net.dll"
+                    RelPath = "External Libraries\ApacheFop.Net.dll"
                     BuildAction = "Content"
                 />
                 <File
