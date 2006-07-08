@@ -6,8 +6,6 @@
   <xsl:output method="xml" version="1.0" encoding="UTF-8" standalone="yes"/>
   <!-- Application parameters -->
   <xsl:param name="version"/>
-  <xsl:param name="copyright"/>
-  <xsl:param name="pathToLogo"/>
   <!-- General parameters -->
   <xsl:param name="description"/>
   <xsl:param name="notes"/>
@@ -53,23 +51,6 @@
     <xsl:attribute name="color">darkgray</xsl:attribute>
     <xsl:attribute name="text-align">right</xsl:attribute>
     <xsl:attribute name="space-after">0.1em</xsl:attribute>
-  </xsl:attribute-set>
-  <xsl:attribute-set name="UCMHCopyright">
-    <xsl:attribute name="font-family">sans-serif</xsl:attribute>
-    <xsl:attribute name="font-size">7pt</xsl:attribute>
-    <xsl:attribute name="font-weight">bold</xsl:attribute>
-    <xsl:attribute name="font-style">italic</xsl:attribute>
-    <xsl:attribute name="color">darkgray</xsl:attribute>
-    <xsl:attribute name="text-align">right</xsl:attribute>
-    <xsl:attribute name="space-after">0.1em</xsl:attribute>
-  </xsl:attribute-set>
-  <xsl:attribute-set name="UCMSiteLink">
-    <xsl:attribute name="font-family">sans-serif</xsl:attribute>
-    <xsl:attribute name="font-size">6pt</xsl:attribute>
-    <xsl:attribute name="color">darkgray</xsl:attribute>
-    <xsl:attribute name="text-align">right</xsl:attribute>
-    <xsl:attribute name="text-decoration">underline</xsl:attribute>
-    <xsl:attribute name="space-after">0.5em</xsl:attribute>    
   </xsl:attribute-set>
   <xsl:attribute-set name="UCMHeader">
     <xsl:attribute name="border-bottom-width">0.3pt</xsl:attribute>
@@ -194,33 +175,14 @@
         <fo:static-content flow-name="xsl-region-before">
           <fo:block xsl:use-attribute-sets="UCMHeader">
             <fo:table table-layout="fixed" width="18cm">
-              <fo:table-column column-number="1" column-width="9.0cm"/>
-              <fo:table-column column-number="2" column-width="7.2cm"/>
-              <fo:table-column column-number="3" column-width="1.8cm"/>
+              <fo:table-column column-number="1" column-width="15cm"/>
+              <fo:table-column column-number="2" column-width="3cm"/>
               <fo:table-body>
                 <fo:table-row>
                   <fo:table-cell column-number="1"/>
                   <fo:table-cell column-number="2">
                     <fo:block xsl:use-attribute-sets="UCMHTitle">Use Case Maker
                       <xsl:value-of select="$version"/>
-                    </fo:block>
-                    <fo:block xsl:use-attribute-sets="UCMHCopyright">
-                      <xsl:value-of select="$copyright"/>
-                    </fo:block>
-                    <fo:block xsl:use-attribute-sets="UCMSiteLink">
-                      <fo:basic-link external-destination="http://www.magosoftware.com">
-											    www.magosoftware.com
-                                                </fo:basic-link>
-                    </fo:block>
-                  </fo:table-cell>
-                  <fo:table-cell column-number="3">
-                    <fo:block text-align="right">
-                      <xsl:element name="fo:external-graphic">
-                        <xsl:attribute name="width">1.5cm</xsl:attribute>
-                        <xsl:attribute name="src">
-                          <xsl:value-of select="string($pathToLogo)" />
-                        </xsl:attribute>
-                      </xsl:element>
                     </fo:block>
                   </fo:table-cell>
                 </fo:table-row>

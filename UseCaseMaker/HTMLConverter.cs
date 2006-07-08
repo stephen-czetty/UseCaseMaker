@@ -51,8 +51,6 @@ namespace UseCaseMaker
 			al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();
 			al.AddParam("version","",an.Version.ToString(2));
-			AssemblyCopyrightAttribute copyright = (AssemblyCopyrightAttribute)this.GetType().Assembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute),false)[0];
-			al.AddParam("copyright","",copyright.Copyright);
 			transform.Transform(doc,al,sw,null);
 			sw.Close();
 		}

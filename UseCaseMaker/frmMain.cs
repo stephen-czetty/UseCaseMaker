@@ -4808,9 +4808,6 @@ namespace UseCaseMaker
 			this.ResumeLayout();
 
 			lblVersion.Text = Application.ProductVersion;
-			AssemblyCopyrightAttribute copyright = 
-				(AssemblyCopyrightAttribute)
-				this.GetType().Assembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute),true)[0];
 			
 			if(this.modelFilePath == string.Empty)
 			{

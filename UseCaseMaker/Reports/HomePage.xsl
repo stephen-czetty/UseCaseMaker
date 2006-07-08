@@ -3,7 +3,6 @@
 	<xsl:output method="html" />
 	
 	<xsl:param name="version" />
-	<xsl:param name="copyright" />
 
 	<xsl:template match="/">
 		<html>
@@ -15,12 +14,8 @@
 				<table border="1" bgcolor="white" cellpadding="5" cellspacing="0" align="center" width="500px">
 					<tr>
 						<td align="center">
-							<img class="TransparentTableCell" src="Mago_logo.gif" />
-							<hr />
 							<p class="Title"><u>Use Case Maker</u></p>
 							<p class="SubTitle"><xsl:value-of select="$version" /></p>
-							<p><font size="-1"><xsl:value-of select="$copyright" /></font></p>
-							<a href="http://www.magosoftware.com"><font size="-1">www.magosoftware.com</font></a>
 						</td>
 					</tr>
 				</table>

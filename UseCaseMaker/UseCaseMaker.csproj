@@ -359,14 +359,6 @@
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "Reports\Mago_logo.gif"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Reports\Mago_logo.JPG"
-                    BuildAction = "Content"
-                />
-                <File
                     RelPath = "Reports\MatchLink.xsl"
                     BuildAction = "Content"
                 />

@@ -71,9 +71,6 @@ namespace UseCaseMaker
 			XsltArgumentList al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();
 			al.AddParam("version","",an.Version.ToString(2));
-			AssemblyCopyrightAttribute copyright = (AssemblyCopyrightAttribute)this.GetType().Assembly.GetCustomAttributes(typeof(AssemblyCopyrightAttribute),false)[0];
-			al.AddParam("copyright","",copyright.Copyright);
-			al.AddParam("pathToLogo","",this.stylesheetFilesPath + Path.DirectorySeparatorChar + "Mago_logo.jpg");
 			al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
 			al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
 			al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
