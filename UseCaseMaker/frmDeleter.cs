@@ -64,6 +64,7 @@ namespace UseCaseMaker
 			// 
 			// cbDontMark
 			// 
+			this.cbDontMark.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.cbDontMark.Location = new System.Drawing.Point(8, 48);
 			this.cbDontMark.Name = "cbDontMark";
 			this.cbDontMark.Size = new System.Drawing.Size(328, 24);
@@ -74,6 +75,7 @@ namespace UseCaseMaker
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnOK.Location = new System.Drawing.Point(48, 80);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(120, 23);
@@ -85,6 +87,7 @@ namespace UseCaseMaker
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.CausesValidation = false;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnCancel.Location = new System.Drawing.Point(176, 80);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(120, 23);
@@ -93,6 +96,7 @@ namespace UseCaseMaker
 			// 
 			// lblUserQuestionTitle
 			// 
+			this.lblUserQuestionTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUserQuestionTitle.Location = new System.Drawing.Point(8, 8);
 			this.lblUserQuestionTitle.Name = "lblUserQuestionTitle";
 			this.lblUserQuestionTitle.Size = new System.Drawing.Size(328, 32);

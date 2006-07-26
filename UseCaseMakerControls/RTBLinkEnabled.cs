@@ -16,6 +16,7 @@ namespace UseCaseMakerControls
 		private HighLightDescriptorCollection mHighlightDescriptors = new HighLightDescriptorCollection();
 		private bool mCaseSesitive = false;
 		private bool mFilterAutoComplete = false;
+		private string lastTokenClicked = "";
 
 		//Internal use members
 		private bool mAutoCompleteShown = false;
@@ -27,6 +28,7 @@ namespace UseCaseMakerControls
 		// Events
 		public event MouseOverTokenEventHandler		MouseOverToken;
 		public event ItemTextChangedEventHandler	ItemTextChanged;
+		public event ClickOnTokenEventHandler		ClickOnToken;
 
 		//Undo/Redo members
 		private ArrayList mUndoList = new ArrayList();
@@ -41,9 +43,9 @@ namespace UseCaseMakerControls
 		void LinkEnableRTB()
 		{
 			DetectUrls = false;
-			mTooltip.AutoPopDelay = 5000;
+			mTooltip.AutoPopDelay = 3000;
 			mTooltip.InitialDelay = 1000;
-			mTooltip.ReshowDelay = 500;
+			mTooltip.ReshowDelay = 1000;
 			mTooltip.ShowAlways = false;
 		}
 		#endregion
@@ -136,6 +138,14 @@ namespace UseCaseMakerControls
 				return mTooltip;
 			}
 		}
+
+		public string LastTokenClicked
+		{
+			get
+			{
+				return lastTokenClicked;
+			}
+		}
 		#endregion
 
 		#region Public Methods
@@ -159,6 +169,14 @@ namespace UseCaseMakerControls
 			if(ItemTextChanged != null)
 			{
 				ItemTextChanged(this,e);
+			}
+		}
+
+		protected virtual void OnClickOnToken(MouseOverTokenEventArgs e)
+		{
+			if(ClickOnToken != null)
+			{
+				ClickOnToken(this,e);
 			}
 		}
 		#endregion
@@ -464,95 +482,38 @@ namespace UseCaseMakerControls
 		{
 			base.OnMouseMove (e);
 
-			bool found = false;
-
-			if(this.Text.Length == 0)
+			string token = CurrentToken(e);
+			if(token != string.Empty)
 			{
-				return;
+				MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(
+					e.Button,
+					e.Clicks,
+					e.X,
+					e.Y,
+					e.Delta,
+					this,
+					token);
+				OnMouseOverToken(mot);
 			}
-			
-			char [] separators = this.Separators.GetAsCharArray();
+		}
 
-			int charIndex;
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			base.OnMouseUp (e);
 
-			string c = string.Empty;
-			string token = string.Empty;
-			string compositeToken = string.Empty;
-			int tokenEndIndex;
-
-			// Composite token
-			found = false;
-			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
-			while(charIndex >= 0)
+			string token = CurrentToken(e);
+			if(token != string.Empty)
 			{
-				c = this.Text.Substring(charIndex,1);
-				if(c == "\"")
-				{
-					found = true;
-					break;
-				}
-				charIndex -= 1;
-			}
-
-			if(found)
-			{
-				charIndex += 1;
-				
-				if(c == "\"")
-				{
-					tokenEndIndex = this.Text.IndexOf("\"",charIndex);
-					if(tokenEndIndex == -1)
-					{
-						tokenEndIndex = this.Text.Length;
-					}
-					
-					compositeToken = "\"" + this.Text.Substring(charIndex,tokenEndIndex - charIndex) + "\"";
-					compositeToken = compositeToken.Replace(" ","\t");
-					compositeToken = compositeToken.Replace(".","\v");
-				}
-			}
-
-			// Single word token
-			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
-			while(charIndex >= 0)
-			{
-				c = this.Text.Substring(charIndex,1);
-				if(c.IndexOfAny(separators) != -1)
-				{
-					found = true;
-					break;
-				}
-				charIndex -= 1;
-			}
-
-			charIndex += 1;
-
-			tokenEndIndex = this.Text.IndexOfAny(separators,charIndex);
-			if(tokenEndIndex == -1)
-			{
-				tokenEndIndex = this.Text.Length;
-			}
-			
-			token = this.Text.Substring(charIndex,tokenEndIndex - charIndex);
-
-			foreach(HighlightDescriptor hd in this.HighlightDescriptors)
-			{
-				if(hd.Token == token)
-				{
-					token = token.Replace("\"","");
-					MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(this,token);
-					OnMouseOverToken(mot);
-					break;
-				}
-				if(hd.Token == compositeToken)
-				{
-					compositeToken = compositeToken.Replace("\t"," ");
-					compositeToken = compositeToken.Replace("\v",".");
-					compositeToken = compositeToken.Replace("\"","");
-					MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(this,compositeToken);
-					OnMouseOverToken(mot);
-					break;
-				}
+				MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(
+					e.Button,
+					e.Clicks,
+					e.X,
+					e.Y,
+					e.Delta,					
+					this,
+					token);
+				lastTokenClicked = token;
+				OnClickOnToken(mot);
 			}
 		}
 
@@ -742,6 +703,101 @@ namespace UseCaseMakerControls
 			}
 
 			return counter;
+		}
+
+		private string CurrentToken(MouseEventArgs e)
+		{
+			bool found = false;
+
+			if(this.Text.Length == 0)
+			{
+				return string.Empty;
+			}
+			
+			char [] separators = this.Separators.GetAsCharArray();
+
+			int charIndex;
+
+			string c = string.Empty;
+			string token = string.Empty;
+			string compositeToken = string.Empty;
+			string retValue = string.Empty;
+			int tokenEndIndex;
+
+			// Composite token
+			found = false;
+			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
+			while(charIndex >= 0)
+			{
+				c = this.Text.Substring(charIndex,1);
+				if(c == "\"")
+				{
+					found = true;
+					break;
+				}
+				charIndex -= 1;
+			}
+
+			if(found)
+			{
+				charIndex += 1;
+				
+				if(c == "\"")
+				{
+					tokenEndIndex = this.Text.IndexOf("\"",charIndex);
+					if(tokenEndIndex == -1)
+					{
+						tokenEndIndex = this.Text.Length;
+					}
+					
+					compositeToken = "\"" + this.Text.Substring(charIndex,tokenEndIndex - charIndex) + "\"";
+					compositeToken = compositeToken.Replace(" ","\t");
+					compositeToken = compositeToken.Replace(".","\v");
+				}
+			}
+
+			// Single word token
+			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
+			while(charIndex >= 0)
+			{
+				c = this.Text.Substring(charIndex,1);
+				if(c.IndexOfAny(separators) != -1)
+				{
+					found = true;
+					break;
+				}
+				charIndex -= 1;
+			}
+
+			charIndex += 1;
+
+			tokenEndIndex = this.Text.IndexOfAny(separators,charIndex);
+			if(tokenEndIndex == -1)
+			{
+				tokenEndIndex = this.Text.Length;
+			}
+			
+			token = this.Text.Substring(charIndex,tokenEndIndex - charIndex);
+
+			foreach(HighlightDescriptor hd in this.HighlightDescriptors)
+			{
+				if(hd.Token == token)
+				{
+					token = token.Replace("\"","");
+					retValue = token;
+					break;
+				}
+				if(hd.Token == compositeToken)
+				{
+					compositeToken = compositeToken.Replace("\t"," ");
+					compositeToken = compositeToken.Replace("\v",".");
+					compositeToken = compositeToken.Replace("\"","");
+					retValue = compositeToken;
+					break;
+				}
+			}
+
+			return retValue;
 		}
 		#endregion
 

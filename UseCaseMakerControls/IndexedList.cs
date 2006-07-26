@@ -47,6 +47,7 @@ namespace UseCaseMakerControls
 		public event MouseOverTokenEventHandler		MouseOverToken;
 		public event ItemTextChangedEventHandler	ItemTextChanged;
 		public event SelectedChangeEventHandler		SelectedChanged;
+		public event ClickOnTokenEventHandler		ClickOnToken;
 		#endregion
 
 		#region Constructors
@@ -660,6 +661,20 @@ namespace UseCaseMakerControls
 			if(this.SelectedChanged != null)
 			{
 				this.SelectedChanged(sender,e);
+			}
+		}
+
+		public void OnClickOnToken(object sender, MouseOverTokenEventArgs e)
+		{
+			if(this.ClickOnToken != null)
+			{
+				foreach(IndexedListItem ili in this.items)
+				{
+					if(ili.ItemRichTextBox.Name == ((RichTextBox)sender).Name)
+					{
+						this.ClickOnToken(ili,e);
+					}
+				}
 			}
 		}
 		#endregion

@@ -7,6 +7,7 @@ namespace UseCaseMakerControls
 	public delegate void MouseOverTokenEventHandler(object sender, MouseOverTokenEventArgs e);
 	public delegate void SelectedChangeEventHandler(object sender, EventArgs e);
 	public delegate void ItemTextChangedEventHandler(object sender, EventArgs e);
+	public delegate void ClickOnTokenEventHandler(object sender, MouseOverTokenEventArgs e);
 
 	/// <summary>
 	/// Descrizione di riepilogo per IndexedListItem.
@@ -28,6 +29,7 @@ namespace UseCaseMakerControls
 		public event MouseOverTokenEventHandler		MouseOverToken;
 		public event SelectedChangeEventHandler		SelectedChange;
 		public event ItemTextChangedEventHandler	ItemTextChanged;
+		public event ClickOnTokenEventHandler		ClickOnToken;
 		#endregion
 
 		#region Constructors
@@ -35,6 +37,7 @@ namespace UseCaseMakerControls
 		{
 			_text.MouseOverToken += new MouseOverTokenEventHandler(_text_MouseOverToken);
 			_text.ItemTextChanged += new ItemTextChangedEventHandler(_text_ItemTextChanged);
+			_text.ClickOnToken += new ClickOnTokenEventHandler(_text_ClickOnToken);
 		}
 		#endregion
 
@@ -154,6 +157,14 @@ namespace UseCaseMakerControls
 			if(ItemTextChanged != null)
 			{
 				ItemTextChanged(sender,e);
+			}
+		}
+
+		protected void _text_ClickOnToken(object sender, MouseOverTokenEventArgs e)
+		{
+			if(ClickOnToken != null)
+			{
+				ClickOnToken(sender,e);
 			}
 		}
 		#endregion

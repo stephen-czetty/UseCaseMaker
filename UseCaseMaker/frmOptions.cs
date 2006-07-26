@@ -157,6 +157,7 @@ namespace UseCaseMaker
 			// 
 			// lblSelectLanguageTitle
 			// 
+			this.lblSelectLanguageTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblSelectLanguageTitle.Location = new System.Drawing.Point(8, 8);
 			this.lblSelectLanguageTitle.Name = "lblSelectLanguageTitle";
 			this.lblSelectLanguageTitle.Size = new System.Drawing.Size(400, 16);
@@ -168,6 +169,7 @@ namespace UseCaseMaker
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.CausesValidation = false;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnCancel.Location = new System.Drawing.Point(224, 256);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(120, 23);
@@ -178,6 +180,7 @@ namespace UseCaseMaker
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnOK.Location = new System.Drawing.Point(96, 256);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(120, 23);

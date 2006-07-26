@@ -113,13 +113,13 @@ namespace UseCaseMakerControls
 			
 			item.ItemLabel.Name = "index_" + GUID.ToString();
 			item.ItemLabel.BorderStyle = BorderStyle.None;
-			item.ItemLabel.BackColor = parent.IndexBackColor;
+			item.ItemLabel.BackColor = this.parent.IndexBackColor;
 			item.ItemLabel.Click += new EventHandler(parent.OnItemLabelClick);
 
 			item.ItemRichTextBox.CaseSensitive = true;
 			item.ItemRichTextBox.Name = "text_" + GUID.ToString();
 			item.ItemRichTextBox.BorderStyle = BorderStyle.None;
-			item.ItemRichTextBox.BackColor = parent.TextBackColor;
+			item.ItemRichTextBox.BackColor = this.parent.TextBackColor;
 			item.ItemRichTextBox.GotFocus += new EventHandler(parent.OnItemRichTextBoxClick);
 
 			item.ItemRichTextBox.Separators = this.parent.Separators;
@@ -128,6 +128,7 @@ namespace UseCaseMakerControls
 			item.SelectedChange += new SelectedChangeEventHandler(item_SelectedChange);
 			item.MouseOverToken += new MouseOverTokenEventHandler(parent.OnMouseOverToken);
 			item.ItemTextChanged += new ItemTextChangedEventHandler(parent.OnItemTextChanged);
+			item.ClickOnToken += new ClickOnTokenEventHandler(parent.OnClickOnToken);
 
 			parent.Controls.Add(item.ItemLabel);
 			parent.Controls.Add(item.ItemRichTextBox);

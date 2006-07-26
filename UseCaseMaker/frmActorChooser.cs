@@ -80,6 +80,7 @@ namespace UseCaseMaker
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnOK.Location = new System.Drawing.Point(48, 120);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(120, 23);
@@ -91,6 +92,7 @@ namespace UseCaseMaker
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.CausesValidation = false;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnCancel.Location = new System.Drawing.Point(176, 120);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(120, 23);
@@ -99,6 +101,7 @@ namespace UseCaseMaker
 			// 
 			// lblChooseActorTitle
 			// 
+			this.lblChooseActorTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblChooseActorTitle.Location = new System.Drawing.Point(8, 8);
 			this.lblChooseActorTitle.Name = "lblChooseActorTitle";
 			this.lblChooseActorTitle.Size = new System.Drawing.Size(328, 16);

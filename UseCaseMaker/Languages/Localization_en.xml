@@ -83,13 +83,15 @@
 			<!-- Help menu items -->
 			<mnuHelp>&amp;Help</mnuHelp>
 			<mnuHelpAbout>&amp;About...</mnuHelpAbout>
-			<!-- Context menu items -->
+			<!-- Model browser context menu items -->
 			<mnuCtxMBAddPackage>Add &amp;package</mnuCtxMBAddPackage>
 			<mnuCtxMBRemovePackage>&amp;Remove package</mnuCtxMBRemovePackage>
 			<mnuCtxMBAddActor>Add &amp;actor</mnuCtxMBAddActor>
 			<mnuCtxMBRemoveActor>Re&amp;move actor</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>Add &amp;use case</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>Remo&amp;ve use case</mnuCtxMBRemoveUseCase>		
+			<!-- Element token context menu items -->
+			<mnuCtxETGoToDefinition>&amp;Go to definition</mnuCtxETGoToDefinition>
 			<!-- Other controls -->
 			<lblModelBrowser>Model browser</lblModelBrowser>
 			<!-- Tab pages -->
