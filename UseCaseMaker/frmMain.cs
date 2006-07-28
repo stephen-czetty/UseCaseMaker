@@ -4192,7 +4192,7 @@ namespace UseCaseMaker
 				sub = sub.Replace(" ","\t");
 				sub = sub.Replace(".","\v");
 				HighlightDescriptor hd = new 
-					HighlightDescriptor(sub,Color.Red,null,DescriptorType.Word,DescriptorRecognition.WholeWord,true);
+					HighlightDescriptor(sub,Color.Green,null,DescriptorType.Word,DescriptorRecognition.WholeWord,true);
 				this.hdc.Add(hd);
 				this.SetModified(true);
 			}
