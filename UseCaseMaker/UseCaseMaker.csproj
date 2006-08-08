@@ -258,6 +258,14 @@
                     BuildAction = "Content"
                 />
                 <File
+                    RelPath = "Icons\FLGJAPAN.ICO"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Icons\FLGNONE.ICO"
+                    BuildAction = "Content"
+                />
+                <File
                     RelPath = "Icons\FLGPORT.ICO"
                     BuildAction = "Content"
                 />

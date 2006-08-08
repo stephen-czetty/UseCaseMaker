@@ -13,12 +13,14 @@ namespace UseCaseMaker
 	{
 		private enum FlagsIndex
 		{
-			FR = 0,
-			DE = 1,
-			IT = 2,
-			PT = 3,
-			ES = 4,
-			EN = 5
+			NC = 0,
+			FR = 1,
+			DE = 2,
+			IT = 3,
+			PT = 4,
+			ES = 5,
+			EN = 6,
+			JP = 7
 		}
 
 		private System.Windows.Forms.TabControl tabOptions;
@@ -47,8 +49,14 @@ namespace UseCaseMaker
 			foreach(string lang in availableLanguages)
 			{
 				ListViewItem lviFlag = new ListViewItem();
-				// lviFlag.ImageIndex = (int)Enum.Parse(typeof(FlagsIndex),lang,true);
-				lviFlag.StateImageIndex = (int)Enum.Parse(typeof(FlagsIndex),lang,true);
+				try
+				{
+					lviFlag.StateImageIndex = (int)Enum.Parse(typeof(FlagsIndex),lang,true);
+				}
+				catch(ArgumentException)
+				{
+					lviFlag.StateImageIndex = (int)FlagsIndex.NC;
+				}
 				lviFlag.SubItems.Add(lang.ToUpper());
 				lvOptLanguages.Items.Add(lviFlag);
 			};
