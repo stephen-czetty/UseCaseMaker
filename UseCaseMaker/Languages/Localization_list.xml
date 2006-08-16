@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Localizations>
+	<Localization Description="Italiano" Country="Italia" RefCode="IT-IT" />
+	<Localization Description="English" Country="United States of America" RefCode="EN-US" />
+	<Pippo />
+</Localizations>
