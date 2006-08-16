@@ -128,6 +128,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "frmAbout.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "frmAbout.resx"
+                    DependentUpon = "frmAbout.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "frmActorChooser.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -285,7 +295,10 @@
                     RelPath = "Icons\UseCases.ico"
                     BuildAction = "Content"
                 />
-                <Folder RelPath = "Images\" />
+                <File
+                    RelPath = "Images\ucm_image.jpg"
+                    BuildAction = "Content"
+                />
                 <File
                     RelPath = "Languages\Localization_en-us.xml"
                     BuildAction = "Content"

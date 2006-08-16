@@ -5240,7 +5240,8 @@ namespace UseCaseMaker
 
 		private void mnuHelpAbout_Click(object sender, System.EventArgs e)
 		{
-			// TODO
+			frmAbout frm = new frmAbout();
+			frm.ShowDialog(this);
 		}
 
 		private void EnableElementTokenContextMenu(LinkEnabledRTB parent, Point location)
