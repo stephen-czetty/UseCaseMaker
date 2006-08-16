@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Xml;
+using System.IO;
 
 namespace UseCaseMaker
 {
@@ -11,32 +13,22 @@ namespace UseCaseMaker
 	/// </summary>
 	public class frmOptions : System.Windows.Forms.Form
 	{
-		private enum FlagsIndex
-		{
-			NC = 0,
-			FR = 1,
-			DE = 2,
-			IT = 3,
-			PT = 4,
-			ES = 5,
-			EN = 6,
-			JP = 7
-		}
-
 		private System.Windows.Forms.TabControl tabOptions;
 		private System.Windows.Forms.TabPage pgOptLanguages;
 		private System.Windows.Forms.Label lblSelectLanguageTitle;
 		private System.Windows.Forms.ListView lvOptLanguages;
-		private System.Windows.Forms.ColumnHeader chFlag;
-		private System.Windows.Forms.ColumnHeader chLanguage;
-		private System.Windows.Forms.ImageList imgFlagList;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
-		private System.ComponentModel.IContainer components;
+		private System.Windows.Forms.ColumnHeader chDescription;
+		private System.Windows.Forms.ColumnHeader chCountry;
+		private System.Windows.Forms.ColumnHeader chRefCode;
 
+		private string previousLanguage = string.Empty;
 		public string SelectedLanguage = string.Empty;
+		private ApplicationSettings appSettings = null;
+		private Localizer localizer = null;
 
-		public frmOptions(string [] availableLanguages, string actualLanguage, Localizer localizer)
+		public frmOptions(ApplicationSettings appSettings, Localizer localizer)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -46,46 +38,66 @@ namespace UseCaseMaker
 			//
 			// TODO: aggiungere il codice del costruttore dopo la chiamata a InitializeComponent
 			//
-			foreach(string lang in availableLanguages)
+			XmlDocument locals = new XmlDocument();
+			try
 			{
-				ListViewItem lviFlag = new ListViewItem();
-				try
+				locals.Load(appSettings.LanguagesFilePath + Path.DirectorySeparatorChar + "Localization_list.xml");
+			}
+			catch(Exception)
+			{
+				MessageBox.Show(
+					this,
+					"Cannot load the localization list file!",
+					Application.ProductName,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Warning);
+				return;
+			}
+
+			try
+			{
+				XmlNode localsNode = locals.SelectSingleNode("//Localizations");
+				foreach(XmlNode node in localsNode.ChildNodes)
 				{
-					lviFlag.StateImageIndex = (int)Enum.Parse(typeof(FlagsIndex),lang,true);
+					if(node.NodeType == XmlNodeType.Element &&
+						node.Name == "Localization")
+					{
+						if(node.Attributes["Description"] != null &&
+							node.Attributes["Country"] != null && 
+							node.Attributes["RefCode"] != null)
+						{
+							ListViewItem lvi = new ListViewItem();
+							lvi.Text = node.Attributes["Description"].Value;
+							lvi.SubItems.Add(node.Attributes["Country"].Value);
+							lvi.SubItems.Add(node.Attributes["RefCode"].Value);
+							lvOptLanguages.Items.Add(lvi);
+						}
+					}
 				}
-				catch(ArgumentException)
-				{
-					lviFlag.StateImageIndex = (int)FlagsIndex.NC;
-				}
-				lviFlag.SubItems.Add(lang.ToUpper());
-				lvOptLanguages.Items.Add(lviFlag);
-			};
+			}
+			catch(XmlException)
+			{
+				MessageBox.Show(
+					this,
+					"Malformed xml format!",
+					Application.ProductName,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Hand);
+			}
 
 			foreach(ListViewItem lvi in lvOptLanguages.Items)
 			{
-				if(lvi.SubItems[1].Text == actualLanguage)
+				if(lvi.SubItems[2].Text == appSettings.UILanguage)
 				{
 					lvi.Selected = true;
 					break;
 				}
 			}
 
+			this.previousLanguage = appSettings.UILanguage;
+			this.appSettings = appSettings;
+			this.localizer = localizer;
 			localizer.LocalizeControls(this);
-		}
-
-		/// <summary>
-		/// Pulire le risorse in uso.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
 		}
 
 		#region Codice generato da Progettazione Windows Form
@@ -95,14 +107,12 @@ namespace UseCaseMaker
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(frmOptions));
 			this.tabOptions = new System.Windows.Forms.TabControl();
 			this.pgOptLanguages = new System.Windows.Forms.TabPage();
 			this.lvOptLanguages = new System.Windows.Forms.ListView();
-			this.chFlag = new System.Windows.Forms.ColumnHeader();
-			this.chLanguage = new System.Windows.Forms.ColumnHeader();
-			this.imgFlagList = new System.Windows.Forms.ImageList(this.components);
+			this.chDescription = new System.Windows.Forms.ColumnHeader();
+			this.chCountry = new System.Windows.Forms.ColumnHeader();
+			this.chRefCode = new System.Windows.Forms.ColumnHeader();
 			this.lblSelectLanguageTitle = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
@@ -132,36 +142,31 @@ namespace UseCaseMaker
 			// lvOptLanguages
 			// 
 			this.lvOptLanguages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-																							 this.chFlag,
-																							 this.chLanguage});
+																							 this.chDescription,
+																							 this.chCountry,
+																							 this.chRefCode});
 			this.lvOptLanguages.FullRowSelect = true;
 			this.lvOptLanguages.GridLines = true;
 			this.lvOptLanguages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.lvOptLanguages.HideSelection = false;
-			this.lvOptLanguages.LargeImageList = this.imgFlagList;
 			this.lvOptLanguages.Location = new System.Drawing.Point(8, 32);
 			this.lvOptLanguages.Name = "lvOptLanguages";
 			this.lvOptLanguages.Size = new System.Drawing.Size(400, 176);
-			this.lvOptLanguages.SmallImageList = this.imgFlagList;
-			this.lvOptLanguages.StateImageList = this.imgFlagList;
 			this.lvOptLanguages.TabIndex = 1;
 			this.lvOptLanguages.View = System.Windows.Forms.View.Details;
 			this.lvOptLanguages.SelectedIndexChanged += new System.EventHandler(this.lvOptLanguages_SelectedIndexChanged);
 			// 
-			// chFlag
+			// chDescription
 			// 
-			this.chFlag.Width = 36;
+			this.chDescription.Width = 120;
 			// 
-			// chLanguage
+			// chCountry
 			// 
-			this.chLanguage.Width = 360;
+			this.chCountry.Width = 210;
 			// 
-			// imgFlagList
+			// chRefCode
 			// 
-			this.imgFlagList.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
-			this.imgFlagList.ImageSize = new System.Drawing.Size(32, 32);
-			this.imgFlagList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgFlagList.ImageStream")));
-			this.imgFlagList.TransparentColor = System.Drawing.Color.Transparent;
+			this.chRefCode.Width = 50;
 			// 
 			// lblSelectLanguageTitle
 			// 
@@ -194,6 +199,7 @@ namespace UseCaseMaker
 			this.btnOK.Size = new System.Drawing.Size(120, 23);
 			this.btnOK.TabIndex = 2;
 			this.btnOK.Text = "[OK]";
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
 			// frmOptions
 			// 
@@ -225,8 +231,28 @@ namespace UseCaseMaker
 			}
 			else
 			{
-				this.SelectedLanguage = lvOptLanguages.SelectedItems[0].SubItems[1].Text;
+				this.SelectedLanguage = lvOptLanguages.SelectedItems[0].SubItems[2].Text;
 				btnOK.Enabled = true;
+			}
+		}
+
+		private void btnOK_Click(object sender, System.EventArgs e)
+		{
+			string localPath =
+				this.appSettings.LanguagesFilePath +
+				Path.DirectorySeparatorChar +
+				this.appSettings.LanguageFileNamePrefix +
+				this.SelectedLanguage  + ".xml";
+
+			if(!File.Exists(localPath))
+			{
+				MessageBox.Show(
+					this,
+					this.localizer.GetValue("UserMessages","cannotOpenFile"),
+					Application.ProductName,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Stop);
+				this.SelectedLanguage = this.previousLanguage;
 			}
 		}
 	}

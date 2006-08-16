@@ -32,7 +32,7 @@ namespace UseCaseMaker
 		private int splitPosition = 130;
 		private string modelFilePath;
 		private string htmlFilesPath;
-		private string uiLanguage = "EN";
+		private string uiLanguage = "EN-US";
 		private string recentFile1;
 		private string recentFile2;
 		private string recentFile3;
@@ -215,6 +215,14 @@ namespace UseCaseMaker
 			{
 				this.recentFile4 = value;
 				this.settingsChanged = true;
+			}
+		}
+
+		public string LanguageFileNamePrefix
+		{
+			get
+			{
+				return languageFileNamePrefix;
 			}
 		}
 

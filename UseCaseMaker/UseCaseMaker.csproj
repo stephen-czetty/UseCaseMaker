@@ -246,38 +246,6 @@
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "Icons\FLGFRAN.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGGERM.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGITALY.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGJAPAN.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGNONE.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGPORT.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGSPAIN.ICO"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Icons\FLGUK.ICO"
-                    BuildAction = "Content"
-                />
-                <File
                     RelPath = "Icons\New.ico"
                     BuildAction = "Content"
                 />
@@ -319,11 +287,15 @@
                 />
                 <Folder RelPath = "Images\" />
                 <File
-                    RelPath = "Languages\Localization_en.xml"
+                    RelPath = "Languages\Localization_en-us.xml"
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "Languages\Localization_it.xml"
+                    RelPath = "Languages\Localization_it-it.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Languages\Localization_list.xml"
                     BuildAction = "Content"
                 />
                 <File

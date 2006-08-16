@@ -342,6 +342,11 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer = new System.Windows.Forms.Panel();
 			this.lblFullPath = new System.Windows.Forms.Label();
 			this.lblFullPathTitle = new System.Windows.Forms.Label();
+			this.pgGlossary = new System.Windows.Forms.TabPage();
+			this.GList = new UseCaseMakerControls.IndexedList();
+			this.btnChangeGlossaryItem = new System.Windows.Forms.Button();
+			this.btnRemoveGlossaryItem = new System.Windows.Forms.Button();
+			this.btnAddGlossaryItem = new System.Windows.Forms.Button();
 			this.pgHistory = new System.Windows.Forms.TabPage();
 			this.btnRemoveHistoryItem = new System.Windows.Forms.Button();
 			this.lvHistory = new System.Windows.Forms.ListView();
@@ -380,11 +385,6 @@ namespace UseCaseMaker
 			this.lblStepsTitle = new System.Windows.Forms.Label();
 			this.pgProse = new System.Windows.Forms.TabPage();
 			this.tbProse = new UseCaseMakerControls.LinkEnabledRTB();
-			this.pgGlossary = new System.Windows.Forms.TabPage();
-			this.GList = new UseCaseMakerControls.IndexedList();
-			this.btnChangeGlossaryItem = new System.Windows.Forms.Button();
-			this.btnRemoveGlossaryItem = new System.Windows.Forms.Button();
-			this.btnAddGlossaryItem = new System.Windows.Forms.Button();
 			this.pgAttributes = new System.Windows.Forms.TabPage();
 			this.btnOpenRelatedDoc = new System.Windows.Forms.Button();
 			this.btnRemoveRelatedDoc = new System.Windows.Forms.Button();
@@ -450,11 +450,11 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.SuspendLayout();
 			this.pnlPackagesContainer.SuspendLayout();
 			this.pnlFullPathContainer.SuspendLayout();
+			this.pgGlossary.SuspendLayout();
 			this.pgHistory.SuspendLayout();
 			this.pgDetails.SuspendLayout();
 			this.pgFlowOfEvents.SuspendLayout();
 			this.pgProse.SuspendLayout();
-			this.pgGlossary.SuspendLayout();
 			this.pgAttributes.SuspendLayout();
 			this.pgRequirements.SuspendLayout();
 			this.pgUCGeneral.SuspendLayout();
@@ -880,14 +880,14 @@ namespace UseCaseMaker
 			// 
 			this.tabUseCase.Controls.Add(this.pgMain);
 			this.tabUseCase.Controls.Add(this.pgGlossary);
-			this.tabUseCase.Controls.Add(this.pgHistory);
 			this.tabUseCase.Controls.Add(this.pgDetails);
-			this.tabUseCase.Controls.Add(this.pgFlowOfEvents);
 			this.tabUseCase.Controls.Add(this.pgProse);
-			this.tabUseCase.Controls.Add(this.pgAttributes);
 			this.tabUseCase.Controls.Add(this.pgRequirements);
-			this.tabUseCase.Controls.Add(this.pgUCGeneral);
 			this.tabUseCase.Controls.Add(this.pgAGeneral);
+			this.tabUseCase.Controls.Add(this.pgHistory);
+			this.tabUseCase.Controls.Add(this.pgFlowOfEvents);
+			this.tabUseCase.Controls.Add(this.pgAttributes);
+			this.tabUseCase.Controls.Add(this.pgUCGeneral);
 			this.tabUseCase.Controls.Add(this.pgPGeneral);
 			this.tabUseCase.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabUseCase.Location = new System.Drawing.Point(130, 28);
@@ -1064,6 +1064,80 @@ namespace UseCaseMaker
 			this.lblFullPathTitle.Size = new System.Drawing.Size(100, 16);
 			this.lblFullPathTitle.TabIndex = 2;
 			this.lblFullPathTitle.Text = "[Full path]";
+			// 
+			// pgGlossary
+			// 
+			this.pgGlossary.Controls.Add(this.GList);
+			this.pgGlossary.Controls.Add(this.btnChangeGlossaryItem);
+			this.pgGlossary.Controls.Add(this.btnRemoveGlossaryItem);
+			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
+			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
+			this.pgGlossary.Name = "pgGlossary";
+			this.pgGlossary.Size = new System.Drawing.Size(490, 348);
+			this.pgGlossary.TabIndex = 10;
+			this.pgGlossary.Text = "[Glossary]";
+			// 
+			// GList
+			// 
+			this.GList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.GList.AutoScroll = true;
+			this.GList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+			this.GList.BackColor = System.Drawing.SystemColors.Window;
+			this.GList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GList.DataSource = null;
+			this.GList.IndexBackColor = System.Drawing.SystemColors.Control;
+			this.GList.IndexColumnWidth = 146;
+			this.GList.IndexDataField = null;
+			this.GList.Location = new System.Drawing.Point(8, 8);
+			this.GList.Name = "GList";
+			this.GList.RowHeight = 46;
+			this.GList.SelectedIndex = -1;
+			this.GList.Size = new System.Drawing.Size(340, 328);
+			this.GList.TabIndex = 4;
+			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
+			this.GList.TextColumnWidth = 189;
+			this.GList.TextDataField = null;
+			this.GList.UniqueIDDataField = null;
+			this.GList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.GList_ItemTextChanged);
+			this.GList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.GList_SelectedChanged);
+			this.GList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.GList_MouseOverToken);
+			// 
+			// btnChangeGlossaryItem
+			// 
+			this.btnChangeGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnChangeGlossaryItem.Enabled = false;
+			this.btnChangeGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(364, 40);
+			this.btnChangeGlossaryItem.Name = "btnChangeGlossaryItem";
+			this.btnChangeGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnChangeGlossaryItem.TabIndex = 2;
+			this.btnChangeGlossaryItem.Text = "[Change]";
+			this.btnChangeGlossaryItem.Click += new System.EventHandler(this.btnChangeGlossaryItem_Click);
+			// 
+			// btnRemoveGlossaryItem
+			// 
+			this.btnRemoveGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveGlossaryItem.Enabled = false;
+			this.btnRemoveGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(364, 72);
+			this.btnRemoveGlossaryItem.Name = "btnRemoveGlossaryItem";
+			this.btnRemoveGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnRemoveGlossaryItem.TabIndex = 3;
+			this.btnRemoveGlossaryItem.Text = "[Remove]";
+			this.btnRemoveGlossaryItem.Click += new System.EventHandler(this.btnRemoveGlossaryItem_Click);
+			// 
+			// btnAddGlossaryItem
+			// 
+			this.btnAddGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddGlossaryItem.Location = new System.Drawing.Point(364, 8);
+			this.btnAddGlossaryItem.Name = "btnAddGlossaryItem";
+			this.btnAddGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnAddGlossaryItem.TabIndex = 1;
+			this.btnAddGlossaryItem.Text = "[Add]";
+			this.btnAddGlossaryItem.Click += new System.EventHandler(this.btnAddGlossaryItem_Click);
 			// 
 			// pgHistory
 			// 
@@ -1283,7 +1357,7 @@ namespace UseCaseMaker
 																   "[Deferred]"});
 			this.cmbImplementation.Location = new System.Drawing.Point(104, 136);
 			this.cmbImplementation.Name = "cmbImplementation";
-			this.cmbImplementation.Size = new System.Drawing.Size(250, 20);
+			this.cmbImplementation.Size = new System.Drawing.Size(250, 21);
 			this.cmbImplementation.TabIndex = 5;
 			this.cmbImplementation.SelectedIndexChanged += new System.EventHandler(this.cmbImplementation_SelectedIndexChanged);
 			// 
@@ -1322,7 +1396,7 @@ namespace UseCaseMaker
 														   "[Approved]"});
 			this.cmbStatus.Location = new System.Drawing.Point(104, 104);
 			this.cmbStatus.Name = "cmbStatus";
-			this.cmbStatus.Size = new System.Drawing.Size(250, 20);
+			this.cmbStatus.Size = new System.Drawing.Size(250, 21);
 			this.cmbStatus.TabIndex = 3;
 			this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
 			// 
@@ -1346,7 +1420,7 @@ namespace UseCaseMaker
 															   "[High]"});
 			this.cmbComplexity.Location = new System.Drawing.Point(104, 72);
 			this.cmbComplexity.Name = "cmbComplexity";
-			this.cmbComplexity.Size = new System.Drawing.Size(378, 20);
+			this.cmbComplexity.Size = new System.Drawing.Size(378, 21);
 			this.cmbComplexity.TabIndex = 2;
 			this.cmbComplexity.SelectedIndexChanged += new System.EventHandler(this.cmbComplexity_SelectedIndexChanged);
 			// 
@@ -1370,7 +1444,7 @@ namespace UseCaseMaker
 														  "[Subfunction]"});
 			this.cmbLevel.Location = new System.Drawing.Point(104, 40);
 			this.cmbLevel.Name = "cmbLevel";
-			this.cmbLevel.Size = new System.Drawing.Size(378, 20);
+			this.cmbLevel.Size = new System.Drawing.Size(378, 21);
 			this.cmbLevel.TabIndex = 1;
 			this.cmbLevel.SelectedIndexChanged += new System.EventHandler(this.cmbLevel_SelectedIndexChanged);
 			// 
@@ -1543,80 +1617,6 @@ namespace UseCaseMaker
 			this.tbProse.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.tbProse_ItemTextChanged);
 			this.tbProse.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.tbProse_MouseOverToken);
 			// 
-			// pgGlossary
-			// 
-			this.pgGlossary.Controls.Add(this.GList);
-			this.pgGlossary.Controls.Add(this.btnChangeGlossaryItem);
-			this.pgGlossary.Controls.Add(this.btnRemoveGlossaryItem);
-			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
-			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
-			this.pgGlossary.Name = "pgGlossary";
-			this.pgGlossary.Size = new System.Drawing.Size(490, 348);
-			this.pgGlossary.TabIndex = 10;
-			this.pgGlossary.Text = "[Glossary]";
-			// 
-			// GList
-			// 
-			this.GList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.GList.AutoScroll = true;
-			this.GList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-			this.GList.BackColor = System.Drawing.SystemColors.Window;
-			this.GList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GList.DataSource = null;
-			this.GList.IndexBackColor = System.Drawing.SystemColors.Control;
-			this.GList.IndexColumnWidth = 146;
-			this.GList.IndexDataField = null;
-			this.GList.Location = new System.Drawing.Point(8, 8);
-			this.GList.Name = "GList";
-			this.GList.RowHeight = 46;
-			this.GList.SelectedIndex = -1;
-			this.GList.Size = new System.Drawing.Size(340, 328);
-			this.GList.TabIndex = 4;
-			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.GList.TextColumnWidth = 189;
-			this.GList.TextDataField = null;
-			this.GList.UniqueIDDataField = null;
-			this.GList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.GList_ItemTextChanged);
-			this.GList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.GList_SelectedChanged);
-			this.GList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.GList_MouseOverToken);
-			// 
-			// btnChangeGlossaryItem
-			// 
-			this.btnChangeGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnChangeGlossaryItem.Enabled = false;
-			this.btnChangeGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(364, 40);
-			this.btnChangeGlossaryItem.Name = "btnChangeGlossaryItem";
-			this.btnChangeGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnChangeGlossaryItem.TabIndex = 2;
-			this.btnChangeGlossaryItem.Text = "[Change]";
-			this.btnChangeGlossaryItem.Click += new System.EventHandler(this.btnChangeGlossaryItem_Click);
-			// 
-			// btnRemoveGlossaryItem
-			// 
-			this.btnRemoveGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnRemoveGlossaryItem.Enabled = false;
-			this.btnRemoveGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(364, 72);
-			this.btnRemoveGlossaryItem.Name = "btnRemoveGlossaryItem";
-			this.btnRemoveGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnRemoveGlossaryItem.TabIndex = 3;
-			this.btnRemoveGlossaryItem.Text = "[Remove]";
-			this.btnRemoveGlossaryItem.Click += new System.EventHandler(this.btnRemoveGlossaryItem_Click);
-			// 
-			// btnAddGlossaryItem
-			// 
-			this.btnAddGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddGlossaryItem.Location = new System.Drawing.Point(364, 8);
-			this.btnAddGlossaryItem.Name = "btnAddGlossaryItem";
-			this.btnAddGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnAddGlossaryItem.TabIndex = 1;
-			this.btnAddGlossaryItem.Text = "[Add]";
-			this.btnAddGlossaryItem.Click += new System.EventHandler(this.btnAddGlossaryItem_Click);
-			// 
 			// pgAttributes
 			// 
 			this.pgAttributes.Controls.Add(this.btnOpenRelatedDoc);
@@ -1751,7 +1751,7 @@ namespace UseCaseMaker
 			this.pgRequirements.Name = "pgRequirements";
 			this.pgRequirements.Size = new System.Drawing.Size(490, 348);
 			this.pgRequirements.TabIndex = 6;
-			this.pgRequirements.Text = "Requirements";
+			this.pgRequirements.Text = "[Requirements]";
 			// 
 			// RList
 			// 
@@ -2229,7 +2229,7 @@ namespace UseCaseMaker
 			this.MinimumSize = new System.Drawing.Size(630, 450);
 			this.Name = "frmMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Use Cases Maker";
+			this.Text = "Use Case Maker";
 			this.Resize += new System.EventHandler(this.frmMain_Resize);
 			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.LocationChanged += new System.EventHandler(this.frmMain_LocationChanged);
@@ -2241,11 +2241,11 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.ResumeLayout(false);
 			this.pnlPackagesContainer.ResumeLayout(false);
 			this.pnlFullPathContainer.ResumeLayout(false);
+			this.pgGlossary.ResumeLayout(false);
 			this.pgHistory.ResumeLayout(false);
 			this.pgDetails.ResumeLayout(false);
 			this.pgFlowOfEvents.ResumeLayout(false);
 			this.pgProse.ResumeLayout(false);
-			this.pgGlossary.ResumeLayout(false);
 			this.pgAttributes.ResumeLayout(false);
 			this.pgRequirements.ResumeLayout(false);
 			this.pgUCGeneral.ResumeLayout(false);
@@ -4878,7 +4878,19 @@ namespace UseCaseMaker
 
 			this.SuspendLayout();
 			
-			LocalizeControls(this.appSettings.UILanguageFilePath);
+			try
+			{
+				LocalizeControls(this.appSettings.UILanguageFilePath);
+			}
+			catch(Exception)
+			{
+				MessageBox.Show(
+					this,
+					"Cannot load the localization file!",
+					Application.ProductName,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Warning);
+			}
 
 			if(this.appSettings.IsMaximized)
 			{
@@ -5210,14 +5222,7 @@ namespace UseCaseMaker
 
 		private void mnuToolsOptions_Click(object sender, System.EventArgs e)
 		{
-			System.Char [] separators = {'_','.'};
-			string [] files = Directory.GetFiles(this.appSettings.LanguagesFilePath,"*.xml");
-			string [] langs = new string[files.Length];
-			for(int i = 0; i < files.Length; i++)
-			{
-				langs[i] = Path.GetFileName(files[i]).Split(separators)[1];
-			}
-			frmOptions frm = new frmOptions(langs,this.appSettings.UILanguage,this.localizer);
+			frmOptions frm = new frmOptions(this.appSettings,this.localizer);
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				if(frm.SelectedLanguage != string.Empty
