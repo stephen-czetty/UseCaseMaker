@@ -308,6 +308,10 @@
                     BuildAction = "Content"
                 />
                 <File
+                    RelPath = "Languages\Localization_jp-jp.xml"
+                    BuildAction = "Content"
+                />
+                <File
                     RelPath = "Languages\Localization_list.xml"
                     BuildAction = "Content"
                 />
