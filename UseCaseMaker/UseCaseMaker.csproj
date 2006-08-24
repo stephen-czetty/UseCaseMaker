@@ -304,6 +304,10 @@
                     BuildAction = "Content"
                 />
                 <File
+                    RelPath = "Languages\Localization_es-es.xml"
+                    BuildAction = "Content"
+                />
+                <File
                     RelPath = "Languages\Localization_it-it.xml"
                     BuildAction = "Content"
                 />
