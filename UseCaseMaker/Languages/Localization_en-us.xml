@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?> 
-<UCM-StringTable Language="EN">
+<UCM-StringTable>
 	<Globals>
 		<NewModel>New model</NewModel>
 		<Model>Model</Model>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="iso-8859-1" ?>
-<UCM-StringTable Language="ES">
+<?xml version="1.0" encoding="utf-8" ?>
+<UCM-StringTable>
 	<Globals>
 		<NewModel>Nuevo modelo</NewModel>
 		<Model>Modelo</Model>
@@ -11,15 +11,15 @@
 		<UseCases>Casos de uso</UseCases>
 		<OpenIssues>Temas pendientes</OpenIssues>
 		<FlowOfEvents>Escenarios</FlowOfEvents>
-		<Prose>Documentación</Prose>
+		<Prose>DocumentaciÃ³n</Prose>
 		<Requirements>Requisitos</Requirements>
-		<Description>Descripción</Description>
+		<Description>DescripciÃ³n</Description>
 		<Notes>Notas</Notes>
 		<RelatedDocuments>Documentos asociados</RelatedDocuments>
 		<Details>Detalles</Details>
 		<Priority>Prioridad</Priority>
 		<Complexity>Complejidad</Complexity>
-		<Implementation>Implementación</Implementation>
+		<Implementation>ImplementaciÃ³n</Implementation>
 		<Level>Nivel</Level>
 		<Status>Estado</Status>
 		<AssignedTo>Asignado a</AssignedTo>
@@ -36,7 +36,7 @@
 		<Glossary>Glosario</Glossary>
 		<GlossaryItem>Elemento de glosario</GlossaryItem>
 		<HistoryType>
-			<Item EnumName="Implementation" ListIndex="0">Implementación</Item>
+			<Item EnumName="Implementation" ListIndex="0">ImplementaciÃ³n</Item>
 			<Item EnumName="Status"  ListIndex="1">Estado</Item>
 		</HistoryType>             
 	</Globals>
@@ -44,14 +44,14 @@
 		<actorAlreadyPresent>El actor ya existe</actorAlreadyPresent>
 		<fileAlreadyPresent>El archivo ya existe</fileAlreadyPresent>
 		<cannotOpenFile>No se puede abrir el archivo</cannotOpenFile>
-		<exitConfirm>¿Desea salir?</exitConfirm>
+		<exitConfirm>Â¿Desea salir?</exitConfirm>
 		<saveBeforeExport>Debe guardar el modelo antes de exportar</saveBeforeExport>
-		<htmlExportCompleted>Modelo exportado. ¿Desea ver el archivo html?</htmlExportCompleted>
-		<xmiExportCompleted>Exportación completada</xmiExportCompleted>
-		<pdfExportCompleted>Exportación completada. ¿Desea ver el archivo pdf?</pdfExportCompleted>
+		<htmlExportCompleted>Modelo exportado. Â¿Desea ver el archivo html?</htmlExportCompleted>
+		<xmiExportCompleted>ExportaciÃ³n completada</xmiExportCompleted>
+		<pdfExportCompleted>ExportaciÃ³n completada. Â¿Desea ver el archivo pdf?</pdfExportCompleted>
 		<exportAsXMI>Exportar a XMI 1.1</exportAsXMI>
 		<exportAsPDF>Exportar a PDF</exportAsPDF>
-		<saveModel>¿Desea guardar el modelo actual?</saveModel>
+		<saveModel>Â¿Desea guardar el modelo actual?</saveModel>
 		<saveModelAs>Guardar modelo como...</saveModelAs>
 		<openModel>Abrir modelo</openModel>
 		<selectHTMLdestination>Selecione la carpeta de destino de los archivos html</selectHTMLdestination>
@@ -67,12 +67,12 @@
 			<mnuFileSaveAs>G&amp;uardar como...</mnuFileSaveAs>
 			<mnuFileExit>&amp;Salir</mnuFileExit>
 			<!-- Edit menu items -->
-			<mnuEdit>&amp;Edición</mnuEdit>
-			<mnuEditAddPackage>Añadir &amp;paquete</mnuEditAddPackage>
+			<mnuEdit>&amp;EdiciÃ³n</mnuEdit>
+			<mnuEditAddPackage>AÃ±adir &amp;paquete</mnuEditAddPackage>
 			<mnuEditRemovePackage>&amp;Eliminar paquete</mnuEditRemovePackage>
-			<mnuEditAddActor>Añadir ac&amp;tor</mnuEditAddActor>
+			<mnuEditAddActor>AÃ±adir ac&amp;tor</mnuEditAddActor>
 			<mnuEditRemoveActor>E&amp;iminar actor</mnuEditRemoveActor>
-			<mnuEditAddUseCase>Añadir caso de &amp;uso</mnuEditAddUseCase>
+			<mnuEditAddUseCase>AÃ±adir caso de &amp;uso</mnuEditAddUseCase>
 			<mnuEditRemoveUseCase>Eli&amp;minar caso de uso</mnuEditRemoveUseCase>
 			<!-- Tools menu items -->
 			<mnuTools>&amp;Herramientas</mnuTools>
@@ -84,14 +84,14 @@
 			<mnuHelp>Ay&amp;uda</mnuHelp>
 			<mnuHelpAbout>Acerca de...</mnuHelpAbout>
 			<!-- Model browser context menu items -->
-			<mnuCtxMBAddPackage>Añadir &amp;paquete</mnuCtxMBAddPackage>
+			<mnuCtxMBAddPackage>AÃ±adir &amp;paquete</mnuCtxMBAddPackage>
 			<mnuCtxMBRemovePackage>Eliminar paquete</mnuCtxMBRemovePackage>
-			<mnuCtxMBAddActor>Añadir &amp;actor</mnuCtxMBAddActor>
+			<mnuCtxMBAddActor>AÃ±adir &amp;actor</mnuCtxMBAddActor>
 			<mnuCtxMBRemoveActor>Eliminar actor</mnuCtxMBRemoveActor>
-			<mnuCtxMBAddUseCase>Añadir caso de &amp;uso</mnuCtxMBAddUseCase>
+			<mnuCtxMBAddUseCase>AÃ±adir caso de &amp;uso</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>Eliminar caso de uso</mnuCtxMBRemoveUseCase>
 			<!-- Element token context menu items -->
-			<mnuCtxETGoToDefinition>&amp;Ir a definición</mnuCtxETGoToDefinition>
+			<mnuCtxETGoToDefinition>&amp;Ir a definiciÃ³n</mnuCtxETGoToDefinition>
 			<!-- Other controls -->
 			<lblModelBrowser>Explorar modelo</lblModelBrowser>
 			<!-- Tab pages -->
@@ -107,18 +107,18 @@
 			<lblLevelTitle>Nivel</lblLevelTitle>
 			<lblComplexityTitle>Complejidad</lblComplexityTitle>
 			<lblStatusTitle>Estado</lblStatusTitle>
-			<lblImplTitle>Implementación</lblImplTitle>
-			<btnStatusToHistory>Añadir al historial</btnStatusToHistory>
-			<btnImplToHistory>Añadir al historial</btnImplToHistory>
+			<lblImplTitle>ImplementaciÃ³n</lblImplTitle>
+			<btnStatusToHistory>AÃ±adir al historial</btnStatusToHistory>
+			<btnImplToHistory>AÃ±adir al historial</btnImplToHistory>
 			<lblAssignedToTitle>Asignado a</lblAssignedToTitle>
 			<lblReleaseTitle>Entrega</lblReleaseTitle>
 			<lblOpenIssuesTitle>Temas pendientes</lblOpenIssuesTitle>
-			<btnAddOpenIssue>Añadir</btnAddOpenIssue>
+			<btnAddOpenIssue>AÃ±adir</btnAddOpenIssue>
 			<btnRemoveOpenIssue>Eliminar</btnRemoveOpenIssue>
 			<cmbLevel>
 				<Item EnumName="Summary" ListIndex="0">Resumen</Item>
 				<Item EnumName="User" ListIndex="1">Usuario</Item>
-				<Item EnumName="Subfunction" ListIndex="2">Subfunción</Item>
+				<Item EnumName="Subfunction" ListIndex="2">SubfunciÃ³n</Item>
 			</cmbLevel>
 			<cmbComplexity>
 				<Item EnumName="Low" ListIndex="0">Baja</Item>
@@ -128,7 +128,7 @@
 			<cmbStatus>
 				<Item EnumName="Named" ListIndex="0">Creado</Item>
 				<Item EnumName="Initial" ListIndex="1">Iniciado</Item>
-				<Item EnumName="Base" ListIndex="2">En ejecución</Item>
+				<Item EnumName="Base" ListIndex="2">En ejecuciÃ³n</Item>
 				<Item EnumName="Completed" ListIndex="3">Completado</Item>
 				<Item EnumName="Deferred" ListIndex="4">Postpuesto</Item>
 				<Item EnumName="Tested" ListIndex="5">Probado</Item>
@@ -137,7 +137,7 @@
 			<cmbImplementation>
 				<Item EnumName="Scheduled" ListIndex="0">Creado</Item>
 				<Item EnumName="Started" ListIndex="1">Iniciado</Item>
-				<Item EnumName="Partial" ListIndex="2">En ejecución</Item>
+				<Item EnumName="Partial" ListIndex="2">En ejecuciÃ³n</Item>
 				<Item EnumName="Completed" ListIndex="3">Completado</Item>
 				<Item EnumName="Deferred" ListIndex="4">Postpuesto</Item>
 			</cmbImplementation>
@@ -152,7 +152,7 @@
 			<lblUCActorsTitle>Actores</lblUCActorsTitle>
 			<chActorName>Nombre</chActorName>
 			<chActorPrimary>Principal</chActorPrimary>
-			<btnAddActor>Añadir</btnAddActor>
+			<btnAddActor>AÃ±adir</btnAddActor>
 			<btnRemoveActor>Eliminar</btnRemoveActor>
 			<btnSetPrimaryActor>Principal</btnSetPrimaryActor>
 			<!-- Actor General -->
@@ -169,36 +169,36 @@
 			<btnPNameChange>Cambiar</btnPNameChange>
 			<!-- Attributes -->
 			<pgAttributes>Propiedades</pgAttributes>
-			<lblDescriptionTitle>Descripción</lblDescriptionTitle>
+			<lblDescriptionTitle>DescripciÃ³n</lblDescriptionTitle>
 			<lblNotesTitle>Notas</lblNotesTitle>
 			<lblRelatedDocsTitle>Documentos relacionados</lblRelatedDocsTitle>
-			<btnAddRelatedDoc>Añadir</btnAddRelatedDoc>
+			<btnAddRelatedDoc>AÃ±adir</btnAddRelatedDoc>
 			<btnRemoveRelatedDoc>Eliminar</btnRemoveRelatedDoc>
 			<btnOpenRelatedDoc>Abrir</btnOpenRelatedDoc>
 			<!-- Flow of events -->
 			<pgFlowOfEvents>Escenarios</pgFlowOfEvents>
 			<lblStepsTitle>Pasos</lblStepsTitle>
-			<btnAddStep>Añadir</btnAddStep>
+			<btnAddStep>AÃ±adir</btnAddStep>
 			<btnInsertStep>Insertar</btnInsertStep>
-			<btnAddAltStep>Añadir alternativo</btnAddAltStep>
+			<btnAddAltStep>AÃ±adir alternativo</btnAddAltStep>
 			<btnInsertAltStep>Insertar alternativo</btnInsertAltStep>
 			<btnRemoveStep>Eliminar</btnRemoveStep>
 			<!-- Prose -->
-			<pgProse>Documentación</pgProse>
+			<pgProse>DocumentaciÃ³n</pgProse>
 			<!-- Requirements -->
 			<pgRequirements>Requisitos</pgRequirements>
-			<btnAddRequirement>Añadir</btnAddRequirement>
+			<btnAddRequirement>AÃ±adir</btnAddRequirement>
 			<btnRemoveRequirement>Eliminar</btnRemoveRequirement>
 			<!-- History -->
 			<pgHistory>Historal</pgHistory>
 			<btnRemoveHistoryItem>Eliminar</btnRemoveHistoryItem>
 			<chDate>Fecha</chDate>
 			<chType>Tipo</chType>
-			<chAction>Acción</chAction>
+			<chAction>AcciÃ³n</chAction>
 			<chNotes>Notas</chNotes>
 			<!-- Glossary -->
 			<pgGlossary>Glosario</pgGlossary>
-			<btnAddGlossaryItem>Añadir</btnAddGlossaryItem>
+			<btnAddGlossaryItem>AÃ±adir</btnAddGlossaryItem>
 			<btnRemoveGlossaryItem>Eliminar</btnRemoveGlossaryItem>
 			<btnChangeGlossaryItem>Cambiar</btnChangeGlossaryItem>
 			<!-- Toolbar buttons -->
@@ -232,7 +232,7 @@
 	<frmDeleter>
 		<Controls>
 			<Self>Borrar elemento</Self>
-			<lblUserQuestionTitle>¿Los elementos seleccionados y elementos relacionados serán
+			<lblUserQuestionTitle>Â¿Los elementos seleccionados y elementos relacionados serÃ¡n
 			eliminados, desea continuar?</lblUserQuestionTitle>
 			<cbDontMark>No marcar ocurrencias</cbDontMark>
 			<btnOK>Aceptar</btnOK>
