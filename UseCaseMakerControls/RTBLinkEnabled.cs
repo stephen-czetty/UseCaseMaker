@@ -214,238 +214,38 @@ namespace UseCaseMakerControls
 			Win32.POINT scrollPos = GetScrollPos();
 			int cursorLoc = SelectionStart;
 
-			//Created with an estimate of how big the stringbuilder has to be...
-			StringBuilder sb = new
-				StringBuilder((int)(Text.Length * 1.5 + 150));
-	
-			//Adding RTF header
-			sb.Append(@"{\rtf1\fbidis\ansi\ansicpg1255\deff0\deflang1037{\fonttbl{");
-			
-			//Font table creation
-			int fontCounter = 0;
-			Hashtable fonts = new Hashtable();
-			AddFontToTable(sb, Font, ref fontCounter, fonts);
-			foreach (HighlightDescriptor hd in mHighlightDescriptors)
+			this.Select(0,this.Text.Length);
+			this.SelectionFont = Parent.Font;
+			this.SelectionColor = SystemColors.WindowText;
+
+			int lastPos;
+			int tokenLength;
+			string token;
+			foreach(HighlightDescriptor hd in this.HighlightDescriptors)
 			{
-				if ((hd.Font !=  null) && !fonts.ContainsKey(hd.Font.Name))
-				{
-					AddFontToTable(sb, hd.Font,ref fontCounter, fonts);
-				}
-			}
-			sb.Append("}\n");
-
-			//ColorTable
-			
-			sb.Append(@"{\colortbl ;");
-			Hashtable colors = new Hashtable();
-			int colorCounter = 1;
-			AddColorToTable(sb, ForeColor, ref colorCounter, colors);
-			AddColorToTable(sb, BackColor, ref colorCounter, colors);
-			
-			foreach (HighlightDescriptor hd in mHighlightDescriptors)
-			{
-				if (!colors.ContainsKey(hd.Color))
-				{
-					AddColorToTable(sb, hd.Color, ref colorCounter, colors);
-				}
-			}
-
-			//Parsing text
-	
-			sb.Append("}\n").Append(@"\viewkind4\uc1\pard\ltrpar");
-			SetDefaultSettings(sb, colors, fonts);
-
-			char[] separators = mSeparators.GetAsCharArray();
-
-			//Replacing "\" to "\\" for RTF...
-			string[] lines = Text.Replace("\\","\\\\").Replace("{", "\\{").Replace("}", "\\}").Split('\n');
-
-			int lineCounter;
-			int tokenSearch;
-			int tokenStart;
-			int tokenEnd;
-
-			for (lineCounter = 0 ; lineCounter < lines.Length; lineCounter++)
-			{
-				tokenSearch = 0;
-				tokenStart = 0;
-				tokenEnd = 0;
-				string s = lines[lineCounter];
+				token = hd.Token.Replace("\t"," ");
+				token = token.Replace("\v",".");
+				lastPos = 0;
+				tokenLength = token.Length;
 				while(true)
 				{
-					tokenStart = s.IndexOf("\"",tokenSearch);
-					if(tokenStart == -1 || tokenStart == s.Length - 1)
+					lastPos = this.Find(token,lastPos,RichTextBoxFinds.WholeWord);
+					if(lastPos == -1 || lastPos >= this.Text.Length)
 					{
 						break;
 					}
-					tokenEnd = s.IndexOf("\"",tokenStart + 1);
-					if(tokenEnd == -1)
-					{
-						break;
-					}
-					string sub = s.Substring(tokenStart,tokenEnd-tokenStart+1);
-					sub = sub.Replace(" ","\t");
-					sub = sub.Replace(".","\v");
-					foreach(HighlightDescriptor hd in this.HighlightDescriptors)
-					{
-						if(hd.Token == sub)
-						{
-							lines[lineCounter] = lines[lineCounter].Replace(s.Substring(tokenStart,tokenEnd-tokenStart+1),sub);
-						}
-					}
-					tokenSearch = tokenEnd;
+					this.Select(lastPos,tokenLength);
+					this.SelectionColor = hd.Color;
+					this.Select(lastPos+tokenLength,1);
+					this.SelectionColor = SystemColors.WindowText;
+					lastPos += 1;
 				}
 			}
-
-			for (lineCounter = 0 ; lineCounter < lines.Length; lineCounter++)
-			{
-				if (lineCounter != 0)
-				{
-					AddNewLine(sb);
-				}
-				string line = lines[lineCounter];
-				string[] tokens = mCaseSesitive ? line.Split(separators) : line.ToUpper().Split(separators);
-				if (tokens.Length == 0)
-				{
-					sb.Append(line);
-					AddNewLine(sb);
-					continue;
-				}
-
-				int tokenCounter = 0;
-				for (int i = 0; i < line.Length ;)
-				{
-					char curChar = line[i];
-					if (mSeparators.Contains(curChar))
-					{
-						sb.Append(curChar);
-						i++;
-					}
-					else
-					{
-						string curToken = tokens[tokenCounter++];
-						bool bAddToken = true;
-						foreach	(HighlightDescriptor hd in mHighlightDescriptors)
-						{
-							string	compareStr = mCaseSesitive ? hd.Token : hd.Token.ToUpper();
-							bool match = false;
-
-							//Check if the highlight descriptor matches the current toker according to the DescriptoRecognision property.
-							switch	(hd.DescriptorRecognition)
-							{
-								case DescriptorRecognition.WholeWord:
-									if (curToken == compareStr)
-									{
-										match = true;
-									}
-									break;
-								case DescriptorRecognition.StartsWith:
-									if (curToken.StartsWith(compareStr))
-									{
-										match = true;
-									}
-									break;
-								case DescriptorRecognition.Contains:
-									if (curToken.IndexOf(compareStr) != -1)
-									{
-										match = true;
-									}
-									break;
-							}
-							if (!match)
-							{
-								//If this token doesn't match chech the next one.
-								continue;
-							}
-
-							//printing this token will be handled by the inner code, don't apply default settings...
-							bAddToken = false;
-	
-							//Set colors to current descriptor settings.
-							SetDescriptorSettings(sb, hd, colors, fonts);
-
-							//Print text affected by this descriptor.
-							switch (hd.DescriptorType)
-							{
-								case DescriptorType.Word:
-									if(line.Substring(i,1) == "\"")
-									{
-										string sub = line.Substring(i, curToken.Length);
-										sub = sub.Replace("\t"," ");
-										sub = sub.Replace("\v",".");
-										sb.Append(sub);
-									}
-									else
-									{
-										sb.Append(line.Substring(i, curToken.Length));
-									}
-									SetDefaultSettings(sb, colors, fonts);
-									i += curToken.Length;
-									break;
-								case DescriptorType.ToEOL:
-									sb.Append(line.Remove(0, i));
-									i = line.Length;
-									SetDefaultSettings(sb, colors, fonts);
-									break;
-								case DescriptorType.ToCloseToken:
-									while((line.IndexOf(hd.CloseToken, i) == -1) && (lineCounter < lines.Length))
-									{
-										sb.Append(line.Remove(0, i));
-										lineCounter++;
-										if (lineCounter < lines.Length)
-										{
-											AddNewLine(sb);
-											line = lines[lineCounter];
-											i = 0;
-										}
-										else
-										{
-											i = line.Length;
-										}
-									}
-									if (line.IndexOf(hd.CloseToken, i) != -1)
-									{
-										sb.Append(line.Substring(i, line.IndexOf(hd.CloseToken, i) + hd.CloseToken.Length - i) );
-										line = line.Remove(0, line.IndexOf(hd.CloseToken, i) + hd.CloseToken.Length);
-										tokenCounter = 0;
-										tokens = mCaseSesitive ? line.Split(separators) : line.ToUpper().Split(separators);
-										SetDefaultSettings(sb, colors, fonts);
-										i = 0;
-									}
-									break;
-							}
-							break;
-						}
-						if (bAddToken)
-						{
-							//Print text with default settings...
-//							if(line.Substring(i,1) == "\"")
-//							{
-								string sub = line.Substring(i, curToken.Length);
-								sub = sub.Replace("\t"," ");
-								sub = sub.Replace("\v",".");
-								sb.Append(sub);
-//							}
-//							else
-//							{
-//								string sub = line.Substring(i, curToken.Length);
-//								sub = sub.Replace("\t"," ");
-//								sub = sub.Replace("\v",".");
-//								sb.Append(line.Substring(i, curToken.Length));
-//							}
-							// sb.Append(line.Substring(i, curToken.Length));
-							i+=	curToken.Length;
-						}
-					}
-				}
-			}
-	
-			//			System.Diagnostics.Debug.WriteLine(sb.ToString());
-			Rtf = sb.ToString();
 
 			//Restore cursor and scrollbars location.
-			SelectionStart = cursorLoc;
-		
+			this.SelectionStart = cursorLoc;
+			this.SelectionLength = 0;
+
 			SetScrollPos(scrollPos);
 			Win32.LockWindowUpdate((IntPtr)0);
 			Invalidate();
@@ -532,21 +332,21 @@ namespace UseCaseMakerControls
 
 		protected override void OnKeyPress(KeyPressEventArgs e)
 		{
-			if(e.KeyChar == '\"')
-			{
-				int counter = this.TagCount() + 1;
-				if(mAutoCompleteShown && counter % 2 == 0)
-				{
-					HideAutoCompleteForm();
-				}
-				else if(!mAutoCompleteShown && counter % 2 != 0)
-				{
-					if(this.HighlightDescriptors.Count > 0)
-					{
-						ShowAutoComplete();
-					}
-				}
-			}
+//			if(e.KeyChar == '\"')
+//			{
+//				int counter = this.TagCount() + 1;
+//				if(mAutoCompleteShown && counter % 2 == 0)
+//				{
+//					HideAutoCompleteForm();
+//				}
+//				else if(!mAutoCompleteShown && counter % 2 != 0)
+//				{
+//					if(this.HighlightDescriptors.Count > 0)
+//					{
+//						ShowAutoComplete();
+//					}
+//				}
+//			}
 			if(e.KeyChar == '.')
 			{
 				if(mAutoCompleteShown)
@@ -661,16 +461,16 @@ namespace UseCaseMakerControls
 						case Keys.Tab:
 							if (mAutoCompleteShown) return;
 							break;
-						case Keys.Back:
-						case Keys.Delete:
-							if(this.TagCount() % 2 == 0)
-							{
-								HideAutoCompleteForm();
-							}
-							break;
+//						case Keys.Back:
+//						case Keys.Delete:
+//							if(this.TagCount() % 2 == 0)
+//							{
+//								HideAutoCompleteForm();
+//							}
+//							break;
 					}
 				}
-					break;
+				break;
 			}
 			base.WndProc (ref m);
 		}
@@ -690,20 +490,20 @@ namespace UseCaseMakerControls
 		#endregion
 
 		#region Private Methods
-		private int TagCount()
-		{
-			int counter = 0;
-			char [] chars = this.Text.ToCharArray();
-			foreach(char c in chars)
-			{
-				if(c == '\"')
-				{
-					counter += 1;
-				}
-			}
-
-			return counter;
-		}
+//		private int TagCount()
+//		{
+//			int counter = 0;
+//			char [] chars = this.Text.ToCharArray();
+//			foreach(char c in chars)
+//			{
+//				if(c == '\"')
+//				{
+//					counter += 1;
+//				}
+//			}
+//
+//			return counter;
+//		}
 
 		private string CurrentToken(MouseEventArgs e)
 		{
@@ -918,13 +718,13 @@ namespace UseCaseMakerControls
 		/// </summary>
 		/// <returns>If the operation was succesful</returns>
 		private bool AcceptAutoCompleteItem()
-		{
-			
+		{		
 			if (mAutoCompleteForm.SelectedItem == null)
 			{
 				return false;
 			}
 			
+/*
 			int curTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart, Text.Length - 1)) + 1;
 			int curTokenEndIndex= Text.IndexOfAny(mSeparators.GetAsCharArray(), SelectionStart);
 			if (curTokenEndIndex == -1) 
@@ -936,7 +736,8 @@ namespace UseCaseMakerControls
 			SelectedText = mAutoCompleteForm.SelectedItem;
 			SelectionStart = SelectionStart + SelectionLength;
 			SelectionLength = 0;
-			
+*/
+			this.SelectedText = mAutoCompleteForm.SelectedItem;
 			HideAutoCompleteForm();
 			return true;
 		}

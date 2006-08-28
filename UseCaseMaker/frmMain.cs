@@ -12,7 +12,6 @@ using System.Diagnostics;
 using UseCaseMakerLibrary;
 using UseCaseMakerControls;
 
-
 /**
  * @defgroup user_interface Interfaccia utente
  */
