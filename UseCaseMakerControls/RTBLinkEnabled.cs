@@ -321,7 +321,10 @@ namespace UseCaseMakerControls
 		{
 			if(msg.Msg == Win32.WM_KEYDOWN || msg.Msg == Win32.WM_SYSKEYDOWN)
 			{
-				if(mAutoCompleteShown && keyData == Keys.Tab)
+				if(mAutoCompleteShown &&
+					(keyData == Keys.Tab ||
+					keyData == Keys.Enter ||
+					keyData == Keys.Space))
 				{
 					AcceptAutoCompleteItem();
 					return true;
@@ -332,21 +335,21 @@ namespace UseCaseMakerControls
 
 		protected override void OnKeyPress(KeyPressEventArgs e)
 		{
-//			if(e.KeyChar == '\"')
-//			{
-//				int counter = this.TagCount() + 1;
-//				if(mAutoCompleteShown && counter % 2 == 0)
-//				{
-//					HideAutoCompleteForm();
-//				}
-//				else if(!mAutoCompleteShown && counter % 2 != 0)
-//				{
-//					if(this.HighlightDescriptors.Count > 0)
-//					{
-//						ShowAutoComplete();
-//					}
-//				}
-//			}
+			if(e.KeyChar == '\"')
+			{
+				int counter = this.TagCount() + 1;
+				if(mAutoCompleteShown && counter % 2 == 0)
+				{
+					HideAutoCompleteForm();
+				}
+				else if(!mAutoCompleteShown && counter % 2 != 0)
+				{
+					if(this.HighlightDescriptors.Count > 0)
+					{
+						ShowAutoComplete();
+					}
+				}
+			}
 			if(e.KeyChar == '.')
 			{
 				if(mAutoCompleteShown)
@@ -408,13 +411,6 @@ namespace UseCaseMakerControls
 								}
 								return;
 							}
-							case Keys.Enter:
-							case Keys.Space:
-							case Keys.Tab:
-							{
-								AcceptAutoCompleteItem();
-								return;
-							}
 							case Keys.Escape:
 							{
 								HideAutoCompleteForm();
@@ -461,13 +457,13 @@ namespace UseCaseMakerControls
 						case Keys.Tab:
 							if (mAutoCompleteShown) return;
 							break;
-//						case Keys.Back:
-//						case Keys.Delete:
-//							if(this.TagCount() % 2 == 0)
-//							{
-//								HideAutoCompleteForm();
-//							}
-//							break;
+						case Keys.Back:
+						case Keys.Delete:
+							if(this.TagCount() % 2 == 0)
+							{
+								HideAutoCompleteForm();
+							}
+							break;
 					}
 				}
 				break;
@@ -490,20 +486,20 @@ namespace UseCaseMakerControls
 		#endregion
 
 		#region Private Methods
-//		private int TagCount()
-//		{
-//			int counter = 0;
-//			char [] chars = this.Text.ToCharArray();
-//			foreach(char c in chars)
-//			{
-//				if(c == '\"')
-//				{
-//					counter += 1;
-//				}
-//			}
-//
-//			return counter;
-//		}
+		private int TagCount()
+		{
+			int counter = 0;
+			char [] chars = this.Text.ToCharArray();
+			foreach(char c in chars)
+			{
+				if(c == '\"')
+				{
+					counter += 1;
+				}
+			}
+
+			return counter;
+		}
 
 		private string CurrentToken(MouseEventArgs e)
 		{
@@ -724,7 +720,6 @@ namespace UseCaseMakerControls
 				return false;
 			}
 			
-/*
 			int curTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart, Text.Length - 1)) + 1;
 			int curTokenEndIndex= Text.IndexOfAny(mSeparators.GetAsCharArray(), SelectionStart);
 			if (curTokenEndIndex == -1) 
@@ -736,8 +731,7 @@ namespace UseCaseMakerControls
 			SelectedText = mAutoCompleteForm.SelectedItem;
 			SelectionStart = SelectionStart + SelectionLength;
 			SelectionLength = 0;
-*/
-			this.SelectedText = mAutoCompleteForm.SelectedItem;
+
 			HideAutoCompleteForm();
 			return true;
 		}
