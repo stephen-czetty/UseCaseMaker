@@ -57,8 +57,6 @@ namespace UseCaseMaker
 			XmlDocument doc = new XmlDocument();
 			doc.XmlResolver = resolver;
 			doc.Load(modelFilePath);
-			//			XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-			//			nsmgr.AddNamespace(string.Empty, "http://www.magosoftware.it/UseCaseMaker");
 			XslTransform transform = new XslTransform();
 			transform.Load(this.stylesheetFilesPath + Path.DirectorySeparatorChar + "XMI11Export.xsl",resolver);
 			StreamWriter sw = new StreamWriter(this.xmiFilesPath,false);

@@ -62,11 +62,9 @@ namespace UseCaseMaker
 			XmlDocument doc = new XmlDocument();
 			doc.XmlResolver = resolver;
 			doc.Load(modelFilePath);
-			//			XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-			//			nsmgr.AddNamespace(string.Empty, "http://www.magosoftware.it/UseCaseMaker");
 			XslTransform transform = new XslTransform();
 			transform.Load(this.stylesheetFilesPath + Path.DirectorySeparatorChar + "PDFExport.xsl",resolver);
-			StringWriter sw = new StringWriter();
+			System.IO.StringWriter sw = new System.IO.StringWriter();
 
 			XsltArgumentList al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();

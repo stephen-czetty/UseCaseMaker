@@ -35,8 +35,6 @@ namespace UseCaseMaker
 			XmlDocument doc = new XmlDocument();
 			doc.XmlResolver = resolver;
 			doc.Load(modelFilePath);
-//			XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-//			nsmgr.AddNamespace(string.Empty, "http://www.magosoftware.it/UseCaseMaker");
 			XslTransform transform = new XslTransform();
 			transform.Load(this.stylesheetFilesPath + Path.DirectorySeparatorChar + "ModelTree.xsl",resolver);
 			StreamWriter sw = new StreamWriter(this.htmlFilesPath + Path.DirectorySeparatorChar + "ModelTree.htm",false);
@@ -62,8 +60,6 @@ namespace UseCaseMaker
 			XmlDocument doc = new XmlDocument();
 			doc.XmlResolver = resolver;
 			doc.Load(modelFilePath);
-			// XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-			// nsmgr.AddNamespace(string.Empty, "http://www.magosoftware.it/UseCaseMaker");
 			XmlNode modelNode = doc.SelectSingleNode("//Model");
 			this.RecurseNode(doc, resolver, modelNode,"Package.xsl");
 		}

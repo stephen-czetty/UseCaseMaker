@@ -3204,7 +3204,7 @@ namespace UseCaseMaker
 					UseCaseMakerLibrary.XmlSerializer.XmlDeserialize(
 						doc,
 						"UCM-Document",
-						"", // "http://www.magosoftware.it/" + this.GetType().Namespace
+						"",
 						this.GetType().Assembly.GetName().Version.ToString(2),
 						model);
 					BuildView(model);
@@ -3302,7 +3302,7 @@ namespace UseCaseMaker
 				UseCaseMakerLibrary.XmlSerializer.XmlDeserialize(
 					doc,
 					"UCM-Document",
-					"", // "http://www.magosoftware.it/" + this.GetType().Namespace
+					"",
 					Application.ProductVersion,
 					model);
 				BuildView(model);
@@ -3360,7 +3360,7 @@ namespace UseCaseMaker
 
 					XmlDocument doc = UseCaseMakerLibrary.XmlSerializer.XmlSerialize(
 						"UCM-Document",
-						"", /* "http://www.magosoftware.it/" + this.GetType().Namespace */
+						"",
 						this.GetType().Assembly.GetName().Version.ToString(2),
 						model,
 						true);
@@ -3375,7 +3375,7 @@ namespace UseCaseMaker
 			{
 				XmlDocument doc = UseCaseMakerLibrary.XmlSerializer.XmlSerialize(
 					"UCM-Document",
-					"", /* "http://www.magosoftware.it/" + this.GetType().Namespace */
+					"",
 					this.GetType().Assembly.GetName().Version.ToString(2),
 					model,
 					true);
