@@ -7,6 +7,11 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Net;
 using ApacheFop;
+//using org.apache.fop;
+//using org.apache.fop.apps;
+//using org.apache.fop.tools;
+//using org.xml.sax;
+//using java.io;
 
 namespace UseCaseMaker
 {
@@ -57,6 +62,9 @@ namespace UseCaseMaker
 		#region Public Methods
 		public void Transform(string modelFilePath)
 		{
+			StreamReader sr;
+			string foDoc;
+			MemoryStream ms = new MemoryStream();
 			XmlResolver resolver = new XmlUrlResolver();
 			resolver.Credentials = CredentialCache.DefaultCredentials;
 			XmlDocument doc = new XmlDocument();
@@ -64,11 +72,10 @@ namespace UseCaseMaker
 			doc.Load(modelFilePath);
 			XslTransform transform = new XslTransform();
 			transform.Load(this.stylesheetFilesPath + Path.DirectorySeparatorChar + "PDFExport.xsl",resolver);
-			System.IO.StringWriter sw = new System.IO.StringWriter();
 
 			XsltArgumentList al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();
-			al.AddParam("version","",an.Version.ToString(2));
+			al.AddParam("version","",an.Version.ToString(3));
 			al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
 			al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
 			al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
@@ -105,10 +112,14 @@ namespace UseCaseMaker
 			al.AddParam("implementationNodeSet","",this.localizer.GetNodeSet("cmbImplementation","Item"));
 			al.AddParam("historyTypeNodeSet","",this.localizer.GetNodeSet("HistoryType","Item"));
 
-			transform.Transform(doc,al,sw,null);
-			sw.Close();
+			transform.Transform(doc,al,ms,resolver);
+			ms.Position = 0;
+			sr = new StreamReader(ms,Encoding.UTF8);
+			foDoc = sr.ReadToEnd();
+			sr.Close();
+			ms.Close();
 
-			this.FO2PDF(sw.ToString(), this.pdfFilesPath);
+			this.FO2PDF(foDoc,this.pdfFilesPath);
 		}
 		#endregion
 
@@ -132,6 +143,34 @@ namespace UseCaseMaker
 			sw.Write(pdf);
 			sw.Close();
 			fs.Close();
+
+//			InputSource source = new InputSource(xmldocFo);
+//			ByteArrayOutputStream output = new ByteArrayOutputStream();
+//			Driver driver = new Driver(source, output);
+//
+//			try
+//			{
+//				driver.setRenderer(Driver.RENDER_PDF);
+//				driver.run();
+//			}
+//			finally
+//			{
+//				output.close();
+//			}
+//
+//			int sz = output.buf.Length;
+//			byte[] pdf = new byte[sz];
+//			for (int i = 0; i < sz; i++)
+//			{
+//				pdf[i] = (byte) output.buf[i];
+//			}
+//
+//			//Write output file
+//			FileStream fs = new FileStream(strFilename, FileMode.Create);
+//			BinaryWriter bw = new BinaryWriter(fs);
+//			bw.Write(pdf);
+//			bw.Close();
+//			fs.Close();
 		}
 		#endregion
 

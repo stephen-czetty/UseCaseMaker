@@ -48,7 +48,7 @@ namespace UseCaseMaker
 			sw = new StreamWriter(this.htmlFilesPath + Path.DirectorySeparatorChar + "main.htm",false);
 			al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();
-			al.AddParam("version","",an.Version.ToString(2));
+			al.AddParam("version","",an.Version.ToString(3));
 			transform.Transform(doc,al,sw,null);
 			sw.Close();
 		}

@@ -4874,6 +4874,7 @@ namespace UseCaseMaker
 		private void frmMain_Load(object sender, System.EventArgs e)
 		{
 			this.appSettings.LoadSettings();
+			this.ImeMode = ImeMode.On;
 
 			this.SuspendLayout();
 			

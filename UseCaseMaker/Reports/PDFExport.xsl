@@ -3,7 +3,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:fo="http://www.w3.org/1999/XSL/Format"
 	xmlns:fox="http://xml.apache.org/fop/extensions">
-  <xsl:output method="xml" version="1.0" encoding="UTF-8" standalone="yes"/>
+  <xsl:output method="xml" version="1.0" encoding="utf-8" standalone="yes"/>
   <!-- Application parameters -->
   <xsl:param name="version"/>
   <!-- General parameters -->
@@ -165,8 +165,8 @@
                         page-width="210mm" page-height="297mm"
 						margin-top="10mm" margin-bottom="10mm"
         				margin-left="15mm" margin-right="15mm">
-          <fo:region-before region-name="xsl-region-before" extent="15mm"/>
           <fo:region-body region-name="xsl-region-body" margin-top="20mm" margin-bottom="20mm"/>
+          <fo:region-before region-name="xsl-region-before" extent="15mm"/>          
           <fo:region-after region-name="xsl-region-after" extent="5mm"/>
         </fo:simple-page-master>
       </fo:layout-master-set>
@@ -179,7 +179,9 @@
               <fo:table-column column-number="2" column-width="3cm"/>
               <fo:table-body>
                 <fo:table-row>
-                  <fo:table-cell column-number="1"/>
+                  <fo:table-cell column-number="1">
+                    <fo:block/>
+                  </fo:table-cell>
                   <fo:table-cell column-number="2">
                     <fo:block xsl:use-attribute-sets="UCMHTitle">Use Case Maker
                       <xsl:value-of select="$version"/>
