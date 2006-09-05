@@ -26,7 +26,7 @@ using System.Runtime.CompilerServices;
 // È possibile specificare tutti i valori o impostare come predefiniti i valori Numero revisione e Numero build 
 // utilizzando l'asterisco (*) come illustrato di seguito:
 
-[assembly: AssemblyVersion("0.9.1")]
+[assembly: AssemblyVersion("0.9.2")]
 
 //
 // Per firmare l'assembly è necessario specificare una chiave da utilizzare.

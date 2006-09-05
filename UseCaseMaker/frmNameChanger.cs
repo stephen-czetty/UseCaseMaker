@@ -158,6 +158,7 @@ namespace UseCaseMaker
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "[Rename element]";
+			this.Load += new System.EventHandler(this.frmNameChanger_Load);
 			this.ResumeLayout(false);
 
 		}
@@ -190,17 +191,19 @@ namespace UseCaseMaker
 
 		private void tbNewName_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
-			if((e.KeyChar >= 'A' && e.KeyChar <= 'Z')
-				|| (e.KeyChar >= 'a' && e.KeyChar <= 'z')
-				|| (e.KeyChar >= '0' && e.KeyChar <= '9')
-				|| e.KeyChar == 0x1E || e.KeyChar == 0x08 || e.KeyChar == ' ')
-			{
-				e.Handled = false;
-			}
-			else
+			if((e.KeyChar == '.' || e.KeyChar == '"'))
 			{
 				e.Handled = true;
 			}
+			else
+			{
+				e.Handled = false;
+			}
+		}
+
+		private void frmNameChanger_Load(object sender, System.EventArgs e)
+		{
+			this.ImeMode = ImeMode.On;
 		}
 	}
 }

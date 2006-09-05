@@ -125,6 +125,7 @@ namespace UseCaseMaker
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "[Create an element]";
+			this.Load += new System.EventHandler(this.frmCreator_Load);
 			this.ResumeLayout(false);
 
 		}
@@ -161,17 +162,19 @@ namespace UseCaseMaker
 
 		private void tbName_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
-			if((e.KeyChar >= 'A' && e.KeyChar <= 'Z')
-				|| (e.KeyChar >= 'a' && e.KeyChar <= 'z')
-				|| (e.KeyChar >= '0' && e.KeyChar <= '9')
-				|| e.KeyChar == 0x1E || e.KeyChar == 0x08 || e.KeyChar == ' ')
+			if((e.KeyChar == '.' || e.KeyChar == '"'))
 			{
-				e.Handled = false;
+				e.Handled = true;
 			}
 			else
 			{
-				e.Handled = true;
-			}		
+				e.Handled = false;
+			}
+		}
+
+		private void frmCreator_Load(object sender, System.EventArgs e)
+		{
+			this.ImeMode = ImeMode.On;
 		}
 	}
 }

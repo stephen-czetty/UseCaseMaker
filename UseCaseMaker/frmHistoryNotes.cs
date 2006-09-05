@@ -108,9 +108,15 @@ namespace UseCaseMaker
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "[History notes]";
+			this.Load += new System.EventHandler(this.frmHistoryNotes_Load);
 			this.ResumeLayout(false);
 
 		}
 		#endregion
+
+		private void frmHistoryNotes_Load(object sender, System.EventArgs e)
+		{
+			this.ImeMode = ImeMode.On;
+		}
 	}
 }
