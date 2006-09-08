@@ -49,8 +49,10 @@
 		<htmlExportCompleted>エクスポート完了。HTMLファイルを参照しますか？</htmlExportCompleted>
 		<xmiExportCompleted>エクスポート完了</xmiExportCompleted>
 		<pdfExportCompleted>エクスポート完了。PDFファイルを参照しますか？</pdfExportCompleted>
+		<rtfExportCompleted>エクスポート完了。RTFファイルを参照しますか？</rtfExportCompleted>
 		<exportAsXMI>XMI 1.1 エクスポート</exportAsXMI>
-		<exportAsPDF>PDF エクスポートExport</exportAsPDF>
+		<exportAsPDF>PDF エクスポート</exportAsPDF>
+		<exportAsRTF>RTF エクスポート</exportAsRTF>
 		<saveModel>カレントモデルを保存しますか?</saveModel>
 		<saveModelAs>名前をつけて保存...</saveModelAs>
 		<openModel>モデルを開く</openModel>
@@ -79,6 +81,7 @@
 			<mnuToolsHtmlExport>HTML書出し(&amp;H)</mnuToolsHtmlExport>
 			<mnuToolsXMIExport>XMI1.1書出し(&amp;X)</mnuToolsXMIExport>
 			<mnuToolsPDFExport>PDF書出し(&amp;P)</mnuToolsPDFExport>
+			<mnuToolsRTFExport>RTF書出し(&amp;R)</mnuToolsRTFExport>
 			<mnuToolsOptions>オプション(&amp;O)</mnuToolsOptions>
 			<!-- Help menu items -->
 			<mnuHelp>ヘルプ(&amp;H)</mnuHelp>

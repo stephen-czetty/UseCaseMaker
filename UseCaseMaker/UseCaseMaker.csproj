@@ -95,19 +95,14 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "vjslib"
-                    AssemblyName = "vjslib"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\vjslib.dll"
-                />
-                <Reference
                     Name = "UseCaseMakerControls"
                     Project = "{08BAF1B1-10D0-4426-BC09-C56C98AA5A6A}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "ApacheFop.Net"
-                    AssemblyName = "ApacheFop.Net"
-                    HintPath = "External Libraries\ApacheFop.Net.dll"
+                    Name = "itextsharp"
+                    AssemblyName = "itextsharp"
+                    HintPath = "External Libraries\itextsharp.dll"
                 />
             </References>
         </Build>
@@ -223,6 +218,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "RTFConverter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "UseCaseMaker.config"
                     BuildAction = "None"
                 />
@@ -232,7 +232,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "External Libraries\ApacheFop.Net.dll"
+                    RelPath = "External Libraries\itextsharp.dll"
                     BuildAction = "Content"
                 />
                 <File
@@ -376,13 +376,8 @@
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "Reports\PDFExport.xsl"
+                    RelPath = "Reports\PdfRtfExport.xsl"
                     BuildAction = "Content"
-                />
-                <File
-                    RelPath = "Reports\PDFExport.xsx"
-                    DependentUpon = "PDFExport.xsl"
-                    BuildAction = "None"
                 />
                 <File
                     RelPath = "Reports\UCM.css"

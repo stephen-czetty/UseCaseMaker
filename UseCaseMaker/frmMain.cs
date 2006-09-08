@@ -223,6 +223,7 @@ namespace UseCaseMaker
 		private UseCaseMakerControls.IndexedList UCList;
 		private System.Windows.Forms.MenuItem mnuCtxETGoToDefinition;
 		private System.Windows.Forms.ContextMenu elementTokenCtxMenu;
+		private System.Windows.Forms.MenuItem mnuToolsRTFExport;
 		private System.ComponentModel.IContainer components;
 
 		public frmMain(string openFromCmdLine)
@@ -341,6 +342,17 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer = new System.Windows.Forms.Panel();
 			this.lblFullPath = new System.Windows.Forms.Label();
 			this.lblFullPathTitle = new System.Windows.Forms.Label();
+			this.pgAttributes = new System.Windows.Forms.TabPage();
+			this.btnOpenRelatedDoc = new System.Windows.Forms.Button();
+			this.btnRemoveRelatedDoc = new System.Windows.Forms.Button();
+			this.btnAddRelatedDoc = new System.Windows.Forms.Button();
+			this.lvRelatedDocs = new System.Windows.Forms.ListView();
+			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+			this.lblRelatedDocsTitle = new System.Windows.Forms.Label();
+			this.tbNotes = new System.Windows.Forms.TextBox();
+			this.lblNotesTitle = new System.Windows.Forms.Label();
+			this.tbDescription = new System.Windows.Forms.TextBox();
+			this.lblDescriptionTitle = new System.Windows.Forms.Label();
 			this.pgGlossary = new System.Windows.Forms.TabPage();
 			this.GList = new UseCaseMakerControls.IndexedList();
 			this.btnChangeGlossaryItem = new System.Windows.Forms.Button();
@@ -396,17 +408,6 @@ namespace UseCaseMaker
 			this.btnRemoveStep = new System.Windows.Forms.Button();
 			this.btnAddStep = new System.Windows.Forms.Button();
 			this.lblStepsTitle = new System.Windows.Forms.Label();
-			this.pgAttributes = new System.Windows.Forms.TabPage();
-			this.btnOpenRelatedDoc = new System.Windows.Forms.Button();
-			this.btnRemoveRelatedDoc = new System.Windows.Forms.Button();
-			this.btnAddRelatedDoc = new System.Windows.Forms.Button();
-			this.lvRelatedDocs = new System.Windows.Forms.ListView();
-			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-			this.lblRelatedDocsTitle = new System.Windows.Forms.Label();
-			this.tbNotes = new System.Windows.Forms.TextBox();
-			this.lblNotesTitle = new System.Windows.Forms.Label();
-			this.tbDescription = new System.Windows.Forms.TextBox();
-			this.lblDescriptionTitle = new System.Windows.Forms.Label();
 			this.pgUCGeneral = new System.Windows.Forms.TabPage();
 			this.lblUCName = new System.Windows.Forms.Label();
 			this.btnUCNameChange = new System.Windows.Forms.Button();
@@ -441,6 +442,7 @@ namespace UseCaseMaker
 			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.elementTokenCtxMenu = new System.Windows.Forms.ContextMenu();
 			this.mnuCtxETGoToDefinition = new System.Windows.Forms.MenuItem();
+			this.mnuToolsRTFExport = new System.Windows.Forms.MenuItem();
 			this.pnlModelBrowser.SuspendLayout();
 			this.tabUseCase.SuspendLayout();
 			this.pgMain.SuspendLayout();
@@ -449,6 +451,7 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.SuspendLayout();
 			this.pnlPackagesContainer.SuspendLayout();
 			this.pnlFullPathContainer.SuspendLayout();
+			this.pgAttributes.SuspendLayout();
 			this.pgGlossary.SuspendLayout();
 			this.pgDetails.SuspendLayout();
 			this.pgProse.SuspendLayout();
@@ -456,7 +459,6 @@ namespace UseCaseMaker
 			this.pgAGeneral.SuspendLayout();
 			this.pgHistory.SuspendLayout();
 			this.pgFlowOfEvents.SuspendLayout();
-			this.pgAttributes.SuspendLayout();
 			this.pgUCGeneral.SuspendLayout();
 			this.pgPGeneral.SuspendLayout();
 			this.SuspendLayout();
@@ -627,6 +629,7 @@ namespace UseCaseMaker
 			this.mnuTools.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					 this.mnuToolsHtmlExport,
 																					 this.mnuToolsPDFExport,
+																					 this.mnuToolsRTFExport,
 																					 this.mnuToolsSep1,
 																					 this.mnuToolsXMIExport,
 																					 this.mnuToolsSep2,
@@ -647,23 +650,23 @@ namespace UseCaseMaker
 			// 
 			// mnuToolsSep1
 			// 
-			this.mnuToolsSep1.Index = 2;
+			this.mnuToolsSep1.Index = 3;
 			this.mnuToolsSep1.Text = "-";
 			// 
 			// mnuToolsXMIExport
 			// 
-			this.mnuToolsXMIExport.Index = 3;
+			this.mnuToolsXMIExport.Index = 4;
 			this.mnuToolsXMIExport.Text = "[XMI 1.1 Export]";
 			this.mnuToolsXMIExport.Click += new System.EventHandler(this.mnuXMIExport_Click);
 			// 
 			// mnuToolsSep2
 			// 
-			this.mnuToolsSep2.Index = 4;
+			this.mnuToolsSep2.Index = 5;
 			this.mnuToolsSep2.Text = "-";
 			// 
 			// mnuToolsOptions
 			// 
-			this.mnuToolsOptions.Index = 5;
+			this.mnuToolsOptions.Index = 6;
 			this.mnuToolsOptions.Text = "[Options]";
 			this.mnuToolsOptions.Click += new System.EventHandler(this.mnuToolsOptions_Click);
 			// 
@@ -1064,6 +1067,131 @@ namespace UseCaseMaker
 			this.lblFullPathTitle.TabIndex = 2;
 			this.lblFullPathTitle.Text = "[Full path]";
 			// 
+			// pgAttributes
+			// 
+			this.pgAttributes.Controls.Add(this.btnOpenRelatedDoc);
+			this.pgAttributes.Controls.Add(this.btnRemoveRelatedDoc);
+			this.pgAttributes.Controls.Add(this.btnAddRelatedDoc);
+			this.pgAttributes.Controls.Add(this.lvRelatedDocs);
+			this.pgAttributes.Controls.Add(this.lblRelatedDocsTitle);
+			this.pgAttributes.Controls.Add(this.tbNotes);
+			this.pgAttributes.Controls.Add(this.lblNotesTitle);
+			this.pgAttributes.Controls.Add(this.tbDescription);
+			this.pgAttributes.Controls.Add(this.lblDescriptionTitle);
+			this.pgAttributes.Location = new System.Drawing.Point(4, 22);
+			this.pgAttributes.Name = "pgAttributes";
+			this.pgAttributes.Size = new System.Drawing.Size(490, 334);
+			this.pgAttributes.TabIndex = 4;
+			this.pgAttributes.Text = "[Attributes]";
+			// 
+			// btnOpenRelatedDoc
+			// 
+			this.btnOpenRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(362, 296);
+			this.btnOpenRelatedDoc.Name = "btnOpenRelatedDoc";
+			this.btnOpenRelatedDoc.Size = new System.Drawing.Size(120, 23);
+			this.btnOpenRelatedDoc.TabIndex = 5;
+			this.btnOpenRelatedDoc.Text = "[Open]";
+			this.btnOpenRelatedDoc.Click += new System.EventHandler(this.btnOpenRelatedDoc_Click);
+			// 
+			// btnRemoveRelatedDoc
+			// 
+			this.btnRemoveRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(362, 264);
+			this.btnRemoveRelatedDoc.Name = "btnRemoveRelatedDoc";
+			this.btnRemoveRelatedDoc.Size = new System.Drawing.Size(120, 23);
+			this.btnRemoveRelatedDoc.TabIndex = 4;
+			this.btnRemoveRelatedDoc.Text = "[Remove]";
+			this.btnRemoveRelatedDoc.Click += new System.EventHandler(this.btnRemoveRelatedDoc_Click);
+			// 
+			// btnAddRelatedDoc
+			// 
+			this.btnAddRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddRelatedDoc.Location = new System.Drawing.Point(362, 232);
+			this.btnAddRelatedDoc.Name = "btnAddRelatedDoc";
+			this.btnAddRelatedDoc.Size = new System.Drawing.Size(120, 23);
+			this.btnAddRelatedDoc.TabIndex = 3;
+			this.btnAddRelatedDoc.Text = "[Add]";
+			this.btnAddRelatedDoc.Click += new System.EventHandler(this.btnAddRelatedDoc_Click);
+			// 
+			// lvRelatedDocs
+			// 
+			this.lvRelatedDocs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.lvRelatedDocs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+																							this.columnHeader1});
+			this.lvRelatedDocs.FullRowSelect = true;
+			this.lvRelatedDocs.GridLines = true;
+			this.lvRelatedDocs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lvRelatedDocs.HideSelection = false;
+			this.lvRelatedDocs.Location = new System.Drawing.Point(104, 232);
+			this.lvRelatedDocs.Name = "lvRelatedDocs";
+			this.lvRelatedDocs.Size = new System.Drawing.Size(250, 90);
+			this.lvRelatedDocs.TabIndex = 2;
+			this.lvRelatedDocs.View = System.Windows.Forms.View.Details;
+			this.lvRelatedDocs.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvRelatedDocs_Layout);
+			this.lvRelatedDocs.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvRelatedDocs_MouseMove);
+			this.lvRelatedDocs.SelectedIndexChanged += new System.EventHandler(this.lvRelatedDocs_SelectedIndexChanged);
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Width = 200;
+			// 
+			// lblRelatedDocsTitle
+			// 
+			this.lblRelatedDocsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblRelatedDocsTitle.Location = new System.Drawing.Point(8, 232);
+			this.lblRelatedDocsTitle.Name = "lblRelatedDocsTitle";
+			this.lblRelatedDocsTitle.Size = new System.Drawing.Size(88, 40);
+			this.lblRelatedDocsTitle.TabIndex = 37;
+			this.lblRelatedDocsTitle.Text = "[Related Docs]";
+			// 
+			// tbNotes
+			// 
+			this.tbNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.tbNotes.Location = new System.Drawing.Point(104, 120);
+			this.tbNotes.Multiline = true;
+			this.tbNotes.Name = "tbNotes";
+			this.tbNotes.Size = new System.Drawing.Size(378, 104);
+			this.tbNotes.TabIndex = 1;
+			this.tbNotes.Text = "";
+			this.tbNotes.TextChanged += new System.EventHandler(this.tbNotes_TextChanged);
+			// 
+			// lblNotesTitle
+			// 
+			this.lblNotesTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblNotesTitle.Location = new System.Drawing.Point(8, 120);
+			this.lblNotesTitle.Name = "lblNotesTitle";
+			this.lblNotesTitle.Size = new System.Drawing.Size(88, 16);
+			this.lblNotesTitle.TabIndex = 10;
+			this.lblNotesTitle.Text = "[Notes]";
+			// 
+			// tbDescription
+			// 
+			this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.tbDescription.Location = new System.Drawing.Point(104, 8);
+			this.tbDescription.Multiline = true;
+			this.tbDescription.Name = "tbDescription";
+			this.tbDescription.Size = new System.Drawing.Size(378, 104);
+			this.tbDescription.TabIndex = 0;
+			this.tbDescription.Text = "";
+			this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
+			// 
+			// lblDescriptionTitle
+			// 
+			this.lblDescriptionTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblDescriptionTitle.Location = new System.Drawing.Point(8, 8);
+			this.lblDescriptionTitle.Name = "lblDescriptionTitle";
+			this.lblDescriptionTitle.Size = new System.Drawing.Size(88, 16);
+			this.lblDescriptionTitle.TabIndex = 8;
+			this.lblDescriptionTitle.Text = "[Description]";
+			// 
 			// pgGlossary
 			// 
 			this.pgGlossary.Controls.Add(this.GList);
@@ -1072,7 +1200,7 @@ namespace UseCaseMaker
 			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
 			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
 			this.pgGlossary.Name = "pgGlossary";
-			this.pgGlossary.Size = new System.Drawing.Size(490, 348);
+			this.pgGlossary.Size = new System.Drawing.Size(490, 334);
 			this.pgGlossary.TabIndex = 10;
 			this.pgGlossary.Text = "[Glossary]";
 			// 
@@ -1093,7 +1221,7 @@ namespace UseCaseMaker
 			this.GList.Name = "GList";
 			this.GList.RowHeight = 46;
 			this.GList.SelectedIndex = -1;
-			this.GList.Size = new System.Drawing.Size(340, 328);
+			this.GList.Size = new System.Drawing.Size(340, 314);
 			this.GList.TabIndex = 4;
 			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.GList.TextColumnWidth = 189;
@@ -1162,7 +1290,7 @@ namespace UseCaseMaker
 			this.pgDetails.Controls.Add(this.lblPriorityTitle);
 			this.pgDetails.Location = new System.Drawing.Point(4, 22);
 			this.pgDetails.Name = "pgDetails";
-			this.pgDetails.Size = new System.Drawing.Size(490, 348);
+			this.pgDetails.Size = new System.Drawing.Size(490, 334);
 			this.pgDetails.TabIndex = 3;
 			this.pgDetails.Text = "[Details]";
 			// 
@@ -1183,7 +1311,7 @@ namespace UseCaseMaker
 			this.OIList.Name = "OIList";
 			this.OIList.RowHeight = 46;
 			this.OIList.SelectedIndex = -1;
-			this.OIList.Size = new System.Drawing.Size(252, 104);
+			this.OIList.Size = new System.Drawing.Size(252, 90);
 			this.OIList.TabIndex = 34;
 			this.OIList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.OIList.TextColumnWidth = 197;
@@ -1418,7 +1546,7 @@ namespace UseCaseMaker
 			this.pgProse.Controls.Add(this.tbProse);
 			this.pgProse.Location = new System.Drawing.Point(4, 22);
 			this.pgProse.Name = "pgProse";
-			this.pgProse.Size = new System.Drawing.Size(490, 348);
+			this.pgProse.Size = new System.Drawing.Size(490, 334);
 			this.pgProse.TabIndex = 2;
 			this.pgProse.Text = "[Prose]";
 			// 
@@ -1432,7 +1560,7 @@ namespace UseCaseMaker
 			this.tbProse.Location = new System.Drawing.Point(8, 8);
 			this.tbProse.MaxUndoRedoSteps = 50;
 			this.tbProse.Name = "tbProse";
-			this.tbProse.Size = new System.Drawing.Size(476, 328);
+			this.tbProse.Size = new System.Drawing.Size(476, 314);
 			this.tbProse.TabIndex = 0;
 			this.tbProse.Text = "";
 			this.tbProse.ClickOnToken += new UseCaseMakerControls.ClickOnTokenEventHandler(this.tbProse_ClickOnToken);
@@ -1446,7 +1574,7 @@ namespace UseCaseMaker
 			this.pgRequirements.Controls.Add(this.btnAddRequirement);
 			this.pgRequirements.Location = new System.Drawing.Point(4, 22);
 			this.pgRequirements.Name = "pgRequirements";
-			this.pgRequirements.Size = new System.Drawing.Size(490, 348);
+			this.pgRequirements.Size = new System.Drawing.Size(490, 334);
 			this.pgRequirements.TabIndex = 6;
 			this.pgRequirements.Text = "[Requirements]";
 			// 
@@ -1467,7 +1595,7 @@ namespace UseCaseMaker
 			this.RList.Name = "RList";
 			this.RList.RowHeight = 46;
 			this.RList.SelectedIndex = -1;
-			this.RList.Size = new System.Drawing.Size(348, 328);
+			this.RList.Size = new System.Drawing.Size(348, 314);
 			this.RList.TabIndex = 3;
 			this.RList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.RList.TextColumnWidth = 293;
@@ -1512,7 +1640,7 @@ namespace UseCaseMaker
 			this.pgAGeneral.Controls.Add(this.lblAIDTitle);
 			this.pgAGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgAGeneral.Name = "pgAGeneral";
-			this.pgAGeneral.Size = new System.Drawing.Size(490, 348);
+			this.pgAGeneral.Size = new System.Drawing.Size(490, 334);
 			this.pgAGeneral.TabIndex = 7;
 			this.pgAGeneral.Text = "[General (A)]";
 			// 
@@ -1591,7 +1719,7 @@ namespace UseCaseMaker
 			this.pgHistory.Controls.Add(this.lvHistory);
 			this.pgHistory.Location = new System.Drawing.Point(4, 22);
 			this.pgHistory.Name = "pgHistory";
-			this.pgHistory.Size = new System.Drawing.Size(490, 348);
+			this.pgHistory.Size = new System.Drawing.Size(490, 334);
 			this.pgHistory.TabIndex = 5;
 			this.pgHistory.Text = "[History]";
 			// 
@@ -1625,7 +1753,7 @@ namespace UseCaseMaker
 			this.lvHistory.Location = new System.Drawing.Point(8, 8);
 			this.lvHistory.MultiSelect = false;
 			this.lvHistory.Name = "lvHistory";
-			this.lvHistory.Size = new System.Drawing.Size(346, 328);
+			this.lvHistory.Size = new System.Drawing.Size(346, 314);
 			this.lvHistory.TabIndex = 0;
 			this.lvHistory.View = System.Windows.Forms.View.Details;
 			this.lvHistory.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvHistory_Layout);
@@ -1662,7 +1790,7 @@ namespace UseCaseMaker
 			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
 			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
 			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
-			this.pgFlowOfEvents.Size = new System.Drawing.Size(490, 348);
+			this.pgFlowOfEvents.Size = new System.Drawing.Size(490, 334);
 			this.pgFlowOfEvents.TabIndex = 1;
 			this.pgFlowOfEvents.Text = "[Flow of events]";
 			// 
@@ -1683,7 +1811,7 @@ namespace UseCaseMaker
 			this.UCList.Name = "UCList";
 			this.UCList.RowHeight = 46;
 			this.UCList.SelectedIndex = -1;
-			this.UCList.Size = new System.Drawing.Size(260, 328);
+			this.UCList.Size = new System.Drawing.Size(260, 314);
 			this.UCList.TabIndex = 10;
 			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.UCList.TextColumnWidth = 205;
@@ -1762,131 +1890,6 @@ namespace UseCaseMaker
 			this.lblStepsTitle.TabIndex = 9;
 			this.lblStepsTitle.Text = "[Steps]";
 			// 
-			// pgAttributes
-			// 
-			this.pgAttributes.Controls.Add(this.btnOpenRelatedDoc);
-			this.pgAttributes.Controls.Add(this.btnRemoveRelatedDoc);
-			this.pgAttributes.Controls.Add(this.btnAddRelatedDoc);
-			this.pgAttributes.Controls.Add(this.lvRelatedDocs);
-			this.pgAttributes.Controls.Add(this.lblRelatedDocsTitle);
-			this.pgAttributes.Controls.Add(this.tbNotes);
-			this.pgAttributes.Controls.Add(this.lblNotesTitle);
-			this.pgAttributes.Controls.Add(this.tbDescription);
-			this.pgAttributes.Controls.Add(this.lblDescriptionTitle);
-			this.pgAttributes.Location = new System.Drawing.Point(4, 22);
-			this.pgAttributes.Name = "pgAttributes";
-			this.pgAttributes.Size = new System.Drawing.Size(490, 348);
-			this.pgAttributes.TabIndex = 4;
-			this.pgAttributes.Text = "[Attributes]";
-			// 
-			// btnOpenRelatedDoc
-			// 
-			this.btnOpenRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOpenRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(362, 296);
-			this.btnOpenRelatedDoc.Name = "btnOpenRelatedDoc";
-			this.btnOpenRelatedDoc.Size = new System.Drawing.Size(120, 23);
-			this.btnOpenRelatedDoc.TabIndex = 5;
-			this.btnOpenRelatedDoc.Text = "[Open]";
-			this.btnOpenRelatedDoc.Click += new System.EventHandler(this.btnOpenRelatedDoc_Click);
-			// 
-			// btnRemoveRelatedDoc
-			// 
-			this.btnRemoveRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnRemoveRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(362, 264);
-			this.btnRemoveRelatedDoc.Name = "btnRemoveRelatedDoc";
-			this.btnRemoveRelatedDoc.Size = new System.Drawing.Size(120, 23);
-			this.btnRemoveRelatedDoc.TabIndex = 4;
-			this.btnRemoveRelatedDoc.Text = "[Remove]";
-			this.btnRemoveRelatedDoc.Click += new System.EventHandler(this.btnRemoveRelatedDoc_Click);
-			// 
-			// btnAddRelatedDoc
-			// 
-			this.btnAddRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddRelatedDoc.Location = new System.Drawing.Point(362, 232);
-			this.btnAddRelatedDoc.Name = "btnAddRelatedDoc";
-			this.btnAddRelatedDoc.Size = new System.Drawing.Size(120, 23);
-			this.btnAddRelatedDoc.TabIndex = 3;
-			this.btnAddRelatedDoc.Text = "[Add]";
-			this.btnAddRelatedDoc.Click += new System.EventHandler(this.btnAddRelatedDoc_Click);
-			// 
-			// lvRelatedDocs
-			// 
-			this.lvRelatedDocs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.lvRelatedDocs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-																							this.columnHeader1});
-			this.lvRelatedDocs.FullRowSelect = true;
-			this.lvRelatedDocs.GridLines = true;
-			this.lvRelatedDocs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			this.lvRelatedDocs.HideSelection = false;
-			this.lvRelatedDocs.Location = new System.Drawing.Point(104, 232);
-			this.lvRelatedDocs.Name = "lvRelatedDocs";
-			this.lvRelatedDocs.Size = new System.Drawing.Size(250, 104);
-			this.lvRelatedDocs.TabIndex = 2;
-			this.lvRelatedDocs.View = System.Windows.Forms.View.Details;
-			this.lvRelatedDocs.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvRelatedDocs_Layout);
-			this.lvRelatedDocs.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvRelatedDocs_MouseMove);
-			this.lvRelatedDocs.SelectedIndexChanged += new System.EventHandler(this.lvRelatedDocs_SelectedIndexChanged);
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.Width = 200;
-			// 
-			// lblRelatedDocsTitle
-			// 
-			this.lblRelatedDocsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblRelatedDocsTitle.Location = new System.Drawing.Point(8, 232);
-			this.lblRelatedDocsTitle.Name = "lblRelatedDocsTitle";
-			this.lblRelatedDocsTitle.Size = new System.Drawing.Size(88, 40);
-			this.lblRelatedDocsTitle.TabIndex = 37;
-			this.lblRelatedDocsTitle.Text = "[Related Docs]";
-			// 
-			// tbNotes
-			// 
-			this.tbNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.tbNotes.Location = new System.Drawing.Point(104, 120);
-			this.tbNotes.Multiline = true;
-			this.tbNotes.Name = "tbNotes";
-			this.tbNotes.Size = new System.Drawing.Size(378, 104);
-			this.tbNotes.TabIndex = 1;
-			this.tbNotes.Text = "";
-			this.tbNotes.TextChanged += new System.EventHandler(this.tbNotes_TextChanged);
-			// 
-			// lblNotesTitle
-			// 
-			this.lblNotesTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblNotesTitle.Location = new System.Drawing.Point(8, 120);
-			this.lblNotesTitle.Name = "lblNotesTitle";
-			this.lblNotesTitle.Size = new System.Drawing.Size(88, 16);
-			this.lblNotesTitle.TabIndex = 10;
-			this.lblNotesTitle.Text = "[Notes]";
-			// 
-			// tbDescription
-			// 
-			this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.tbDescription.Location = new System.Drawing.Point(104, 8);
-			this.tbDescription.Multiline = true;
-			this.tbDescription.Name = "tbDescription";
-			this.tbDescription.Size = new System.Drawing.Size(378, 104);
-			this.tbDescription.TabIndex = 0;
-			this.tbDescription.Text = "";
-			this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
-			// 
-			// lblDescriptionTitle
-			// 
-			this.lblDescriptionTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblDescriptionTitle.Location = new System.Drawing.Point(8, 8);
-			this.lblDescriptionTitle.Name = "lblDescriptionTitle";
-			this.lblDescriptionTitle.Size = new System.Drawing.Size(88, 16);
-			this.lblDescriptionTitle.TabIndex = 8;
-			this.lblDescriptionTitle.Text = "[Description]";
-			// 
 			// pgUCGeneral
 			// 
 			this.pgUCGeneral.Controls.Add(this.lblUCName);
@@ -1907,7 +1910,7 @@ namespace UseCaseMaker
 			this.pgUCGeneral.Controls.Add(this.lblUCIDTitle);
 			this.pgUCGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgUCGeneral.Name = "pgUCGeneral";
-			this.pgUCGeneral.Size = new System.Drawing.Size(490, 348);
+			this.pgUCGeneral.Size = new System.Drawing.Size(490, 334);
 			this.pgUCGeneral.TabIndex = 0;
 			this.pgUCGeneral.Text = "[General (UC)]";
 			// 
@@ -1982,7 +1985,7 @@ namespace UseCaseMaker
 			this.lvActors.Location = new System.Drawing.Point(104, 216);
 			this.lvActors.MultiSelect = false;
 			this.lvActors.Name = "lvActors";
-			this.lvActors.Size = new System.Drawing.Size(250, 120);
+			this.lvActors.Size = new System.Drawing.Size(250, 106);
 			this.lvActors.TabIndex = 3;
 			this.lvActors.View = System.Windows.Forms.View.Details;
 			this.lvActors.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvActors_Layout);
@@ -2108,7 +2111,7 @@ namespace UseCaseMaker
 			this.pgPGeneral.Controls.Add(this.lblPIDTitle);
 			this.pgPGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgPGeneral.Name = "pgPGeneral";
-			this.pgPGeneral.Size = new System.Drawing.Size(490, 348);
+			this.pgPGeneral.Size = new System.Drawing.Size(490, 334);
 			this.pgPGeneral.TabIndex = 9;
 			this.pgPGeneral.Text = "[General(P)]";
 			// 
@@ -2214,6 +2217,12 @@ namespace UseCaseMaker
 			this.mnuCtxETGoToDefinition.Text = "[Go to definition]";
 			this.mnuCtxETGoToDefinition.Click += new System.EventHandler(this.mnuCtxETGoToDefinition_Click);
 			// 
+			// mnuToolsRTFExport
+			// 
+			this.mnuToolsRTFExport.Index = 2;
+			this.mnuToolsRTFExport.Text = "[RTF Export]";
+			this.mnuToolsRTFExport.Click += new System.EventHandler(this.mnuToolsRTFExport_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -2240,6 +2249,7 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.ResumeLayout(false);
 			this.pnlPackagesContainer.ResumeLayout(false);
 			this.pnlFullPathContainer.ResumeLayout(false);
+			this.pgAttributes.ResumeLayout(false);
 			this.pgGlossary.ResumeLayout(false);
 			this.pgDetails.ResumeLayout(false);
 			this.pgProse.ResumeLayout(false);
@@ -2247,7 +2257,6 @@ namespace UseCaseMaker
 			this.pgAGeneral.ResumeLayout(false);
 			this.pgHistory.ResumeLayout(false);
 			this.pgFlowOfEvents.ResumeLayout(false);
-			this.pgAttributes.ResumeLayout(false);
 			this.pgUCGeneral.ResumeLayout(false);
 			this.pgPGeneral.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -5188,6 +5197,78 @@ namespace UseCaseMaker
 					}
 				}
 			}		
+		}
+
+
+		private void mnuToolsRTFExport_Click(object sender, System.EventArgs e)
+		{
+			if(this.modelFilePath == string.Empty || this.modified)
+			{
+				// [Model must be saved before exporting...]
+				MessageBox.Show(
+					this,
+					this.localizer.GetValue("UserMessages","saveBeforeExport"),
+					Application.ProductName,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Hand);
+				return;
+			}
+
+			SaveFileDialog saveRTFFileDialog = new SaveFileDialog();
+			saveRTFFileDialog.Title = this.localizer.GetValue("UserMessages","exportAsRTF");
+			saveRTFFileDialog.FileName = ((this.modelFileName == string.Empty)
+				? model.Name : Path.GetFileNameWithoutExtension(this.modelFileName));
+			saveRTFFileDialog.DefaultExt = "rtf";
+			saveRTFFileDialog.Filter = "RTF Files|*.rtf";
+			if(saveRTFFileDialog.ShowDialog(this) == DialogResult.OK)
+			{
+				RTFConverter rtf = new RTFConverter(
+					this.appSettings.ReportsFilesPath,
+					saveRTFFileDialog.FileName,
+					this.localizer);
+
+				this.Cursor = Cursors.WaitCursor;
+
+				try
+				{
+					rtf.Transform(this.modelFilePath + Path.DirectorySeparatorChar + this.modelFileName);
+				}
+				catch(Exception ex)
+				{
+					this.Cursor = Cursors.Default;
+					MessageBox.Show(
+						this,
+						ex.GetType().Name + ":\r\n" + ex.Message,
+						Application.ProductName,
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Stop);
+					return;
+				}
+
+				this.Cursor = Cursors.Default;
+
+				// [Export complete. Do you want to see the PDF file?]
+				if(MessageBox.Show(
+					this,
+					this.localizer.GetValue("UserMessages","rtfExportCompleted"),
+					Application.ProductName,
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Information) == DialogResult.Yes)
+				{
+					Process process = new Process();
+					process.StartInfo.FileName = saveRTFFileDialog.FileName;
+					try
+					{
+						process.Start();
+					}
+					catch(Win32Exception ex)
+					{
+						// [Cannot open file!]
+						MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile") + 
+							"\r\n" + ex.Message);
+					}
+				}
+			}				
 		}
 
 		private void splLeft_SplitterMoving(object sender, System.Windows.Forms.SplitterEventArgs e)

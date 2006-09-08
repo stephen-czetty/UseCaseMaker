@@ -49,8 +49,10 @@
 		<htmlExportCompleted>Export completed. Do you want to see the HTML files?</htmlExportCompleted>
 		<xmiExportCompleted>Export completed.</xmiExportCompleted>
 		<pdfExportCompleted>Export completed. Do you want to see the PDF file?</pdfExportCompleted>
+		<rtfExportCompleted>Export completed. Do you want to see the RTF file?</rtfExportCompleted>
 		<exportAsXMI>XMI 1.1 Export</exportAsXMI>
 		<exportAsPDF>PDF Export</exportAsPDF>
+		<exportAsRTF>RTF Export</exportAsRTF>
 		<saveModel>Do you want to save the current model?</saveModel>
 		<saveModelAs>Save model as...</saveModelAs>
 		<openModel>Open model</openModel>
@@ -79,6 +81,7 @@
 			<mnuToolsHtmlExport>&amp;HTML export</mnuToolsHtmlExport>
 			<mnuToolsXMIExport>&amp;XMI 1.1 export</mnuToolsXMIExport>
 			<mnuToolsPDFExport>&amp;PDF export</mnuToolsPDFExport>
+			<mnuToolsRTFExport>&amp;RTF export</mnuToolsRTFExport>
 			<mnuToolsOptions>&amp;Options</mnuToolsOptions>
 			<!-- Help menu items -->
 			<mnuHelp>&amp;Help</mnuHelp>

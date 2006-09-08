@@ -8,7 +8,7 @@ using System.Xml.Xsl;
 using System.Collections.Specialized;
 using System.Net;
 using iTextSharp.text;
-using iTextSharp.text.pdf;
+using iTextSharp.text.rtf;
 using iTextSharp.text.xml;
 
 namespace UseCaseMaker
@@ -16,7 +16,7 @@ namespace UseCaseMaker
 	/**
 	 * @brief Descrizione di riepilogo per PDFConverter.
 	 */
-	public class PDFConverter
+	public class RTFConverter
 	{
 		#region Enumerators and Constants
 		// Public
@@ -28,7 +28,7 @@ namespace UseCaseMaker
 		// Public
 		// Private
 		private string stylesheetFilesPath = string.Empty;
-		private string pdfFilesPath = string.Empty;
+		private string rtfFilesPath = string.Empty;
 		private Localizer localizer = null;
 		// Protected
 		#endregion
@@ -37,13 +37,13 @@ namespace UseCaseMaker
 		/**
 		 * @brief Costruttore di default per XMIConverter
 		 */
-		public PDFConverter(
+		public RTFConverter(
 			string stylesheetFilesPath,
-			string pdfFilesPath,
+			string rtfFilesPath,
 			Localizer localizer)
 		{
 			this.stylesheetFilesPath = stylesheetFilesPath;
-			this.pdfFilesPath = pdfFilesPath;
+			this.rtfFilesPath = rtfFilesPath;
 			this.localizer = localizer;
 		}
 		#endregion
@@ -74,7 +74,7 @@ namespace UseCaseMaker
 			XsltArgumentList al = new XsltArgumentList();
 			AssemblyName an = this.GetType().Assembly.GetName();
 			al.AddParam("version","",an.Version.ToString(3));
-			al.AddParam("outputType","","withLink");
+			al.AddParam("outputType","","withoutLink");
 			al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
 			al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
 			al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
@@ -118,20 +118,31 @@ namespace UseCaseMaker
 			sr.Close();
 			ms.Close();
 
-			this.XmlToPdf(foDoc,this.pdfFilesPath);
+			this.XmlToRtf(foDoc,this.rtfFilesPath);
 		}
 		#endregion
 
 		#region Private Methods
-		public void XmlToPdf(string xmlDoc, string strFilename) 
+		public void XmlToRtf(string xmlDoc, string strFilename) 
 		{        
 			Document document = new Document();
 			MemoryStream ms = new MemoryStream();
+			Phrase headerPhrase;
+			Phrase footerPhrase;
         
 			// iTextSharp
-			PdfWriter writer = PdfWriter.GetInstance(document, ms);
-			MyPageEvents pageEvents = new MyPageEvents();
-			writer.PageEvent = pageEvents;
+			RtfWriter2 writer = RtfWriter2.GetInstance(document, ms);
+			
+			footerPhrase = new Phrase("",new Font(Font.HELVETICA,8));
+			RtfHeaderFooter footer = new RtfHeaderFooter(footerPhrase,true);
+			footer.SetAlignment("center");
+			writer.Footer = footer;
+			
+			AssemblyName an = this.GetType().Assembly.GetName();
+			headerPhrase = new Phrase("Use Case Maker " + an.Version.ToString(3),new Font(Font.HELVETICA,8));
+			RtfHeaderFooter header = new RtfHeaderFooter(headerPhrase,false);
+			header.SetAlignment("right");
+			writer.Header = header;
 
 			StringReader sr = new StringReader(xmlDoc);
 			XmlTextReader reader = new XmlTextReader(sr);
@@ -163,84 +174,6 @@ namespace UseCaseMaker
 		#endregion
 
 		#region Protected Methods
-		#endregion
-	}
-
-	/**
-	 * @brief Page events class.
-	 */
-	class MyPageEvents : PdfPageEventHelper 
-	{
-		#region Class Members
-		// This is the contentbyte object of the writer
-		PdfContentByte cb = null;
-
-		// this is the BaseFont we are going to use for the header / footer
-		BaseFont bf = null;
-
-		NameValueCollection nvc = null;
-		#endregion
-
-		#region Public Methods (override)
-		// we override the onOpenDocument method
-		public override void OnOpenDocument(PdfWriter writer, Document document) 
-		{
-			try 
-			{
-				bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-				cb = writer.DirectContent;
-				// nvc = new NameValueCollection();
-			}
-			catch(DocumentException) 
-			{
-			}
-			catch(IOException) 
-			{
-			}
-		}
-
-		// we override the onEndPage method
-		public override void OnEndPage(PdfWriter writer, Document document) 
-		{
-			int pageN = writer.PageNumber;
-			string text = Convert.ToString(pageN);
-			float len = bf.GetWidthPoint(text, 8);
-			cb.BeginText();
-			cb.SetFontAndSize(bf, 8);
-			cb.SetTextMatrix(280, 29);
-			cb.ShowText(text);
-			cb.EndText();
-
-			cb.SetLineWidth(0.5f);
-			cb.MoveTo(50,802);
-			cb.LineTo(545,802);
-			cb.Stroke();
-
-			cb.SetLineWidth(0.5f);
-			cb.MoveTo(50,40);
-			cb.LineTo(545,40);
-			cb.Stroke();
-
-			cb.BeginText();
-			cb.SetFontAndSize(bf, 8);
-			AssemblyName an = this.GetType().Assembly.GetName();
-			text = "Use Case Maker " + an.Version.ToString(3);
-			len = bf.GetWidthPoint(text,8);
-			cb.SetTextMatrix(545 - len,807);
-			cb.ShowText(text);
-			cb.EndText();
-		}
-
-		public override void OnGenericTag(PdfWriter writer, Document document, Rectangle rect, string text)
-		{
-			// Could it be a TOC?
-			// nvc.Add(text,Convert.ToString(writer.PageNumber));
-		}
-
-		public override void OnCloseDocument(PdfWriter writer, Document document)
-		{
-
-		}
 		#endregion
 	}
 }
