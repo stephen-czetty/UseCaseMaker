@@ -927,7 +927,9 @@
         <xsl:choose>
           <xsl:when test="$end">
             <xsl:if test="$start">
-              <xsl:value-of select="substring-before($text,$end)"/>
+			  <xsl:call-template name="lf2nl"> 
+                <xsl:with-param name="text" select="substring-before($text,$end)"/>
+              </xsl:call-template>
             </xsl:if>
             <xsl:choose>
               <xsl:when test="//Glossary/*[@Name = $end]">
@@ -961,7 +963,9 @@
                     </xsl:call-template>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="$end"/>
+                    <xsl:call-template name="lf2nl">
+                      <xsl:with-param name="text" select="$end"/>
+                    </xsl:call-template>
                     <xsl:call-template name="MatchLink">
                       <xsl:with-param name="text" select="substring-after($text,$end)"/>
                     </xsl:call-template>
@@ -978,7 +982,9 @@
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$text"/>
+        <xsl:call-template name="lf2nl">
+          <xsl:with-param name="text" select="$text"/>
+        </xsl:call-template>  
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -1058,4 +1064,23 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  <xsl:template name="lf2nl">
+    <xsl:param name="text" />
+    <xsl:choose>
+		<xsl:when test="contains($text, '&#10;')">
+			<xsl:variable name="head" select="substring-before($text, '&#10;')" />
+			<xsl:variable name="tail" select="substring-after($text, '&#10;')" />
+			<xsl:value-of select="$head" />
+			<newline/>
+			<xsl:if test="$tail">
+				<xsl:call-template name="lf2nl">
+					<xsl:with-param name="text" select="$tail" />
+				</xsl:call-template>
+			</xsl:if>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$text" />
+		</xsl:otherwise>
+	</xsl:choose>
+  </xsl:template>  
 </xsl:stylesheet>

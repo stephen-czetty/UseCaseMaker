@@ -87,7 +87,7 @@ namespace UseCaseMakerControls
 			this.border.Enabled = false;
 			this.border.Location = new System.Drawing.Point(0, 0);
 			this.border.Name = "border";
-			this.border.Size = new System.Drawing.Size(128, 136);
+			this.border.Size = new System.Drawing.Size(200, 136);
 			this.border.TabIndex = 0;
 			// 
 			// lstCompleteItems
@@ -104,7 +104,7 @@ namespace UseCaseMakerControls
 			this.lstCompleteItems.Location = new System.Drawing.Point(2, 2);
 			this.lstCompleteItems.MultiSelect = false;
 			this.lstCompleteItems.Name = "lstCompleteItems";
-			this.lstCompleteItems.Size = new System.Drawing.Size(124, 132);
+			this.lstCompleteItems.Size = new System.Drawing.Size(196, 132);
 			this.lstCompleteItems.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.lstCompleteItems.TabIndex = 5;
 			this.lstCompleteItems.View = System.Windows.Forms.View.Details;
@@ -112,18 +112,18 @@ namespace UseCaseMakerControls
 			// 
 			// columnHeader1
 			// 
-			this.columnHeader1.Width = 148;
+			this.columnHeader1.Width = 216;
 			// 
 			// AutoCompleteForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(128, 136);
+			this.ClientSize = new System.Drawing.Size(200, 136);
 			this.ControlBox = false;
 			this.Controls.Add(this.lstCompleteItems);
 			this.Controls.Add(this.border);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(128, 176);
+			this.MaximumSize = new System.Drawing.Size(256, 176);
 			this.MinimizeBox = false;
 			this.Name = "AutoCompleteForm";
 			this.ShowInTaskbar = false;
