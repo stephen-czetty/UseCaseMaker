@@ -151,7 +151,9 @@
 	<xsl:template match="Preconditions">
 		<tr>
 			<td class="TableCell">
-				<xsl:value-of select="text()" />
+				<xsl:call-template name="MatchLink">
+					<xsl:with-param name="text" select="text()"/>
+				</xsl:call-template>
 			</td>
 		</tr>
 	</xsl:template>
@@ -159,7 +161,9 @@
 	<xsl:template match="Postconditions">
 		<tr>
 			<td class="TableCell">
-				<xsl:value-of select="text()" />
+				<xsl:call-template name="MatchLink">
+					<xsl:with-param name="text" select="text()"/>
+				</xsl:call-template>
 			</td>
 		</tr>
 	</xsl:template>

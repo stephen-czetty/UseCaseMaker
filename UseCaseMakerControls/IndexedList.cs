@@ -426,7 +426,7 @@ namespace UseCaseMakerControls
 		protected override void OnSizeChanged(EventArgs e)
 		{
 			base.OnSizeChanged(e);
-			// UpdateControlsLayout();
+			this.UpdateControlsLayout();
 		}
 
 		protected override void OnLayout(LayoutEventArgs levent)

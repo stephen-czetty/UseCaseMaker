@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:import href="lf2br.xsl" />
+	<xsl:import href="MatchLink.xsl" />
 	<xsl:output method="html" />
 	
 	<xsl:param name="elementUniqueID" />
@@ -41,12 +42,14 @@
 	<xsl:template match="GlossaryItem">
 		<tr>
 			<td class="TableCell" width="30%">
-				<xsl:value-of select="@Name" />
+				<xsl:variable name="uid" select="@UniqueID" />
+				<a name="{$uid}"><xsl:value-of select="@Name" /></a>
 			</td>
 			<td class="TableCell">
-				<xsl:variable name="uid" select="@UniqueID" />
-				<a name="{$uid}"><xsl:value-of select="Description" /></a>
-			</td>
+				<xsl:call-template name="MatchLink">
+					<xsl:with-param name="text" select="Description"/>
+				</xsl:call-template>
+			</td>			
 		</tr>
 	</xsl:template>
 </xsl:stylesheet>

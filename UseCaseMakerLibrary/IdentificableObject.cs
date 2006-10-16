@@ -11,6 +11,7 @@ namespace UseCaseMakerLibrary
 		private String prefix = String.Empty;
 		private String uniqueID = String.Empty;
 		private Package owner = null;
+		private UserViewStatus userViewStatus = new UserViewStatus();
 		#endregion
 
 		#region Constructors
@@ -125,6 +126,15 @@ namespace UseCaseMakerLibrary
 			get
 			{
 				return this.prefix + this.id.ToString();
+			}
+		}
+
+		[XMLSerializeIgnore]
+		public UserViewStatus ObjectUserViewStatus
+		{
+			get
+			{
+				return this.userViewStatus;
 			}
 		}
 		#endregion

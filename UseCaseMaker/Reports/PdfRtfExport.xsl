@@ -260,7 +260,9 @@
       </cell>
       <cell xsl:use-attribute-sets="ElementTextCell">
         <paragraph xsl:use-attribute-sets="ElementText">
-          <xsl:value-of select="Description"/>
+          <xsl:call-template name="MatchLink">
+            <xsl:with-param name="text" select="Description"/>
+          </xsl:call-template>
         </paragraph>
       </cell>
     </row>
@@ -451,9 +453,15 @@
         <xsl:call-template name="HeaderRow">
           <xsl:with-param name="text" select="$preconditions"/>
         </xsl:call-template>
-        <xsl:call-template name="TextRow">
-          <xsl:with-param name="text" select="Preconditions/text()"/>
-        </xsl:call-template>
+        <row>
+          <cell xsl:use-attribute-sets="ElementTextCell">
+            <paragraph xsl:use-attribute-sets="ElementText">
+              <xsl:call-template name="MatchLink">
+                <xsl:with-param name="text" select="Preconditions/text()"/>
+              </xsl:call-template>
+            </paragraph>
+          </cell>
+        </row>
       </table>
       <paragraph xsl:use-attribute-sets="ParaSep"/>
     </xsl:if>
@@ -463,9 +471,15 @@
         <xsl:call-template name="HeaderRow">
           <xsl:with-param name="text" select="$postconditions"/>
         </xsl:call-template>
-        <xsl:call-template name="TextRow">
-          <xsl:with-param name="text" select="Postconditions/text()"/>
-        </xsl:call-template>
+        <row>
+          <cell xsl:use-attribute-sets="ElementTextCell">
+            <paragraph xsl:use-attribute-sets="ElementText">
+              <xsl:call-template name="MatchLink">
+                <xsl:with-param name="text" select="Postconditions/text()"/>
+              </xsl:call-template>
+            </paragraph>
+          </cell>
+        </row>
       </table>
       <paragraph xsl:use-attribute-sets="ParaSep"/>
     </xsl:if>
@@ -792,9 +806,15 @@
           <xsl:call-template name="HeaderRow">
             <xsl:with-param name="text" select="$description"/>
           </xsl:call-template>
-          <xsl:call-template name="TextRow">
-            <xsl:with-param name="text" select="$node/Attributes/Description/text()"/>
-          </xsl:call-template>
+          <row>
+            <cell xsl:use-attribute-sets="ElementTextCell">
+              <paragraph xsl:use-attribute-sets="ElementText">
+                <xsl:call-template name="MatchLink">
+                  <xsl:with-param name="text" select="$node/Attributes/Description/text()"/>
+                </xsl:call-template>
+              </paragraph>
+            </cell>
+          </row>                 
       </table>
       <paragraph spacingafter="12.0"/>
     </xsl:if>
@@ -803,9 +823,15 @@
           <xsl:call-template name="HeaderRow">
             <xsl:with-param name="text" select="$notes"/>
           </xsl:call-template>
-          <xsl:call-template name="TextRow">
-            <xsl:with-param name="text" select="$node/Attributes/Notes/text()"/>
-          </xsl:call-template>
+          <row>
+            <cell xsl:use-attribute-sets="ElementTextCell">
+              <paragraph xsl:use-attribute-sets="ElementText">
+                <xsl:call-template name="MatchLink">
+                  <xsl:with-param name="text" select="$node/Attributes/Notes/text()"/>
+                </xsl:call-template>
+              </paragraph>
+            </cell>
+          </row>
       </table>
       <paragraph spacingafter="12.0"/>
     </xsl:if>
