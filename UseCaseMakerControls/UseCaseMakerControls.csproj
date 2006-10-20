@@ -139,6 +139,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ItemTextChangedEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "MouseOverTokenEventArgs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

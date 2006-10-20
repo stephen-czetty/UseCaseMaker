@@ -10,6 +10,7 @@ namespace UseCaseMakerControls
 	{
 		private string token = string.Empty;
 		private LinkEnabledRTB item = null;
+		private bool overToken = false;
 		
 		public MouseOverTokenEventArgs(
 			MouseButtons button,
@@ -18,11 +19,13 @@ namespace UseCaseMakerControls
 			int y,
 			int delta,
 			LinkEnabledRTB item,
-			string token)
+			string token,
+			bool overToken)
 			: base(button,clicks,x,y,delta)
 		{
 			this.item = item;
 			this.token = token;
+			this.overToken = overToken;
 		}
 
 		public string Token
@@ -38,6 +41,14 @@ namespace UseCaseMakerControls
 			get
 			{
 				return this.item;
+			}
+		}
+
+		public bool OverToken
+		{
+			get
+			{
+				return this.overToken;
 			}
 		}
 	}

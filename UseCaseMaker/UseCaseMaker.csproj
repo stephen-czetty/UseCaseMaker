@@ -256,6 +256,14 @@
                     BuildAction = "Content"
                 />
                 <File
+                    RelPath = "Icons\Copy.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Icons\Cut.ico"
+                    BuildAction = "Content"
+                />
+                <File
                     RelPath = "Icons\New.ico"
                     BuildAction = "Content"
                 />
@@ -265,6 +273,10 @@
                 />
                 <File
                     RelPath = "Icons\Package.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Icons\Paste.ico"
                     BuildAction = "Content"
                 />
                 <File

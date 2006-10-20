@@ -26,9 +26,11 @@ namespace UseCaseMakerControls
 		private AutoCompleteForm mAutoCompleteForm = new AutoCompleteForm();
 
 		// Events
-		public event MouseOverTokenEventHandler		MouseOverToken;
-		public event ItemTextChangedEventHandler	ItemTextChanged;
-		public event ClickOnTokenEventHandler		ClickOnToken;
+		public event MouseOverTokenEventHandler				MouseOverToken;
+		public event ItemTextChangedEventHandler			ItemTextChanged;
+		public event ItemClickEventHandler					ItemClick;
+		public event ItemTextEnterEventHandler				ItemTextEnter;
+		public event ItemTextSelectionChangedEventHandler	ItemTextSelectionChanged;
 
 		//Undo/Redo members
 		private ArrayList mUndoList = new ArrayList();
@@ -164,7 +166,7 @@ namespace UseCaseMakerControls
 			}
 		}
 
-		protected virtual void OnItemTextChanged(EventArgs e)
+		protected virtual void OnItemTextChanged(ItemTextChangedEventArgs e)
 		{
 			if(ItemTextChanged != null)
 			{
@@ -172,11 +174,27 @@ namespace UseCaseMakerControls
 			}
 		}
 
-		protected virtual void OnClickOnToken(MouseOverTokenEventArgs e)
+		protected virtual void OnItemClick(MouseOverTokenEventArgs e)
 		{
-			if(ClickOnToken != null)
+			if(ItemClick != null)
 			{
-				ClickOnToken(this,e);
+				ItemClick(this,e);
+			}
+		}
+
+		protected virtual void OnItemTextEnter(ItemTextChangedEventArgs e)
+		{
+			if(ItemTextEnter != null)
+			{
+				ItemTextEnter(this,e);
+			}
+		}
+
+		protected virtual void OnItemTextSelectionChanged(ItemTextChangedEventArgs e)
+		{
+			if(ItemTextSelectionChanged  != null)
+			{
+				ItemTextSelectionChanged(this,e);
 			}
 		}
 		#endregion
@@ -194,7 +212,7 @@ namespace UseCaseMakerControls
 			if(this.HighlightDescriptors.Count == 0)
 			{
 				base.OnTextChanged(e);
-				OnItemTextChanged(new EventArgs());
+				OnItemTextChanged(new ItemTextChangedEventArgs(this));
 				return;
 			}
 
@@ -263,13 +281,13 @@ namespace UseCaseMakerControls
 
 			mParsing = false;
 
-			OnItemTextChanged(new EventArgs());
+			OnItemTextChanged(new ItemTextChangedEventArgs(this));
 		}
 
 		protected override void OnVScroll(EventArgs e)
 		{
 			if (mParsing) return;
-			base.OnVScroll (e);
+			base.OnVScroll(e);
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
@@ -280,7 +298,7 @@ namespace UseCaseMakerControls
 
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			base.OnMouseMove (e);
+			base.OnMouseMove(e);
 
 			string token = CurrentToken(e);
 			if(token != string.Empty)
@@ -292,30 +310,46 @@ namespace UseCaseMakerControls
 					e.Y,
 					e.Delta,
 					this,
-					token);
+					token,
+					true);
 				OnMouseOverToken(mot);
 			}
 		}
 
 		protected override void OnMouseUp(MouseEventArgs e)
 		{
-			base.OnMouseUp (e);
+			base.OnMouseUp(e);
 
 			string token = CurrentToken(e);
 			if(token != string.Empty)
 			{
-				MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(
-					e.Button,
-					e.Clicks,
-					e.X,
-					e.Y,
-					e.Delta,					
-					this,
-					token);
 				lastTokenClicked = token;
-				OnClickOnToken(mot);
 			}
+			MouseOverTokenEventArgs mot = new MouseOverTokenEventArgs(
+				e.Button,
+				e.Clicks,
+				e.X,
+				e.Y,
+				e.Delta,					
+				this,
+				token,
+				(token != string.Empty) ? true : false);
+			OnItemClick(mot);
 		}
+
+		protected override void OnEnter(EventArgs e)
+		{
+			base.OnEnter(e);
+
+			this.OnItemTextEnter(new ItemTextChangedEventArgs(this));
+		}
+
+		protected override void OnSelectionChanged(EventArgs e)
+		{
+			base.OnSelectionChanged(e);
+			this.OnItemTextSelectionChanged(new ItemTextChangedEventArgs(this));
+		}
+
 
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{

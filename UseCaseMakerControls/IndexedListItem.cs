@@ -6,8 +6,10 @@ namespace UseCaseMakerControls
 {
 	public delegate void MouseOverTokenEventHandler(object sender, MouseOverTokenEventArgs e);
 	public delegate void SelectedChangeEventHandler(object sender, EventArgs e);
-	public delegate void ItemTextChangedEventHandler(object sender, EventArgs e);
-	public delegate void ClickOnTokenEventHandler(object sender, MouseOverTokenEventArgs e);
+	public delegate void ItemTextChangedEventHandler(object sender, ItemTextChangedEventArgs e);
+	public delegate void ItemClickEventHandler(object sender, MouseOverTokenEventArgs e);
+	public delegate void ItemTextEnterEventHandler(object sender, ItemTextChangedEventArgs e);
+	public delegate void ItemTextSelectionChangedEventHandler(object sender, ItemTextChangedEventArgs e);
 
 	/// <summary>
 	/// Descrizione di riepilogo per IndexedListItem.
@@ -26,10 +28,12 @@ namespace UseCaseMakerControls
 		private bool								_selected = false;
 		private object								_tag = null;
 
-		public event MouseOverTokenEventHandler		MouseOverToken;
-		public event SelectedChangeEventHandler		SelectedChange;
-		public event ItemTextChangedEventHandler	ItemTextChanged;
-		public event ClickOnTokenEventHandler		ClickOnToken;
+		public event MouseOverTokenEventHandler				MouseOverToken;
+		public event SelectedChangeEventHandler				SelectedChange;
+		public event ItemTextChangedEventHandler			ItemTextChanged;
+		public event ItemClickEventHandler					ItemClick;
+		public event ItemTextEnterEventHandler				ItemTextEnter;
+		public event ItemTextSelectionChangedEventHandler	ItemTextSelectionChanged;
 		#endregion
 
 		#region Constructors
@@ -37,7 +41,9 @@ namespace UseCaseMakerControls
 		{
 			_text.MouseOverToken += new MouseOverTokenEventHandler(_text_MouseOverToken);
 			_text.ItemTextChanged += new ItemTextChangedEventHandler(_text_ItemTextChanged);
-			_text.ClickOnToken += new ClickOnTokenEventHandler(_text_ClickOnToken);
+			_text.ItemClick += new ItemClickEventHandler(_text_ItemClick);
+			_text.ItemTextEnter += new ItemTextEnterEventHandler(_text_ItemTextEnter);
+			_text.ItemTextSelectionChanged += new ItemTextSelectionChangedEventHandler(_text_ItemTextSelectionChanged);
 		}
 		#endregion
 
@@ -152,7 +158,7 @@ namespace UseCaseMakerControls
 			}
 		}
 
-		protected void _text_ItemTextChanged(object sender, EventArgs e)
+		protected void _text_ItemTextChanged(object sender, ItemTextChangedEventArgs e)
 		{
 			if(ItemTextChanged != null)
 			{
@@ -160,11 +166,27 @@ namespace UseCaseMakerControls
 			}
 		}
 
-		protected void _text_ClickOnToken(object sender, MouseOverTokenEventArgs e)
+		protected void _text_ItemClick(object sender, MouseOverTokenEventArgs e)
 		{
-			if(ClickOnToken != null)
+			if(ItemClick != null)
 			{
-				ClickOnToken(sender,e);
+				ItemClick(sender,e);
+			}
+		}
+
+		protected void _text_ItemTextEnter(object sender, ItemTextChangedEventArgs e)
+		{
+			if(ItemTextEnter != null)
+			{
+				ItemTextEnter(sender,e);
+			}
+		}
+
+		protected void _text_ItemTextSelectionChanged(object sender, ItemTextChangedEventArgs e)
+		{
+			if(ItemTextSelectionChanged != null)
+			{
+				ItemTextSelectionChanged(sender,e);
 			}
 		}
 		#endregion

@@ -128,7 +128,9 @@ namespace UseCaseMakerControls
 			item.SelectedChange += new SelectedChangeEventHandler(item_SelectedChange);
 			item.MouseOverToken += new MouseOverTokenEventHandler(parent.OnMouseOverToken);
 			item.ItemTextChanged += new ItemTextChangedEventHandler(parent.OnItemTextChanged);
-			item.ClickOnToken += new ClickOnTokenEventHandler(parent.OnClickOnToken);
+			item.ItemClick += new ItemClickEventHandler(parent.OnItemClick);
+			item.ItemTextEnter += new ItemTextEnterEventHandler(parent.OnItemTextEnter);
+			item.ItemTextSelectionChanged += new ItemTextSelectionChangedEventHandler(parent.OnItemTextSelectionChanged);
 
 			parent.Controls.Add(item.ItemLabel);
 			parent.Controls.Add(item.ItemRichTextBox);

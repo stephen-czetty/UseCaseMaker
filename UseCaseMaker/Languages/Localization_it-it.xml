@@ -70,6 +70,11 @@
 			<mnuFileExit>&amp;Esci</mnuFileExit>
 			<!-- Edit menu items -->
 			<mnuEdit>&amp;Modifica</mnuEdit>
+			<!-- Start of 0.9.5 section -->
+			<mnuEditCut>Ta&amp;glia</mnuEditCut>
+			<mnuEditCopy>&amp;Copia</mnuEditCopy>
+			<mnuEditPaste>&amp;Incolla</mnuEditPaste>
+			<!-- End of 0.9.5 section -->			
 			<mnuEditAddPackage>Aggiungi &amp;package</mnuEditAddPackage>
 			<mnuEditRemovePackage>&amp;Rimuovi package</mnuEditRemovePackage>
 			<mnuEditAddActor>Aggiungi &amp;attore</mnuEditAddActor>
@@ -87,6 +92,11 @@
 			<mnuHelp>&amp;Aiuto</mnuHelp>
 			<mnuHelpAbout>&amp;Informazioni su...</mnuHelpAbout>
 			<!-- Model browser context menu items -->
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxMBCut>Ta&amp;glia</mnuCtxMBCut>
+			<mnuCtxMBCopy>&amp;Copia</mnuCtxMBCopy>
+			<mnuCtxMBPaste>&amp;Incolla</mnuCtxMBPaste>
+			<!-- End of 0.9.5 section -->				
 			<mnuCtxMBAddPackage>Aggiungi &amp;package</mnuCtxMBAddPackage>
 			<mnuCtxMBRemovePackage>&amp;Rimuovi package</mnuCtxMBRemovePackage>
 			<mnuCtxMBAddActor>Aggiungi &amp;attore</mnuCtxMBAddActor>
@@ -95,6 +105,11 @@
 			<mnuCtxMBRemoveUseCase>Rimuo&amp;vi caso d'uso</mnuCtxMBRemoveUseCase>
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Vai alla definizione</mnuCtxETGoToDefinition>			
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxETCut>Ta&amp;glia</mnuCtxETCut>
+			<mnuCtxETCopy>&amp;Copia</mnuCtxETCopy>
+			<mnuCtxETPaste>&amp;Incolla</mnuCtxETPaste>
+			<!-- End of 0.9.5 section -->				
 			<!-- Other controls -->
 			<lblModelBrowser>Esplora modello</lblModelBrowser>
 			<!-- Tab pages -->

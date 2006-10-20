@@ -44,10 +44,12 @@ namespace UseCaseMakerControls
 		private string textDataField;
 		private string uniqueIDDataField;
 
-		public event MouseOverTokenEventHandler		MouseOverToken;
-		public event ItemTextChangedEventHandler	ItemTextChanged;
-		public event SelectedChangeEventHandler		SelectedChanged;
-		public event ClickOnTokenEventHandler		ClickOnToken;
+		public event MouseOverTokenEventHandler				MouseOverToken;
+		public event ItemTextChangedEventHandler			ItemTextChanged;
+		public event SelectedChangeEventHandler				SelectedChanged;
+		public event ItemClickEventHandler					ItemClick;
+		public event ItemTextEnterEventHandler				ItemTextEnter;
+		public event ItemTextSelectionChangedEventHandler	ItemTextSelectionChanged;
 		#endregion
 
 		#region Constructors
@@ -628,7 +630,7 @@ namespace UseCaseMakerControls
 			this.Invalidate();
 		}
 
-		public void OnItemTextChanged(object sender, EventArgs e)
+		public void OnItemTextChanged(object sender, ItemTextChangedEventArgs e)
 		{
 			if(this.ItemTextChanged != null)
 			{
@@ -664,16 +666,41 @@ namespace UseCaseMakerControls
 			}
 		}
 
-		public void OnClickOnToken(object sender, MouseOverTokenEventArgs e)
+		public void OnItemClick(object sender, MouseOverTokenEventArgs e)
 		{
-			if(this.ClickOnToken != null)
+			if(this.ItemClick != null)
 			{
 				foreach(IndexedListItem ili in this.items)
 				{
 					if(ili.ItemRichTextBox.Name == ((RichTextBox)sender).Name)
 					{
-						this.ClickOnToken(ili,e);
+						this.ItemClick(ili,e);
 					}
+				}
+			}
+		}
+
+		public void OnItemTextEnter(object sender, ItemTextChangedEventArgs e)
+		{
+			if(this.ItemTextEnter != null)
+			{
+				foreach(IndexedListItem ili in this.items)
+				{
+					if(ili.ItemRichTextBox.Name == ((RichTextBox)sender).Name)
+					{
+						this.ItemTextEnter(ili,e);
+					}
+				}
+			}
+		}
+
+		public void OnItemTextSelectionChanged(object sender, ItemTextChangedEventArgs e)
+		{
+			foreach(IndexedListItem ili in this.items)
+			{
+				if(ili.ItemRichTextBox.Name == ((RichTextBox)sender).Name)
+				{
+					this.ItemTextSelectionChanged(ili,e);
 				}
 			}
 		}

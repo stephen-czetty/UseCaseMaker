@@ -70,6 +70,11 @@
 			<mnuFileExit>&amp;Exit</mnuFileExit>
 			<!-- Edit menu items -->
 			<mnuEdit>&amp;Edit</mnuEdit>
+			<!-- Start of 0.9.5 section -->
+			<mnuEditCut>Cu&amp;t</mnuEditCut>
+			<mnuEditCopy>&amp;Copy</mnuEditCopy>
+			<mnuEditPaste>&amp;Paste</mnuEditPaste>
+			<!-- End of 0.9.5 section -->
 			<mnuEditAddPackage>Add &amp;package</mnuEditAddPackage>
 			<mnuEditRemovePackage>&amp;Remove package</mnuEditRemovePackage>
 			<mnuEditAddActor>Add &amp;actor</mnuEditAddActor>
@@ -87,6 +92,11 @@
 			<mnuHelp>&amp;Help</mnuHelp>
 			<mnuHelpAbout>&amp;About...</mnuHelpAbout>
 			<!-- Model browser context menu items -->
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxMBCut>Cu&amp;t</mnuCtxMBCut>
+			<mnuCtxMBCopy>&amp;Copy</mnuCtxMBCopy>
+			<mnuCtxMBPaste>&amp;Paste</mnuCtxMBPaste>
+			<!-- End of 0.9.5 section -->			
 			<mnuCtxMBAddPackage>Add &amp;package</mnuCtxMBAddPackage>
 			<mnuCtxMBRemovePackage>&amp;Remove package</mnuCtxMBRemovePackage>
 			<mnuCtxMBAddActor>Add &amp;actor</mnuCtxMBAddActor>
@@ -95,6 +105,11 @@
 			<mnuCtxMBRemoveUseCase>Remo&amp;ve use case</mnuCtxMBRemoveUseCase>		
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Go to definition</mnuCtxETGoToDefinition>
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxETCut>Cu&amp;t</mnuCtxETCut>
+			<mnuCtxETCopy>&amp;Copy</mnuCtxETCopy>
+			<mnuCtxETPaste>&amp;Paste</mnuCtxETPaste>
+			<!-- End of 0.9.5 section -->					
 			<!-- Other controls -->
 			<lblModelBrowser>Model browser</lblModelBrowser>
 			<!-- Tab pages -->
