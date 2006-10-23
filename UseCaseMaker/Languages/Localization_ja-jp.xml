@@ -70,6 +70,11 @@
 			<mnuFileExit>終了(&amp;E)</mnuFileExit>
 			<!-- Edit menu items -->
 			<mnuEdit>編集(&amp;E)</mnuEdit>
+			<!-- Start of 0.9.5 section -->
+			<mnuEditCut>切り取り(&amp;T)</mnuEditCut>
+			<mnuEditCopy>コピー(&amp;C)</mnuEditCopy>
+			<mnuEditPaste>貼り付け(&amp;P)</mnuEditPaste>
+			<!-- End of 0.9.5 section -->			
 			<mnuEditAddPackage>パッケージ追加(&amp;A)</mnuEditAddPackage>
 			<mnuEditRemovePackage>パッケージ削除(&amp;R)</mnuEditRemovePackage>
 			<mnuEditAddActor>アクタ追加(&amp;a)</mnuEditAddActor>
@@ -86,13 +91,25 @@
 			<!-- Help menu items -->
 			<mnuHelp>ヘルプ(&amp;H)</mnuHelp>
 			<mnuHelpAbout>UseCaseMakerについて(&amp;A)...</mnuHelpAbout>
-			<!-- Context menu items -->
+			<!-- Model browser context menu items -->
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxMBCut>切り取り(&amp;T)</mnuCtxMBCut>
+			<mnuCtxMBCopy>コピー(&amp;C)</mnuCtxMBCopy>
+			<mnuCtxMBPaste>貼り付け(&amp;P)</mnuCtxMBPaste>
+			<!-- End of 0.9.5 section -->				
 			<mnuCtxMBAddPackage>パッケージ追加(&amp;A)</mnuCtxMBAddPackage>
 			<mnuCtxMBRemovePackage>パッケージ削除(&amp;R)</mnuCtxMBRemovePackage>
 			<mnuCtxMBAddActor>アクタ追加(&amp;a)</mnuCtxMBAddActor>
 			<mnuCtxMBRemoveActor>アクタ削除(&amp;m)</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>ユースケース追加(&amp;u)</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>ユースケース削除(&amp;v)</mnuCtxMBRemoveUseCase>
+			<!-- Element token context menu items -->
+			<mnuCtxETGoToDefinition>定義に行きなさい(&amp;G)</mnuCtxETGoToDefinition>
+			<!-- Start of 0.9.5 section -->
+			<mnuCtxETCut>切り取り(&amp;T)</mnuCtxETCut>
+			<mnuCtxETCopy>コピー(&amp;C)</mnuCtxETCopy>
+			<mnuCtxETPaste>貼り付け(&amp;P)</mnuCtxETPaste>
+			<!-- End of 0.9.5 section -->	
 			<!-- Other controls -->
 			<lblModelBrowser>モデルブラウザ</lblModelBrowser>
 			<!-- Tab pages -->
