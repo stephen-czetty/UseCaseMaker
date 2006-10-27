@@ -6005,6 +6005,8 @@ namespace UseCaseMaker
 					return;
 				}
 
+				this.hdc.Clear();
+
 				if(dstElement.GetType() == typeof(Package) || dstElement.GetType() == typeof(Model))
 				{
 					if(srcElement.GetType() == typeof(Package))
@@ -6158,6 +6160,8 @@ namespace UseCaseMaker
 					{
 						return;
 					}
+
+					this.hdc.Clear();
 
 					if(dstElement.GetType() == typeof(Package) || dstElement.GetType() == typeof(Model))
 					{
