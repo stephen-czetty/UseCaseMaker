@@ -58,6 +58,10 @@ namespace UseCaseMaker
 		public void LocalizeControls(Form form)
 		{
 			XmlNode controlsNode = this.langDoc.SelectSingleNode("//" + form.Name + "/Controls");
+			if(controlsNode == null)
+			{
+				return;
+			}
 			foreach(XmlNode node in controlsNode.ChildNodes)
 			{
 				if(node.HasChildNodes && node.FirstChild.NodeType != XmlNodeType.Text)

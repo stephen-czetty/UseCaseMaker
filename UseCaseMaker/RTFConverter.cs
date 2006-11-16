@@ -80,6 +80,7 @@ namespace UseCaseMaker
 			al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
 			al.AddParam("model","",this.localizer.GetValue("Globals","Model"));
 			al.AddParam("actor","",this.localizer.GetValue("Globals","Actor"));
+			al.AddParam("goals","",this.localizer.GetValue("Globals","Goals"));
 			al.AddParam("useCase","",this.localizer.GetValue("Globals","UseCase"));
 			al.AddParam("package","",this.localizer.GetValue("Globals","Package"));
 			al.AddParam("actors","",this.localizer.GetValue("Globals","Actors"));

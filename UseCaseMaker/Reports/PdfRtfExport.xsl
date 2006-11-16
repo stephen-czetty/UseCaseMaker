@@ -21,6 +21,8 @@
   <xsl:param name="summary"/>
   <xsl:param name="glossary"/>
   <xsl:param name="glossaryItem"/>
+  <!-- 'Actor' specific parameters -->
+  <xsl:param name="goals"/>
   <!-- 'Use case' specific paramters -->
   <xsl:param name="preconditions"/>
   <xsl:param name="postconditions"/>
@@ -416,7 +418,37 @@
       <xsl:with-param name="elementType" select="$actor"/>
     </xsl:call-template>
     <paragraph xsl:use-attribute-sets="ParaSep"/>
+    <!-- Actor specific -->
+    <xsl:if test="Goals/*">
+      <xsl:apply-templates select="Goals"/>
+      <paragraph xsl:use-attribute-sets="ParaSep"/>
+    </xsl:if>    
   </xsl:template>
+  <!-- 'Actor' goals -->
+  <xsl:template match="Goals">
+    <table columns="2" width="100%" cellpadding="2.0" widths="20.0;80.0">
+      <xsl:call-template name="HeaderRow">
+        <xsl:with-param name="colspan" select="2"/>
+        <xsl:with-param name="text" select="$goals"/>
+      </xsl:call-template>
+      <xsl:for-each select="Goal">
+        <row>
+        <cell xsl:use-attribute-sets="ElementTextCell">
+            <paragraph xsl:use-attribute-sets="ElementText">
+              <xsl:value-of select="Name"/>
+            </paragraph>
+        </cell>
+        <cell xsl:use-attribute-sets="ElementTextCell">
+            <paragraph xsl:use-attribute-sets="ElementText">
+            <xsl:call-template name="MatchLink">
+                <xsl:with-param name="text" select="Description"/>
+            </xsl:call-template>
+            </paragraph>
+        </cell>
+        </row>
+      </xsl:for-each>
+    </table>
+  </xsl:template>  
   <!-- Use case details -->
   <xsl:template match="UseCase">
 		<!-- Common attributes -->

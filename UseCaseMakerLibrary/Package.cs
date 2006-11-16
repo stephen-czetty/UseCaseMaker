@@ -235,6 +235,22 @@ namespace UseCaseMakerLibrary
 				newNameEndTag,
 				true);
 		}
+
+		public void ReplaceElementPath(
+			String oldPath,
+			String pathStartTag,
+			String pathEndTag,
+			String newPath)
+		{
+			this.ChangeReferences(
+				oldPath,
+				pathStartTag,
+				pathEndTag,
+				newPath,
+				pathStartTag,
+				pathEndTag,
+				true);
+		}
 		#endregion
 		#endregion
 

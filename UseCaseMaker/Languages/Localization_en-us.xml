@@ -35,6 +35,9 @@
 		<Owner>Owner</Owner>
 		<Glossary>Glossary</Glossary>
 		<GlossaryItem>Glossary item</GlossaryItem>
+		<!-- Start of 0.9.6 section -->
+		<Goals>Goals</Goals>
+		<!-- End of 0.9.6 section -->
 		<HistoryType>
 			<Item EnumName="Implementation" ListIndex="0">Implementation</Item>
 			<Item EnumName="Status" ListIndex="1">Status</Item>
@@ -179,6 +182,11 @@
 			<lblAOwnerTitle>Owner package</lblAOwnerTitle>
 			<lblANameTitle>Name</lblANameTitle>
 			<btnANameChange>Change</btnANameChange>
+			<!-- Start of 0.9.6 section -->
+			<lblAGoalsTitle>Goals</lblAGoalsTitle>
+			<btnAddGoal>Add</btnAddGoal>
+			<btnRemoveGoal>Remove</btnRemoveGoal>
+			<!-- End of 0.9.6 section -->
 			<!-- Package General -->
 			<pgPGeneral>General</pgPGeneral>
 			<lblPIDTitle>Identifier</lblPIDTitle>

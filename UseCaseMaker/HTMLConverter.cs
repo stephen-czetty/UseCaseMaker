@@ -137,6 +137,7 @@ namespace UseCaseMaker
 				al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
 				al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
 				al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
+				al.AddParam("goals","",this.localizer.GetValue("Globals","Goals"));
 			}
 			if(currentNode.Name == "UseCase")
 			{

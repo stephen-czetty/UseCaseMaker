@@ -203,6 +203,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "frmReorder.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "frmReorder.resx"
+                    DependentUpon = "frmReorder.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "HTMLConverter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

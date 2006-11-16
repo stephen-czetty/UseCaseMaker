@@ -154,6 +154,7 @@ namespace UseCaseMaker
 			this.lvOptLanguages.Size = new System.Drawing.Size(400, 176);
 			this.lvOptLanguages.TabIndex = 1;
 			this.lvOptLanguages.View = System.Windows.Forms.View.Details;
+			this.lvOptLanguages.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvOptLanguages_MouseUp);
 			this.lvOptLanguages.SelectedIndexChanged += new System.EventHandler(this.lvOptLanguages_SelectedIndexChanged);
 			// 
 			// chDescription
@@ -183,7 +184,7 @@ namespace UseCaseMaker
 			this.btnCancel.CausesValidation = false;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnCancel.Location = new System.Drawing.Point(224, 256);
+			this.btnCancel.Location = new System.Drawing.Point(223, 256);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(120, 23);
 			this.btnCancel.TabIndex = 3;
@@ -194,7 +195,7 @@ namespace UseCaseMaker
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOK.Location = new System.Drawing.Point(96, 256);
+			this.btnOK.Location = new System.Drawing.Point(95, 256);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(120, 23);
 			this.btnOK.TabIndex = 2;
@@ -204,7 +205,7 @@ namespace UseCaseMaker
 			// frmOptions
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(440, 288);
+			this.ClientSize = new System.Drawing.Size(439, 279);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.tabOptions);
@@ -224,16 +225,7 @@ namespace UseCaseMaker
 
 		private void lvOptLanguages_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			if(lvOptLanguages.SelectedIndices.Count == 0)
-			{
-				this.SelectedLanguage = string.Empty;
-				btnOK.Enabled = false;
-			}
-			else
-			{
-				this.SelectedLanguage = lvOptLanguages.SelectedItems[0].SubItems[2].Text;
-				btnOK.Enabled = true;
-			}
+ 
 		}
 
 		private void btnOK_Click(object sender, System.EventArgs e)
@@ -254,6 +246,18 @@ namespace UseCaseMaker
 					MessageBoxIcon.Stop);
 				this.SelectedLanguage = this.previousLanguage;
 			}
+		}
+
+		private void lvOptLanguages_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			if(lvOptLanguages.SelectedIndices.Count == 0)
+			{
+				if(lvOptLanguages.Items.Count > 0)
+				{
+					lvOptLanguages.Items[lvOptLanguages.Items.Count-1].Selected = true;
+				}
+				return;
+			}		
 		}
 	}
 }

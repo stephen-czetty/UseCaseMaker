@@ -23,7 +23,7 @@ namespace UseCaseMaker
 	 */
 	public class frmMain : System.Windows.Forms.Form
 	{
-		[DllImport("user32")] public static extern int LockWindowUpdate(IntPtr hwnd);
+		// [DllImport("user32")] public static extern int LockWindowUpdate(IntPtr hwnd);
 
 		private const string defaultUCPrefix = "UC";
 		private const string defaultPPrefix = "P";
@@ -243,6 +243,14 @@ namespace UseCaseMaker
 		private System.Windows.Forms.MenuItem mnuCtxETCut;
 		private System.Windows.Forms.MenuItem mnuCtxETCopy;
 		private System.Windows.Forms.MenuItem mnuCtxETPaste;
+		private UseCaseMakerControls.IndexedList AGList;
+		private System.Windows.Forms.Button btnRemoveGoal;
+		private System.Windows.Forms.Button btnAddGoal;
+		private System.Windows.Forms.Label lblAGoalsTitle;
+		private System.Windows.Forms.MenuItem mnuEditSep4;
+		private System.Windows.Forms.MenuItem mnuEditReorderElements;
+		private System.Windows.Forms.MenuItem mnuCtxMBSep4;
+		private System.Windows.Forms.MenuItem mnuCtxMBReorderElements;
 		private System.ComponentModel.IContainer components;
 
 		public frmMain(string openFromCmdLine)
@@ -379,6 +387,18 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer = new System.Windows.Forms.Panel();
 			this.lblFullPath = new System.Windows.Forms.Label();
 			this.lblFullPathTitle = new System.Windows.Forms.Label();
+			this.pgAGeneral = new System.Windows.Forms.TabPage();
+			this.btnRemoveGoal = new System.Windows.Forms.Button();
+			this.btnAddGoal = new System.Windows.Forms.Button();
+			this.AGList = new UseCaseMakerControls.IndexedList();
+			this.lblAGoalsTitle = new System.Windows.Forms.Label();
+			this.btnANameChange = new System.Windows.Forms.Button();
+			this.lblAName = new System.Windows.Forms.Label();
+			this.lblANameTitle = new System.Windows.Forms.Label();
+			this.lblAOwner = new System.Windows.Forms.Label();
+			this.lblAOwnerTitle = new System.Windows.Forms.Label();
+			this.lblAID = new System.Windows.Forms.Label();
+			this.lblAIDTitle = new System.Windows.Forms.Label();
 			this.pgUCGeneral = new System.Windows.Forms.TabPage();
 			this.tbPostconditions = new UseCaseMakerControls.LinkEnabledRTB();
 			this.tbPreconditions = new UseCaseMakerControls.LinkEnabledRTB();
@@ -398,14 +418,14 @@ namespace UseCaseMaker
 			this.lblUCOwnerTitle = new System.Windows.Forms.Label();
 			this.lblUCID = new System.Windows.Forms.Label();
 			this.lblUCIDTitle = new System.Windows.Forms.Label();
-			this.pgAGeneral = new System.Windows.Forms.TabPage();
-			this.btnANameChange = new System.Windows.Forms.Button();
-			this.lblAName = new System.Windows.Forms.Label();
-			this.lblANameTitle = new System.Windows.Forms.Label();
-			this.lblAOwner = new System.Windows.Forms.Label();
-			this.lblAOwnerTitle = new System.Windows.Forms.Label();
-			this.lblAID = new System.Windows.Forms.Label();
-			this.lblAIDTitle = new System.Windows.Forms.Label();
+			this.pgFlowOfEvents = new System.Windows.Forms.TabPage();
+			this.UCList = new UseCaseMakerControls.IndexedList();
+			this.btnInsertAltStep = new System.Windows.Forms.Button();
+			this.btnInsertStep = new System.Windows.Forms.Button();
+			this.btnAddAltStep = new System.Windows.Forms.Button();
+			this.btnRemoveStep = new System.Windows.Forms.Button();
+			this.btnAddStep = new System.Windows.Forms.Button();
+			this.lblStepsTitle = new System.Windows.Forms.Label();
 			this.pgAttributes = new System.Windows.Forms.TabPage();
 			this.tbNotes = new UseCaseMakerControls.LinkEnabledRTB();
 			this.tbDescription = new UseCaseMakerControls.LinkEnabledRTB();
@@ -417,14 +437,6 @@ namespace UseCaseMaker
 			this.lblRelatedDocsTitle = new System.Windows.Forms.Label();
 			this.lblNotesTitle = new System.Windows.Forms.Label();
 			this.lblDescriptionTitle = new System.Windows.Forms.Label();
-			this.pgFlowOfEvents = new System.Windows.Forms.TabPage();
-			this.UCList = new UseCaseMakerControls.IndexedList();
-			this.btnInsertAltStep = new System.Windows.Forms.Button();
-			this.btnInsertStep = new System.Windows.Forms.Button();
-			this.btnAddAltStep = new System.Windows.Forms.Button();
-			this.btnRemoveStep = new System.Windows.Forms.Button();
-			this.btnAddStep = new System.Windows.Forms.Button();
-			this.lblStepsTitle = new System.Windows.Forms.Label();
 			this.pgPGeneral = new System.Windows.Forms.TabPage();
 			this.btnPNameChange = new System.Windows.Forms.Button();
 			this.lblPName = new System.Windows.Forms.Label();
@@ -433,6 +445,11 @@ namespace UseCaseMaker
 			this.lblPOwnerTitle = new System.Windows.Forms.Label();
 			this.lblPID = new System.Windows.Forms.Label();
 			this.lblPIDTitle = new System.Windows.Forms.Label();
+			this.pgGlossary = new System.Windows.Forms.TabPage();
+			this.GList = new UseCaseMakerControls.IndexedList();
+			this.btnChangeGlossaryItem = new System.Windows.Forms.Button();
+			this.btnRemoveGlossaryItem = new System.Windows.Forms.Button();
+			this.btnAddGlossaryItem = new System.Windows.Forms.Button();
 			this.pgHistory = new System.Windows.Forms.TabPage();
 			this.btnRemoveHistoryItem = new System.Windows.Forms.Button();
 			this.lvHistory = new System.Windows.Forms.ListView();
@@ -440,11 +457,6 @@ namespace UseCaseMaker
 			this.chType = new System.Windows.Forms.ColumnHeader();
 			this.chAction = new System.Windows.Forms.ColumnHeader();
 			this.chNotes = new System.Windows.Forms.ColumnHeader();
-			this.pgGlossary = new System.Windows.Forms.TabPage();
-			this.GList = new UseCaseMakerControls.IndexedList();
-			this.btnChangeGlossaryItem = new System.Windows.Forms.Button();
-			this.btnRemoveGlossaryItem = new System.Windows.Forms.Button();
-			this.btnAddGlossaryItem = new System.Windows.Forms.Button();
 			this.pgDetails = new System.Windows.Forms.TabPage();
 			this.OIList = new UseCaseMakerControls.IndexedList();
 			this.btnRemoveOpenIssue = new System.Windows.Forms.Button();
@@ -483,6 +495,10 @@ namespace UseCaseMaker
 			this.mnuCtxETCut = new System.Windows.Forms.MenuItem();
 			this.mnuCtxETCopy = new System.Windows.Forms.MenuItem();
 			this.mnuCtxETPaste = new System.Windows.Forms.MenuItem();
+			this.mnuEditSep4 = new System.Windows.Forms.MenuItem();
+			this.mnuEditReorderElements = new System.Windows.Forms.MenuItem();
+			this.mnuCtxMBSep4 = new System.Windows.Forms.MenuItem();
+			this.mnuCtxMBReorderElements = new System.Windows.Forms.MenuItem();
 			this.pnlModelBrowser.SuspendLayout();
 			this.tabUseCase.SuspendLayout();
 			this.pgMain.SuspendLayout();
@@ -491,13 +507,13 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.SuspendLayout();
 			this.pnlPackagesContainer.SuspendLayout();
 			this.pnlFullPathContainer.SuspendLayout();
-			this.pgUCGeneral.SuspendLayout();
 			this.pgAGeneral.SuspendLayout();
-			this.pgAttributes.SuspendLayout();
+			this.pgUCGeneral.SuspendLayout();
 			this.pgFlowOfEvents.SuspendLayout();
+			this.pgAttributes.SuspendLayout();
 			this.pgPGeneral.SuspendLayout();
-			this.pgHistory.SuspendLayout();
 			this.pgGlossary.SuspendLayout();
+			this.pgHistory.SuspendLayout();
 			this.pgDetails.SuspendLayout();
 			this.pgProse.SuspendLayout();
 			this.pgRequirements.SuspendLayout();
@@ -618,7 +634,9 @@ namespace UseCaseMaker
 																					this.mnuEditRemoveActor,
 																					this.mnuEditSep3,
 																					this.mnuEditAddUseCase,
-																					this.mnuEditRemoveUseCase});
+																					this.mnuEditRemoveUseCase,
+																					this.mnuEditSep4,
+																					this.mnuEditReorderElements});
 			this.mnuEdit.Text = "[Edit]";
 			// 
 			// mnuEditCut
@@ -770,7 +788,7 @@ namespace UseCaseMaker
 			this.tvModelBrowser.ImageList = this.imgListModelBrowser;
 			this.tvModelBrowser.Location = new System.Drawing.Point(3, 28);
 			this.tvModelBrowser.Name = "tvModelBrowser";
-			this.tvModelBrowser.Size = new System.Drawing.Size(125, 352);
+			this.tvModelBrowser.Size = new System.Drawing.Size(125, 343);
 			this.tvModelBrowser.TabIndex = 0;
 			this.tvModelBrowser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvModelBrowser_KeyDown);
 			this.tvModelBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvModelBrowser_MouseDown);
@@ -794,7 +812,9 @@ namespace UseCaseMaker
 																								this.mnuCtxMBRemoveActor,
 																								this.mnuCtxMBSep3,
 																								this.mnuCtxMBAddUseCase,
-																								this.mnuCtxMBRemoveUseCase});
+																								this.mnuCtxMBRemoveUseCase,
+																								this.mnuCtxMBSep4,
+																								this.mnuCtxMBReorderElements});
 			// 
 			// mnuCtxMBCut
 			// 
@@ -886,7 +906,7 @@ namespace UseCaseMaker
 			this.pnlModelBrowser.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.pnlModelBrowser.Location = new System.Drawing.Point(0, 28);
 			this.pnlModelBrowser.Name = "pnlModelBrowser";
-			this.pnlModelBrowser.Size = new System.Drawing.Size(130, 382);
+			this.pnlModelBrowser.Size = new System.Drawing.Size(130, 373);
 			this.pnlModelBrowser.TabIndex = 2;
 			// 
 			// lblModelBrowser
@@ -906,7 +926,7 @@ namespace UseCaseMaker
 			this.splLeft.MinExtra = 490;
 			this.splLeft.MinSize = 130;
 			this.splLeft.Name = "splLeft";
-			this.splLeft.Size = new System.Drawing.Size(3, 382);
+			this.splLeft.Size = new System.Drawing.Size(3, 373);
 			this.splLeft.TabIndex = 3;
 			this.splLeft.TabStop = false;
 			this.splLeft.SplitterMoving += new System.Windows.Forms.SplitterEventHandler(this.splLeft_SplitterMoving);
@@ -936,7 +956,7 @@ namespace UseCaseMaker
 			this.toolBar.Location = new System.Drawing.Point(0, 0);
 			this.toolBar.Name = "toolBar";
 			this.toolBar.ShowToolTips = true;
-			this.toolBar.Size = new System.Drawing.Size(644, 28);
+			this.toolBar.Size = new System.Drawing.Size(648, 28);
 			this.toolBar.TabIndex = 1;
 			this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
 			// 
@@ -1016,13 +1036,13 @@ namespace UseCaseMaker
 			// tabUseCase
 			// 
 			this.tabUseCase.Controls.Add(this.pgMain);
-			this.tabUseCase.Controls.Add(this.pgUCGeneral);
 			this.tabUseCase.Controls.Add(this.pgAGeneral);
-			this.tabUseCase.Controls.Add(this.pgAttributes);
+			this.tabUseCase.Controls.Add(this.pgUCGeneral);
 			this.tabUseCase.Controls.Add(this.pgFlowOfEvents);
+			this.tabUseCase.Controls.Add(this.pgAttributes);
 			this.tabUseCase.Controls.Add(this.pgPGeneral);
-			this.tabUseCase.Controls.Add(this.pgHistory);
 			this.tabUseCase.Controls.Add(this.pgGlossary);
+			this.tabUseCase.Controls.Add(this.pgHistory);
 			this.tabUseCase.Controls.Add(this.pgDetails);
 			this.tabUseCase.Controls.Add(this.pgProse);
 			this.tabUseCase.Controls.Add(this.pgRequirements);
@@ -1030,7 +1050,7 @@ namespace UseCaseMaker
 			this.tabUseCase.Location = new System.Drawing.Point(130, 28);
 			this.tabUseCase.Name = "tabUseCase";
 			this.tabUseCase.SelectedIndex = 0;
-			this.tabUseCase.Size = new System.Drawing.Size(514, 382);
+			this.tabUseCase.Size = new System.Drawing.Size(518, 373);
 			this.tabUseCase.TabIndex = 4;
 			this.tabUseCase.SelectedIndexChanged += new System.EventHandler(this.tabUseCase_SelectedIndexChanged);
 			// 
@@ -1043,7 +1063,7 @@ namespace UseCaseMaker
 			this.pgMain.Controls.Add(this.pnlFullPathContainer);
 			this.pgMain.Location = new System.Drawing.Point(4, 22);
 			this.pgMain.Name = "pgMain";
-			this.pgMain.Size = new System.Drawing.Size(506, 356);
+			this.pgMain.Size = new System.Drawing.Size(510, 347);
 			this.pgMain.TabIndex = 8;
 			this.pgMain.Text = "[Main]";
 			// 
@@ -1054,9 +1074,9 @@ namespace UseCaseMaker
 			this.pnlAbout.Controls.Add(this.lblVersion);
 			this.pnlAbout.Controls.Add(this.label1);
 			this.pnlAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.pnlAbout.Location = new System.Drawing.Point(0, 292);
+			this.pnlAbout.Location = new System.Drawing.Point(0, 283);
 			this.pnlAbout.Name = "pnlAbout";
-			this.pnlAbout.Size = new System.Drawing.Size(506, 64);
+			this.pnlAbout.Size = new System.Drawing.Size(510, 64);
 			this.pnlAbout.TabIndex = 13;
 			// 
 			// lblVersion
@@ -1064,7 +1084,7 @@ namespace UseCaseMaker
 			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.lblVersion.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.lblVersion.Location = new System.Drawing.Point(336, 32);
+			this.lblVersion.Location = new System.Drawing.Point(340, 32);
 			this.lblVersion.Name = "lblVersion";
 			this.lblVersion.Size = new System.Drawing.Size(160, 23);
 			this.lblVersion.TabIndex = 15;
@@ -1076,7 +1096,7 @@ namespace UseCaseMaker
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.label1.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.label1.Location = new System.Drawing.Point(336, 8);
+			this.label1.Location = new System.Drawing.Point(340, 8);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(160, 23);
 			this.label1.TabIndex = 14;
@@ -1090,7 +1110,7 @@ namespace UseCaseMaker
 			this.pnlUseCasesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlUseCasesContainer.Location = new System.Drawing.Point(0, 72);
 			this.pnlUseCasesContainer.Name = "pnlUseCasesContainer";
-			this.pnlUseCasesContainer.Size = new System.Drawing.Size(506, 24);
+			this.pnlUseCasesContainer.Size = new System.Drawing.Size(510, 24);
 			this.pnlUseCasesContainer.TabIndex = 11;
 			// 
 			// lblUseCases
@@ -1101,7 +1121,7 @@ namespace UseCaseMaker
 			this.lblUseCases.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUseCases.Location = new System.Drawing.Point(120, 8);
 			this.lblUseCases.Name = "lblUseCases";
-			this.lblUseCases.Size = new System.Drawing.Size(378, 16);
+			this.lblUseCases.Size = new System.Drawing.Size(382, 16);
 			this.lblUseCases.TabIndex = 9;
 			// 
 			// lblUseCasesTitle
@@ -1120,7 +1140,7 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlActorsContainer.Location = new System.Drawing.Point(0, 48);
 			this.pnlActorsContainer.Name = "pnlActorsContainer";
-			this.pnlActorsContainer.Size = new System.Drawing.Size(506, 24);
+			this.pnlActorsContainer.Size = new System.Drawing.Size(510, 24);
 			this.pnlActorsContainer.TabIndex = 10;
 			// 
 			// lblActors
@@ -1131,7 +1151,7 @@ namespace UseCaseMaker
 			this.lblActors.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblActors.Location = new System.Drawing.Point(120, 8);
 			this.lblActors.Name = "lblActors";
-			this.lblActors.Size = new System.Drawing.Size(378, 16);
+			this.lblActors.Size = new System.Drawing.Size(382, 16);
 			this.lblActors.TabIndex = 7;
 			// 
 			// lblActorsTitle
@@ -1150,7 +1170,7 @@ namespace UseCaseMaker
 			this.pnlPackagesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlPackagesContainer.Location = new System.Drawing.Point(0, 24);
 			this.pnlPackagesContainer.Name = "pnlPackagesContainer";
-			this.pnlPackagesContainer.Size = new System.Drawing.Size(506, 24);
+			this.pnlPackagesContainer.Size = new System.Drawing.Size(510, 24);
 			this.pnlPackagesContainer.TabIndex = 9;
 			// 
 			// lblPackages
@@ -1161,7 +1181,7 @@ namespace UseCaseMaker
 			this.lblPackages.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPackages.Location = new System.Drawing.Point(120, 8);
 			this.lblPackages.Name = "lblPackages";
-			this.lblPackages.Size = new System.Drawing.Size(378, 16);
+			this.lblPackages.Size = new System.Drawing.Size(382, 16);
 			this.lblPackages.TabIndex = 5;
 			// 
 			// lblPackagesTitle
@@ -1180,7 +1200,7 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlFullPathContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnlFullPathContainer.Name = "pnlFullPathContainer";
-			this.pnlFullPathContainer.Size = new System.Drawing.Size(506, 24);
+			this.pnlFullPathContainer.Size = new System.Drawing.Size(510, 24);
 			this.pnlFullPathContainer.TabIndex = 8;
 			// 
 			// lblFullPath
@@ -1191,7 +1211,7 @@ namespace UseCaseMaker
 			this.lblFullPath.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblFullPath.Location = new System.Drawing.Point(120, 8);
 			this.lblFullPath.Name = "lblFullPath";
-			this.lblFullPath.Size = new System.Drawing.Size(378, 16);
+			this.lblFullPath.Size = new System.Drawing.Size(382, 16);
 			this.lblFullPath.TabIndex = 3;
 			// 
 			// lblFullPathTitle
@@ -1202,6 +1222,155 @@ namespace UseCaseMaker
 			this.lblFullPathTitle.Size = new System.Drawing.Size(100, 16);
 			this.lblFullPathTitle.TabIndex = 2;
 			this.lblFullPathTitle.Text = "[Full path]";
+			// 
+			// pgAGeneral
+			// 
+			this.pgAGeneral.Controls.Add(this.btnRemoveGoal);
+			this.pgAGeneral.Controls.Add(this.btnAddGoal);
+			this.pgAGeneral.Controls.Add(this.AGList);
+			this.pgAGeneral.Controls.Add(this.lblAGoalsTitle);
+			this.pgAGeneral.Controls.Add(this.btnANameChange);
+			this.pgAGeneral.Controls.Add(this.lblAName);
+			this.pgAGeneral.Controls.Add(this.lblANameTitle);
+			this.pgAGeneral.Controls.Add(this.lblAOwner);
+			this.pgAGeneral.Controls.Add(this.lblAOwnerTitle);
+			this.pgAGeneral.Controls.Add(this.lblAID);
+			this.pgAGeneral.Controls.Add(this.lblAIDTitle);
+			this.pgAGeneral.Location = new System.Drawing.Point(4, 22);
+			this.pgAGeneral.Name = "pgAGeneral";
+			this.pgAGeneral.Size = new System.Drawing.Size(511, 326);
+			this.pgAGeneral.TabIndex = 7;
+			this.pgAGeneral.Text = "[General (A)]";
+			// 
+			// btnRemoveGoal
+			// 
+			this.btnRemoveGoal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveGoal.Enabled = false;
+			this.btnRemoveGoal.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveGoal.Location = new System.Drawing.Point(379, 104);
+			this.btnRemoveGoal.Name = "btnRemoveGoal";
+			this.btnRemoveGoal.Size = new System.Drawing.Size(120, 24);
+			this.btnRemoveGoal.TabIndex = 14;
+			this.btnRemoveGoal.Text = "[Remove]";
+			this.btnRemoveGoal.Click += new System.EventHandler(this.btnRemoveGoal_Click);
+			// 
+			// btnAddGoal
+			// 
+			this.btnAddGoal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddGoal.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddGoal.Location = new System.Drawing.Point(379, 72);
+			this.btnAddGoal.Name = "btnAddGoal";
+			this.btnAddGoal.Size = new System.Drawing.Size(120, 24);
+			this.btnAddGoal.TabIndex = 13;
+			this.btnAddGoal.Text = "[Add]";
+			this.btnAddGoal.Click += new System.EventHandler(this.btnAddGoal_Click);
+			// 
+			// AGList
+			// 
+			this.AGList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.AGList.AutoScroll = true;
+			this.AGList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+			this.AGList.BackColor = System.Drawing.SystemColors.Window;
+			this.AGList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.AGList.DataSource = null;
+			this.AGList.IndexBackColor = System.Drawing.SystemColors.Control;
+			this.AGList.IndexColumnWidth = 50;
+			this.AGList.IndexDataField = null;
+			this.AGList.Location = new System.Drawing.Point(104, 72);
+			this.AGList.Name = "AGList";
+			this.AGList.RowHeight = 46;
+			this.AGList.SelectedIndex = -1;
+			this.AGList.Size = new System.Drawing.Size(268, 241);
+			this.AGList.TabIndex = 1;
+			this.AGList.TextBackColor = System.Drawing.SystemColors.Window;
+			this.AGList.TextColumnWidth = 213;
+			this.AGList.TextDataField = null;
+			this.AGList.UniqueIDDataField = null;
+			this.AGList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.AGList_ItemTextChanged);
+			this.AGList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.AGList_SelectedChanged);
+			this.AGList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.AGList_ItemClick);
+			this.AGList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
+			this.AGList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
+			this.AGList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.AGList_MouseOverToken);
+			// 
+			// lblAGoalsTitle
+			// 
+			this.lblAGoalsTitle.Location = new System.Drawing.Point(8, 72);
+			this.lblAGoalsTitle.Name = "lblAGoalsTitle";
+			this.lblAGoalsTitle.Size = new System.Drawing.Size(80, 16);
+			this.lblAGoalsTitle.TabIndex = 12;
+			this.lblAGoalsTitle.Text = "[Goals]";
+			// 
+			// btnANameChange
+			// 
+			this.btnANameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnANameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnANameChange.Location = new System.Drawing.Point(380, 40);
+			this.btnANameChange.Name = "btnANameChange";
+			this.btnANameChange.Size = new System.Drawing.Size(120, 23);
+			this.btnANameChange.TabIndex = 0;
+			this.btnANameChange.Text = "[Change]";
+			this.btnANameChange.Click += new System.EventHandler(this.btnANameChange_Click);
+			// 
+			// lblAName
+			// 
+			this.lblAName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblAName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.lblAName.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblAName.Location = new System.Drawing.Point(104, 40);
+			this.lblAName.Name = "lblAName";
+			this.lblAName.Size = new System.Drawing.Size(268, 20);
+			this.lblAName.TabIndex = 11;
+			// 
+			// lblANameTitle
+			// 
+			this.lblANameTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblANameTitle.Location = new System.Drawing.Point(8, 40);
+			this.lblANameTitle.Name = "lblANameTitle";
+			this.lblANameTitle.Size = new System.Drawing.Size(80, 16);
+			this.lblANameTitle.TabIndex = 10;
+			this.lblANameTitle.Text = "[Name]";
+			// 
+			// lblAOwner
+			// 
+			this.lblAOwner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.lblAOwner.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.lblAOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblAOwner.Location = new System.Drawing.Point(320, 8);
+			this.lblAOwner.Name = "lblAOwner";
+			this.lblAOwner.Size = new System.Drawing.Size(183, 20);
+			this.lblAOwner.TabIndex = 9;
+			// 
+			// lblAOwnerTitle
+			// 
+			this.lblAOwnerTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblAOwnerTitle.Location = new System.Drawing.Point(208, 8);
+			this.lblAOwnerTitle.Name = "lblAOwnerTitle";
+			this.lblAOwnerTitle.Size = new System.Drawing.Size(96, 16);
+			this.lblAOwnerTitle.TabIndex = 8;
+			this.lblAOwnerTitle.Text = "[Owning package]";
+			// 
+			// lblAID
+			// 
+			this.lblAID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.lblAID.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblAID.Location = new System.Drawing.Point(104, 8);
+			this.lblAID.Name = "lblAID";
+			this.lblAID.Size = new System.Drawing.Size(80, 20);
+			this.lblAID.TabIndex = 7;
+			// 
+			// lblAIDTitle
+			// 
+			this.lblAIDTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblAIDTitle.Location = new System.Drawing.Point(8, 8);
+			this.lblAIDTitle.Name = "lblAIDTitle";
+			this.lblAIDTitle.Size = new System.Drawing.Size(80, 16);
+			this.lblAIDTitle.TabIndex = 6;
+			this.lblAIDTitle.Text = "[ID]";
 			// 
 			// pgUCGeneral
 			// 
@@ -1223,7 +1392,7 @@ namespace UseCaseMaker
 			this.pgUCGeneral.Controls.Add(this.lblUCIDTitle);
 			this.pgUCGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgUCGeneral.Name = "pgUCGeneral";
-			this.pgUCGeneral.Size = new System.Drawing.Size(506, 356);
+			this.pgUCGeneral.Size = new System.Drawing.Size(511, 326);
 			this.pgUCGeneral.TabIndex = 0;
 			this.pgUCGeneral.Text = "[General (UC)]";
 			// 
@@ -1236,7 +1405,7 @@ namespace UseCaseMaker
 			this.tbPostconditions.Location = new System.Drawing.Point(104, 144);
 			this.tbPostconditions.MaxUndoRedoSteps = 50;
 			this.tbPostconditions.Name = "tbPostconditions";
-			this.tbPostconditions.Size = new System.Drawing.Size(392, 64);
+			this.tbPostconditions.Size = new System.Drawing.Size(397, 64);
 			this.tbPostconditions.TabIndex = 30;
 			this.tbPostconditions.Text = "";
 			this.tbPostconditions.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1254,7 +1423,7 @@ namespace UseCaseMaker
 			this.tbPreconditions.Location = new System.Drawing.Point(104, 72);
 			this.tbPreconditions.MaxUndoRedoSteps = 50;
 			this.tbPreconditions.Name = "tbPreconditions";
-			this.tbPreconditions.Size = new System.Drawing.Size(392, 64);
+			this.tbPreconditions.Size = new System.Drawing.Size(397, 64);
 			this.tbPreconditions.TabIndex = 29;
 			this.tbPreconditions.Text = "";
 			this.tbPreconditions.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1271,14 +1440,14 @@ namespace UseCaseMaker
 			this.lblUCName.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUCName.Location = new System.Drawing.Point(104, 40);
 			this.lblUCName.Name = "lblUCName";
-			this.lblUCName.Size = new System.Drawing.Size(266, 20);
+			this.lblUCName.Size = new System.Drawing.Size(271, 20);
 			this.lblUCName.TabIndex = 28;
 			// 
 			// btnUCNameChange
 			// 
 			this.btnUCNameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnUCNameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnUCNameChange.Location = new System.Drawing.Point(378, 40);
+			this.btnUCNameChange.Location = new System.Drawing.Point(383, 40);
 			this.btnUCNameChange.Name = "btnUCNameChange";
 			this.btnUCNameChange.Size = new System.Drawing.Size(120, 23);
 			this.btnUCNameChange.TabIndex = 0;
@@ -1289,7 +1458,7 @@ namespace UseCaseMaker
 			// 
 			this.btnSetPrimaryActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnSetPrimaryActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnSetPrimaryActor.Location = new System.Drawing.Point(378, 280);
+			this.btnSetPrimaryActor.Location = new System.Drawing.Point(383, 280);
 			this.btnSetPrimaryActor.Name = "btnSetPrimaryActor";
 			this.btnSetPrimaryActor.Size = new System.Drawing.Size(120, 23);
 			this.btnSetPrimaryActor.TabIndex = 6;
@@ -1300,7 +1469,7 @@ namespace UseCaseMaker
 			// 
 			this.btnRemoveActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveActor.Location = new System.Drawing.Point(378, 248);
+			this.btnRemoveActor.Location = new System.Drawing.Point(383, 248);
 			this.btnRemoveActor.Name = "btnRemoveActor";
 			this.btnRemoveActor.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveActor.TabIndex = 5;
@@ -1311,7 +1480,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddActor.Location = new System.Drawing.Point(378, 216);
+			this.btnAddActor.Location = new System.Drawing.Point(383, 216);
 			this.btnAddActor.Name = "btnAddActor";
 			this.btnAddActor.Size = new System.Drawing.Size(120, 23);
 			this.btnAddActor.TabIndex = 4;
@@ -1334,7 +1503,7 @@ namespace UseCaseMaker
 			this.lvActors.Location = new System.Drawing.Point(104, 216);
 			this.lvActors.MultiSelect = false;
 			this.lvActors.Name = "lvActors";
-			this.lvActors.Size = new System.Drawing.Size(266, 128);
+			this.lvActors.Size = new System.Drawing.Size(271, 98);
 			this.lvActors.TabIndex = 3;
 			this.lvActors.View = System.Windows.Forms.View.Details;
 			this.lvActors.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvActors_Layout);
@@ -1395,7 +1564,7 @@ namespace UseCaseMaker
 			this.lblUCOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUCOwner.Location = new System.Drawing.Point(320, 8);
 			this.lblUCOwner.Name = "lblUCOwner";
-			this.lblUCOwner.Size = new System.Drawing.Size(178, 20);
+			this.lblUCOwner.Size = new System.Drawing.Size(183, 20);
 			this.lblUCOwner.TabIndex = 3;
 			// 
 			// lblUCOwnerTitle
@@ -1425,89 +1594,118 @@ namespace UseCaseMaker
 			this.lblUCIDTitle.TabIndex = 0;
 			this.lblUCIDTitle.Text = "[ID]";
 			// 
-			// pgAGeneral
+			// pgFlowOfEvents
 			// 
-			this.pgAGeneral.Controls.Add(this.btnANameChange);
-			this.pgAGeneral.Controls.Add(this.lblAName);
-			this.pgAGeneral.Controls.Add(this.lblANameTitle);
-			this.pgAGeneral.Controls.Add(this.lblAOwner);
-			this.pgAGeneral.Controls.Add(this.lblAOwnerTitle);
-			this.pgAGeneral.Controls.Add(this.lblAID);
-			this.pgAGeneral.Controls.Add(this.lblAIDTitle);
-			this.pgAGeneral.Location = new System.Drawing.Point(4, 22);
-			this.pgAGeneral.Name = "pgAGeneral";
-			this.pgAGeneral.Size = new System.Drawing.Size(506, 356);
-			this.pgAGeneral.TabIndex = 7;
-			this.pgAGeneral.Text = "[General (A)]";
+			this.pgFlowOfEvents.Controls.Add(this.UCList);
+			this.pgFlowOfEvents.Controls.Add(this.btnInsertAltStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnInsertStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnAddAltStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnRemoveStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnAddStep);
+			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
+			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
+			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
+			this.pgFlowOfEvents.Size = new System.Drawing.Size(511, 326);
+			this.pgFlowOfEvents.TabIndex = 1;
+			this.pgFlowOfEvents.Text = "[Flow of events]";
 			// 
-			// btnANameChange
+			// UCList
 			// 
-			this.btnANameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnANameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnANameChange.Location = new System.Drawing.Point(378, 40);
-			this.btnANameChange.Name = "btnANameChange";
-			this.btnANameChange.Size = new System.Drawing.Size(120, 23);
-			this.btnANameChange.TabIndex = 0;
-			this.btnANameChange.Text = "[Change]";
-			this.btnANameChange.Click += new System.EventHandler(this.btnANameChange_Click);
-			// 
-			// lblAName
-			// 
-			this.lblAName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.UCList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblAName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.lblAName.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblAName.Location = new System.Drawing.Point(104, 40);
-			this.lblAName.Name = "lblAName";
-			this.lblAName.Size = new System.Drawing.Size(266, 20);
-			this.lblAName.TabIndex = 11;
+			this.UCList.AutoScroll = true;
+			this.UCList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+			this.UCList.BackColor = System.Drawing.SystemColors.Window;
+			this.UCList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.UCList.DataSource = null;
+			this.UCList.IndexBackColor = System.Drawing.SystemColors.Control;
+			this.UCList.IndexColumnWidth = 50;
+			this.UCList.IndexDataField = null;
+			this.UCList.Location = new System.Drawing.Point(96, 8);
+			this.UCList.Name = "UCList";
+			this.UCList.RowHeight = 46;
+			this.UCList.SelectedIndex = -1;
+			this.UCList.Size = new System.Drawing.Size(281, 306);
+			this.UCList.TabIndex = 10;
+			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
+			this.UCList.TextColumnWidth = 226;
+			this.UCList.TextDataField = null;
+			this.UCList.UniqueIDDataField = null;
+			this.UCList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.UCList_ItemTextChanged);
+			this.UCList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.UCList_SelectedChanged);
+			this.UCList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.UCList_ItemClick);
+			this.UCList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
+			this.UCList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
+			this.UCList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.UCList_MouseOverToken);
 			// 
-			// lblANameTitle
+			// btnInsertAltStep
 			// 
-			this.lblANameTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblANameTitle.Location = new System.Drawing.Point(8, 40);
-			this.lblANameTitle.Name = "lblANameTitle";
-			this.lblANameTitle.Size = new System.Drawing.Size(80, 16);
-			this.lblANameTitle.TabIndex = 10;
-			this.lblANameTitle.Text = "[Name]";
+			this.btnInsertAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnInsertAltStep.Enabled = false;
+			this.btnInsertAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnInsertAltStep.Location = new System.Drawing.Point(383, 112);
+			this.btnInsertAltStep.Name = "btnInsertAltStep";
+			this.btnInsertAltStep.Size = new System.Drawing.Size(120, 23);
+			this.btnInsertAltStep.TabIndex = 4;
+			this.btnInsertAltStep.Text = "[Insert alternative]";
+			this.btnInsertAltStep.Click += new System.EventHandler(this.btnInsertAltStep_Click);
 			// 
-			// lblAOwner
+			// btnInsertStep
 			// 
-			this.lblAOwner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.lblAOwner.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.lblAOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblAOwner.Location = new System.Drawing.Point(320, 8);
-			this.lblAOwner.Name = "lblAOwner";
-			this.lblAOwner.Size = new System.Drawing.Size(178, 20);
-			this.lblAOwner.TabIndex = 9;
+			this.btnInsertStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnInsertStep.Enabled = false;
+			this.btnInsertStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnInsertStep.Location = new System.Drawing.Point(383, 40);
+			this.btnInsertStep.Name = "btnInsertStep";
+			this.btnInsertStep.Size = new System.Drawing.Size(120, 23);
+			this.btnInsertStep.TabIndex = 2;
+			this.btnInsertStep.Text = "[Insert]";
+			this.btnInsertStep.Click += new System.EventHandler(this.btnInsertStep_Click);
 			// 
-			// lblAOwnerTitle
+			// btnAddAltStep
 			// 
-			this.lblAOwnerTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblAOwnerTitle.Location = new System.Drawing.Point(208, 8);
-			this.lblAOwnerTitle.Name = "lblAOwnerTitle";
-			this.lblAOwnerTitle.Size = new System.Drawing.Size(96, 16);
-			this.lblAOwnerTitle.TabIndex = 8;
-			this.lblAOwnerTitle.Text = "[Owning package]";
+			this.btnAddAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddAltStep.Enabled = false;
+			this.btnAddAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddAltStep.Location = new System.Drawing.Point(383, 80);
+			this.btnAddAltStep.Name = "btnAddAltStep";
+			this.btnAddAltStep.Size = new System.Drawing.Size(120, 23);
+			this.btnAddAltStep.TabIndex = 3;
+			this.btnAddAltStep.Text = "[Add alternative]";
+			this.btnAddAltStep.Click += new System.EventHandler(this.btnAddAltStep_Click);
 			// 
-			// lblAID
+			// btnRemoveStep
 			// 
-			this.lblAID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.lblAID.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblAID.Location = new System.Drawing.Point(104, 8);
-			this.lblAID.Name = "lblAID";
-			this.lblAID.Size = new System.Drawing.Size(80, 20);
-			this.lblAID.TabIndex = 7;
+			this.btnRemoveStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveStep.Enabled = false;
+			this.btnRemoveStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveStep.Location = new System.Drawing.Point(383, 152);
+			this.btnRemoveStep.Name = "btnRemoveStep";
+			this.btnRemoveStep.Size = new System.Drawing.Size(120, 23);
+			this.btnRemoveStep.TabIndex = 5;
+			this.btnRemoveStep.Text = "[Remove]";
+			this.btnRemoveStep.Click += new System.EventHandler(this.btnRemoveStep_Click);
 			// 
-			// lblAIDTitle
+			// btnAddStep
 			// 
-			this.lblAIDTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblAIDTitle.Location = new System.Drawing.Point(8, 8);
-			this.lblAIDTitle.Name = "lblAIDTitle";
-			this.lblAIDTitle.Size = new System.Drawing.Size(80, 16);
-			this.lblAIDTitle.TabIndex = 6;
-			this.lblAIDTitle.Text = "[ID]";
+			this.btnAddStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddStep.Location = new System.Drawing.Point(383, 8);
+			this.btnAddStep.Name = "btnAddStep";
+			this.btnAddStep.Size = new System.Drawing.Size(120, 23);
+			this.btnAddStep.TabIndex = 1;
+			this.btnAddStep.Text = "[Add]";
+			this.btnAddStep.Click += new System.EventHandler(this.btnAddStep_Click);
+			// 
+			// lblStepsTitle
+			// 
+			this.lblStepsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblStepsTitle.Location = new System.Drawing.Point(8, 8);
+			this.lblStepsTitle.Name = "lblStepsTitle";
+			this.lblStepsTitle.Size = new System.Drawing.Size(88, 16);
+			this.lblStepsTitle.TabIndex = 9;
+			this.lblStepsTitle.Text = "[Steps]";
 			// 
 			// pgAttributes
 			// 
@@ -1522,7 +1720,7 @@ namespace UseCaseMaker
 			this.pgAttributes.Controls.Add(this.lblDescriptionTitle);
 			this.pgAttributes.Location = new System.Drawing.Point(4, 22);
 			this.pgAttributes.Name = "pgAttributes";
-			this.pgAttributes.Size = new System.Drawing.Size(506, 356);
+			this.pgAttributes.Size = new System.Drawing.Size(511, 326);
 			this.pgAttributes.TabIndex = 4;
 			this.pgAttributes.Text = "[Attributes]";
 			// 
@@ -1535,7 +1733,7 @@ namespace UseCaseMaker
 			this.tbNotes.Location = new System.Drawing.Point(104, 120);
 			this.tbNotes.MaxUndoRedoSteps = 50;
 			this.tbNotes.Name = "tbNotes";
-			this.tbNotes.Size = new System.Drawing.Size(392, 104);
+			this.tbNotes.Size = new System.Drawing.Size(397, 104);
 			this.tbNotes.TabIndex = 39;
 			this.tbNotes.Text = "";
 			this.tbNotes.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1553,7 +1751,7 @@ namespace UseCaseMaker
 			this.tbDescription.Location = new System.Drawing.Point(104, 8);
 			this.tbDescription.MaxUndoRedoSteps = 50;
 			this.tbDescription.Name = "tbDescription";
-			this.tbDescription.Size = new System.Drawing.Size(392, 104);
+			this.tbDescription.Size = new System.Drawing.Size(397, 104);
 			this.tbDescription.TabIndex = 38;
 			this.tbDescription.Text = "";
 			this.tbDescription.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1566,7 +1764,7 @@ namespace UseCaseMaker
 			// 
 			this.btnOpenRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOpenRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(378, 296);
+			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(383, 296);
 			this.btnOpenRelatedDoc.Name = "btnOpenRelatedDoc";
 			this.btnOpenRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnOpenRelatedDoc.TabIndex = 5;
@@ -1577,7 +1775,7 @@ namespace UseCaseMaker
 			// 
 			this.btnRemoveRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(378, 264);
+			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(383, 264);
 			this.btnRemoveRelatedDoc.Name = "btnRemoveRelatedDoc";
 			this.btnRemoveRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveRelatedDoc.TabIndex = 4;
@@ -1588,7 +1786,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddRelatedDoc.Location = new System.Drawing.Point(378, 232);
+			this.btnAddRelatedDoc.Location = new System.Drawing.Point(383, 232);
 			this.btnAddRelatedDoc.Name = "btnAddRelatedDoc";
 			this.btnAddRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnAddRelatedDoc.TabIndex = 3;
@@ -1608,7 +1806,7 @@ namespace UseCaseMaker
 			this.lvRelatedDocs.HideSelection = false;
 			this.lvRelatedDocs.Location = new System.Drawing.Point(104, 232);
 			this.lvRelatedDocs.Name = "lvRelatedDocs";
-			this.lvRelatedDocs.Size = new System.Drawing.Size(266, 112);
+			this.lvRelatedDocs.Size = new System.Drawing.Size(271, 82);
 			this.lvRelatedDocs.TabIndex = 2;
 			this.lvRelatedDocs.View = System.Windows.Forms.View.Details;
 			this.lvRelatedDocs.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvRelatedDocs_Layout);
@@ -1646,119 +1844,6 @@ namespace UseCaseMaker
 			this.lblDescriptionTitle.TabIndex = 8;
 			this.lblDescriptionTitle.Text = "[Description]";
 			// 
-			// pgFlowOfEvents
-			// 
-			this.pgFlowOfEvents.Controls.Add(this.UCList);
-			this.pgFlowOfEvents.Controls.Add(this.btnInsertAltStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnInsertStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnAddAltStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnRemoveStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnAddStep);
-			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
-			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
-			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
-			this.pgFlowOfEvents.Size = new System.Drawing.Size(506, 356);
-			this.pgFlowOfEvents.TabIndex = 1;
-			this.pgFlowOfEvents.Text = "[Flow of events]";
-			// 
-			// UCList
-			// 
-			this.UCList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.UCList.AutoScroll = true;
-			this.UCList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-			this.UCList.BackColor = System.Drawing.SystemColors.Window;
-			this.UCList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.UCList.DataSource = null;
-			this.UCList.IndexBackColor = System.Drawing.SystemColors.Control;
-			this.UCList.IndexColumnWidth = 50;
-			this.UCList.IndexDataField = null;
-			this.UCList.Location = new System.Drawing.Point(96, 8);
-			this.UCList.Name = "UCList";
-			this.UCList.RowHeight = 46;
-			this.UCList.SelectedIndex = -1;
-			this.UCList.Size = new System.Drawing.Size(276, 336);
-			this.UCList.TabIndex = 10;
-			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.UCList.TextColumnWidth = 221;
-			this.UCList.TextDataField = null;
-			this.UCList.UniqueIDDataField = null;
-			this.UCList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.UCList_ItemTextChanged);
-			this.UCList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.UCList_SelectedChanged);
-			this.UCList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.UCList_ItemClick);
-			this.UCList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
-			this.UCList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
-			this.UCList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.UCList_MouseOverToken);
-			// 
-			// btnInsertAltStep
-			// 
-			this.btnInsertAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInsertAltStep.Enabled = false;
-			this.btnInsertAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnInsertAltStep.Location = new System.Drawing.Point(378, 112);
-			this.btnInsertAltStep.Name = "btnInsertAltStep";
-			this.btnInsertAltStep.Size = new System.Drawing.Size(120, 23);
-			this.btnInsertAltStep.TabIndex = 4;
-			this.btnInsertAltStep.Text = "[Insert alternative]";
-			this.btnInsertAltStep.Click += new System.EventHandler(this.btnInsertAltStep_Click);
-			// 
-			// btnInsertStep
-			// 
-			this.btnInsertStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInsertStep.Enabled = false;
-			this.btnInsertStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnInsertStep.Location = new System.Drawing.Point(378, 40);
-			this.btnInsertStep.Name = "btnInsertStep";
-			this.btnInsertStep.Size = new System.Drawing.Size(120, 23);
-			this.btnInsertStep.TabIndex = 2;
-			this.btnInsertStep.Text = "[Insert]";
-			this.btnInsertStep.Click += new System.EventHandler(this.btnInsertStep_Click);
-			// 
-			// btnAddAltStep
-			// 
-			this.btnAddAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddAltStep.Enabled = false;
-			this.btnAddAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddAltStep.Location = new System.Drawing.Point(378, 80);
-			this.btnAddAltStep.Name = "btnAddAltStep";
-			this.btnAddAltStep.Size = new System.Drawing.Size(120, 23);
-			this.btnAddAltStep.TabIndex = 3;
-			this.btnAddAltStep.Text = "[Add alternative]";
-			this.btnAddAltStep.Click += new System.EventHandler(this.btnAddAltStep_Click);
-			// 
-			// btnRemoveStep
-			// 
-			this.btnRemoveStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnRemoveStep.Enabled = false;
-			this.btnRemoveStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveStep.Location = new System.Drawing.Point(378, 152);
-			this.btnRemoveStep.Name = "btnRemoveStep";
-			this.btnRemoveStep.Size = new System.Drawing.Size(120, 23);
-			this.btnRemoveStep.TabIndex = 5;
-			this.btnRemoveStep.Text = "[Remove]";
-			this.btnRemoveStep.Click += new System.EventHandler(this.btnRemoveStep_Click);
-			// 
-			// btnAddStep
-			// 
-			this.btnAddStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddStep.Location = new System.Drawing.Point(378, 8);
-			this.btnAddStep.Name = "btnAddStep";
-			this.btnAddStep.Size = new System.Drawing.Size(120, 23);
-			this.btnAddStep.TabIndex = 1;
-			this.btnAddStep.Text = "[Add]";
-			this.btnAddStep.Click += new System.EventHandler(this.btnAddStep_Click);
-			// 
-			// lblStepsTitle
-			// 
-			this.lblStepsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblStepsTitle.Location = new System.Drawing.Point(8, 8);
-			this.lblStepsTitle.Name = "lblStepsTitle";
-			this.lblStepsTitle.Size = new System.Drawing.Size(88, 16);
-			this.lblStepsTitle.TabIndex = 9;
-			this.lblStepsTitle.Text = "[Steps]";
-			// 
 			// pgPGeneral
 			// 
 			this.pgPGeneral.Controls.Add(this.btnPNameChange);
@@ -1770,7 +1855,7 @@ namespace UseCaseMaker
 			this.pgPGeneral.Controls.Add(this.lblPIDTitle);
 			this.pgPGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgPGeneral.Name = "pgPGeneral";
-			this.pgPGeneral.Size = new System.Drawing.Size(506, 356);
+			this.pgPGeneral.Size = new System.Drawing.Size(511, 326);
 			this.pgPGeneral.TabIndex = 9;
 			this.pgPGeneral.Text = "[General(P)]";
 			// 
@@ -1778,7 +1863,7 @@ namespace UseCaseMaker
 			// 
 			this.btnPNameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnPNameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnPNameChange.Location = new System.Drawing.Point(378, 40);
+			this.btnPNameChange.Location = new System.Drawing.Point(383, 40);
 			this.btnPNameChange.Name = "btnPNameChange";
 			this.btnPNameChange.Size = new System.Drawing.Size(120, 23);
 			this.btnPNameChange.TabIndex = 0;
@@ -1793,7 +1878,7 @@ namespace UseCaseMaker
 			this.lblPName.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPName.Location = new System.Drawing.Point(104, 40);
 			this.lblPName.Name = "lblPName";
-			this.lblPName.Size = new System.Drawing.Size(266, 20);
+			this.lblPName.Size = new System.Drawing.Size(271, 20);
 			this.lblPName.TabIndex = 17;
 			// 
 			// lblPNameTitle
@@ -1813,7 +1898,7 @@ namespace UseCaseMaker
 			this.lblPOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPOwner.Location = new System.Drawing.Point(320, 8);
 			this.lblPOwner.Name = "lblPOwner";
-			this.lblPOwner.Size = new System.Drawing.Size(178, 20);
+			this.lblPOwner.Size = new System.Drawing.Size(183, 20);
 			this.lblPOwner.TabIndex = 15;
 			// 
 			// lblPOwnerTitle
@@ -1843,13 +1928,90 @@ namespace UseCaseMaker
 			this.lblPIDTitle.TabIndex = 12;
 			this.lblPIDTitle.Text = "[ID]";
 			// 
+			// pgGlossary
+			// 
+			this.pgGlossary.Controls.Add(this.GList);
+			this.pgGlossary.Controls.Add(this.btnChangeGlossaryItem);
+			this.pgGlossary.Controls.Add(this.btnRemoveGlossaryItem);
+			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
+			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
+			this.pgGlossary.Name = "pgGlossary";
+			this.pgGlossary.Size = new System.Drawing.Size(511, 326);
+			this.pgGlossary.TabIndex = 10;
+			this.pgGlossary.Text = "[Glossary]";
+			// 
+			// GList
+			// 
+			this.GList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.GList.AutoScroll = true;
+			this.GList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+			this.GList.BackColor = System.Drawing.SystemColors.Window;
+			this.GList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.GList.DataSource = null;
+			this.GList.IndexBackColor = System.Drawing.SystemColors.Control;
+			this.GList.IndexColumnWidth = 146;
+			this.GList.IndexDataField = null;
+			this.GList.Location = new System.Drawing.Point(8, 8);
+			this.GList.Name = "GList";
+			this.GList.RowHeight = 46;
+			this.GList.SelectedIndex = -1;
+			this.GList.Size = new System.Drawing.Size(365, 306);
+			this.GList.TabIndex = 4;
+			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
+			this.GList.TextColumnWidth = 214;
+			this.GList.TextDataField = null;
+			this.GList.UniqueIDDataField = null;
+			this.GList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.GList_ItemTextChanged);
+			this.GList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.GList_SelectedChanged);
+			this.GList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.GList_ItemClick);
+			this.GList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
+			this.GList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
+			this.GList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.GList_MouseOverToken);
+			// 
+			// btnChangeGlossaryItem
+			// 
+			this.btnChangeGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnChangeGlossaryItem.Enabled = false;
+			this.btnChangeGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(381, 40);
+			this.btnChangeGlossaryItem.Name = "btnChangeGlossaryItem";
+			this.btnChangeGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnChangeGlossaryItem.TabIndex = 2;
+			this.btnChangeGlossaryItem.Text = "[Change]";
+			this.btnChangeGlossaryItem.Click += new System.EventHandler(this.btnChangeGlossaryItem_Click);
+			// 
+			// btnRemoveGlossaryItem
+			// 
+			this.btnRemoveGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveGlossaryItem.Enabled = false;
+			this.btnRemoveGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(381, 72);
+			this.btnRemoveGlossaryItem.Name = "btnRemoveGlossaryItem";
+			this.btnRemoveGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnRemoveGlossaryItem.TabIndex = 3;
+			this.btnRemoveGlossaryItem.Text = "[Remove]";
+			this.btnRemoveGlossaryItem.Click += new System.EventHandler(this.btnRemoveGlossaryItem_Click);
+			// 
+			// btnAddGlossaryItem
+			// 
+			this.btnAddGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddGlossaryItem.Location = new System.Drawing.Point(381, 8);
+			this.btnAddGlossaryItem.Name = "btnAddGlossaryItem";
+			this.btnAddGlossaryItem.Size = new System.Drawing.Size(120, 23);
+			this.btnAddGlossaryItem.TabIndex = 1;
+			this.btnAddGlossaryItem.Text = "[Add]";
+			this.btnAddGlossaryItem.Click += new System.EventHandler(this.btnAddGlossaryItem_Click);
+			// 
 			// pgHistory
 			// 
 			this.pgHistory.Controls.Add(this.btnRemoveHistoryItem);
 			this.pgHistory.Controls.Add(this.lvHistory);
 			this.pgHistory.Location = new System.Drawing.Point(4, 22);
 			this.pgHistory.Name = "pgHistory";
-			this.pgHistory.Size = new System.Drawing.Size(506, 356);
+			this.pgHistory.Size = new System.Drawing.Size(511, 326);
 			this.pgHistory.TabIndex = 5;
 			this.pgHistory.Text = "[History]";
 			// 
@@ -1858,7 +2020,7 @@ namespace UseCaseMaker
 			this.btnRemoveHistoryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveHistoryItem.Enabled = false;
 			this.btnRemoveHistoryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveHistoryItem.Location = new System.Drawing.Point(378, 8);
+			this.btnRemoveHistoryItem.Location = new System.Drawing.Point(383, 8);
 			this.btnRemoveHistoryItem.Name = "btnRemoveHistoryItem";
 			this.btnRemoveHistoryItem.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveHistoryItem.TabIndex = 1;
@@ -1883,7 +2045,7 @@ namespace UseCaseMaker
 			this.lvHistory.Location = new System.Drawing.Point(8, 8);
 			this.lvHistory.MultiSelect = false;
 			this.lvHistory.Name = "lvHistory";
-			this.lvHistory.Size = new System.Drawing.Size(362, 336);
+			this.lvHistory.Size = new System.Drawing.Size(367, 306);
 			this.lvHistory.TabIndex = 0;
 			this.lvHistory.View = System.Windows.Forms.View.Details;
 			this.lvHistory.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvHistory_Layout);
@@ -1909,83 +2071,6 @@ namespace UseCaseMaker
 			this.chNotes.Text = "[Notes]";
 			this.chNotes.Width = 150;
 			// 
-			// pgGlossary
-			// 
-			this.pgGlossary.Controls.Add(this.GList);
-			this.pgGlossary.Controls.Add(this.btnChangeGlossaryItem);
-			this.pgGlossary.Controls.Add(this.btnRemoveGlossaryItem);
-			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
-			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
-			this.pgGlossary.Name = "pgGlossary";
-			this.pgGlossary.Size = new System.Drawing.Size(506, 356);
-			this.pgGlossary.TabIndex = 10;
-			this.pgGlossary.Text = "[Glossary]";
-			// 
-			// GList
-			// 
-			this.GList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.GList.AutoScroll = true;
-			this.GList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-			this.GList.BackColor = System.Drawing.SystemColors.Window;
-			this.GList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.GList.DataSource = null;
-			this.GList.IndexBackColor = System.Drawing.SystemColors.Control;
-			this.GList.IndexColumnWidth = 146;
-			this.GList.IndexDataField = null;
-			this.GList.Location = new System.Drawing.Point(8, 8);
-			this.GList.Name = "GList";
-			this.GList.RowHeight = 46;
-			this.GList.SelectedIndex = -1;
-			this.GList.Size = new System.Drawing.Size(360, 336);
-			this.GList.TabIndex = 4;
-			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.GList.TextColumnWidth = 209;
-			this.GList.TextDataField = null;
-			this.GList.UniqueIDDataField = null;
-			this.GList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.GList_ItemTextChanged);
-			this.GList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.GList_SelectedChanged);
-			this.GList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.GList_ItemClick);
-			this.GList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
-			this.GList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
-			this.GList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.GList_MouseOverToken);
-			// 
-			// btnChangeGlossaryItem
-			// 
-			this.btnChangeGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnChangeGlossaryItem.Enabled = false;
-			this.btnChangeGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(376, 40);
-			this.btnChangeGlossaryItem.Name = "btnChangeGlossaryItem";
-			this.btnChangeGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnChangeGlossaryItem.TabIndex = 2;
-			this.btnChangeGlossaryItem.Text = "[Change]";
-			this.btnChangeGlossaryItem.Click += new System.EventHandler(this.btnChangeGlossaryItem_Click);
-			// 
-			// btnRemoveGlossaryItem
-			// 
-			this.btnRemoveGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnRemoveGlossaryItem.Enabled = false;
-			this.btnRemoveGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(376, 72);
-			this.btnRemoveGlossaryItem.Name = "btnRemoveGlossaryItem";
-			this.btnRemoveGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnRemoveGlossaryItem.TabIndex = 3;
-			this.btnRemoveGlossaryItem.Text = "[Remove]";
-			this.btnRemoveGlossaryItem.Click += new System.EventHandler(this.btnRemoveGlossaryItem_Click);
-			// 
-			// btnAddGlossaryItem
-			// 
-			this.btnAddGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddGlossaryItem.Location = new System.Drawing.Point(376, 8);
-			this.btnAddGlossaryItem.Name = "btnAddGlossaryItem";
-			this.btnAddGlossaryItem.Size = new System.Drawing.Size(120, 23);
-			this.btnAddGlossaryItem.TabIndex = 1;
-			this.btnAddGlossaryItem.Text = "[Add]";
-			this.btnAddGlossaryItem.Click += new System.EventHandler(this.btnAddGlossaryItem_Click);
-			// 
 			// pgDetails
 			// 
 			this.pgDetails.Controls.Add(this.OIList);
@@ -2010,7 +2095,7 @@ namespace UseCaseMaker
 			this.pgDetails.Controls.Add(this.lblPriorityTitle);
 			this.pgDetails.Location = new System.Drawing.Point(4, 22);
 			this.pgDetails.Name = "pgDetails";
-			this.pgDetails.Size = new System.Drawing.Size(506, 356);
+			this.pgDetails.Size = new System.Drawing.Size(511, 326);
 			this.pgDetails.TabIndex = 3;
 			this.pgDetails.Text = "[Details]";
 			// 
@@ -2031,10 +2116,10 @@ namespace UseCaseMaker
 			this.OIList.Name = "OIList";
 			this.OIList.RowHeight = 46;
 			this.OIList.SelectedIndex = -1;
-			this.OIList.Size = new System.Drawing.Size(268, 112);
+			this.OIList.Size = new System.Drawing.Size(273, 82);
 			this.OIList.TabIndex = 34;
 			this.OIList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.OIList.TextColumnWidth = 213;
+			this.OIList.TextColumnWidth = 218;
 			this.OIList.TextDataField = null;
 			this.OIList.UniqueIDDataField = null;
 			this.OIList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.OIList_ItemTextChanged);
@@ -2049,7 +2134,7 @@ namespace UseCaseMaker
 			this.btnRemoveOpenIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveOpenIssue.Enabled = false;
 			this.btnRemoveOpenIssue.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveOpenIssue.Location = new System.Drawing.Point(378, 264);
+			this.btnRemoveOpenIssue.Location = new System.Drawing.Point(383, 264);
 			this.btnRemoveOpenIssue.Name = "btnRemoveOpenIssue";
 			this.btnRemoveOpenIssue.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveOpenIssue.TabIndex = 12;
@@ -2060,7 +2145,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddOpenIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddOpenIssue.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddOpenIssue.Location = new System.Drawing.Point(378, 232);
+			this.btnAddOpenIssue.Location = new System.Drawing.Point(383, 232);
 			this.btnAddOpenIssue.Name = "btnAddOpenIssue";
 			this.btnAddOpenIssue.Size = new System.Drawing.Size(120, 23);
 			this.btnAddOpenIssue.TabIndex = 10;
@@ -2082,7 +2167,7 @@ namespace UseCaseMaker
 				| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbRelease.Location = new System.Drawing.Point(104, 200);
 			this.tbRelease.Name = "tbRelease";
-			this.tbRelease.Size = new System.Drawing.Size(394, 20);
+			this.tbRelease.Size = new System.Drawing.Size(399, 20);
 			this.tbRelease.TabIndex = 8;
 			this.tbRelease.Text = "";
 			this.tbRelease.TextChanged += new System.EventHandler(this.tbRelease_TextChanged);
@@ -2102,7 +2187,7 @@ namespace UseCaseMaker
 				| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbAssignedTo.Location = new System.Drawing.Point(104, 168);
 			this.tbAssignedTo.Name = "tbAssignedTo";
-			this.tbAssignedTo.Size = new System.Drawing.Size(394, 20);
+			this.tbAssignedTo.Size = new System.Drawing.Size(399, 20);
 			this.tbAssignedTo.TabIndex = 7;
 			this.tbAssignedTo.Text = "";
 			this.tbAssignedTo.TextChanged += new System.EventHandler(this.tbAssignedTo_TextChanged);
@@ -2120,7 +2205,7 @@ namespace UseCaseMaker
 			// 
 			this.btnImplToHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnImplToHistory.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnImplToHistory.Location = new System.Drawing.Point(378, 136);
+			this.btnImplToHistory.Location = new System.Drawing.Point(383, 136);
 			this.btnImplToHistory.Name = "btnImplToHistory";
 			this.btnImplToHistory.Size = new System.Drawing.Size(120, 23);
 			this.btnImplToHistory.TabIndex = 6;
@@ -2140,7 +2225,7 @@ namespace UseCaseMaker
 																   "[Deferred]"});
 			this.cmbImplementation.Location = new System.Drawing.Point(104, 136);
 			this.cmbImplementation.Name = "cmbImplementation";
-			this.cmbImplementation.Size = new System.Drawing.Size(266, 20);
+			this.cmbImplementation.Size = new System.Drawing.Size(271, 20);
 			this.cmbImplementation.TabIndex = 5;
 			this.cmbImplementation.SelectedIndexChanged += new System.EventHandler(this.cmbImplementation_SelectedIndexChanged);
 			// 
@@ -2157,7 +2242,7 @@ namespace UseCaseMaker
 			// 
 			this.btnStatusToHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnStatusToHistory.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnStatusToHistory.Location = new System.Drawing.Point(378, 104);
+			this.btnStatusToHistory.Location = new System.Drawing.Point(383, 104);
 			this.btnStatusToHistory.Name = "btnStatusToHistory";
 			this.btnStatusToHistory.Size = new System.Drawing.Size(120, 23);
 			this.btnStatusToHistory.TabIndex = 4;
@@ -2179,7 +2264,7 @@ namespace UseCaseMaker
 														   "[Approved]"});
 			this.cmbStatus.Location = new System.Drawing.Point(104, 104);
 			this.cmbStatus.Name = "cmbStatus";
-			this.cmbStatus.Size = new System.Drawing.Size(266, 20);
+			this.cmbStatus.Size = new System.Drawing.Size(271, 20);
 			this.cmbStatus.TabIndex = 3;
 			this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
 			// 
@@ -2203,7 +2288,7 @@ namespace UseCaseMaker
 															   "[High]"});
 			this.cmbComplexity.Location = new System.Drawing.Point(104, 72);
 			this.cmbComplexity.Name = "cmbComplexity";
-			this.cmbComplexity.Size = new System.Drawing.Size(394, 20);
+			this.cmbComplexity.Size = new System.Drawing.Size(399, 20);
 			this.cmbComplexity.TabIndex = 2;
 			this.cmbComplexity.SelectedIndexChanged += new System.EventHandler(this.cmbComplexity_SelectedIndexChanged);
 			// 
@@ -2227,7 +2312,7 @@ namespace UseCaseMaker
 														  "[Subfunction]"});
 			this.cmbLevel.Location = new System.Drawing.Point(104, 40);
 			this.cmbLevel.Name = "cmbLevel";
-			this.cmbLevel.Size = new System.Drawing.Size(394, 20);
+			this.cmbLevel.Size = new System.Drawing.Size(399, 20);
 			this.cmbLevel.TabIndex = 1;
 			this.cmbLevel.SelectedIndexChanged += new System.EventHandler(this.cmbLevel_SelectedIndexChanged);
 			// 
@@ -2247,7 +2332,7 @@ namespace UseCaseMaker
 			this.tbPriority.Location = new System.Drawing.Point(104, 8);
 			this.tbPriority.MaxLength = 3;
 			this.tbPriority.Name = "tbPriority";
-			this.tbPriority.Size = new System.Drawing.Size(394, 20);
+			this.tbPriority.Size = new System.Drawing.Size(399, 20);
 			this.tbPriority.TabIndex = 0;
 			this.tbPriority.Text = "";
 			this.tbPriority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPriority_KeyPress);
@@ -2268,7 +2353,7 @@ namespace UseCaseMaker
 			this.pgProse.Controls.Add(this.tbProse);
 			this.pgProse.Location = new System.Drawing.Point(4, 22);
 			this.pgProse.Name = "pgProse";
-			this.pgProse.Size = new System.Drawing.Size(506, 356);
+			this.pgProse.Size = new System.Drawing.Size(511, 326);
 			this.pgProse.TabIndex = 2;
 			this.pgProse.Text = "[Prose]";
 			// 
@@ -2282,7 +2367,7 @@ namespace UseCaseMaker
 			this.tbProse.Location = new System.Drawing.Point(8, 8);
 			this.tbProse.MaxUndoRedoSteps = 50;
 			this.tbProse.Name = "tbProse";
-			this.tbProse.Size = new System.Drawing.Size(492, 336);
+			this.tbProse.Size = new System.Drawing.Size(497, 306);
 			this.tbProse.TabIndex = 0;
 			this.tbProse.Text = "";
 			this.tbProse.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -2298,7 +2383,7 @@ namespace UseCaseMaker
 			this.pgRequirements.Controls.Add(this.btnAddRequirement);
 			this.pgRequirements.Location = new System.Drawing.Point(4, 22);
 			this.pgRequirements.Name = "pgRequirements";
-			this.pgRequirements.Size = new System.Drawing.Size(506, 356);
+			this.pgRequirements.Size = new System.Drawing.Size(511, 326);
 			this.pgRequirements.TabIndex = 6;
 			this.pgRequirements.Text = "[Requirements]";
 			// 
@@ -2319,10 +2404,10 @@ namespace UseCaseMaker
 			this.RList.Name = "RList";
 			this.RList.RowHeight = 46;
 			this.RList.SelectedIndex = -1;
-			this.RList.Size = new System.Drawing.Size(360, 336);
+			this.RList.Size = new System.Drawing.Size(365, 306);
 			this.RList.TabIndex = 3;
 			this.RList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.RList.TextColumnWidth = 305;
+			this.RList.TextColumnWidth = 310;
 			this.RList.TextDataField = null;
 			this.RList.UniqueIDDataField = null;
 			this.RList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.RList_ItemTextChanged);
@@ -2337,7 +2422,7 @@ namespace UseCaseMaker
 			this.btnRemoveRequirement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveRequirement.Enabled = false;
 			this.btnRemoveRequirement.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveRequirement.Location = new System.Drawing.Point(376, 40);
+			this.btnRemoveRequirement.Location = new System.Drawing.Point(381, 40);
 			this.btnRemoveRequirement.Name = "btnRemoveRequirement";
 			this.btnRemoveRequirement.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveRequirement.TabIndex = 2;
@@ -2348,7 +2433,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddRequirement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddRequirement.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddRequirement.Location = new System.Drawing.Point(376, 8);
+			this.btnAddRequirement.Location = new System.Drawing.Point(381, 8);
 			this.btnAddRequirement.Name = "btnAddRequirement";
 			this.btnAddRequirement.Size = new System.Drawing.Size(120, 23);
 			this.btnAddRequirement.TabIndex = 1;
@@ -2357,9 +2442,9 @@ namespace UseCaseMaker
 			// 
 			// statusBar
 			// 
-			this.statusBar.Location = new System.Drawing.Point(0, 410);
+			this.statusBar.Location = new System.Drawing.Point(0, 401);
 			this.statusBar.Name = "statusBar";
-			this.statusBar.Size = new System.Drawing.Size(644, 22);
+			this.statusBar.Size = new System.Drawing.Size(648, 22);
 			this.statusBar.TabIndex = 5;
 			// 
 			// openModelFileDialog
@@ -2418,10 +2503,32 @@ namespace UseCaseMaker
 			this.mnuCtxETPaste.Text = "[Paste]";
 			this.mnuCtxETPaste.Click += new System.EventHandler(this.mnuCtxETPaste_Click);
 			// 
+			// mnuEditSep4
+			// 
+			this.mnuEditSep4.Index = 12;
+			this.mnuEditSep4.Text = "-";
+			// 
+			// mnuEditReorderElements
+			// 
+			this.mnuEditReorderElements.Index = 13;
+			this.mnuEditReorderElements.Text = "[Reorder elements]";
+			this.mnuEditReorderElements.Click += new System.EventHandler(this.mnuEditReorderElements_Click);
+			// 
+			// mnuCtxMBSep4
+			// 
+			this.mnuCtxMBSep4.Index = 12;
+			this.mnuCtxMBSep4.Text = "-";
+			// 
+			// mnuCtxMBReorderElements
+			// 
+			this.mnuCtxMBReorderElements.Index = 13;
+			this.mnuCtxMBReorderElements.Text = "[Reorder elements]";
+			this.mnuCtxMBReorderElements.Click += new System.EventHandler(this.mnuCtxMBReorderElements_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(644, 432);
+			this.ClientSize = new System.Drawing.Size(648, 423);
 			this.Controls.Add(this.splLeft);
 			this.Controls.Add(this.tabUseCase);
 			this.Controls.Add(this.pnlModelBrowser);
@@ -2444,13 +2551,13 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.ResumeLayout(false);
 			this.pnlPackagesContainer.ResumeLayout(false);
 			this.pnlFullPathContainer.ResumeLayout(false);
-			this.pgUCGeneral.ResumeLayout(false);
 			this.pgAGeneral.ResumeLayout(false);
-			this.pgAttributes.ResumeLayout(false);
+			this.pgUCGeneral.ResumeLayout(false);
 			this.pgFlowOfEvents.ResumeLayout(false);
+			this.pgAttributes.ResumeLayout(false);
 			this.pgPGeneral.ResumeLayout(false);
-			this.pgHistory.ResumeLayout(false);
 			this.pgGlossary.ResumeLayout(false);
+			this.pgHistory.ResumeLayout(false);
 			this.pgDetails.ResumeLayout(false);
 			this.pgProse.ResumeLayout(false);
 			this.pgRequirements.ResumeLayout(false);
@@ -2668,7 +2775,7 @@ namespace UseCaseMaker
 				return;
 			}
 
-			LockWindowUpdate(tabUseCase.Handle);
+			Win32.LockWindowUpdate(tabUseCase.Handle);
 			this.LockModified();
 
 			tabUseCase.TabPages.Clear();
@@ -2695,6 +2802,7 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = false;
 					mnuEditRemovePackage.Enabled = false;
 					mnuEditRemoveUseCase.Enabled = false;
+					mnuEditReorderElements.Enabled = false;
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = false;
@@ -2703,6 +2811,7 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = false;
 					mnuCtxMBRemovePackage.Enabled = false;
 					mnuCtxMBRemoveUseCase.Enabled = false;
+					mnuCtxMBReorderElements.Enabled = false;
 					
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -2776,6 +2885,7 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = false;
 					mnuEditRemovePackage.Enabled = true;
 					mnuEditRemoveUseCase.Enabled = false;
+					mnuEditReorderElements.Enabled = false;
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = true;
@@ -2784,6 +2894,7 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = false;
 					mnuCtxMBRemovePackage.Enabled = true;
 					mnuCtxMBRemoveUseCase.Enabled = false;
+					mnuCtxMBReorderElements.Enabled = false;
 
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -2843,6 +2954,14 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = false;
 					mnuEditRemovePackage.Enabled = false;
 					mnuEditRemoveUseCase.Enabled = false;
+					if(((Actors)this.currentElement).Count > 0)
+					{
+						mnuEditReorderElements.Enabled = true;
+					}
+					else
+					{
+						mnuEditReorderElements.Enabled = false;
+					}
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = true;
@@ -2851,6 +2970,14 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = false;
 					mnuCtxMBRemovePackage.Enabled = false;
 					mnuCtxMBRemoveUseCase.Enabled = false;
+					if(((Actors)this.currentElement).Count > 0)
+					{
+						mnuCtxMBReorderElements.Enabled = true;
+					}
+					else
+					{
+						mnuCtxMBReorderElements.Enabled = false;
+					}
 					
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -2877,6 +3004,14 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = false;
 					mnuEditRemovePackage.Enabled = false;
 					mnuEditRemoveUseCase.Enabled = false;
+					if(((UseCases)this.currentElement).Count > 0)
+					{
+						mnuEditReorderElements.Enabled = true;
+					}
+					else
+					{
+						mnuEditReorderElements.Enabled = false;
+					}
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = false;
@@ -2885,6 +3020,14 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = false;
 					mnuCtxMBRemovePackage.Enabled = false;
 					mnuCtxMBRemoveUseCase.Enabled = false;
+					if(((UseCases)this.currentElement).Count > 0)
+					{
+						mnuCtxMBReorderElements.Enabled = true;
+					}
+					else
+					{
+						mnuCtxMBReorderElements.Enabled = false;
+					}
 
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -2913,6 +3056,7 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = true;
 					mnuEditRemovePackage.Enabled = false;
 					mnuEditRemoveUseCase.Enabled = false;
+					mnuEditReorderElements.Enabled = false;
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = false;
@@ -2921,6 +3065,7 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = true;
 					mnuCtxMBRemovePackage.Enabled = false;
 					mnuCtxMBRemoveUseCase.Enabled = false;
+					mnuCtxMBReorderElements.Enabled = false;
 
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -2933,6 +3078,15 @@ namespace UseCaseMaker
 					lblAOwner.Text = actor.Owner.Name;
 					lblAID.Text = actor.ElementID;
 					lblAName.Text = actor.Name;
+					AGList.DataSource = actor.Goals;
+					AGList.IndexDataField = "Name";
+					AGList.TextDataField = "Description";
+					AGList.UniqueIDDataField = "UniqueID";
+					AGList.DataBind();
+					if(actor.Goals.Count > 0)
+					{
+						AGList.SelectedIndex = 0;
+					}
 					
 					tabUseCase.TabPages.Add(pgAttributes);
 					tbDescription.Text = actor.Attributes.Description;
@@ -2969,6 +3123,7 @@ namespace UseCaseMaker
 					mnuEditRemoveActor.Enabled = false;
 					mnuEditRemovePackage.Enabled = false;
 					mnuEditRemoveUseCase.Enabled = true;
+					mnuEditReorderElements.Enabled = false;
 
 					// Model browser context menu items
 					mnuCtxMBAddActor.Enabled = false;
@@ -2977,6 +3132,7 @@ namespace UseCaseMaker
 					mnuCtxMBRemoveActor.Enabled = false;
 					mnuCtxMBRemovePackage.Enabled = false;
 					mnuCtxMBRemoveUseCase.Enabled = true;
+					mnuCtxMBReorderElements.Enabled = false;
 
 					// TabPage controls
 					tabUseCase.TabPages.Add(pgMain);
@@ -3101,7 +3257,7 @@ namespace UseCaseMaker
 
 			this.UnlockModified();
 
-			LockWindowUpdate(new IntPtr(0));
+			Win32.LockWindowUpdate((IntPtr)0); 
 			tabUseCase.Invalidate();
 		}
 
@@ -3367,6 +3523,10 @@ namespace UseCaseMaker
 			GList.Separators = this.separators;
 			GList.HighlightDescriptors = this.hdc;
 
+			AGList.Items.Clear();
+			AGList.Separators = this.separators;
+			AGList.HighlightDescriptors = this.hdc;
+
 			tbProse.CaseSensitive = true;
 			tbProse.Separators = this.separators;
 			tbProse.HighlightDescriptors = this.hdc;
@@ -3463,6 +3623,10 @@ namespace UseCaseMaker
 				GList.Separators = this.separators;
 				GList.HighlightDescriptors = this.hdc;
 
+				AGList.Items.Clear();
+				AGList.Separators = this.separators;
+				AGList.HighlightDescriptors = this.hdc;
+
 				tbProse.CaseSensitive = true;
 				tbProse.Separators = this.separators;
 				tbProse.HighlightDescriptors = this.hdc;
@@ -3484,7 +3648,8 @@ namespace UseCaseMaker
 				tbPostconditions.HighlightDescriptors = this.hdc;
 
 				this.lockUpdate = true;
-				LockWindowUpdate(tvModelBrowser.Handle);
+				// LockWindowUpdate(tvModelBrowser.Handle);
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				this.Cursor = Cursors.WaitCursor;
 				XmlDocument doc = new XmlDocument();
 				try
@@ -3512,7 +3677,8 @@ namespace UseCaseMaker
 				finally
 				{
 					this.lockUpdate = false;
-					LockWindowUpdate(new IntPtr(0));
+					// LockWindowUpdate(new IntPtr(0));
+					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 					tvModelBrowser.Invalidate();
 				}
 				UpdateView();
@@ -3581,6 +3747,10 @@ namespace UseCaseMaker
 			GList.Separators = this.separators;
 			GList.HighlightDescriptors = this.hdc;
 
+			AGList.Items.Clear();
+			AGList.Separators = this.separators;
+			AGList.HighlightDescriptors = this.hdc;
+
 			tbProse.CaseSensitive = true;
 			tbProse.Separators = this.separators;
 			tbProse.HighlightDescriptors = this.hdc;
@@ -3602,7 +3772,8 @@ namespace UseCaseMaker
 			tbPostconditions.HighlightDescriptors = this.hdc;
 
 			this.lockUpdate = true;
-			LockWindowUpdate(tvModelBrowser.Handle);
+			// LockWindowUpdate(tvModelBrowser.Handle);
+			Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			this.Cursor = Cursors.WaitCursor;
 			XmlDocument doc = new XmlDocument();
 			try
@@ -3630,7 +3801,8 @@ namespace UseCaseMaker
 			finally
 			{
 				this.lockUpdate = false;
-				LockWindowUpdate(new IntPtr(0));
+				// LockWindowUpdate(new IntPtr(0));
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 				tvModelBrowser.Invalidate();
 			}
 			UpdateView();
@@ -3872,6 +4044,39 @@ namespace UseCaseMaker
 			IdentificableObject ia = (IdentificableObject)this.currentElement;
 			oldNameLabel.Text = this.ElementNameChange(ia);
 			tvModelBrowser.SelectedNode.Text = ia.Name + " (" + ia.ElementID + ")";
+		}
+
+		private void ReorderElements()
+		{
+			frmReorder frm = new frmReorder(this.localizer);
+
+			if(this.currentElement.GetType() == typeof(Actors))
+			{
+				for(int i = 0; i < ((Actors)this.currentElement).Count; i++)
+				{
+					ListViewItem lvi = new ListViewItem();
+					lvi.Text =  defaultAPrefix + (i+1).ToString();
+					lvi.SubItems.Add(((Actor)((Actors)this.currentElement)[i]).Name);
+					frm.lvElements.Items.Add(lvi);
+				}
+				frm.lvElements.Items[0].Selected = true;
+			}
+
+			if(this.currentElement.GetType() == typeof(UseCases))
+			{
+				for(int i = 0; i < ((UseCases)this.currentElement).Count; i++)
+				{
+					ListViewItem lvi = new ListViewItem();
+					lvi.Text =  defaultAPrefix + (i+1).ToString();
+					lvi.SubItems.Add(((UseCase)((UseCases)this.currentElement)[i]).Name);
+					frm.lvElements.Items.Add(lvi);
+				}
+				frm.lvElements.Items[0].Selected = true;
+			}
+
+			if(frm.ShowDialog(this) == DialogResult.OK)
+			{
+			}
 		}
 
 		private string ElementNameChange(IdentificableObject ia)
@@ -5054,6 +5259,11 @@ namespace UseCaseMaker
 			this.ElementDelete();
 		}
 
+		private void mnuEditReorderElements_Click(object sender, System.EventArgs e)
+		{
+			this.ReorderElements();
+		}
+
 		private void mnuFileSaveAs_Click(object sender, System.EventArgs e)
 		{
 			this.SaveModel(true);
@@ -5092,6 +5302,11 @@ namespace UseCaseMaker
 		private void mnuCtxMBRemoveUseCase_Click(object sender, System.EventArgs e)
 		{
 			this.ElementDelete();
+		}
+
+		private void mnuCtxMBReorderElements_Click(object sender, System.EventArgs e)
+		{
+			this.ReorderElements();
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
@@ -5687,7 +5902,7 @@ namespace UseCaseMaker
 			if(e.Button == MouseButtons.Right)
 			{
 				EnableElementTokenContextMenu(e.Item,e.OverToken,new Point(e.X,e.Y));
-			}		
+			}
 		}
 
 		private void tbProse_ItemClick(object sender, UseCaseMakerControls.MouseOverTokenEventArgs e)
@@ -5695,7 +5910,7 @@ namespace UseCaseMaker
 			if(e.Button == MouseButtons.Right)
 			{
 				EnableElementTokenContextMenu(e.Item,e.OverToken,new Point(e.X,e.Y));
-			}		
+			}
 		}
 
 		private void RList_ItemClick(object sender, UseCaseMakerControls.MouseOverTokenEventArgs e)
@@ -5987,6 +6202,7 @@ namespace UseCaseMaker
 
 			TreeNode srcNode, dstNode;
 			object srcElement, dstElement;
+			string oldPath;
 
 			srcNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
 			srcElement = model.FindElementByUniqueID((String)srcNode.Tag);
@@ -6014,6 +6230,7 @@ namespace UseCaseMaker
 						Package dst = (Package)dstElement;
 						Package src = (Package)srcElement;
 						Package owner = src.Owner;
+						oldPath = src.Path;
 						owner.RemovePackage(
 							src,
 							"",
@@ -6023,6 +6240,7 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.Packages.GetNextFreeID();
 						dst.AddPackage(src);
+						model.ReplaceElementPath(oldPath,"","",src.Path);
 					}
 				}
 				else if(dstElement.GetType() == typeof(Actors))
@@ -6034,8 +6252,10 @@ namespace UseCaseMaker
 						Package owner = src.Owner;
 						foreach(Actor actor in owner.Actors)
 						{
+							oldPath = actor.Path;
 							actor.ID = dst.Actors.GetNextFreeID();
 							dst.AddActor(actor);
+							model.ReplaceElementPath(oldPath,"","",actor.Path);
 						}
 						owner.Actors.Clear();
 					}
@@ -6044,6 +6264,7 @@ namespace UseCaseMaker
 						Package dst = ((Actors)dstElement).Owner;
 						Actor src = (Actor)srcElement;
 						Package owner = src.Owner;
+						oldPath = src.Path;
 						owner.RemoveActor(
 							src,
 							"",
@@ -6053,6 +6274,7 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.Actors.GetNextFreeID();
 						dst.AddActor(src);
+						model.ReplaceElementPath(oldPath,"","",src.Path);
 					}
 				}
 				else if(dstElement.GetType() == typeof(UseCases))
@@ -6064,8 +6286,10 @@ namespace UseCaseMaker
 						Package owner = src.Owner;
 						foreach(UseCase useCase in owner.UseCases)
 						{
+							oldPath = useCase.Path;
 							useCase.ID = dst.UseCases.GetNextFreeID();
 							dst.AddUseCase(useCase);
+							model.ReplaceElementPath(oldPath,"","",useCase.Path);
 						}
 						owner.UseCases.Clear();
 					}
@@ -6074,6 +6298,7 @@ namespace UseCaseMaker
 						Package dst = ((UseCases)dstElement).Owner;
 						UseCase src = (UseCase)srcElement;
 						Package owner = src.Owner;
+						oldPath = src.Path;
 						owner.RemoveUseCase(
 							src,
 							"",
@@ -6083,13 +6308,16 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.UseCases.GetNextFreeID();
 						dst.AddUseCase(src);
+						model.ReplaceElementPath(oldPath,"","",src.Path);
 					}
 				}
 
 				this.lockUpdate = true;
-				LockWindowUpdate(tvModelBrowser.Handle);
+				// Win32.LockWindowUpdate(tvModelBrowser.Handle);
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				BuildView(this.model);
-				Win32.LockWindowUpdate(new IntPtr(0));
+				// Win32.LockWindowUpdate(new IntPtr(0));
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 				this.lockUpdate = false;
 				this.UpdateView();
 			}		
@@ -6249,9 +6477,11 @@ namespace UseCaseMaker
 
 					mnuEditPaste.Enabled = true;
 					this.lockUpdate = true;
-					LockWindowUpdate(tvModelBrowser.Handle);
+					// LockWindowUpdate(tvModelBrowser.Handle);
+					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 					BuildView(this.model);
-					Win32.LockWindowUpdate(new IntPtr(0));
+					// Win32.LockWindowUpdate(new IntPtr(0));
+					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 					this.lockUpdate = false;
 					this.UpdateView();
 				}
@@ -6412,6 +6642,90 @@ namespace UseCaseMaker
 		private void mnuCtxETPaste_Click(object sender, System.EventArgs e)
 		{
 			mnuEditPaste_Click(sender,e);
+		}
+
+		private void AGList_ItemClick(object sender, UseCaseMakerControls.MouseOverTokenEventArgs e)
+		{
+			if(e.Button == MouseButtons.Right)
+			{
+				EnableElementTokenContextMenu(e.Item,e.OverToken,new Point(e.X,e.Y));
+			}		
+		}
+
+		private void AGList_ItemTextChanged(object sender, UseCaseMakerControls.ItemTextChangedEventArgs e)
+		{
+			Actor actor = (Actor)this.currentElement;
+			IndexedListItem item = (IndexedListItem)sender;
+			Goal goal = (Goal)actor.FindGoalByUniqueID((String)item.Tag);
+			if(goal != null)
+			{
+				goal.Description = item.Text;
+			}
+			this.SetModified(true);
+		}
+
+		private void AGList_MouseOverToken(object sender, UseCaseMakerControls.MouseOverTokenEventArgs e)
+		{
+			UseCaseMakerControls.LinkEnabledRTB rtb = ((UseCaseMakerControls.LinkEnabledRTB)e.Item);
+
+			object element = null;
+
+			element = model.FindElementByName(e.Token);
+			if(element == null)
+			{
+				element = model.FindElementByPath(e.Token);
+			}
+			if(element != null)
+			{
+				rtb.ToolTip.SetToolTip(rtb,this.GetElementInfo(element));
+			}		
+		}
+
+		private void AGList_SelectedChanged(object sender, System.EventArgs e)
+		{
+			btnAddGoal.Enabled = true;
+			btnRemoveGoal.Enabled = true;		
+		}
+
+		private void btnAddGoal_Click(object sender, System.EventArgs e)
+		{
+			Actor actor = (Actor)this.currentElement;
+			int currentSelectedIndex = actor.AddGoal();
+
+			AGList.DataBind();
+
+			AGList.SelectedIndex = currentSelectedIndex;
+			this.SetModified(true);
+		}
+
+		private void btnRemoveGoal_Click(object sender, System.EventArgs e)
+		{
+			Actor actor = (Actor)this.currentElement;
+			int currentSelectedIndex = AGList.SelectedIndex;
+
+			IndexedListItem ili = AGList.Items[currentSelectedIndex];
+			Goal goal = (Goal)actor.FindGoalByUniqueID((String)ili.Tag);
+			actor.RemoveGoal(goal);
+
+			AGList.DataBind();
+
+			if(currentSelectedIndex < AGList.Items.Count)
+			{
+				AGList.SelectedIndex = currentSelectedIndex;
+			}
+			else
+			{
+				if(AGList.Items.Count > 0)
+				{
+					AGList.SelectedIndex = AGList.Items.Count - 1;
+				}
+				else
+				{
+					btnAddGoal.Enabled = true;
+					btnRemoveGoal.Enabled = false;
+				}
+			}
+			this.SetModified(true);
 		}
 	}
 }

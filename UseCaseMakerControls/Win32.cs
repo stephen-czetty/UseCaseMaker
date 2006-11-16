@@ -24,6 +24,7 @@ namespace UseCaseMakerControls
 		public const int WM_NOTIFY = 0x4E;
 		public const int WM_MOUSEMOVE = 0x200;
 		public const int WM_PASTE = 0x0302;
+		public const int WM_SETREDRAW = 0x000B;
 
 		public const int EM_GETSCROLLPOS	=	(WM_USER + 221);
 		public const int EM_SETSCROLLPOS	=	(WM_USER + 222);

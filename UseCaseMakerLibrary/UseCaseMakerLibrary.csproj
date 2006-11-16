@@ -129,6 +129,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Goal.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Goals.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "HistoryItem.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

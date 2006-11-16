@@ -217,7 +217,8 @@ namespace UseCaseMakerControls
 			}
 
 			mParsing = true;
-			Win32.LockWindowUpdate(Handle);
+			// Win32.LockWindowUpdate(Handle);
+			Win32.SendMessage(Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			base.OnTextChanged(e);
 
 			if (!mIsUndo)
@@ -265,7 +266,8 @@ namespace UseCaseMakerControls
 			this.SelectionLength = 0;
 
 			SetScrollPos(scrollPos);
-			Win32.LockWindowUpdate((IntPtr)0);
+			//Win32.LockWindowUpdate((IntPtr)0);
+			Win32.SendMessage(Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 			Invalidate();
 			
 			if (mAutoCompleteShown)
