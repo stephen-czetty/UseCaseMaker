@@ -213,7 +213,11 @@
 			<btnAddStep>Add</btnAddStep>
 			<btnInsertStep>Insert</btnInsertStep>
 			<btnAddAltStep>Add alternative</btnAddAltStep>
-			<btnInsertAltStep>Insert alternative</btnInsertAltStep>
+			<!-- Start of 0.9.6 section -->
+			<!-- <btnInsertAltStep>Insert alternative</btnInsertAltStep> -->
+			<btnAddRefStep>Add dependency</btnAddRefStep>
+			<btnInsertRefStep>Insert dependency</btnInsertRefStep>
+			<!-- End of 0.9.6 section -->
 			<btnRemoveStep>Remove</btnRemoveStep>
 			<!-- Prose -->
 			<pgProse>Prose</pgProse>

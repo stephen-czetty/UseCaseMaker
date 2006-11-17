@@ -27,6 +27,7 @@ namespace UseCaseMakerControls
 		private LinkEnabledRTB						_text = new LinkEnabledRTB();
 		private bool								_selected = false;
 		private object								_tag = null;
+		private bool								_readOnly = false;
 
 		public event MouseOverTokenEventHandler				MouseOverToken;
 		public event SelectedChangeEventHandler				SelectedChange;
@@ -101,6 +102,24 @@ namespace UseCaseMakerControls
 			set
 			{
 				this._tag = value;
+			}
+		}
+
+		[ 
+		Category("Default"),
+		DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+		NotifyParentProperty(true)
+		]
+		public bool ReadOnly
+		{
+			get
+			{
+				return this._readOnly;
+			}
+			set
+			{
+				this._readOnly = value;
+				this.ItemRichTextBox.ReadOnly = value;
 			}
 		}
 

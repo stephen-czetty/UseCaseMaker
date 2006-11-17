@@ -9,7 +9,15 @@ namespace UseCaseMakerLibrary
 		{
 			Default = 0,
 			Alternative = 1,
-			AlternativeChild = 2
+			AlternativeChild = 2,
+			UseCaseReference = 3
+		}
+
+		public enum StepReferenceType
+		{
+			None = 0,
+			Client = 1,
+			Supplier = 2
 		}
 		#endregion
 
@@ -17,6 +25,9 @@ namespace UseCaseMakerLibrary
 		private String description = String.Empty;
 		private Int32 childID = -1;
 		private StepType type = StepType.Default;
+		private String referenceStereotype = "";
+		private StepReferenceType referenceType = StepReferenceType.None;
+		private String referencedUseCaseUniqueID = "";
 		#endregion
 
 		#region Constructors
@@ -59,6 +70,50 @@ namespace UseCaseMakerLibrary
 			set
 			{
 				this.type = value;
+			}
+		}
+
+		public String ReferenceStereotipe
+		{
+			get
+			{
+				return this.referenceStereotype;
+			}
+			set
+			{
+				this.referenceStereotype = value;
+			}
+		}
+
+		public StepReferenceType ReferenceType
+		{
+			get
+			{
+				return this.referenceType;
+			}
+			set
+			{
+				this.referenceType = value;
+				if(value == StepReferenceType.None)
+				{
+					this.referencedUseCaseUniqueID = "";
+					this.referenceStereotype = "";
+				}
+			}
+		}
+
+		public String ReferencedUseCaseUniqueID
+		{
+			get
+			{
+				return this.referencedUseCaseUniqueID;
+			}
+			set
+			{
+				if(this.referenceType != StepReferenceType.None)
+				{
+					this.referencedUseCaseUniqueID = value;
+				}
 			}
 		}
 

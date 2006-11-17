@@ -205,7 +205,7 @@ namespace UseCaseMaker
 			// frmOptions
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(439, 279);
+			this.ClientSize = new System.Drawing.Size(439, 288);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.tabOptions);

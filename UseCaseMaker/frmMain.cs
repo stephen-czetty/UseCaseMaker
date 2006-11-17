@@ -153,7 +153,6 @@ namespace UseCaseMaker
 		private System.Windows.Forms.Button btnAddAltStep;
 		private System.Windows.Forms.Button btnRemoveStep;
 		private System.Windows.Forms.Button btnAddStep;
-		private System.Windows.Forms.Button btnInsertAltStep;
 		private System.Windows.Forms.Button btnInsertStep;
 		private System.Windows.Forms.Button btnRemoveRequirement;
 		private System.Windows.Forms.Button btnAddRequirement;
@@ -251,6 +250,8 @@ namespace UseCaseMaker
 		private System.Windows.Forms.MenuItem mnuEditReorderElements;
 		private System.Windows.Forms.MenuItem mnuCtxMBSep4;
 		private System.Windows.Forms.MenuItem mnuCtxMBReorderElements;
+		private System.Windows.Forms.Button btnInsertRefStep;
+		private System.Windows.Forms.Button btnAddRefStep;
 		private System.ComponentModel.IContainer components;
 
 		public frmMain(string openFromCmdLine)
@@ -324,6 +325,8 @@ namespace UseCaseMaker
 			this.mnuEditSep3 = new System.Windows.Forms.MenuItem();
 			this.mnuEditAddUseCase = new System.Windows.Forms.MenuItem();
 			this.mnuEditRemoveUseCase = new System.Windows.Forms.MenuItem();
+			this.mnuEditSep4 = new System.Windows.Forms.MenuItem();
+			this.mnuEditReorderElements = new System.Windows.Forms.MenuItem();
 			this.mnuTools = new System.Windows.Forms.MenuItem();
 			this.mnuToolsHtmlExport = new System.Windows.Forms.MenuItem();
 			this.mnuToolsPDFExport = new System.Windows.Forms.MenuItem();
@@ -348,6 +351,8 @@ namespace UseCaseMaker
 			this.mnuCtxMBSep3 = new System.Windows.Forms.MenuItem();
 			this.mnuCtxMBAddUseCase = new System.Windows.Forms.MenuItem();
 			this.mnuCtxMBRemoveUseCase = new System.Windows.Forms.MenuItem();
+			this.mnuCtxMBSep4 = new System.Windows.Forms.MenuItem();
+			this.mnuCtxMBReorderElements = new System.Windows.Forms.MenuItem();
 			this.imgListModelBrowser = new System.Windows.Forms.ImageList(this.components);
 			this.pnlModelBrowser = new System.Windows.Forms.Panel();
 			this.lblModelBrowser = new System.Windows.Forms.Label();
@@ -387,6 +392,15 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer = new System.Windows.Forms.Panel();
 			this.lblFullPath = new System.Windows.Forms.Label();
 			this.lblFullPathTitle = new System.Windows.Forms.Label();
+			this.pgFlowOfEvents = new System.Windows.Forms.TabPage();
+			this.btnInsertRefStep = new System.Windows.Forms.Button();
+			this.btnAddRefStep = new System.Windows.Forms.Button();
+			this.UCList = new UseCaseMakerControls.IndexedList();
+			this.btnInsertStep = new System.Windows.Forms.Button();
+			this.btnAddAltStep = new System.Windows.Forms.Button();
+			this.btnRemoveStep = new System.Windows.Forms.Button();
+			this.btnAddStep = new System.Windows.Forms.Button();
+			this.lblStepsTitle = new System.Windows.Forms.Label();
 			this.pgAGeneral = new System.Windows.Forms.TabPage();
 			this.btnRemoveGoal = new System.Windows.Forms.Button();
 			this.btnAddGoal = new System.Windows.Forms.Button();
@@ -418,14 +432,6 @@ namespace UseCaseMaker
 			this.lblUCOwnerTitle = new System.Windows.Forms.Label();
 			this.lblUCID = new System.Windows.Forms.Label();
 			this.lblUCIDTitle = new System.Windows.Forms.Label();
-			this.pgFlowOfEvents = new System.Windows.Forms.TabPage();
-			this.UCList = new UseCaseMakerControls.IndexedList();
-			this.btnInsertAltStep = new System.Windows.Forms.Button();
-			this.btnInsertStep = new System.Windows.Forms.Button();
-			this.btnAddAltStep = new System.Windows.Forms.Button();
-			this.btnRemoveStep = new System.Windows.Forms.Button();
-			this.btnAddStep = new System.Windows.Forms.Button();
-			this.lblStepsTitle = new System.Windows.Forms.Label();
 			this.pgAttributes = new System.Windows.Forms.TabPage();
 			this.tbNotes = new UseCaseMakerControls.LinkEnabledRTB();
 			this.tbDescription = new UseCaseMakerControls.LinkEnabledRTB();
@@ -495,10 +501,6 @@ namespace UseCaseMaker
 			this.mnuCtxETCut = new System.Windows.Forms.MenuItem();
 			this.mnuCtxETCopy = new System.Windows.Forms.MenuItem();
 			this.mnuCtxETPaste = new System.Windows.Forms.MenuItem();
-			this.mnuEditSep4 = new System.Windows.Forms.MenuItem();
-			this.mnuEditReorderElements = new System.Windows.Forms.MenuItem();
-			this.mnuCtxMBSep4 = new System.Windows.Forms.MenuItem();
-			this.mnuCtxMBReorderElements = new System.Windows.Forms.MenuItem();
 			this.pnlModelBrowser.SuspendLayout();
 			this.tabUseCase.SuspendLayout();
 			this.pgMain.SuspendLayout();
@@ -507,9 +509,9 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.SuspendLayout();
 			this.pnlPackagesContainer.SuspendLayout();
 			this.pnlFullPathContainer.SuspendLayout();
+			this.pgFlowOfEvents.SuspendLayout();
 			this.pgAGeneral.SuspendLayout();
 			this.pgUCGeneral.SuspendLayout();
-			this.pgFlowOfEvents.SuspendLayout();
 			this.pgAttributes.SuspendLayout();
 			this.pgPGeneral.SuspendLayout();
 			this.pgGlossary.SuspendLayout();
@@ -711,6 +713,17 @@ namespace UseCaseMaker
 			this.mnuEditRemoveUseCase.Text = "[Remove use case]";
 			this.mnuEditRemoveUseCase.Click += new System.EventHandler(this.mnuEditRemoveUseCase_Click);
 			// 
+			// mnuEditSep4
+			// 
+			this.mnuEditSep4.Index = 12;
+			this.mnuEditSep4.Text = "-";
+			// 
+			// mnuEditReorderElements
+			// 
+			this.mnuEditReorderElements.Index = 13;
+			this.mnuEditReorderElements.Text = "[Reorder elements]";
+			this.mnuEditReorderElements.Click += new System.EventHandler(this.mnuEditReorderElements_Click);
+			// 
 			// mnuTools
 			// 
 			this.mnuTools.Index = 2;
@@ -793,7 +806,7 @@ namespace UseCaseMaker
 			this.tvModelBrowser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvModelBrowser_KeyDown);
 			this.tvModelBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvModelBrowser_MouseDown);
 			this.tvModelBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.tvModelBrowser_DragOver);
-			this.tvModelBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.OnAfterSelect);
+			this.tvModelBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvModelBrowser_AfterSelect);
 			this.tvModelBrowser.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvModelBrowser_ItemDrag);
 			this.tvModelBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvModelBrowser_DragDrop);
 			this.tvModelBrowser.Enter += new System.EventHandler(this.tvModelBrowser_Enter);
@@ -888,6 +901,17 @@ namespace UseCaseMaker
 			this.mnuCtxMBRemoveUseCase.Text = "[Remove use case]";
 			this.mnuCtxMBRemoveUseCase.Click += new System.EventHandler(this.mnuCtxMBRemoveUseCase_Click);
 			// 
+			// mnuCtxMBSep4
+			// 
+			this.mnuCtxMBSep4.Index = 12;
+			this.mnuCtxMBSep4.Text = "-";
+			// 
+			// mnuCtxMBReorderElements
+			// 
+			this.mnuCtxMBReorderElements.Index = 13;
+			this.mnuCtxMBReorderElements.Text = "[Reorder elements]";
+			this.mnuCtxMBReorderElements.Click += new System.EventHandler(this.mnuCtxMBReorderElements_Click);
+			// 
 			// imgListModelBrowser
 			// 
 			this.imgListModelBrowser.ImageSize = new System.Drawing.Size(16, 16);
@@ -956,7 +980,7 @@ namespace UseCaseMaker
 			this.toolBar.Location = new System.Drawing.Point(0, 0);
 			this.toolBar.Name = "toolBar";
 			this.toolBar.ShowToolTips = true;
-			this.toolBar.Size = new System.Drawing.Size(648, 28);
+			this.toolBar.Size = new System.Drawing.Size(650, 28);
 			this.toolBar.TabIndex = 1;
 			this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
 			// 
@@ -1036,9 +1060,9 @@ namespace UseCaseMaker
 			// tabUseCase
 			// 
 			this.tabUseCase.Controls.Add(this.pgMain);
+			this.tabUseCase.Controls.Add(this.pgFlowOfEvents);
 			this.tabUseCase.Controls.Add(this.pgAGeneral);
 			this.tabUseCase.Controls.Add(this.pgUCGeneral);
-			this.tabUseCase.Controls.Add(this.pgFlowOfEvents);
 			this.tabUseCase.Controls.Add(this.pgAttributes);
 			this.tabUseCase.Controls.Add(this.pgPGeneral);
 			this.tabUseCase.Controls.Add(this.pgGlossary);
@@ -1050,7 +1074,7 @@ namespace UseCaseMaker
 			this.tabUseCase.Location = new System.Drawing.Point(130, 28);
 			this.tabUseCase.Name = "tabUseCase";
 			this.tabUseCase.SelectedIndex = 0;
-			this.tabUseCase.Size = new System.Drawing.Size(518, 373);
+			this.tabUseCase.Size = new System.Drawing.Size(520, 373);
 			this.tabUseCase.TabIndex = 4;
 			this.tabUseCase.SelectedIndexChanged += new System.EventHandler(this.tabUseCase_SelectedIndexChanged);
 			// 
@@ -1063,7 +1087,7 @@ namespace UseCaseMaker
 			this.pgMain.Controls.Add(this.pnlFullPathContainer);
 			this.pgMain.Location = new System.Drawing.Point(4, 22);
 			this.pgMain.Name = "pgMain";
-			this.pgMain.Size = new System.Drawing.Size(510, 347);
+			this.pgMain.Size = new System.Drawing.Size(512, 347);
 			this.pgMain.TabIndex = 8;
 			this.pgMain.Text = "[Main]";
 			// 
@@ -1076,7 +1100,7 @@ namespace UseCaseMaker
 			this.pnlAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnlAbout.Location = new System.Drawing.Point(0, 283);
 			this.pnlAbout.Name = "pnlAbout";
-			this.pnlAbout.Size = new System.Drawing.Size(510, 64);
+			this.pnlAbout.Size = new System.Drawing.Size(512, 64);
 			this.pnlAbout.TabIndex = 13;
 			// 
 			// lblVersion
@@ -1084,7 +1108,7 @@ namespace UseCaseMaker
 			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.lblVersion.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.lblVersion.Location = new System.Drawing.Point(340, 32);
+			this.lblVersion.Location = new System.Drawing.Point(342, 32);
 			this.lblVersion.Name = "lblVersion";
 			this.lblVersion.Size = new System.Drawing.Size(160, 23);
 			this.lblVersion.TabIndex = 15;
@@ -1096,7 +1120,7 @@ namespace UseCaseMaker
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.label1.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.label1.Location = new System.Drawing.Point(340, 8);
+			this.label1.Location = new System.Drawing.Point(342, 8);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(160, 23);
 			this.label1.TabIndex = 14;
@@ -1110,7 +1134,7 @@ namespace UseCaseMaker
 			this.pnlUseCasesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlUseCasesContainer.Location = new System.Drawing.Point(0, 72);
 			this.pnlUseCasesContainer.Name = "pnlUseCasesContainer";
-			this.pnlUseCasesContainer.Size = new System.Drawing.Size(510, 24);
+			this.pnlUseCasesContainer.Size = new System.Drawing.Size(512, 24);
 			this.pnlUseCasesContainer.TabIndex = 11;
 			// 
 			// lblUseCases
@@ -1121,7 +1145,7 @@ namespace UseCaseMaker
 			this.lblUseCases.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUseCases.Location = new System.Drawing.Point(120, 8);
 			this.lblUseCases.Name = "lblUseCases";
-			this.lblUseCases.Size = new System.Drawing.Size(382, 16);
+			this.lblUseCases.Size = new System.Drawing.Size(384, 16);
 			this.lblUseCases.TabIndex = 9;
 			// 
 			// lblUseCasesTitle
@@ -1140,7 +1164,7 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlActorsContainer.Location = new System.Drawing.Point(0, 48);
 			this.pnlActorsContainer.Name = "pnlActorsContainer";
-			this.pnlActorsContainer.Size = new System.Drawing.Size(510, 24);
+			this.pnlActorsContainer.Size = new System.Drawing.Size(512, 24);
 			this.pnlActorsContainer.TabIndex = 10;
 			// 
 			// lblActors
@@ -1151,7 +1175,7 @@ namespace UseCaseMaker
 			this.lblActors.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblActors.Location = new System.Drawing.Point(120, 8);
 			this.lblActors.Name = "lblActors";
-			this.lblActors.Size = new System.Drawing.Size(382, 16);
+			this.lblActors.Size = new System.Drawing.Size(384, 16);
 			this.lblActors.TabIndex = 7;
 			// 
 			// lblActorsTitle
@@ -1170,7 +1194,7 @@ namespace UseCaseMaker
 			this.pnlPackagesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlPackagesContainer.Location = new System.Drawing.Point(0, 24);
 			this.pnlPackagesContainer.Name = "pnlPackagesContainer";
-			this.pnlPackagesContainer.Size = new System.Drawing.Size(510, 24);
+			this.pnlPackagesContainer.Size = new System.Drawing.Size(512, 24);
 			this.pnlPackagesContainer.TabIndex = 9;
 			// 
 			// lblPackages
@@ -1181,7 +1205,7 @@ namespace UseCaseMaker
 			this.lblPackages.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPackages.Location = new System.Drawing.Point(120, 8);
 			this.lblPackages.Name = "lblPackages";
-			this.lblPackages.Size = new System.Drawing.Size(382, 16);
+			this.lblPackages.Size = new System.Drawing.Size(384, 16);
 			this.lblPackages.TabIndex = 5;
 			// 
 			// lblPackagesTitle
@@ -1200,7 +1224,7 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlFullPathContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnlFullPathContainer.Name = "pnlFullPathContainer";
-			this.pnlFullPathContainer.Size = new System.Drawing.Size(510, 24);
+			this.pnlFullPathContainer.Size = new System.Drawing.Size(512, 24);
 			this.pnlFullPathContainer.TabIndex = 8;
 			// 
 			// lblFullPath
@@ -1211,7 +1235,7 @@ namespace UseCaseMaker
 			this.lblFullPath.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblFullPath.Location = new System.Drawing.Point(120, 8);
 			this.lblFullPath.Name = "lblFullPath";
-			this.lblFullPath.Size = new System.Drawing.Size(382, 16);
+			this.lblFullPath.Size = new System.Drawing.Size(384, 16);
 			this.lblFullPath.TabIndex = 3;
 			// 
 			// lblFullPathTitle
@@ -1222,6 +1246,132 @@ namespace UseCaseMaker
 			this.lblFullPathTitle.Size = new System.Drawing.Size(100, 16);
 			this.lblFullPathTitle.TabIndex = 2;
 			this.lblFullPathTitle.Text = "[Full path]";
+			// 
+			// pgFlowOfEvents
+			// 
+			this.pgFlowOfEvents.Controls.Add(this.btnInsertRefStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnAddRefStep);
+			this.pgFlowOfEvents.Controls.Add(this.UCList);
+			this.pgFlowOfEvents.Controls.Add(this.btnInsertStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnAddAltStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnRemoveStep);
+			this.pgFlowOfEvents.Controls.Add(this.btnAddStep);
+			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
+			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
+			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
+			this.pgFlowOfEvents.Size = new System.Drawing.Size(512, 347);
+			this.pgFlowOfEvents.TabIndex = 1;
+			this.pgFlowOfEvents.Text = "[Flow of events]";
+			// 
+			// btnInsertRefStep
+			// 
+			this.btnInsertRefStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnInsertRefStep.Enabled = false;
+			this.btnInsertRefStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnInsertRefStep.Location = new System.Drawing.Point(385, 152);
+			this.btnInsertRefStep.Name = "btnInsertRefStep";
+			this.btnInsertRefStep.Size = new System.Drawing.Size(120, 23);
+			this.btnInsertRefStep.TabIndex = 6;
+			this.btnInsertRefStep.Text = "[Insert reference]";
+			this.btnInsertRefStep.Click += new System.EventHandler(this.btnInsertRefStep_Click);
+			// 
+			// btnAddRefStep
+			// 
+			this.btnAddRefStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddRefStep.Enabled = false;
+			this.btnAddRefStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddRefStep.Location = new System.Drawing.Point(385, 120);
+			this.btnAddRefStep.Name = "btnAddRefStep";
+			this.btnAddRefStep.Size = new System.Drawing.Size(120, 23);
+			this.btnAddRefStep.TabIndex = 5;
+			this.btnAddRefStep.Text = "[Add reference]";
+			this.btnAddRefStep.Click += new System.EventHandler(this.btnAddRefStep_Click);
+			// 
+			// UCList
+			// 
+			this.UCList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
+			this.UCList.AutoScroll = true;
+			this.UCList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+			this.UCList.BackColor = System.Drawing.SystemColors.Window;
+			this.UCList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.UCList.DataSource = null;
+			this.UCList.IndexBackColor = System.Drawing.SystemColors.Control;
+			this.UCList.IndexColumnWidth = 50;
+			this.UCList.IndexDataField = null;
+			this.UCList.Location = new System.Drawing.Point(96, 8);
+			this.UCList.Name = "UCList";
+			this.UCList.RowHeight = 46;
+			this.UCList.SelectedIndex = -1;
+			this.UCList.Size = new System.Drawing.Size(282, 327);
+			this.UCList.TabIndex = 0;
+			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
+			this.UCList.TextColumnWidth = 227;
+			this.UCList.TextDataField = null;
+			this.UCList.UniqueIDDataField = null;
+			this.UCList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.UCList_ItemTextChanged);
+			this.UCList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.UCList_SelectedChanged);
+			this.UCList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.UCList_ItemClick);
+			this.UCList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
+			this.UCList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
+			this.UCList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.UCList_MouseOverToken);
+			// 
+			// btnInsertStep
+			// 
+			this.btnInsertStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnInsertStep.Enabled = false;
+			this.btnInsertStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnInsertStep.Location = new System.Drawing.Point(384, 40);
+			this.btnInsertStep.Name = "btnInsertStep";
+			this.btnInsertStep.Size = new System.Drawing.Size(120, 23);
+			this.btnInsertStep.TabIndex = 2;
+			this.btnInsertStep.Text = "[Insert]";
+			this.btnInsertStep.Click += new System.EventHandler(this.btnInsertStep_Click);
+			// 
+			// btnAddAltStep
+			// 
+			this.btnAddAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddAltStep.Enabled = false;
+			this.btnAddAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddAltStep.Location = new System.Drawing.Point(384, 80);
+			this.btnAddAltStep.Name = "btnAddAltStep";
+			this.btnAddAltStep.Size = new System.Drawing.Size(120, 23);
+			this.btnAddAltStep.TabIndex = 3;
+			this.btnAddAltStep.Text = "[Add alternative]";
+			this.btnAddAltStep.Click += new System.EventHandler(this.btnAddAltStep_Click);
+			// 
+			// btnRemoveStep
+			// 
+			this.btnRemoveStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnRemoveStep.Enabled = false;
+			this.btnRemoveStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnRemoveStep.Location = new System.Drawing.Point(385, 192);
+			this.btnRemoveStep.Name = "btnRemoveStep";
+			this.btnRemoveStep.Size = new System.Drawing.Size(120, 23);
+			this.btnRemoveStep.TabIndex = 7;
+			this.btnRemoveStep.Text = "[Remove]";
+			this.btnRemoveStep.Click += new System.EventHandler(this.btnRemoveStep_Click);
+			// 
+			// btnAddStep
+			// 
+			this.btnAddStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnAddStep.Location = new System.Drawing.Point(384, 8);
+			this.btnAddStep.Name = "btnAddStep";
+			this.btnAddStep.Size = new System.Drawing.Size(120, 23);
+			this.btnAddStep.TabIndex = 1;
+			this.btnAddStep.Text = "[Add]";
+			this.btnAddStep.Click += new System.EventHandler(this.btnAddStep_Click);
+			// 
+			// lblStepsTitle
+			// 
+			this.lblStepsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblStepsTitle.Location = new System.Drawing.Point(8, 8);
+			this.lblStepsTitle.Name = "lblStepsTitle";
+			this.lblStepsTitle.Size = new System.Drawing.Size(88, 16);
+			this.lblStepsTitle.TabIndex = 9;
+			this.lblStepsTitle.Text = "[Steps]";
 			// 
 			// pgAGeneral
 			// 
@@ -1238,7 +1388,7 @@ namespace UseCaseMaker
 			this.pgAGeneral.Controls.Add(this.lblAIDTitle);
 			this.pgAGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgAGeneral.Name = "pgAGeneral";
-			this.pgAGeneral.Size = new System.Drawing.Size(511, 326);
+			this.pgAGeneral.Size = new System.Drawing.Size(512, 347);
 			this.pgAGeneral.TabIndex = 7;
 			this.pgAGeneral.Text = "[General (A)]";
 			// 
@@ -1247,7 +1397,7 @@ namespace UseCaseMaker
 			this.btnRemoveGoal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveGoal.Enabled = false;
 			this.btnRemoveGoal.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveGoal.Location = new System.Drawing.Point(379, 104);
+			this.btnRemoveGoal.Location = new System.Drawing.Point(380, 104);
 			this.btnRemoveGoal.Name = "btnRemoveGoal";
 			this.btnRemoveGoal.Size = new System.Drawing.Size(120, 24);
 			this.btnRemoveGoal.TabIndex = 14;
@@ -1258,7 +1408,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddGoal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddGoal.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddGoal.Location = new System.Drawing.Point(379, 72);
+			this.btnAddGoal.Location = new System.Drawing.Point(380, 72);
 			this.btnAddGoal.Name = "btnAddGoal";
 			this.btnAddGoal.Size = new System.Drawing.Size(120, 24);
 			this.btnAddGoal.TabIndex = 13;
@@ -1282,10 +1432,10 @@ namespace UseCaseMaker
 			this.AGList.Name = "AGList";
 			this.AGList.RowHeight = 46;
 			this.AGList.SelectedIndex = -1;
-			this.AGList.Size = new System.Drawing.Size(268, 241);
+			this.AGList.Size = new System.Drawing.Size(269, 262);
 			this.AGList.TabIndex = 1;
 			this.AGList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.AGList.TextColumnWidth = 213;
+			this.AGList.TextColumnWidth = 214;
 			this.AGList.TextDataField = null;
 			this.AGList.UniqueIDDataField = null;
 			this.AGList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.AGList_ItemTextChanged);
@@ -1307,7 +1457,7 @@ namespace UseCaseMaker
 			// 
 			this.btnANameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnANameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnANameChange.Location = new System.Drawing.Point(380, 40);
+			this.btnANameChange.Location = new System.Drawing.Point(381, 40);
 			this.btnANameChange.Name = "btnANameChange";
 			this.btnANameChange.Size = new System.Drawing.Size(120, 23);
 			this.btnANameChange.TabIndex = 0;
@@ -1322,7 +1472,7 @@ namespace UseCaseMaker
 			this.lblAName.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblAName.Location = new System.Drawing.Point(104, 40);
 			this.lblAName.Name = "lblAName";
-			this.lblAName.Size = new System.Drawing.Size(268, 20);
+			this.lblAName.Size = new System.Drawing.Size(269, 20);
 			this.lblAName.TabIndex = 11;
 			// 
 			// lblANameTitle
@@ -1342,7 +1492,7 @@ namespace UseCaseMaker
 			this.lblAOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblAOwner.Location = new System.Drawing.Point(320, 8);
 			this.lblAOwner.Name = "lblAOwner";
-			this.lblAOwner.Size = new System.Drawing.Size(183, 20);
+			this.lblAOwner.Size = new System.Drawing.Size(184, 20);
 			this.lblAOwner.TabIndex = 9;
 			// 
 			// lblAOwnerTitle
@@ -1392,7 +1542,7 @@ namespace UseCaseMaker
 			this.pgUCGeneral.Controls.Add(this.lblUCIDTitle);
 			this.pgUCGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgUCGeneral.Name = "pgUCGeneral";
-			this.pgUCGeneral.Size = new System.Drawing.Size(511, 326);
+			this.pgUCGeneral.Size = new System.Drawing.Size(512, 347);
 			this.pgUCGeneral.TabIndex = 0;
 			this.pgUCGeneral.Text = "[General (UC)]";
 			// 
@@ -1405,7 +1555,7 @@ namespace UseCaseMaker
 			this.tbPostconditions.Location = new System.Drawing.Point(104, 144);
 			this.tbPostconditions.MaxUndoRedoSteps = 50;
 			this.tbPostconditions.Name = "tbPostconditions";
-			this.tbPostconditions.Size = new System.Drawing.Size(397, 64);
+			this.tbPostconditions.Size = new System.Drawing.Size(398, 64);
 			this.tbPostconditions.TabIndex = 30;
 			this.tbPostconditions.Text = "";
 			this.tbPostconditions.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1423,7 +1573,7 @@ namespace UseCaseMaker
 			this.tbPreconditions.Location = new System.Drawing.Point(104, 72);
 			this.tbPreconditions.MaxUndoRedoSteps = 50;
 			this.tbPreconditions.Name = "tbPreconditions";
-			this.tbPreconditions.Size = new System.Drawing.Size(397, 64);
+			this.tbPreconditions.Size = new System.Drawing.Size(398, 64);
 			this.tbPreconditions.TabIndex = 29;
 			this.tbPreconditions.Text = "";
 			this.tbPreconditions.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1440,14 +1590,14 @@ namespace UseCaseMaker
 			this.lblUCName.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUCName.Location = new System.Drawing.Point(104, 40);
 			this.lblUCName.Name = "lblUCName";
-			this.lblUCName.Size = new System.Drawing.Size(271, 20);
+			this.lblUCName.Size = new System.Drawing.Size(272, 20);
 			this.lblUCName.TabIndex = 28;
 			// 
 			// btnUCNameChange
 			// 
 			this.btnUCNameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnUCNameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnUCNameChange.Location = new System.Drawing.Point(383, 40);
+			this.btnUCNameChange.Location = new System.Drawing.Point(384, 40);
 			this.btnUCNameChange.Name = "btnUCNameChange";
 			this.btnUCNameChange.Size = new System.Drawing.Size(120, 23);
 			this.btnUCNameChange.TabIndex = 0;
@@ -1458,7 +1608,7 @@ namespace UseCaseMaker
 			// 
 			this.btnSetPrimaryActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnSetPrimaryActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnSetPrimaryActor.Location = new System.Drawing.Point(383, 280);
+			this.btnSetPrimaryActor.Location = new System.Drawing.Point(384, 280);
 			this.btnSetPrimaryActor.Name = "btnSetPrimaryActor";
 			this.btnSetPrimaryActor.Size = new System.Drawing.Size(120, 23);
 			this.btnSetPrimaryActor.TabIndex = 6;
@@ -1469,7 +1619,7 @@ namespace UseCaseMaker
 			// 
 			this.btnRemoveActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveActor.Location = new System.Drawing.Point(383, 248);
+			this.btnRemoveActor.Location = new System.Drawing.Point(384, 248);
 			this.btnRemoveActor.Name = "btnRemoveActor";
 			this.btnRemoveActor.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveActor.TabIndex = 5;
@@ -1480,7 +1630,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddActor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddActor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddActor.Location = new System.Drawing.Point(383, 216);
+			this.btnAddActor.Location = new System.Drawing.Point(384, 216);
 			this.btnAddActor.Name = "btnAddActor";
 			this.btnAddActor.Size = new System.Drawing.Size(120, 23);
 			this.btnAddActor.TabIndex = 4;
@@ -1503,7 +1653,7 @@ namespace UseCaseMaker
 			this.lvActors.Location = new System.Drawing.Point(104, 216);
 			this.lvActors.MultiSelect = false;
 			this.lvActors.Name = "lvActors";
-			this.lvActors.Size = new System.Drawing.Size(271, 98);
+			this.lvActors.Size = new System.Drawing.Size(272, 119);
 			this.lvActors.TabIndex = 3;
 			this.lvActors.View = System.Windows.Forms.View.Details;
 			this.lvActors.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvActors_Layout);
@@ -1564,7 +1714,7 @@ namespace UseCaseMaker
 			this.lblUCOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUCOwner.Location = new System.Drawing.Point(320, 8);
 			this.lblUCOwner.Name = "lblUCOwner";
-			this.lblUCOwner.Size = new System.Drawing.Size(183, 20);
+			this.lblUCOwner.Size = new System.Drawing.Size(184, 20);
 			this.lblUCOwner.TabIndex = 3;
 			// 
 			// lblUCOwnerTitle
@@ -1594,119 +1744,6 @@ namespace UseCaseMaker
 			this.lblUCIDTitle.TabIndex = 0;
 			this.lblUCIDTitle.Text = "[ID]";
 			// 
-			// pgFlowOfEvents
-			// 
-			this.pgFlowOfEvents.Controls.Add(this.UCList);
-			this.pgFlowOfEvents.Controls.Add(this.btnInsertAltStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnInsertStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnAddAltStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnRemoveStep);
-			this.pgFlowOfEvents.Controls.Add(this.btnAddStep);
-			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
-			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
-			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
-			this.pgFlowOfEvents.Size = new System.Drawing.Size(511, 326);
-			this.pgFlowOfEvents.TabIndex = 1;
-			this.pgFlowOfEvents.Text = "[Flow of events]";
-			// 
-			// UCList
-			// 
-			this.UCList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.UCList.AutoScroll = true;
-			this.UCList.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-			this.UCList.BackColor = System.Drawing.SystemColors.Window;
-			this.UCList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.UCList.DataSource = null;
-			this.UCList.IndexBackColor = System.Drawing.SystemColors.Control;
-			this.UCList.IndexColumnWidth = 50;
-			this.UCList.IndexDataField = null;
-			this.UCList.Location = new System.Drawing.Point(96, 8);
-			this.UCList.Name = "UCList";
-			this.UCList.RowHeight = 46;
-			this.UCList.SelectedIndex = -1;
-			this.UCList.Size = new System.Drawing.Size(281, 306);
-			this.UCList.TabIndex = 10;
-			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.UCList.TextColumnWidth = 226;
-			this.UCList.TextDataField = null;
-			this.UCList.UniqueIDDataField = null;
-			this.UCList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.UCList_ItemTextChanged);
-			this.UCList.SelectedChanged += new UseCaseMakerControls.SelectedChangeEventHandler(this.UCList_SelectedChanged);
-			this.UCList.ItemClick += new UseCaseMakerControls.ItemClickEventHandler(this.UCList_ItemClick);
-			this.UCList.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
-			this.UCList.ItemTextEnter += new UseCaseMakerControls.ItemTextEnterEventHandler(this.OnEditableStateChanged);
-			this.UCList.MouseOverToken += new UseCaseMakerControls.MouseOverTokenEventHandler(this.UCList_MouseOverToken);
-			// 
-			// btnInsertAltStep
-			// 
-			this.btnInsertAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInsertAltStep.Enabled = false;
-			this.btnInsertAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnInsertAltStep.Location = new System.Drawing.Point(383, 112);
-			this.btnInsertAltStep.Name = "btnInsertAltStep";
-			this.btnInsertAltStep.Size = new System.Drawing.Size(120, 23);
-			this.btnInsertAltStep.TabIndex = 4;
-			this.btnInsertAltStep.Text = "[Insert alternative]";
-			this.btnInsertAltStep.Click += new System.EventHandler(this.btnInsertAltStep_Click);
-			// 
-			// btnInsertStep
-			// 
-			this.btnInsertStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInsertStep.Enabled = false;
-			this.btnInsertStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnInsertStep.Location = new System.Drawing.Point(383, 40);
-			this.btnInsertStep.Name = "btnInsertStep";
-			this.btnInsertStep.Size = new System.Drawing.Size(120, 23);
-			this.btnInsertStep.TabIndex = 2;
-			this.btnInsertStep.Text = "[Insert]";
-			this.btnInsertStep.Click += new System.EventHandler(this.btnInsertStep_Click);
-			// 
-			// btnAddAltStep
-			// 
-			this.btnAddAltStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddAltStep.Enabled = false;
-			this.btnAddAltStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddAltStep.Location = new System.Drawing.Point(383, 80);
-			this.btnAddAltStep.Name = "btnAddAltStep";
-			this.btnAddAltStep.Size = new System.Drawing.Size(120, 23);
-			this.btnAddAltStep.TabIndex = 3;
-			this.btnAddAltStep.Text = "[Add alternative]";
-			this.btnAddAltStep.Click += new System.EventHandler(this.btnAddAltStep_Click);
-			// 
-			// btnRemoveStep
-			// 
-			this.btnRemoveStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnRemoveStep.Enabled = false;
-			this.btnRemoveStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveStep.Location = new System.Drawing.Point(383, 152);
-			this.btnRemoveStep.Name = "btnRemoveStep";
-			this.btnRemoveStep.Size = new System.Drawing.Size(120, 23);
-			this.btnRemoveStep.TabIndex = 5;
-			this.btnRemoveStep.Text = "[Remove]";
-			this.btnRemoveStep.Click += new System.EventHandler(this.btnRemoveStep_Click);
-			// 
-			// btnAddStep
-			// 
-			this.btnAddStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddStep.Location = new System.Drawing.Point(383, 8);
-			this.btnAddStep.Name = "btnAddStep";
-			this.btnAddStep.Size = new System.Drawing.Size(120, 23);
-			this.btnAddStep.TabIndex = 1;
-			this.btnAddStep.Text = "[Add]";
-			this.btnAddStep.Click += new System.EventHandler(this.btnAddStep_Click);
-			// 
-			// lblStepsTitle
-			// 
-			this.lblStepsTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblStepsTitle.Location = new System.Drawing.Point(8, 8);
-			this.lblStepsTitle.Name = "lblStepsTitle";
-			this.lblStepsTitle.Size = new System.Drawing.Size(88, 16);
-			this.lblStepsTitle.TabIndex = 9;
-			this.lblStepsTitle.Text = "[Steps]";
-			// 
 			// pgAttributes
 			// 
 			this.pgAttributes.Controls.Add(this.tbNotes);
@@ -1720,7 +1757,7 @@ namespace UseCaseMaker
 			this.pgAttributes.Controls.Add(this.lblDescriptionTitle);
 			this.pgAttributes.Location = new System.Drawing.Point(4, 22);
 			this.pgAttributes.Name = "pgAttributes";
-			this.pgAttributes.Size = new System.Drawing.Size(511, 326);
+			this.pgAttributes.Size = new System.Drawing.Size(512, 347);
 			this.pgAttributes.TabIndex = 4;
 			this.pgAttributes.Text = "[Attributes]";
 			// 
@@ -1733,7 +1770,7 @@ namespace UseCaseMaker
 			this.tbNotes.Location = new System.Drawing.Point(104, 120);
 			this.tbNotes.MaxUndoRedoSteps = 50;
 			this.tbNotes.Name = "tbNotes";
-			this.tbNotes.Size = new System.Drawing.Size(397, 104);
+			this.tbNotes.Size = new System.Drawing.Size(398, 104);
 			this.tbNotes.TabIndex = 39;
 			this.tbNotes.Text = "";
 			this.tbNotes.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1751,7 +1788,7 @@ namespace UseCaseMaker
 			this.tbDescription.Location = new System.Drawing.Point(104, 8);
 			this.tbDescription.MaxUndoRedoSteps = 50;
 			this.tbDescription.Name = "tbDescription";
-			this.tbDescription.Size = new System.Drawing.Size(397, 104);
+			this.tbDescription.Size = new System.Drawing.Size(398, 104);
 			this.tbDescription.TabIndex = 38;
 			this.tbDescription.Text = "";
 			this.tbDescription.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -1764,7 +1801,7 @@ namespace UseCaseMaker
 			// 
 			this.btnOpenRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOpenRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(383, 296);
+			this.btnOpenRelatedDoc.Location = new System.Drawing.Point(384, 296);
 			this.btnOpenRelatedDoc.Name = "btnOpenRelatedDoc";
 			this.btnOpenRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnOpenRelatedDoc.TabIndex = 5;
@@ -1775,7 +1812,7 @@ namespace UseCaseMaker
 			// 
 			this.btnRemoveRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(383, 264);
+			this.btnRemoveRelatedDoc.Location = new System.Drawing.Point(384, 264);
 			this.btnRemoveRelatedDoc.Name = "btnRemoveRelatedDoc";
 			this.btnRemoveRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveRelatedDoc.TabIndex = 4;
@@ -1786,7 +1823,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddRelatedDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddRelatedDoc.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddRelatedDoc.Location = new System.Drawing.Point(383, 232);
+			this.btnAddRelatedDoc.Location = new System.Drawing.Point(384, 232);
 			this.btnAddRelatedDoc.Name = "btnAddRelatedDoc";
 			this.btnAddRelatedDoc.Size = new System.Drawing.Size(120, 23);
 			this.btnAddRelatedDoc.TabIndex = 3;
@@ -1806,7 +1843,7 @@ namespace UseCaseMaker
 			this.lvRelatedDocs.HideSelection = false;
 			this.lvRelatedDocs.Location = new System.Drawing.Point(104, 232);
 			this.lvRelatedDocs.Name = "lvRelatedDocs";
-			this.lvRelatedDocs.Size = new System.Drawing.Size(271, 82);
+			this.lvRelatedDocs.Size = new System.Drawing.Size(272, 103);
 			this.lvRelatedDocs.TabIndex = 2;
 			this.lvRelatedDocs.View = System.Windows.Forms.View.Details;
 			this.lvRelatedDocs.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvRelatedDocs_Layout);
@@ -1855,7 +1892,7 @@ namespace UseCaseMaker
 			this.pgPGeneral.Controls.Add(this.lblPIDTitle);
 			this.pgPGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgPGeneral.Name = "pgPGeneral";
-			this.pgPGeneral.Size = new System.Drawing.Size(511, 326);
+			this.pgPGeneral.Size = new System.Drawing.Size(512, 347);
 			this.pgPGeneral.TabIndex = 9;
 			this.pgPGeneral.Text = "[General(P)]";
 			// 
@@ -1863,7 +1900,7 @@ namespace UseCaseMaker
 			// 
 			this.btnPNameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnPNameChange.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnPNameChange.Location = new System.Drawing.Point(383, 40);
+			this.btnPNameChange.Location = new System.Drawing.Point(384, 40);
 			this.btnPNameChange.Name = "btnPNameChange";
 			this.btnPNameChange.Size = new System.Drawing.Size(120, 23);
 			this.btnPNameChange.TabIndex = 0;
@@ -1878,7 +1915,7 @@ namespace UseCaseMaker
 			this.lblPName.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPName.Location = new System.Drawing.Point(104, 40);
 			this.lblPName.Name = "lblPName";
-			this.lblPName.Size = new System.Drawing.Size(271, 20);
+			this.lblPName.Size = new System.Drawing.Size(272, 20);
 			this.lblPName.TabIndex = 17;
 			// 
 			// lblPNameTitle
@@ -1898,7 +1935,7 @@ namespace UseCaseMaker
 			this.lblPOwner.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPOwner.Location = new System.Drawing.Point(320, 8);
 			this.lblPOwner.Name = "lblPOwner";
-			this.lblPOwner.Size = new System.Drawing.Size(183, 20);
+			this.lblPOwner.Size = new System.Drawing.Size(184, 20);
 			this.lblPOwner.TabIndex = 15;
 			// 
 			// lblPOwnerTitle
@@ -1936,7 +1973,7 @@ namespace UseCaseMaker
 			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
 			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
 			this.pgGlossary.Name = "pgGlossary";
-			this.pgGlossary.Size = new System.Drawing.Size(511, 326);
+			this.pgGlossary.Size = new System.Drawing.Size(512, 347);
 			this.pgGlossary.TabIndex = 10;
 			this.pgGlossary.Text = "[Glossary]";
 			// 
@@ -1957,10 +1994,10 @@ namespace UseCaseMaker
 			this.GList.Name = "GList";
 			this.GList.RowHeight = 46;
 			this.GList.SelectedIndex = -1;
-			this.GList.Size = new System.Drawing.Size(365, 306);
+			this.GList.Size = new System.Drawing.Size(366, 327);
 			this.GList.TabIndex = 4;
 			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.GList.TextColumnWidth = 214;
+			this.GList.TextColumnWidth = 215;
 			this.GList.TextDataField = null;
 			this.GList.UniqueIDDataField = null;
 			this.GList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.GList_ItemTextChanged);
@@ -1975,7 +2012,7 @@ namespace UseCaseMaker
 			this.btnChangeGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnChangeGlossaryItem.Enabled = false;
 			this.btnChangeGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(381, 40);
+			this.btnChangeGlossaryItem.Location = new System.Drawing.Point(382, 40);
 			this.btnChangeGlossaryItem.Name = "btnChangeGlossaryItem";
 			this.btnChangeGlossaryItem.Size = new System.Drawing.Size(120, 23);
 			this.btnChangeGlossaryItem.TabIndex = 2;
@@ -1987,7 +2024,7 @@ namespace UseCaseMaker
 			this.btnRemoveGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveGlossaryItem.Enabled = false;
 			this.btnRemoveGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(381, 72);
+			this.btnRemoveGlossaryItem.Location = new System.Drawing.Point(382, 72);
 			this.btnRemoveGlossaryItem.Name = "btnRemoveGlossaryItem";
 			this.btnRemoveGlossaryItem.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveGlossaryItem.TabIndex = 3;
@@ -1998,7 +2035,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddGlossaryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddGlossaryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddGlossaryItem.Location = new System.Drawing.Point(381, 8);
+			this.btnAddGlossaryItem.Location = new System.Drawing.Point(382, 8);
 			this.btnAddGlossaryItem.Name = "btnAddGlossaryItem";
 			this.btnAddGlossaryItem.Size = new System.Drawing.Size(120, 23);
 			this.btnAddGlossaryItem.TabIndex = 1;
@@ -2011,7 +2048,7 @@ namespace UseCaseMaker
 			this.pgHistory.Controls.Add(this.lvHistory);
 			this.pgHistory.Location = new System.Drawing.Point(4, 22);
 			this.pgHistory.Name = "pgHistory";
-			this.pgHistory.Size = new System.Drawing.Size(511, 326);
+			this.pgHistory.Size = new System.Drawing.Size(512, 347);
 			this.pgHistory.TabIndex = 5;
 			this.pgHistory.Text = "[History]";
 			// 
@@ -2020,7 +2057,7 @@ namespace UseCaseMaker
 			this.btnRemoveHistoryItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveHistoryItem.Enabled = false;
 			this.btnRemoveHistoryItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveHistoryItem.Location = new System.Drawing.Point(383, 8);
+			this.btnRemoveHistoryItem.Location = new System.Drawing.Point(384, 8);
 			this.btnRemoveHistoryItem.Name = "btnRemoveHistoryItem";
 			this.btnRemoveHistoryItem.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveHistoryItem.TabIndex = 1;
@@ -2045,7 +2082,7 @@ namespace UseCaseMaker
 			this.lvHistory.Location = new System.Drawing.Point(8, 8);
 			this.lvHistory.MultiSelect = false;
 			this.lvHistory.Name = "lvHistory";
-			this.lvHistory.Size = new System.Drawing.Size(367, 306);
+			this.lvHistory.Size = new System.Drawing.Size(368, 327);
 			this.lvHistory.TabIndex = 0;
 			this.lvHistory.View = System.Windows.Forms.View.Details;
 			this.lvHistory.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvHistory_Layout);
@@ -2095,7 +2132,7 @@ namespace UseCaseMaker
 			this.pgDetails.Controls.Add(this.lblPriorityTitle);
 			this.pgDetails.Location = new System.Drawing.Point(4, 22);
 			this.pgDetails.Name = "pgDetails";
-			this.pgDetails.Size = new System.Drawing.Size(511, 326);
+			this.pgDetails.Size = new System.Drawing.Size(512, 347);
 			this.pgDetails.TabIndex = 3;
 			this.pgDetails.Text = "[Details]";
 			// 
@@ -2116,10 +2153,10 @@ namespace UseCaseMaker
 			this.OIList.Name = "OIList";
 			this.OIList.RowHeight = 46;
 			this.OIList.SelectedIndex = -1;
-			this.OIList.Size = new System.Drawing.Size(273, 82);
+			this.OIList.Size = new System.Drawing.Size(274, 103);
 			this.OIList.TabIndex = 34;
 			this.OIList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.OIList.TextColumnWidth = 218;
+			this.OIList.TextColumnWidth = 219;
 			this.OIList.TextDataField = null;
 			this.OIList.UniqueIDDataField = null;
 			this.OIList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.OIList_ItemTextChanged);
@@ -2134,7 +2171,7 @@ namespace UseCaseMaker
 			this.btnRemoveOpenIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveOpenIssue.Enabled = false;
 			this.btnRemoveOpenIssue.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveOpenIssue.Location = new System.Drawing.Point(383, 264);
+			this.btnRemoveOpenIssue.Location = new System.Drawing.Point(384, 264);
 			this.btnRemoveOpenIssue.Name = "btnRemoveOpenIssue";
 			this.btnRemoveOpenIssue.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveOpenIssue.TabIndex = 12;
@@ -2145,7 +2182,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddOpenIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddOpenIssue.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddOpenIssue.Location = new System.Drawing.Point(383, 232);
+			this.btnAddOpenIssue.Location = new System.Drawing.Point(384, 232);
 			this.btnAddOpenIssue.Name = "btnAddOpenIssue";
 			this.btnAddOpenIssue.Size = new System.Drawing.Size(120, 23);
 			this.btnAddOpenIssue.TabIndex = 10;
@@ -2167,7 +2204,7 @@ namespace UseCaseMaker
 				| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbRelease.Location = new System.Drawing.Point(104, 200);
 			this.tbRelease.Name = "tbRelease";
-			this.tbRelease.Size = new System.Drawing.Size(399, 20);
+			this.tbRelease.Size = new System.Drawing.Size(400, 20);
 			this.tbRelease.TabIndex = 8;
 			this.tbRelease.Text = "";
 			this.tbRelease.TextChanged += new System.EventHandler(this.tbRelease_TextChanged);
@@ -2187,7 +2224,7 @@ namespace UseCaseMaker
 				| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbAssignedTo.Location = new System.Drawing.Point(104, 168);
 			this.tbAssignedTo.Name = "tbAssignedTo";
-			this.tbAssignedTo.Size = new System.Drawing.Size(399, 20);
+			this.tbAssignedTo.Size = new System.Drawing.Size(400, 20);
 			this.tbAssignedTo.TabIndex = 7;
 			this.tbAssignedTo.Text = "";
 			this.tbAssignedTo.TextChanged += new System.EventHandler(this.tbAssignedTo_TextChanged);
@@ -2205,7 +2242,7 @@ namespace UseCaseMaker
 			// 
 			this.btnImplToHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnImplToHistory.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnImplToHistory.Location = new System.Drawing.Point(383, 136);
+			this.btnImplToHistory.Location = new System.Drawing.Point(384, 136);
 			this.btnImplToHistory.Name = "btnImplToHistory";
 			this.btnImplToHistory.Size = new System.Drawing.Size(120, 23);
 			this.btnImplToHistory.TabIndex = 6;
@@ -2225,7 +2262,7 @@ namespace UseCaseMaker
 																   "[Deferred]"});
 			this.cmbImplementation.Location = new System.Drawing.Point(104, 136);
 			this.cmbImplementation.Name = "cmbImplementation";
-			this.cmbImplementation.Size = new System.Drawing.Size(271, 20);
+			this.cmbImplementation.Size = new System.Drawing.Size(272, 20);
 			this.cmbImplementation.TabIndex = 5;
 			this.cmbImplementation.SelectedIndexChanged += new System.EventHandler(this.cmbImplementation_SelectedIndexChanged);
 			// 
@@ -2242,7 +2279,7 @@ namespace UseCaseMaker
 			// 
 			this.btnStatusToHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnStatusToHistory.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnStatusToHistory.Location = new System.Drawing.Point(383, 104);
+			this.btnStatusToHistory.Location = new System.Drawing.Point(384, 104);
 			this.btnStatusToHistory.Name = "btnStatusToHistory";
 			this.btnStatusToHistory.Size = new System.Drawing.Size(120, 23);
 			this.btnStatusToHistory.TabIndex = 4;
@@ -2264,7 +2301,7 @@ namespace UseCaseMaker
 														   "[Approved]"});
 			this.cmbStatus.Location = new System.Drawing.Point(104, 104);
 			this.cmbStatus.Name = "cmbStatus";
-			this.cmbStatus.Size = new System.Drawing.Size(271, 20);
+			this.cmbStatus.Size = new System.Drawing.Size(272, 20);
 			this.cmbStatus.TabIndex = 3;
 			this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
 			// 
@@ -2288,7 +2325,7 @@ namespace UseCaseMaker
 															   "[High]"});
 			this.cmbComplexity.Location = new System.Drawing.Point(104, 72);
 			this.cmbComplexity.Name = "cmbComplexity";
-			this.cmbComplexity.Size = new System.Drawing.Size(399, 20);
+			this.cmbComplexity.Size = new System.Drawing.Size(400, 20);
 			this.cmbComplexity.TabIndex = 2;
 			this.cmbComplexity.SelectedIndexChanged += new System.EventHandler(this.cmbComplexity_SelectedIndexChanged);
 			// 
@@ -2312,7 +2349,7 @@ namespace UseCaseMaker
 														  "[Subfunction]"});
 			this.cmbLevel.Location = new System.Drawing.Point(104, 40);
 			this.cmbLevel.Name = "cmbLevel";
-			this.cmbLevel.Size = new System.Drawing.Size(399, 20);
+			this.cmbLevel.Size = new System.Drawing.Size(400, 20);
 			this.cmbLevel.TabIndex = 1;
 			this.cmbLevel.SelectedIndexChanged += new System.EventHandler(this.cmbLevel_SelectedIndexChanged);
 			// 
@@ -2332,7 +2369,7 @@ namespace UseCaseMaker
 			this.tbPriority.Location = new System.Drawing.Point(104, 8);
 			this.tbPriority.MaxLength = 3;
 			this.tbPriority.Name = "tbPriority";
-			this.tbPriority.Size = new System.Drawing.Size(399, 20);
+			this.tbPriority.Size = new System.Drawing.Size(400, 20);
 			this.tbPriority.TabIndex = 0;
 			this.tbPriority.Text = "";
 			this.tbPriority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPriority_KeyPress);
@@ -2353,7 +2390,7 @@ namespace UseCaseMaker
 			this.pgProse.Controls.Add(this.tbProse);
 			this.pgProse.Location = new System.Drawing.Point(4, 22);
 			this.pgProse.Name = "pgProse";
-			this.pgProse.Size = new System.Drawing.Size(511, 326);
+			this.pgProse.Size = new System.Drawing.Size(512, 347);
 			this.pgProse.TabIndex = 2;
 			this.pgProse.Text = "[Prose]";
 			// 
@@ -2367,7 +2404,7 @@ namespace UseCaseMaker
 			this.tbProse.Location = new System.Drawing.Point(8, 8);
 			this.tbProse.MaxUndoRedoSteps = 50;
 			this.tbProse.Name = "tbProse";
-			this.tbProse.Size = new System.Drawing.Size(497, 306);
+			this.tbProse.Size = new System.Drawing.Size(498, 327);
 			this.tbProse.TabIndex = 0;
 			this.tbProse.Text = "";
 			this.tbProse.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -2383,7 +2420,7 @@ namespace UseCaseMaker
 			this.pgRequirements.Controls.Add(this.btnAddRequirement);
 			this.pgRequirements.Location = new System.Drawing.Point(4, 22);
 			this.pgRequirements.Name = "pgRequirements";
-			this.pgRequirements.Size = new System.Drawing.Size(511, 326);
+			this.pgRequirements.Size = new System.Drawing.Size(512, 347);
 			this.pgRequirements.TabIndex = 6;
 			this.pgRequirements.Text = "[Requirements]";
 			// 
@@ -2404,10 +2441,10 @@ namespace UseCaseMaker
 			this.RList.Name = "RList";
 			this.RList.RowHeight = 46;
 			this.RList.SelectedIndex = -1;
-			this.RList.Size = new System.Drawing.Size(365, 306);
+			this.RList.Size = new System.Drawing.Size(366, 327);
 			this.RList.TabIndex = 3;
 			this.RList.TextBackColor = System.Drawing.SystemColors.Window;
-			this.RList.TextColumnWidth = 310;
+			this.RList.TextColumnWidth = 311;
 			this.RList.TextDataField = null;
 			this.RList.UniqueIDDataField = null;
 			this.RList.ItemTextChanged += new UseCaseMakerControls.ItemTextChangedEventHandler(this.RList_ItemTextChanged);
@@ -2422,7 +2459,7 @@ namespace UseCaseMaker
 			this.btnRemoveRequirement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnRemoveRequirement.Enabled = false;
 			this.btnRemoveRequirement.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnRemoveRequirement.Location = new System.Drawing.Point(381, 40);
+			this.btnRemoveRequirement.Location = new System.Drawing.Point(382, 40);
 			this.btnRemoveRequirement.Name = "btnRemoveRequirement";
 			this.btnRemoveRequirement.Size = new System.Drawing.Size(120, 23);
 			this.btnRemoveRequirement.TabIndex = 2;
@@ -2433,7 +2470,7 @@ namespace UseCaseMaker
 			// 
 			this.btnAddRequirement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnAddRequirement.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnAddRequirement.Location = new System.Drawing.Point(381, 8);
+			this.btnAddRequirement.Location = new System.Drawing.Point(382, 8);
 			this.btnAddRequirement.Name = "btnAddRequirement";
 			this.btnAddRequirement.Size = new System.Drawing.Size(120, 23);
 			this.btnAddRequirement.TabIndex = 1;
@@ -2444,7 +2481,7 @@ namespace UseCaseMaker
 			// 
 			this.statusBar.Location = new System.Drawing.Point(0, 401);
 			this.statusBar.Name = "statusBar";
-			this.statusBar.Size = new System.Drawing.Size(648, 22);
+			this.statusBar.Size = new System.Drawing.Size(650, 22);
 			this.statusBar.TabIndex = 5;
 			// 
 			// openModelFileDialog
@@ -2503,32 +2540,10 @@ namespace UseCaseMaker
 			this.mnuCtxETPaste.Text = "[Paste]";
 			this.mnuCtxETPaste.Click += new System.EventHandler(this.mnuCtxETPaste_Click);
 			// 
-			// mnuEditSep4
-			// 
-			this.mnuEditSep4.Index = 12;
-			this.mnuEditSep4.Text = "-";
-			// 
-			// mnuEditReorderElements
-			// 
-			this.mnuEditReorderElements.Index = 13;
-			this.mnuEditReorderElements.Text = "[Reorder elements]";
-			this.mnuEditReorderElements.Click += new System.EventHandler(this.mnuEditReorderElements_Click);
-			// 
-			// mnuCtxMBSep4
-			// 
-			this.mnuCtxMBSep4.Index = 12;
-			this.mnuCtxMBSep4.Text = "-";
-			// 
-			// mnuCtxMBReorderElements
-			// 
-			this.mnuCtxMBReorderElements.Index = 13;
-			this.mnuCtxMBReorderElements.Text = "[Reorder elements]";
-			this.mnuCtxMBReorderElements.Click += new System.EventHandler(this.mnuCtxMBReorderElements_Click);
-			// 
 			// frmMain
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(648, 423);
+			this.ClientSize = new System.Drawing.Size(650, 423);
 			this.Controls.Add(this.splLeft);
 			this.Controls.Add(this.tabUseCase);
 			this.Controls.Add(this.pnlModelBrowser);
@@ -2551,9 +2566,9 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.ResumeLayout(false);
 			this.pnlPackagesContainer.ResumeLayout(false);
 			this.pnlFullPathContainer.ResumeLayout(false);
+			this.pgFlowOfEvents.ResumeLayout(false);
 			this.pgAGeneral.ResumeLayout(false);
 			this.pgUCGeneral.ResumeLayout(false);
-			this.pgFlowOfEvents.ResumeLayout(false);
 			this.pgAttributes.ResumeLayout(false);
 			this.pgPGeneral.ResumeLayout(false);
 			this.pgGlossary.ResumeLayout(false);
@@ -3207,6 +3222,13 @@ namespace UseCaseMaker
 					UCList.TextDataField = "Description";
 					UCList.UniqueIDDataField = "UniqueID";
 					UCList.DataBind();
+					for(int counter = 0; counter < useCase.Steps.Count; counter++)
+					{
+						if(((Step)useCase.Steps[counter]).ReferenceType != UseCaseMakerLibrary.Step.StepReferenceType.None)
+						{
+							UCList.Items[counter].ReadOnly = true;
+						}
+					}
 					if(useCase.Steps.Count > 0)
 					{
 						UCList.SelectedIndex = 0;
@@ -3911,7 +3933,7 @@ namespace UseCaseMaker
 			}
 		}
 
-		private void OnAfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+		private void tvModelBrowser_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
 		{
 			this.OnEditableStateChanged(sender,new ItemTextChangedEventArgs(null));
 			this.UpdateView();
@@ -4385,24 +4407,7 @@ namespace UseCaseMaker
 
 			ili = UCList.Items[UCList.SelectedIndex];
 			Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
-			currentSelectedIndex = useCase.InsertStep(previousStep,Step.StepType.Default);
-
-			UCList.DataBind();
-
-			UCList.SelectedIndex = currentSelectedIndex;
-			this.SetModified(true);
-		}
-
-
-		private void btnInsertAltStep_Click(object sender, System.EventArgs e)
-		{
-			UseCase useCase = (UseCase)this.currentElement;
-			int currentSelectedIndex = UCList.SelectedIndex;
-			IndexedListItem ili = null;
-
-			ili = UCList.Items[UCList.SelectedIndex];
-			Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
-			currentSelectedIndex = useCase.InsertStep(previousStep,Step.StepType.Alternative);
+			currentSelectedIndex = useCase.InsertStep(previousStep);
 
 			UCList.DataBind();
 
@@ -4436,7 +4441,8 @@ namespace UseCaseMaker
 					btnAddStep.Enabled = true;
 					btnAddAltStep.Enabled = false;
 					btnInsertStep.Enabled = false;
-					btnInsertAltStep.Enabled = false;
+					btnAddRefStep.Enabled = true;
+					btnInsertRefStep.Enabled = false;
 					btnRemoveStep.Enabled = false;
 				}
 			}
@@ -4482,26 +4488,28 @@ namespace UseCaseMaker
 					btnAddStep.Enabled = true;
 					btnInsertStep.Enabled = true;
 					btnAddAltStep.Enabled = true;
-					btnInsertAltStep.Enabled = false;
+					btnAddRefStep.Enabled = true;
+					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
 					break;
 				case Step.StepType.Alternative:
 					btnAddStep.Enabled = true;
-					btnInsertStep.Enabled = false;
+					btnInsertStep.Enabled = true;
 					btnAddAltStep.Enabled = true;
-					btnInsertAltStep.Enabled = true;
+					btnAddRefStep.Enabled = true;
+					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
 					break;
 				case Step.StepType.AlternativeChild:
 					btnAddStep.Enabled = true;
 					btnInsertStep.Enabled = true;
-					btnAddAltStep.Enabled = true;
-					btnInsertAltStep.Enabled = false;
+					btnAddAltStep.Enabled = false;
+					btnAddRefStep.Enabled = true;
+					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
 					break;
 			}
 		}
-
 
 		private void tbProse_MouseOverToken(object sender, UseCaseMakerControls.MouseOverTokenEventArgs e)
 		{
@@ -6785,6 +6793,19 @@ namespace UseCaseMaker
 				}
 			}
 			this.SetModified(true);
+		}
+
+		private void btnAddRefStep_Click(object sender, System.EventArgs e)
+		{
+			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
+			if(frm.ShowDialog(this) == DialogResult.OK)
+			{
+			}
+		}
+
+		private void btnInsertRefStep_Click(object sender, System.EventArgs e)
+		{
+		
 		}
 	}
 }

@@ -448,7 +448,6 @@ namespace UseCaseMakerControls
 			foreach(IndexedListItem ili in this.items)
 			{
 				rect = ili.ItemLabel.Bounds;
-				e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
 				e.Graphics.DrawRectangle(pen,ili.ItemRichTextBox.Bounds);
 				e.Graphics.DrawLine(
 					pen,
@@ -456,6 +455,16 @@ namespace UseCaseMakerControls
 					ili.ItemRichTextBox.Top,
 					ili.ItemRichTextBox.Left - 1,
 					ili.ItemRichTextBox.Bottom);
+				if(ili.ReadOnly)
+				{
+					pen.Color = Color.Red;
+					e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
+					pen.Color = System.Drawing.SystemColors.ControlDark;
+				}
+				else
+				{
+					e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
+				}
 			}
 		}
 
@@ -546,7 +555,8 @@ namespace UseCaseMakerControls
 				return;
 			}
 
-			Win32.LockWindowUpdate(this.Handle);
+			// Win32.LockWindowUpdate(this.Handle);
+			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 
 			this.items.Clear();
 			IEnumerator ie = data.GetEnumerator();
@@ -567,8 +577,10 @@ namespace UseCaseMakerControls
 				ili.ItemRichTextBox.ParseNow();
 			}
 
-			Win32.LockWindowUpdate(new IntPtr(0));
+			// Win32.LockWindowUpdate(new IntPtr(0));
+			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 			this.Invalidate();
+			this.Refresh();
 		}
 
 		public void SelectedChange(object sender)

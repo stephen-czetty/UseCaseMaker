@@ -286,17 +286,46 @@ namespace UseCaseMakerLibrary
 						}
 						else if(previousStep.Type == Step.StepType.Alternative)
 						{
-							step.Type = Step.StepType.AlternativeChild;
 							step.ID = previousStep.ID;
+							step.Type = Step.StepType.Alternative;
+
+							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
+							while(true)
+							{
+								if(index == this.steps.Count)
+								{
+									previousStep = (Step)this.steps[index - 1];
+									break;
+								}
+								Step tmpStep = (Step)this.steps[index];
+								if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
+								{
+									previousStep = (Step)this.steps[index - 1];
+									break;
+								}
+								index += 1;
+							}
 							step.Prefix = previousStep.Prefix;
-							step.ChildID = 1;
+							if(step.Prefix != String.Empty)
+							{
+								Char nextChar = step.Prefix[0];
+								nextChar++;
+								step.Prefix = new String(nextChar,1);
+							}
+							else
+							{
+								step.Prefix = "A";
+							}
+						
 							foreach(Step tmpStep in this.steps)
 							{
-								if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+								if(tmpStep.ID == step.ID)
 								{
-									if(tmpStep.ChildID != -1)
+									if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
 									{
-										tmpStep.ChildID += 1;
+										Char nextChar = tmpStep.Prefix[0];
+										nextChar++;
+										tmpStep.Prefix = new String(nextChar,1);
 									}
 								}
 							}
@@ -320,46 +349,66 @@ namespace UseCaseMakerLibrary
 						}
 						break;
 					case Step.StepType.Alternative:
-						step.ID = previousStep.ID;
-						step.Type = Step.StepType.Alternative;
+						if(previousStep.Type == Step.StepType.Default)
+						{
+							step.ID = previousStep.ID;
+							step.Type = Step.StepType.Alternative;
 
-						index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
-						while(true)
-						{
-							if(index == this.steps.Count)
+							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
+							while(true)
 							{
-								previousStep = (Step)this.steps[index - 1];
-								break;
-							}
-							Step tmpStep = (Step)this.steps[index];
-							if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
-							{
-								previousStep = (Step)this.steps[index - 1];
-								break;
-							}
-							index += 1;
-						}
-						step.Prefix = previousStep.Prefix;
-						if(step.Prefix != String.Empty)
-						{
-							Char nextChar = step.Prefix[0];
-							nextChar++;
-							step.Prefix = new String(nextChar,1);
-						}
-						else
-						{
-							step.Prefix = "A";
-						}
-						
-						foreach(Step tmpStep in this.steps)
-						{
-							if(tmpStep.ID == step.ID)
-							{
-								if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
+								if(index == this.steps.Count)
 								{
-									Char nextChar = tmpStep.Prefix[0];
-									nextChar++;
-									tmpStep.Prefix = new String(nextChar,1);
+									previousStep = (Step)this.steps[index - 1];
+									break;
+								}
+								Step tmpStep = (Step)this.steps[index];
+								if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
+								{
+									previousStep = (Step)this.steps[index - 1];
+									break;
+								}
+								index += 1;
+							}
+							step.Prefix = previousStep.Prefix;
+							if(step.Prefix != String.Empty)
+							{
+								Char nextChar = step.Prefix[0];
+								nextChar++;
+								step.Prefix = new String(nextChar,1);
+							}
+							else
+							{
+								step.Prefix = "A";
+							}
+						
+							foreach(Step tmpStep in this.steps)
+							{
+								if(tmpStep.ID == step.ID)
+								{
+									if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
+									{
+										Char nextChar = tmpStep.Prefix[0];
+										nextChar++;
+										tmpStep.Prefix = new String(nextChar,1);
+									}
+								}
+							}
+						}
+						else if(previousStep.Type == Step.StepType.Alternative)
+						{
+							step.Type = Step.StepType.AlternativeChild;
+							step.ID = previousStep.ID;
+							step.Prefix = previousStep.Prefix;
+							step.ChildID = 1;
+							foreach(Step tmpStep in this.steps)
+							{
+								if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+								{
+									if(tmpStep.ChildID != -1)
+									{
+										tmpStep.ChildID += 1;
+									}
 								}
 							}
 						}
@@ -381,65 +430,61 @@ namespace UseCaseMakerLibrary
 			return ret;
 		}
 
-		public Int32 InsertStep(Step previousStep, Step.StepType type)
+		public Int32 InsertStep(Step previousStep)
 		{
 			Step step = new Step();
 			Int32 ret;
 
-			switch(type)
+			if(previousStep.Type == Step.StepType.Default)
 			{
-				case Step.StepType.Default:
-					if(previousStep.Type == Step.StepType.Default)
+				step.ID = previousStep.ID;
+				foreach(Step tmpStep in this.steps)
+				{
+					if(tmpStep.ID >= step.ID)
 					{
-						step.ID = previousStep.ID;
-						foreach(Step tmpStep in this.steps)
-						{
-							if(tmpStep.ID >= step.ID)
-							{
-								tmpStep.ID += 1;
-							}
-						}
+						tmpStep.ID += 1;
 					}
-					if(previousStep.Type == Step.StepType.AlternativeChild)
-					{
-						step.Type = Step.StepType.AlternativeChild;
-						step.ID = previousStep.ID;
-						step.Prefix = previousStep.Prefix;
-						step.ChildID = previousStep.ChildID;
-						foreach(Step tmpStep in this.steps)
-						{
-							if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
-							{
-								if(tmpStep.ChildID >= step.ChildID)
-								{
-									tmpStep.ChildID += 1;
-								}
-							}
-						}
-					}
-					break;
-				case Step.StepType.Alternative:
-					step.Prefix = previousStep.Prefix;
-					if(step.Prefix == String.Empty)
-					{
-						step.Prefix = "A";
-					}
-					step.ID = previousStep.ID;
-					step.Type = Step.StepType.Alternative;
+				}
+			}
+			else if(previousStep.Type == Step.StepType.Alternative)
+			{
+				step.Prefix = previousStep.Prefix;
+				if(step.Prefix == String.Empty)
+				{
+					step.Prefix = "A";
+				}
+				step.ID = previousStep.ID;
+				step.Type = Step.StepType.Alternative;
 
-					foreach(Step tmpStep in this.steps)
+				foreach(Step tmpStep in this.steps)
+				{
+					if(tmpStep.ID == step.ID)
 					{
-						if(tmpStep.ID == step.ID)
+						if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
 						{
-							if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
-							{
-								Char nextChar = tmpStep.Prefix[0];
-								nextChar++;
-								tmpStep.Prefix = new String(nextChar,1);
-							}
+							Char nextChar = tmpStep.Prefix[0];
+							nextChar++;
+							tmpStep.Prefix = new String(nextChar,1);
 						}
 					}
-					break;
+				}
+			}
+			else if(previousStep.Type == Step.StepType.AlternativeChild)
+			{
+				step.Type = Step.StepType.AlternativeChild;
+				step.ID = previousStep.ID;
+				step.Prefix = previousStep.Prefix;
+				step.ChildID = previousStep.ChildID;
+				foreach(Step tmpStep in this.steps)
+				{
+					if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+					{
+						if(tmpStep.ChildID >= step.ChildID)
+						{
+							tmpStep.ChildID += 1;
+						}
+					}
+				}
 			}
 
 			int index = this.FindStepIndexByUniqueID(previousStep.UniqueID);
