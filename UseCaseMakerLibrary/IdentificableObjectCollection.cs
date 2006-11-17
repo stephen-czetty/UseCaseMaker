@@ -207,6 +207,13 @@ namespace UseCaseMakerLibrary
 			return items.GetEnumerator();
 		}
 
+		public ICollection Sorted(string propertyName)
+		{
+			ArrayList sorter = new ArrayList(this);
+			sorter.Sort(new PropertySorter(propertyName,"ASC"));
+			return sorter;
+		}
+
 		public object FindByName(String name)
 		{
 			IdentificableObject element = null;

@@ -238,17 +238,19 @@ namespace UseCaseMakerLibrary
 
 		public void ReplaceElementPath(
 			String oldPath,
-			String pathStartTag,
-			String pathEndTag,
-			String newPath)
+			String oldPathStartTag,
+			String oldPathEndTag,
+			String newPath,
+			String newPathStartTag,
+			String newPathEndTag)
 		{
 			this.ChangeReferences(
 				oldPath,
-				pathStartTag,
-				pathEndTag,
+				oldPathStartTag,
+				oldPathEndTag,
 				newPath,
-				pathStartTag,
-				pathEndTag,
+				newPathStartTag,
+				newPathEndTag,
 				true);
 		}
 		#endregion

@@ -2714,17 +2714,17 @@ namespace UseCaseMaker
 			{
 				Model model = (Model)element;
 				AddElement(model,null,false);
-				foreach(Actor actor in model.Actors)
+				foreach(Actor actor in model.Actors.Sorted("ID"))
 				{
 					actor.Owner = model;
 					AddElement(actor,actor.Owner,false);
 				}
-				foreach(UseCase useCase in model.UseCases)
+				foreach(UseCase useCase in model.UseCases.Sorted("ID"))
 				{
 					useCase.Owner = model;
 					AddElement(useCase,useCase.Owner,false);
 				}
-				foreach(Package subPackage in model.Packages)
+				foreach(Package subPackage in model.Packages.Sorted("ID"))
 				{
 					subPackage.Owner = model;
 					BuildView(subPackage);
@@ -2744,17 +2744,17 @@ namespace UseCaseMaker
 			{
 				Package package = (Package)element;
 				AddElement(package,package.Owner,false);
-				foreach(Actor actor in package.Actors)
+				foreach(Actor actor in package.Actors.Sorted("ID"))
 				{
 					actor.Owner = package;
 					AddElement(actor,actor.Owner,false);
 				}
-				foreach(UseCase useCase in package.UseCases)
+				foreach(UseCase useCase in package.UseCases.Sorted("ID"))
 				{
 					useCase.Owner = package;
 					AddElement(useCase,useCase.Owner,false);
 				}
-				foreach(Package subPackage in package.Packages)
+				foreach(Package subPackage in package.Packages.Sorted("ID"))
 				{
 					subPackage.Owner = package;
 					BuildView(subPackage);
@@ -4048,35 +4048,94 @@ namespace UseCaseMaker
 
 		private void ReorderElements()
 		{
-			frmReorder frm = new frmReorder(this.localizer);
+			frmReorder frm = new frmReorder(this.localizer,string.Empty);
 
 			if(this.currentElement.GetType() == typeof(Actors))
 			{
-				for(int i = 0; i < ((Actors)this.currentElement).Count; i++)
+				frm.Prefix = defaultAPrefix;
+				foreach(Actor actor in ((Actors)this.currentElement).Sorted("ID"))
 				{
-					ListViewItem lvi = new ListViewItem();
-					lvi.Text =  defaultAPrefix + (i+1).ToString();
-					lvi.SubItems.Add(((Actor)((Actors)this.currentElement)[i]).Name);
-					frm.lvElements.Items.Add(lvi);
+					frm.AddNameToList(actor.Name);
 				}
-				frm.lvElements.Items[0].Selected = true;
 			}
 
 			if(this.currentElement.GetType() == typeof(UseCases))
 			{
-				for(int i = 0; i < ((UseCases)this.currentElement).Count; i++)
+				frm.Prefix = defaultUCPrefix;
+				foreach(UseCase useCase in ((UseCases)this.currentElement).Sorted("ID"))
 				{
-					ListViewItem lvi = new ListViewItem();
-					lvi.Text =  defaultAPrefix + (i+1).ToString();
-					lvi.SubItems.Add(((UseCase)((UseCases)this.currentElement)[i]).Name);
-					frm.lvElements.Items.Add(lvi);
+					frm.AddNameToList(useCase.Name);
 				}
-				frm.lvElements.Items[0].Selected = true;
 			}
 
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
+				string [] orderedNames = frm.GetOrderedNames();
+				// Step 1: marks old name with unique tag (#_n_#path#_n_#)
+				for(int counter = 0; counter <= orderedNames.GetUpperBound(0); counter++)
+				{
+					if(this.currentElement.GetType() == typeof(Actors))
+					{
+						Actor actor = (Actor)((Actors)this.currentElement).FindByName(orderedNames[counter]);
+						model.ReplaceElementPath(
+							actor.Path,
+							"\"",
+							"\"",
+							actor.Path,
+							"#_" + counter.ToString() + "_#",
+							"#_" + counter.ToString() + "_#");
+					}
+					if(this.currentElement.GetType() == typeof(UseCases))
+					{
+						UseCase useCase = (UseCase)((UseCases)this.currentElement).FindByName(orderedNames[counter]);
+						model.ReplaceElementPath(
+							useCase.Path,
+							"\"",
+							"\"",
+							useCase.Path,
+							"#_" + counter.ToString() + "_#",
+							"#_" + counter.ToString() + "_#");
+					}
+				}
+				// Step 2: element reordering and marked path substitution
+				for(int counter = 0; counter <= orderedNames.GetUpperBound(0); counter++)
+				{
+					if(this.currentElement.GetType() == typeof(Actors))
+					{
+						Actor actor = (Actor)((Actors)this.currentElement).FindByName(orderedNames[counter]);
+						string oldPath = actor.Path;
+						actor.ID = counter + 1;
+						model.ReplaceElementPath(
+							oldPath,
+							"#_" + counter.ToString() + "_#",
+							"#_" + counter.ToString() + "_#",
+							actor.Path,
+							"\"",
+							"\"");
+					}
+					if(this.currentElement.GetType() == typeof(UseCases))
+					{
+						UseCase useCase = (UseCase)((UseCases)this.currentElement).FindByName(orderedNames[counter]);
+						string oldPath = useCase.Path;
+						useCase.ID = counter + 1;
+						model.ReplaceElementPath(
+							oldPath,
+							"#_" + counter.ToString() + "_#",
+							"#_" + counter.ToString() + "_#",
+							useCase.Path,
+							"\"",
+							"\"");
+					}
+				}
+				this.lockUpdate = true;
+				// Win32.LockWindowUpdate(tvModelBrowser.Handle);
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
+				BuildView(this.model);
+				// Win32.LockWindowUpdate(new IntPtr(0));
+				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
+				this.lockUpdate = false;
 			}
+			frm.Dispose();
 		}
 
 		private string ElementNameChange(IdentificableObject ia)
@@ -6240,7 +6299,7 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.Packages.GetNextFreeID();
 						dst.AddPackage(src);
-						model.ReplaceElementPath(oldPath,"","",src.Path);
+						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
 				}
 				else if(dstElement.GetType() == typeof(Actors))
@@ -6255,7 +6314,7 @@ namespace UseCaseMaker
 							oldPath = actor.Path;
 							actor.ID = dst.Actors.GetNextFreeID();
 							dst.AddActor(actor);
-							model.ReplaceElementPath(oldPath,"","",actor.Path);
+							model.ReplaceElementPath(oldPath,"","","","",actor.Path);
 						}
 						owner.Actors.Clear();
 					}
@@ -6274,7 +6333,7 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.Actors.GetNextFreeID();
 						dst.AddActor(src);
-						model.ReplaceElementPath(oldPath,"","",src.Path);
+						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
 				}
 				else if(dstElement.GetType() == typeof(UseCases))
@@ -6289,7 +6348,7 @@ namespace UseCaseMaker
 							oldPath = useCase.Path;
 							useCase.ID = dst.UseCases.GetNextFreeID();
 							dst.AddUseCase(useCase);
-							model.ReplaceElementPath(oldPath,"","",useCase.Path);
+							model.ReplaceElementPath(oldPath,"","","","",useCase.Path);
 						}
 						owner.UseCases.Clear();
 					}
@@ -6308,7 +6367,7 @@ namespace UseCaseMaker
 							true);
 						src.ID = dst.UseCases.GetNextFreeID();
 						dst.AddUseCase(src);
-						model.ReplaceElementPath(oldPath,"","",src.Path);
+						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
 				}
 

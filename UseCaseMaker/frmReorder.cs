@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Collections;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -11,19 +12,21 @@ namespace UseCaseMaker
 	/// </summary>
 	public class frmReorder : System.Windows.Forms.Form
 	{
+		private string prefix;
+
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnMoveDown;
 		private System.Windows.Forms.ColumnHeader chIndex;
 		private System.Windows.Forms.ColumnHeader chValue;
-		public System.Windows.Forms.ListView lvElements;
+		private System.Windows.Forms.ListView lvElements;
 		private System.Windows.Forms.Button btnMoveUp;
 		/// <summary>
 		/// Variabile di progettazione necessaria.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public frmReorder(Localizer localizer)
+		public frmReorder(Localizer localizer, string prefix)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -33,7 +36,24 @@ namespace UseCaseMaker
 			//
 			// TODO: aggiungere il codice del costruttore dopo la chiamata a InitializeComponent
 			//
+			this.prefix = prefix;
 			localizer.LocalizeControls(this);
+
+			btnMoveDown.Enabled = false;
+			btnMoveUp.Enabled = false;
+		}
+
+		public string Prefix
+		{
+			get
+			{
+				return this.prefix;
+			}
+
+			set
+			{
+				this.prefix = value;
+			}
 		}
 
 		/// <summary>
@@ -61,10 +81,10 @@ namespace UseCaseMaker
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.lvElements = new System.Windows.Forms.ListView();
-			this.btnMoveUp = new System.Windows.Forms.Button();
-			this.btnMoveDown = new System.Windows.Forms.Button();
 			this.chIndex = new System.Windows.Forms.ColumnHeader();
 			this.chValue = new System.Windows.Forms.ColumnHeader();
+			this.btnMoveUp = new System.Windows.Forms.Button();
+			this.btnMoveDown = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnCancel
@@ -108,6 +128,14 @@ namespace UseCaseMaker
 			this.lvElements.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvElements_MouseUp);
 			this.lvElements.SelectedIndexChanged += new System.EventHandler(this.lvElements_SelectedIndexChanged);
 			// 
+			// chIndex
+			// 
+			this.chIndex.Width = 40;
+			// 
+			// chValue
+			// 
+			this.chValue.Width = 260;
+			// 
 			// btnMoveUp
 			// 
 			this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -129,14 +157,6 @@ namespace UseCaseMaker
 			this.btnMoveDown.TabIndex = 2;
 			this.btnMoveDown.Text = "[Move Down]";
 			this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
-			// 
-			// chIndex
-			// 
-			this.chIndex.Width = 40;
-			// 
-			// chValue
-			// 
-			this.chValue.Width = 260;
 			// 
 			// frmReorder
 			// 
@@ -191,6 +211,7 @@ namespace UseCaseMaker
 			int selectedIndex;
 
 			selectedIndex = lvElements.SelectedIndices[0];
+
 			ListViewItem lvi1 = lvElements.Items[selectedIndex];
 			text = lvi1.SubItems[1].Text;
 			ListViewItem lvi2 = lvElements.Items[selectedIndex - 1];
@@ -205,9 +226,10 @@ namespace UseCaseMaker
 			int selectedIndex;
 
 			selectedIndex = lvElements.SelectedIndices[0];
+
 			ListViewItem lvi1 = lvElements.Items[selectedIndex];
 			text = lvi1.SubItems[1].Text;
-			ListViewItem lvi2 = lvElements.Items[selectedIndex + 1];
+			ListViewItem lvi2 = this.lvElements.Items[selectedIndex + 1];
 			lvi1.SubItems[1].Text = lvi2.SubItems[1].Text;
 			lvi2.SubItems[1].Text = text;
 			lvi2.Selected = true;
@@ -217,12 +239,27 @@ namespace UseCaseMaker
 		{
 			if(lvElements.SelectedIndices.Count == 0)
 			{
-				if(lvElements.Items.Count > 0)
-				{
-					lvElements.Items[lvElements.Items.Count-1].Selected = true;
-				}
-				return;
+				btnMoveDown.Enabled = false;
+				btnMoveUp.Enabled = false;
 			}		
+		}
+
+		public void AddNameToList(string name)
+		{
+			ListViewItem lvi = new ListViewItem();
+			lvi.Text =  this.prefix + (this.lvElements.Items.Count + 1).ToString();
+			lvi.SubItems.Add(name);
+			this.lvElements.Items.Add(lvi);
+		}
+
+		public string [] GetOrderedNames()
+		{
+			string [] names = new string[this.lvElements.Items.Count];
+			for(int counter = 0; counter < this.lvElements.Items.Count; counter++)
+			{
+				names[counter] = lvElements.Items[counter].SubItems[1].Text;
+			}
+			return names;
 		}
 	}
 }

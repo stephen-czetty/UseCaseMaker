@@ -84,6 +84,9 @@
 			<mnuEditRemoveActor>Re&amp;move actor</mnuEditRemoveActor>
 			<mnuEditAddUseCase>Add &amp;use case</mnuEditAddUseCase>
 			<mnuEditRemoveUseCase>Remo&amp;ve use case</mnuEditRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuEditReorderElements>Re&amp;order elements</mnuEditReorderElements>
+			<!-- End of 0.9.6 section -->
 			<!-- Tools menu items -->
 			<mnuTools>&amp;Tools</mnuTools>
 			<mnuToolsHtmlExport>&amp;HTML export</mnuToolsHtmlExport>
@@ -105,7 +108,10 @@
 			<mnuCtxMBAddActor>Add &amp;actor</mnuCtxMBAddActor>
 			<mnuCtxMBRemoveActor>Re&amp;move actor</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>Add &amp;use case</mnuCtxMBAddUseCase>
-			<mnuCtxMBRemoveUseCase>Remo&amp;ve use case</mnuCtxMBRemoveUseCase>		
+			<mnuCtxMBRemoveUseCase>Remo&amp;ve use case</mnuCtxMBRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuCtxMBReorderElements>Re&amp;order elements</mnuCtxMBReorderElements>
+			<!-- End of 0.9.6 section -->			
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Go to definition</mnuCtxETGoToDefinition>
 			<!-- Start of 0.9.5 section -->
@@ -291,4 +297,15 @@
 			<btnCancel>Cancel</btnCancel>
 		</Controls>
 	</frmOptions>
+	<!-- Start of 0.9.6 section	-->
+	<frmReorder>
+		<Controls>
+			<Self>Reorder elements</Self>
+			<btnMoveUp>Move up</btnMoveUp>
+			<btnMoveDown>Move down</btnMoveDown>
+			<btnOK>OK</btnOK>
+			<btnCancel>Cancel</btnCancel>
+		</Controls>
+	</frmReorder>
+	<!-- End of 0.9.6 section -->
 </UCM-StringTable>
