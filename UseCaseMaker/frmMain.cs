@@ -1278,7 +1278,6 @@ namespace UseCaseMaker
 			// btnAddRefStep
 			// 
 			this.btnAddRefStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddRefStep.Enabled = false;
 			this.btnAddRefStep.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.btnAddRefStep.Location = new System.Drawing.Point(385, 120);
 			this.btnAddRefStep.Name = "btnAddRefStep";
@@ -1302,6 +1301,7 @@ namespace UseCaseMaker
 			this.UCList.IndexDataField = null;
 			this.UCList.Location = new System.Drawing.Point(96, 8);
 			this.UCList.Name = "UCList";
+			this.UCList.ReadOnlyBackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.UCList.RowHeight = 46;
 			this.UCList.SelectedIndex = -1;
 			this.UCList.Size = new System.Drawing.Size(282, 327);
@@ -1430,6 +1430,7 @@ namespace UseCaseMaker
 			this.AGList.IndexDataField = null;
 			this.AGList.Location = new System.Drawing.Point(104, 72);
 			this.AGList.Name = "AGList";
+			this.AGList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.AGList.RowHeight = 46;
 			this.AGList.SelectedIndex = -1;
 			this.AGList.Size = new System.Drawing.Size(269, 262);
@@ -1992,6 +1993,7 @@ namespace UseCaseMaker
 			this.GList.IndexDataField = null;
 			this.GList.Location = new System.Drawing.Point(8, 8);
 			this.GList.Name = "GList";
+			this.GList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.GList.RowHeight = 46;
 			this.GList.SelectedIndex = -1;
 			this.GList.Size = new System.Drawing.Size(366, 327);
@@ -2151,6 +2153,7 @@ namespace UseCaseMaker
 			this.OIList.IndexDataField = null;
 			this.OIList.Location = new System.Drawing.Point(104, 232);
 			this.OIList.Name = "OIList";
+			this.OIList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.OIList.RowHeight = 46;
 			this.OIList.SelectedIndex = -1;
 			this.OIList.Size = new System.Drawing.Size(274, 103);
@@ -2439,6 +2442,7 @@ namespace UseCaseMaker
 			this.RList.IndexDataField = null;
 			this.RList.Location = new System.Drawing.Point(8, 8);
 			this.RList.Name = "RList";
+			this.RList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.RList.RowHeight = 46;
 			this.RList.SelectedIndex = -1;
 			this.RList.Size = new System.Drawing.Size(366, 327);
@@ -2744,7 +2748,7 @@ namespace UseCaseMaker
 					subPackage.Owner = model;
 					BuildView(subPackage);
 				}
-				foreach(GlossaryItem gi in model.Glossary)
+				foreach(GlossaryItem gi in model.Glossary.Sorted("Name"))
 				{
 					gi.Owner = model;
 					string sub = "\"" + gi.Name + "\"";
@@ -2792,6 +2796,8 @@ namespace UseCaseMaker
 
 			Win32.LockWindowUpdate(tabUseCase.Handle);
 			this.LockModified();
+
+			this.SetDefaultButtonsState();
 
 			tabUseCase.TabPages.Clear();
 			TreeNode node = tvModelBrowser.SelectedNode;
@@ -3224,7 +3230,7 @@ namespace UseCaseMaker
 					UCList.DataBind();
 					for(int counter = 0; counter < useCase.Steps.Count; counter++)
 					{
-						if(((Step)useCase.Steps[counter]).ReferenceType != UseCaseMakerLibrary.Step.StepReferenceType.None)
+						if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
 						{
 							UCList.Items[counter].ReadOnly = true;
 						}
@@ -3520,6 +3526,7 @@ namespace UseCaseMaker
 		private void NewModel()
 		{
 			this.CloseModel();
+			this.SetDefaultButtonsState();
 
 			System.Char [] separators = {' ','\r','\n',',','.','-','+','\\','\'','?','!'};
 			foreach(System.Char c in separators)
@@ -3603,6 +3610,7 @@ namespace UseCaseMaker
 		private void OpenModel()
 		{
 			this.CloseModel();
+			this.SetDefaultButtonsState();
 
 			if(Directory.Exists(this.appSettings.ModelFilePath))
 			{
@@ -3734,6 +3742,7 @@ namespace UseCaseMaker
 		private void OpenRecentModel(string modelFilePath)
 		{
 			this.CloseModel();
+			this.SetDefaultButtonsState();
 
 			if(!File.Exists(modelFilePath))
 			{
@@ -3931,6 +3940,47 @@ namespace UseCaseMaker
 				mnuFileRecent4.Visible = true;
 				mnuFileSep3.Visible = true;
 			}
+		}
+
+		private void SetDefaultButtonsState()
+		{
+			// Flow of events buttons
+			btnAddStep.Enabled = true;
+			btnInsertStep.Enabled = false;
+			btnAddAltStep.Enabled = false;
+			btnAddRefStep.Enabled = true;
+			btnInsertRefStep.Enabled = false;
+			btnRemoveStep.Enabled = false;
+
+			// General (Actor)
+			btnAddGoal.Enabled = true;
+			btnRemoveGoal.Enabled = false;
+
+			// General (Use Case)
+			btnAddActor.Enabled = true;
+			btnRemoveActor.Enabled = false;
+			btnSetPrimaryActor.Enabled = false;
+
+			// Attributes
+			btnAddRelatedDoc.Enabled = true;
+			btnRemoveRelatedDoc.Enabled = false;
+			btnOpenRelatedDoc.Enabled = false;
+
+			// Glossary
+			btnAddGlossaryItem.Enabled = true;
+			btnChangeGlossaryItem.Enabled = false;
+			btnRemoveGlossaryItem.Enabled = false;
+
+			// History
+			btnRemoveHistoryItem.Enabled = false;
+
+			// Details
+			btnAddOpenIssue.Enabled = true;
+			btnRemoveOpenIssue.Enabled = false;
+
+			// Requirements
+			btnAddRequirement.Enabled = true;
+			btnRemoveRequirement.Enabled = false;
 		}
 
 		private void tvModelBrowser_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
@@ -4220,6 +4270,14 @@ namespace UseCaseMaker
 				}
 
 				ia.Name = frm.tbNewName.Text;
+
+				// Glossary must be always sorted
+				if(ia.GetType() == typeof(GlossaryItem))
+				{
+					model.Glossary.Sorted("Name");
+					GList.DataBind();
+				}
+				
 				this.SetModified(true);
 			}
 			frm.Dispose();
@@ -4370,14 +4428,31 @@ namespace UseCaseMaker
 			{
 				ili = UCList.Items[UCList.SelectedIndex];
 				Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
-				currentSelectedIndex = useCase.AddStep(previousStep,Step.StepType.Default);
+				currentSelectedIndex = useCase.AddStep(
+					previousStep,
+					Step.StepType.Default,
+					"",
+					null,
+					DependencyItem.ReferenceType.None);
 			}
 			else
 			{
-				currentSelectedIndex = useCase.AddStep(null,Step.StepType.Default);
+				currentSelectedIndex = useCase.AddStep(
+					null,
+					Step.StepType.Default,
+					"",
+					null,
+					DependencyItem.ReferenceType.None);
 			}
 
 			UCList.DataBind();
+			for(int counter = 0; counter < useCase.Steps.Count; counter++)
+			{
+				if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+				{
+					UCList.Items[counter].ReadOnly = true;
+				}
+			}
 
 			UCList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
@@ -4391,9 +4466,21 @@ namespace UseCaseMaker
 
 			ili = UCList.Items[UCList.SelectedIndex];
 			Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
-			currentSelectedIndex = useCase.AddStep(previousStep,Step.StepType.Alternative);
+			currentSelectedIndex = useCase.AddStep(
+				previousStep,
+				Step.StepType.Alternative,
+				"",
+				null,
+				DependencyItem.ReferenceType.None);
 
 			UCList.DataBind();
+			for(int counter = 0; counter < useCase.Steps.Count; counter++)
+			{
+				if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+				{
+					UCList.Items[counter].ReadOnly = true;
+				}
+			}
 
 			UCList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
@@ -4407,12 +4494,99 @@ namespace UseCaseMaker
 
 			ili = UCList.Items[UCList.SelectedIndex];
 			Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
-			currentSelectedIndex = useCase.InsertStep(previousStep);
+			currentSelectedIndex = useCase.InsertStep(
+				previousStep,
+				"",
+				null,
+				DependencyItem.ReferenceType.None);
 
 			UCList.DataBind();
+			for(int counter = 0; counter < useCase.Steps.Count; counter++)
+			{
+				if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+				{
+					UCList.Items[counter].ReadOnly = true;
+				}
+			}
 
 			UCList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
+		}
+
+
+		private void btnAddRefStep_Click(object sender, System.EventArgs e)
+		{
+			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
+			if(frm.ShowDialog(this) == DialogResult.OK)
+			{
+				UseCase useCase = (UseCase)this.currentElement;
+				int currentSelectedIndex = UCList.SelectedIndex;
+				IndexedListItem ili = null;
+
+				if(currentSelectedIndex != -1)
+				{
+					ili = UCList.Items[UCList.SelectedIndex];
+					Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
+					currentSelectedIndex = useCase.AddStep(
+						previousStep,
+						Step.StepType.Default,
+						frm.Stereotype,
+						frm.SelectedUseCase,
+						frm.ReferenceType);
+				}
+				else
+				{
+					currentSelectedIndex = useCase.AddStep(
+						null,
+						Step.StepType.Default,
+						frm.Stereotype,
+						frm.SelectedUseCase,
+						frm.ReferenceType);
+				}
+
+				UCList.DataBind();
+				for(int counter = 0; counter < useCase.Steps.Count; counter++)
+				{
+					if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+					{
+						UCList.Items[counter].ReadOnly = true;
+					}
+				}
+
+				UCList.SelectedIndex = currentSelectedIndex;
+				this.SetModified(true);
+			}
+		}
+
+		private void btnInsertRefStep_Click(object sender, System.EventArgs e)
+		{
+			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
+			if(frm.ShowDialog(this) == DialogResult.OK)
+			{
+				UseCase useCase = (UseCase)this.currentElement;
+				int currentSelectedIndex = UCList.SelectedIndex;
+				IndexedListItem ili = null;
+
+				ili = UCList.Items[UCList.SelectedIndex];
+				Step previousStep = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
+				currentSelectedIndex = useCase.InsertStep(
+					previousStep,
+					frm.Stereotype,
+					frm.SelectedUseCase,
+					frm.ReferenceType);
+
+				UCList.DataBind();
+				for(int counter = 0; counter < useCase.Steps.Count; counter++)
+				{
+					if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+					{
+						UCList.Items[counter].ReadOnly = true;
+					}
+				}
+
+				UCList.SelectedIndex = currentSelectedIndex;
+				this.SetModified(true);
+			}		
 		}
 
 		private void btnRemoveStep_Click(object sender, System.EventArgs e)
@@ -4425,6 +4599,13 @@ namespace UseCaseMaker
 			useCase.RemoveStep(step);
 
 			UCList.DataBind();
+			for(int counter = 0; counter < useCase.Steps.Count; counter++)
+			{
+				if(((Step)useCase.Steps[counter]).Dependency.Type != DependencyItem.ReferenceType.None)
+				{
+					UCList.Items[counter].ReadOnly = true;
+				}
+			}
 
 			if(currentSelectedIndex < UCList.Items.Count)
 			{
@@ -4487,7 +4668,14 @@ namespace UseCaseMaker
 				case Step.StepType.Default:
 					btnAddStep.Enabled = true;
 					btnInsertStep.Enabled = true;
-					btnAddAltStep.Enabled = true;
+					if(useCase.StepHasAlternatives(step))
+					{
+						btnAddAltStep.Enabled = false;
+					}
+					else
+					{
+						btnAddAltStep.Enabled = true;
+					}
 					btnAddRefStep.Enabled = true;
 					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
@@ -4495,7 +4683,14 @@ namespace UseCaseMaker
 				case Step.StepType.Alternative:
 					btnAddStep.Enabled = true;
 					btnInsertStep.Enabled = true;
-					btnAddAltStep.Enabled = true;
+					if(useCase.StepHasAlternatives(step))
+					{
+						btnAddAltStep.Enabled = false;
+					}
+					else
+					{
+						btnAddAltStep.Enabled = true;
+					}
 					btnAddRefStep.Enabled = true;
 					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
@@ -4503,7 +4698,14 @@ namespace UseCaseMaker
 				case Step.StepType.AlternativeChild:
 					btnAddStep.Enabled = true;
 					btnInsertStep.Enabled = true;
-					btnAddAltStep.Enabled = false;
+					if(useCase.StepHasAlternatives(step))
+					{
+						btnAddAltStep.Enabled = false;
+					}
+					else
+					{
+						btnAddAltStep.Enabled = true;
+					}
 					btnAddRefStep.Enabled = true;
 					btnInsertRefStep.Enabled = true;
 					btnRemoveStep.Enabled = true;
@@ -4711,15 +4913,19 @@ namespace UseCaseMaker
 				Model model = (Model)this.currentElement;
 				GlossaryItem gi = 
 					model.NewGlossaryItem(frm.tbName.Text,defaultGPrefix,model.Glossary.GetNextFreeID());
-				model.Glossary.Add(gi);
+				model.AddGlossaryItem(gi);
+				model.Glossary.Sorted("Name");
 
-				IndexedListItem ili = new IndexedListItem();
-				ili.Index = frm.tbName.Text;
-				ili.Text = string.Empty;
-				ili.Tag = gi.UniqueID;
-				GList.Items.Add(ili);
-				GList.SelectedIndex = GList.Items.Count - 1;
+				GList.DataBind();
 
+				for(int counter = 0; counter < model.Glossary.Count; counter++)
+				{
+					if((string)GList.Items[counter].Tag == gi.UniqueID)
+					{
+						GList.SelectedIndex = counter;
+					}
+				}
+				
 				string sub = "\"" + gi.Name + "\"";
 				sub = sub.Replace(" ","\t");
 				sub = sub.Replace(".","\v");
@@ -4737,6 +4943,14 @@ namespace UseCaseMaker
 
 			IndexedListItem ili = GList.Items[GList.SelectedIndex];
 			ili.Index = this.ElementNameChange((IdentificableObject)model.GetGlossaryItem((String)ili.Tag));
+
+			for(int counter = 0; counter < model.Glossary.Count; counter++)
+			{
+				if((string)GList.Items[counter].Tag == (String)ili.Tag)
+				{
+					GList.SelectedIndex = counter;
+				}
+			}
 		}
 
 		private void btnRemoveGlossaryItem_Click(object sender, System.EventArgs e)
@@ -6793,19 +7007,6 @@ namespace UseCaseMaker
 				}
 			}
 			this.SetModified(true);
-		}
-
-		private void btnAddRefStep_Click(object sender, System.EventArgs e)
-		{
-			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
-			if(frm.ShowDialog(this) == DialogResult.OK)
-			{
-			}
-		}
-
-		private void btnInsertRefStep_Click(object sender, System.EventArgs e)
-		{
-		
 		}
 	}
 }

@@ -211,7 +211,12 @@ namespace UseCaseMakerLibrary
 		{
 			ArrayList sorter = new ArrayList(this);
 			sorter.Sort(new PropertySorter(propertyName,"ASC"));
-			return sorter;
+			this.Clear();
+			foreach(object element in sorter)
+			{
+				this.Add(element);
+			}
+			return this;
 		}
 
 		public object FindByName(String name)

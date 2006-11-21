@@ -34,6 +34,7 @@ namespace UseCaseMakerControls
 		private int textColumnWidth = 100;
 		private Color indexBackColor;
 		private Color textBackColor;
+		private Color readOnlyBackColor;
 		private ColumnResizeStatus ColumnResizing = ColumnResizeStatus.None;
 		private SepararatorCollection separators = new SepararatorCollection();
 		private HighLightDescriptorCollection highLightDescriptors = new HighLightDescriptorCollection();
@@ -72,6 +73,7 @@ namespace UseCaseMakerControls
 
 			this.indexBackColor = System.Drawing.SystemColors.Control;
 			this.textBackColor = System.Drawing.SystemColors.Window;
+			this.readOnlyBackColor = System.Drawing.SystemColors.ControlLightLight;
 		}
 		#endregion
 
@@ -175,6 +177,24 @@ namespace UseCaseMakerControls
 			set
 			{
 				this.textBackColor = value;
+				UpdateControlsAppearance();
+			}
+		}
+
+		[ 
+		Category("Appearance"),
+		DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+		NotifyParentProperty(true)
+		]		
+		public Color ReadOnlyBackColor
+		{
+			get
+			{
+				return this.readOnlyBackColor;
+			}
+			set
+			{
+				this.readOnlyBackColor = value;
 				UpdateControlsAppearance();
 			}
 		}
@@ -359,25 +379,12 @@ namespace UseCaseMakerControls
 			this.ResumeLayout();
 
 			this.Invalidate();
+			this.Refresh();
 		}
 
 		internal void UpdateControlsAppearance()
 		{
-			IndexedListItem item;
-
-			this.SuspendLayout();
-
-			for(int index = 0; index < this.items.Count; index++)
-			{
-				item = items[index];
-
-				item.ItemLabel.BackColor = this.indexBackColor;
-				item.ItemRichTextBox.BackColor = this.textBackColor;
-			}
-
-			this.ResumeLayout(true);
-			
-			this.Invalidate();
+			this.Refresh();
 		}
 		#endregion
 
@@ -425,6 +432,35 @@ namespace UseCaseMakerControls
 			base.Dispose( disposing );
 		}
 
+		public override void Refresh()
+		{
+			IndexedListItem item;
+
+			this.SuspendLayout();
+
+			for(int index = 0; index < this.items.Count; index++)
+			{
+				item = items[index];
+
+				if(!item.Selected)
+				{
+					item.ItemLabel.BackColor = this.indexBackColor;
+				}
+				if(item.ReadOnly)
+				{
+					item.ItemRichTextBox.BackColor = this.readOnlyBackColor;
+				}
+				else
+				{
+					item.ItemRichTextBox.BackColor = this.textBackColor;
+				}
+			}
+
+			this.ResumeLayout(true);
+
+			base.Refresh ();
+		}
+
 		protected override void OnSizeChanged(EventArgs e)
 		{
 			base.OnSizeChanged(e);
@@ -455,16 +491,7 @@ namespace UseCaseMakerControls
 					ili.ItemRichTextBox.Top,
 					ili.ItemRichTextBox.Left - 1,
 					ili.ItemRichTextBox.Bottom);
-				if(ili.ReadOnly)
-				{
-					pen.Color = Color.Red;
-					e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
-					pen.Color = System.Drawing.SystemColors.ControlDark;
-				}
-				else
-				{
-					e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
-				}
+				e.Graphics.DrawRectangle(pen,ili.ItemLabel.Bounds);
 			}
 		}
 
@@ -600,6 +627,7 @@ namespace UseCaseMakerControls
 				index += 1;
 			}
 			this.Invalidate();
+			this.Refresh();
 		}
 
 		public void OnItemLabelClick(object sender, EventArgs e) 
@@ -620,6 +648,7 @@ namespace UseCaseMakerControls
 				index += 1;
 			}
 			this.Invalidate();
+			this.Refresh();
 		}
 
 		public void OnItemRichTextBoxClick(object sender, EventArgs e) 
@@ -640,6 +669,7 @@ namespace UseCaseMakerControls
 				}
 			}
 			this.Invalidate();
+			this.Refresh();
 		}
 
 		public void OnItemTextChanged(object sender, ItemTextChangedEventArgs e)

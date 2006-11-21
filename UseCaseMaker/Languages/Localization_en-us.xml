@@ -311,5 +311,17 @@
 			<btnCancel>Cancel</btnCancel>
 		</Controls>
 	</frmReorder>
+	<frmRefSelector>
+		<Controls>
+			<Self>Select use case dependency</Self>
+			<lblStereotypeTitle>Stereotype</lblStereotypeTitle>
+			<lblUseCaseTitle>Use case</lblUseCaseTitle>
+			<gbRelationship>Relationship</gbRelationship>
+			<lblDepFromTitle>depends from</lblDepFromTitle>
+			<btnSwap>Swap</btnSwap>
+			<btnOK>OK</btnOK>
+			<btnCancel>Cancel</btnCancel>
+		</Controls>
+	</frmRefSelector>
 	<!-- End of 0.9.6 section -->
 </UCM-StringTable>

@@ -239,11 +239,27 @@ namespace UseCaseMakerLibrary
 
 		#region Public Methods
 		#region Step Handling
-		public Int32 AddStep(Step previousStep, Step.StepType type)
+		public Int32 AddStep(
+			Step previousStep,
+			Step.StepType type,
+			String stereotype,
+			UseCase referencedUseCase,
+			DependencyItem.ReferenceType referenceType)
 		{
 			Step step = new Step();
 			Int32 index;
 			Int32 ret;
+
+			if(referenceType != DependencyItem.ReferenceType.None)
+			{
+				step.Dependency.Stereotype = stereotype;
+				step.Dependency.PartnerUniqueID = referencedUseCase.UniqueID;
+				step.Dependency.Type = referenceType;
+				step.Description = (step.Dependency.Stereotype != "") ? "<<" + step.Dependency.Stereotype + ">>" : "";
+				step.Description += " \"";
+				step.Description += referencedUseCase.Name;
+				step.Description += "\"";
+			}
 
 			if(previousStep == null)
 			{
@@ -335,17 +351,26 @@ namespace UseCaseMakerLibrary
 							step.Type = Step.StepType.AlternativeChild;
 							step.ID = previousStep.ID;
 							step.Prefix = previousStep.Prefix;
-							step.ChildID = previousStep.ChildID + 1;
-							foreach(Step tmpStep in this.steps)
+
+							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
+							while(true)
 							{
-								if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+								if(index == this.steps.Count)
 								{
-									if(tmpStep.ChildID >= step.ChildID)
-									{
-										tmpStep.ChildID += 1;
-									}
+									previousStep = (Step)this.steps[index - 1];
+									break;
 								}
+								Step tmpStep = (Step)this.steps[index];
+								if(tmpStep.ID != step.ID || tmpStep.Prefix != step.Prefix)
+								{
+									previousStep = (Step)this.steps[index - 1];
+									break;
+								}
+								index += 1;
 							}
+
+							step.Prefix = previousStep.Prefix;
+							step.ChildID = previousStep.ChildID + 1;
 						}
 						break;
 					case Step.StepType.Alternative:
@@ -401,16 +426,6 @@ namespace UseCaseMakerLibrary
 							step.ID = previousStep.ID;
 							step.Prefix = previousStep.Prefix;
 							step.ChildID = 1;
-							foreach(Step tmpStep in this.steps)
-							{
-								if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
-								{
-									if(tmpStep.ChildID != -1)
-									{
-										tmpStep.ChildID += 1;
-									}
-								}
-							}
 						}
 						break;
 				}
@@ -430,10 +445,25 @@ namespace UseCaseMakerLibrary
 			return ret;
 		}
 
-		public Int32 InsertStep(Step previousStep)
+		public Int32 InsertStep(
+			Step previousStep,
+			String stereotype,
+			UseCase referencedUseCase,
+			DependencyItem.ReferenceType referenceType)
 		{
 			Step step = new Step();
 			Int32 ret;
+
+			if(referenceType != DependencyItem.ReferenceType.None)
+			{
+				step.Dependency.Stereotype = stereotype;
+				step.Dependency.PartnerUniqueID = referencedUseCase.UniqueID;
+				step.Dependency.Type = referenceType;
+				step.Description = (step.Dependency.Stereotype != "") ? "<<" + step.Dependency.Stereotype + ">>" : "";
+				step.Description += " \"";
+				step.Description += referencedUseCase.Name;
+				step.Description += "\"";
+			}
 
 			if(previousStep.Type == Step.StepType.Default)
 			{
@@ -547,7 +577,7 @@ namespace UseCaseMakerLibrary
 		{
 			Step step = null;
 
-			foreach(Step tmpStep in this.steps)
+			foreach(Step tmpStep in this.Steps)
 			{
 				if(tmpStep.UniqueID == uniqueID)
 				{
@@ -556,6 +586,41 @@ namespace UseCaseMakerLibrary
 			}
 
 			return step;
+		}
+
+		public bool StepHasAlternatives(Step step)
+		{
+			Int32 index;
+			Step tmpStep;
+
+			if(step.Type == Step.StepType.AlternativeChild)
+			{
+				return true;
+			}
+
+			for(index = this.Steps.Count - 1; index >= 0; index--)
+			{
+				tmpStep = (Step)this.Steps[index];
+				if(tmpStep.UniqueID == step.UniqueID)
+				{
+					break;
+				}
+			}
+			// Step is not found or it is the last step in collection
+			if(index >= this.Steps.Count - 1)
+			{
+				return false;
+			}
+			tmpStep = (Step)this.Steps[index + 1];
+			if(step.Type == Step.StepType.Default && tmpStep.Type == Step.StepType.Alternative)
+			{
+				return true;
+			}
+			if(step.Type == Step.StepType.Alternative && tmpStep.Type == Step.StepType.AlternativeChild)
+			{
+				return true;
+			}
+			return false;
 		}
 		#endregion
 

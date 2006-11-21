@@ -482,6 +482,19 @@ namespace UseCaseMakerLibrary
 						newNameEndTag,
 						false);
 				}
+				// remove use case references in use case's steps
+				foreach(UseCase useCase in this.UseCases)
+				{
+					foreach(Step step in useCase.Steps)
+					{
+						if(step.Dependency.PartnerUniqueID == ((UseCase)element).UniqueID)
+						{
+							step.Dependency.Type = DependencyItem.ReferenceType.None;
+							step.Dependency.PartnerUniqueID = "";
+							step.Dependency.Stereotype = "";
+						}
+					}
+				}
 			}
 
 			if(element.GetType() == typeof(Actor))

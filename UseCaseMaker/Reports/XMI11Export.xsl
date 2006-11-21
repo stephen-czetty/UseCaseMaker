@@ -7,8 +7,8 @@
 		<XMI xmi.version="1.1" xmlns:UML="http://www.omg.org/UML">
 			<XMI.header>
 				<XMI.documentation>
-					<XMI.exporter>Unisys.JCR.2</XMI.exporter>
-					<XMI.exporterVersion>1.3.4</XMI.exporterVersion>
+					<XMI.exporter>Use Case Maker</XMI.exporter><!-- Unisys.JCR.2 -->
+					<XMI.exporterVersion>1.0.0</XMI.exporterVersion><!-- 1.3.4 -->
 				</XMI.documentation>
 				<XMI.metamodel xmi.name="UML" xmi.version="1.3"/>
 			</XMI.header>
@@ -149,6 +149,8 @@
 	</xsl:template>
 
 	<xsl:template match="UseCase">
+		<xsl:variable name="ucid" select="@UniqueID" />
+	
 		<xsl:element name="UML:UseCase">
 			<xsl:attribute name="xmi.id">
 				<xsl:value-of select="@UniqueID" />
@@ -162,8 +164,65 @@
 			<xsl:attribute name="isLeaf">false</xsl:attribute>
 			<xsl:attribute name="isRoot">false</xsl:attribute>
 		</xsl:element>
-	</xsl:template
-	>
+		
+		<xsl:for-each select="Steps/Step/Dependency">
+			<xsl:variable name="ref_ucid" select="PartnerUniqueID/text()" />
+			<xsl:if test="$ref_ucid != ''">
+				<xsl:if test="Type = 'Client'">
+					<xsl:call-template name="dependency">
+						<xsl:with-param name="client_ucid" select="$ucid" />
+						<xsl:with-param name="supplier_ucid" select="$ref_ucid" />
+						<xsl:with-param name="stereotype" select="Stereotype/text()" />
+					</xsl:call-template>
+				</xsl:if>
+				<xsl:if test="Type = 'Supplier'">
+					<xsl:call-template name="dependency">
+						<xsl:with-param name="client_ucid" select="$ref_ucid" />
+						<xsl:with-param name="supplier_ucid" select="$ucid" />
+						<xsl:with-param name="stereotype" select="Stereotype/text()" />
+					</xsl:call-template>				
+				</xsl:if>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template name="dependency">
+		<xsl:param name="client_ucid" />
+		<xsl:param name="supplier_ucid" />
+		<xsl:param name="stereotype" />
+		
+		<xsl:element name="UML:Dependency">
+			<xsl:attribute name="xmi.id">
+				<xsl:value-of select="concat('dep_',$client_ucid,'_',$supplier_ucid)" />
+			</xsl:attribute>
+			<xsl:attribute name="name"></xsl:attribute>
+			<xsl:attribute name="isSpecification">false</xsl:attribute>
+			<xsl:attribute name="visibility">public</xsl:attribute>
+			<xsl:attribute name="isAbstract">false</xsl:attribute>
+			<xsl:attribute name="isLeaf">false</xsl:attribute>
+			<xsl:attribute name="isRoot">false</xsl:attribute>
+			<xsl:attribute name="client">
+				<xsl:value-of select="$client_ucid" />
+			</xsl:attribute>
+			<xsl:attribute name="supplier">
+				<xsl:value-of select="$supplier_ucid" />
+			</xsl:attribute>
+		</xsl:element>
+		<xsl:if test="$stereotype != ''">
+			<UML:Stereotype>
+				<xsl:attribute name="xmi.id">
+					<xsl:value-of select="concat('st_',$client_ucid,'_',$supplier_ucid)" />
+				</xsl:attribute>
+				<xsl:attribute name="name">
+					<xsl:value-of select="$stereotype" />
+				</xsl:attribute>
+				<xsl:attribute name="extendedElement">
+					<xsl:value-of select="concat('dep_',$client_ucid,'_',$supplier_ucid)" />
+				</xsl:attribute>
+			</UML:Stereotype>
+		</xsl:if>		
+	</xsl:template>
+	
 	<xsl:template name="association">
 		<xsl:param name="ucid" />
 		<xsl:param name="aid" />
