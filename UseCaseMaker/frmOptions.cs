@@ -225,7 +225,16 @@ namespace UseCaseMaker
 
 		private void lvOptLanguages_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
- 
+			if(lvOptLanguages.SelectedIndices.Count == 0)
+			{
+				this.SelectedLanguage = string.Empty;
+				btnOK.Enabled = false;
+			}
+			else
+			{
+				this.SelectedLanguage = lvOptLanguages.SelectedItems[0].SubItems[2].Text;
+				btnOK.Enabled = true;
+			} 
 		}
 
 		private void btnOK_Click(object sender, System.EventArgs e)

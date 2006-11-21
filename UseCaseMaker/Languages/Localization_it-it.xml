@@ -35,6 +35,9 @@
 		<Owner>Genitore</Owner>
 		<Glossary>Glossario</Glossary>
 		<GlossaryItem>Voce di glossario</GlossaryItem>
+		<!-- Start of 0.9.6 section -->
+		<Goals>Obiettivi</Goals>
+		<!-- End of 0.9.6 section -->
 		<HistoryType>
 			<Item EnumName="Implementation" ListIndex="0">Implementazione</Item>
 			<Item EnumName="Status" ListIndex="1">Stato</Item>
@@ -81,6 +84,9 @@
 			<mnuEditRemoveActor>Rimu&amp;ovi attore</mnuEditRemoveActor>
 			<mnuEditAddUseCase>Aggiungi &amp;caso d'uso</mnuEditAddUseCase>
 			<mnuEditRemoveUseCase>Rimuo&amp;vi caso d'uso</mnuEditRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuEditReorderElements>R&amp;iordina elementi</mnuEditReorderElements>
+			<!-- End of 0.9.6 section -->
 			<!-- Tools menu items -->
 			<mnuTools>&amp;Strumenti</mnuTools>
 			<mnuToolsHtmlExport>Esporta in &amp;HTML</mnuToolsHtmlExport>
@@ -103,6 +109,9 @@
 			<mnuCtxMBRemoveActor>Rimu&amp;ovi attore</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>Aggiungi &amp;caso d'uso</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>Rimuo&amp;vi caso d'uso</mnuCtxMBRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuCtxMBReorderElements>R&amp;iordina elementi</mnuCtxMBReorderElements>
+			<!-- End of 0.9.6 section -->
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Vai alla definizione</mnuCtxETGoToDefinition>			
 			<!-- Start of 0.9.5 section -->
@@ -179,6 +188,11 @@
 			<lblAOwnerTitle>Package genitore</lblAOwnerTitle>
 			<lblANameTitle>Nome</lblANameTitle>
 			<btnANameChange>Cambia</btnANameChange>
+			<!-- Start of 0.9.6 section -->
+			<lblAGoalsTitle>Obiettivi</lblAGoalsTitle>
+			<btnAddGoal>Aggiungi</btnAddGoal>
+			<btnRemoveGoal>Rimuovi</btnRemoveGoal>
+			<!-- End of 0.9.6 section -->			
 			<!-- Package General -->
 			<pgPGeneral>Generale</pgPGeneral>
 			<lblPIDTitle>Identificativo</lblPIDTitle>
@@ -199,7 +213,11 @@
 			<btnAddStep>Aggiungi</btnAddStep>
 			<btnInsertStep>Inserisci</btnInsertStep>
 			<btnAddAltStep>Aggiungi alternativa</btnAddAltStep>
-			<btnInsertAltStep>Inserisci alternativa</btnInsertAltStep>
+			<!-- Start of 0.9.6 section -->
+			<!-- <btnInsertAltStep>Inserisci alternativa</btnInsertAltStep> -->
+			<btnAddRefStep>Aggiungi dipendenza</btnAddRefStep>
+			<btnInsertRefStep>Inserisci dipendenza</btnInsertRefStep>
+			<!-- End of 0.9.6 section -->
 			<btnRemoveStep>Rimuovi</btnRemoveStep>
 			<!-- Prose -->
 			<pgProse>Prosa</pgProse>
@@ -283,4 +301,27 @@
 			<btnCancel>Annulla</btnCancel>						
 		</Controls>
 	</frmOptions>
+	<!-- Start of 0.9.6 section	-->
+	<frmReorder>
+		<Controls>
+			<Self>Riordina elementi</Self>
+			<btnMoveUp>Sposta sopra</btnMoveUp>
+			<btnMoveDown>Sposta sotto</btnMoveDown>
+			<btnOK>OK</btnOK>
+			<btnCancel>Annulla</btnCancel>
+		</Controls>
+	</frmReorder>
+	<frmRefSelector>
+		<Controls>
+			<Self>Dipendenza del caso d'uso</Self>
+			<lblStereotypeTitle>Stereotipo</lblStereotypeTitle>
+			<lblUseCaseTitle>Caso d'uso</lblUseCaseTitle>
+			<gbRelationship>Relazione</gbRelationship>
+			<lblDepFromTitle>depende da</lblDepFromTitle>
+			<btnSwap>Scambia</btnSwap>
+			<btnOK>OK</btnOK>
+			<btnCancel>Annulla</btnCancel>
+		</Controls>
+	</frmRefSelector>
+	<!-- End of 0.9.6 section -->	
 </UCM-StringTable>

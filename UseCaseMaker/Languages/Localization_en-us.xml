@@ -313,7 +313,7 @@
 	</frmReorder>
 	<frmRefSelector>
 		<Controls>
-			<Self>Select use case dependency</Self>
+			<Self>Use case dependency</Self>
 			<lblStereotypeTitle>Stereotype</lblStereotypeTitle>
 			<lblUseCaseTitle>Use case</lblUseCaseTitle>
 			<gbRelationship>Relationship</gbRelationship>
