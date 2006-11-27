@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <UCM-StringTable>
 	<Globals>
 		<NewModel>Nuevo modelo</NewModel>
@@ -35,6 +35,9 @@
 		<Owner>Propietario</Owner>
 		<Glossary>Glosario</Glossary>
 		<GlossaryItem>Elemento de glosario</GlossaryItem>
+		<!-- Start of 0.9.6 section -->
+		<Goals>Objetivos</Goals>
+		<!-- End of 0.9.6 section -->
 		<HistoryType>
 			<Item EnumName="Implementation" ListIndex="0">Implementación</Item>
 			<Item EnumName="Status"  ListIndex="1">Estado</Item>
@@ -81,6 +84,9 @@
 			<mnuEditRemoveActor>E&amp;iminar actor</mnuEditRemoveActor>
 			<mnuEditAddUseCase>Añadir caso de &amp;uso</mnuEditAddUseCase>
 			<mnuEditRemoveUseCase>Eli&amp;minar caso de uso</mnuEditRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuEditReorderElements>&amp;Ordenar elementos</mnuEditReorderElements>
+			<!-- End of 0.9.6 section -->			
 			<!-- Tools menu items -->
 			<mnuTools>&amp;Herramientas</mnuTools>
 			<mnuToolsHtmlExport>Exportar a &amp;HTML</mnuToolsHtmlExport>
@@ -103,6 +109,9 @@
 			<mnuCtxMBRemoveActor>Eliminar actor</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>Añadir caso de &amp;uso</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>Eliminar caso de uso</mnuCtxMBRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuCtxMBReorderElements>&amp;Ordenar elementos</mnuCtxMBReorderElements>
+			<!-- End of 0.9.6 section -->
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Ir a definición</mnuCtxETGoToDefinition>
 			<!-- Start of 0.9.5 section -->
@@ -179,6 +188,11 @@
 			<lblAOwnerTitle>Paquete</lblAOwnerTitle>
 			<lblANameTitle>Nombre</lblANameTitle>
 			<btnANameChange>Cambiar</btnANameChange>
+			<!-- Start of 0.9.6 section -->
+			<lblAGoalsTitle>Objetivos</lblAGoalsTitle>
+			<btnAddGoal>Añadir</btnAddGoal>
+			<btnRemoveGoal>Eliminar</btnRemoveGoal>
+			<!-- End of 0.9.6 section -->			
 			<!-- Package General -->
 			<pgPGeneral>General</pgPGeneral>
 			<lblPIDTitle>Identificador</lblPIDTitle>
@@ -199,7 +213,11 @@
 			<btnAddStep>Añadir</btnAddStep>
 			<btnInsertStep>Insertar</btnInsertStep>
 			<btnAddAltStep>Añadir alternativo</btnAddAltStep>
-			<btnInsertAltStep>Insertar alternativo</btnInsertAltStep>
+			<!-- Start of 0.9.6 section -->
+			<!-- <btnInsertAltStep>Insertar alternativo</btnInsertAltStep> -->
+			<btnAddRefStep>Añadir dependencia</btnAddRefStep>
+			<btnInsertRefStep>Insertar dependencia</btnInsertRefStep>
+			<!-- End of 0.9.6 section -->			
 			<btnRemoveStep>Eliminar</btnRemoveStep>
 			<!-- Prose -->
 			<pgProse>Documentación</pgProse>
@@ -283,4 +301,27 @@
 			<btnCancel>Cancelar</btnCancel>
 		</Controls>
 	</frmOptions>
+	<!-- Start of 0.9.6 section	-->
+	<frmReorder>
+		<Controls>
+			<Self>Ordenar elementos</Self>
+			<btnMoveUp>Subir</btnMoveUp>
+			<btnMoveDown>Bajar</btnMoveDown>
+			<btnOK>Aceptar</btnOK>
+			<btnCancel>Cancelar</btnCancel>
+		</Controls>
+	</frmReorder>
+	<frmRefSelector>
+		<Controls>
+			<Self>Dependencias del caso de uso</Self>
+			<lblStereotypeTitle>Estereotipo</lblStereotypeTitle>
+			<lblUseCaseTitle>Caso de uso</lblUseCaseTitle>
+			<gbRelationship>Relaciones</gbRelationship>
+			<lblDepFromTitle>depende de</lblDepFromTitle>
+			<btnSwap>Intercambiar</btnSwap>
+			<btnOK>Aceptar</btnOK>
+			<btnCancel>Cancelar</btnCancel>
+		</Controls>
+	</frmRefSelector>
+	<!-- End of 0.9.6 section -->	
 </UCM-StringTable>

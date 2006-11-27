@@ -317,7 +317,7 @@
 			<lblStereotypeTitle>Stereotipo</lblStereotypeTitle>
 			<lblUseCaseTitle>Caso d'uso</lblUseCaseTitle>
 			<gbRelationship>Relazione</gbRelationship>
-			<lblDepFromTitle>depende da</lblDepFromTitle>
+			<lblDepFromTitle>dipende da</lblDepFromTitle>
 			<btnSwap>Scambia</btnSwap>
 			<btnOK>OK</btnOK>
 			<btnCancel>Annulla</btnCancel>

@@ -137,7 +137,7 @@
 			<lblImplTitle>Implementation</lblImplTitle>
 			<btnStatusToHistory>Add to history</btnStatusToHistory>
 			<btnImplToHistory>Add to history</btnImplToHistory>
-			<lblAssignedToTitle>Assegned to</lblAssignedToTitle>
+			<lblAssignedToTitle>Assigned to</lblAssignedToTitle>
 			<lblReleaseTitle>Release</lblReleaseTitle>
 			<lblOpenIssuesTitle>Open issues</lblOpenIssuesTitle>
 			<btnAddOpenIssue>Add</btnAddOpenIssue>

@@ -35,6 +35,9 @@
 		<Owner>Eigentümer</Owner>
 		<Glossary>Glossar</Glossary>
 		<GlossaryItem>Glossar-Element</GlossaryItem>
+		<!-- Start of 0.9.6 section -->
+		<Goals>Goals</Goals>
+		<!-- End of 0.9.6 section -->		
 		<HistoryType>
 			<Item EnumName="Implementation" ListIndex="0">Implementation</Item>
 			<Item EnumName="Status" ListIndex="1">Status</Item>
@@ -81,6 +84,9 @@
 			<mnuEditRemoveActor>Akteur l&amp;öschen</mnuEditRemoveActor>
 			<mnuEditAddUseCase>&amp;Anwendungsfall hinzufügen</mnuEditAddUseCase>
 			<mnuEditRemoveUseCase>Anwendungsfall lö&amp;schen</mnuEditRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuEditReorderElements>Re&amp;order elements</mnuEditReorderElements>
+			<!-- End of 0.9.6 section -->			
 			<!-- Tools menu items -->
 			<mnuTools>&amp;Tools</mnuTools>
 			<mnuToolsHtmlExport>&amp;HTML export</mnuToolsHtmlExport>
@@ -102,7 +108,10 @@
 			<mnuCtxMBAddActor>A&amp;kteur hinzufügen</mnuCtxMBAddActor>
 			<mnuCtxMBRemoveActor>Akteur l&amp;öschen</mnuCtxMBRemoveActor>
 			<mnuCtxMBAddUseCase>&amp;Anwendungsfall hinzufügen</mnuCtxMBAddUseCase>
-			<mnuCtxMBRemoveUseCase>Anwendungsfall lö&amp;schen</mnuCtxMBRemoveUseCase>		
+			<mnuCtxMBRemoveUseCase>Anwendungsfall lö&amp;schen</mnuCtxMBRemoveUseCase>
+			<!-- Start of 0.9.6 section -->
+			<mnuCtxMBReorderElements>Re&amp;order elements</mnuCtxMBReorderElements>
+			<!-- End of 0.9.6 section -->						
 			<!-- Element token context menu items -->
 			<mnuCtxETGoToDefinition>&amp;Gehe zur Definition</mnuCtxETGoToDefinition>
 			<!-- Start of 0.9.5 section -->
@@ -179,6 +188,11 @@
 			<lblAOwnerTitle>Eigentümer Paket</lblAOwnerTitle>
 			<lblANameTitle>Name</lblANameTitle>
 			<btnANameChange>Ändern</btnANameChange>
+			<!-- Start of 0.9.6 section -->
+			<lblAGoalsTitle>Goals</lblAGoalsTitle>
+			<btnAddGoal>Add</btnAddGoal>
+			<btnRemoveGoal>Remove</btnRemoveGoal>
+			<!-- End of 0.9.6 section -->			
 			<!-- Package General -->
 			<pgPGeneral>Allgemein</pgPGeneral>
 			<lblPIDTitle>Identifikation</lblPIDTitle>
@@ -200,8 +214,11 @@
 			<btnInsertStep>Einfügen</btnInsertStep>
 			<!-- Alternative hinzufügen => too long for button-->
 			<btnAddAltStep>Alternative hinzuf.</btnAddAltStep>
-			<!-- Alternative einfügen => too long for button -->
-			<btnInsertAltStep>Alternative einf.</btnInsertAltStep>
+			<!-- Start of 0.9.6 section -->
+			<!-- <btnInsertAltStep>Alternative einf.</btnInsertAltStep> -->
+			<btnAddRefStep>Add dependency</btnAddRefStep>
+			<btnInsertRefStep>Insert dependency</btnInsertRefStep>
+			<!-- End of 0.9.6 section -->			
 			<btnRemoveStep>Löschen</btnRemoveStep>
 			<!-- Prose -->
 			<pgProse>Prosa</pgProse>
@@ -285,4 +302,27 @@
 			<btnCancel>Abbrechen</btnCancel>
 		</Controls>
 	</frmOptions>
+	<!-- Start of 0.9.6 section	-->
+	<frmReorder>
+		<Controls>
+			<Self>Reorder elements</Self>
+			<btnMoveUp>Move up</btnMoveUp>
+			<btnMoveDown>Move down</btnMoveDown>
+			<btnOK>OK</btnOK>
+			<btnCancel>Cancel</btnCancel>
+		</Controls>
+	</frmReorder>
+	<frmRefSelector>
+		<Controls>
+			<Self>Use case dependency</Self>
+			<lblStereotypeTitle>Stereotype</lblStereotypeTitle>
+			<lblUseCaseTitle>Use case</lblUseCaseTitle>
+			<gbRelationship>Relationship</gbRelationship>
+			<lblDepFromTitle>depends from</lblDepFromTitle>
+			<btnSwap>Swap</btnSwap>
+			<btnOK>OK</btnOK>
+			<btnCancel>Cancel</btnCancel>
+		</Controls>
+	</frmRefSelector>
+	<!-- End of 0.9.6 section -->	
 </UCM-StringTable>

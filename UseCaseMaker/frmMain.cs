@@ -23,8 +23,6 @@ namespace UseCaseMaker
 	 */
 	public class frmMain : System.Windows.Forms.Form
 	{
-		// [DllImport("user32")] public static extern int LockWindowUpdate(IntPtr hwnd);
-
 		private const string defaultUCPrefix = "UC";
 		private const string defaultPPrefix = "P";
 		private const string defaultAPrefix = "A";
@@ -2794,7 +2792,7 @@ namespace UseCaseMaker
 				return;
 			}
 
-			Win32.LockWindowUpdate(tabUseCase.Handle);
+			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			this.LockModified();
 
 			this.SetDefaultButtonsState();
@@ -3285,8 +3283,10 @@ namespace UseCaseMaker
 
 			this.UnlockModified();
 
-			Win32.LockWindowUpdate((IntPtr)0); 
-			tabUseCase.Invalidate();
+			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
+			// tabUseCase.Invalidate();
+			this.Invalidate();
+			this.Refresh();
 		}
 
 		/**
@@ -3678,7 +3678,6 @@ namespace UseCaseMaker
 				tbPostconditions.HighlightDescriptors = this.hdc;
 
 				this.lockUpdate = true;
-				// LockWindowUpdate(tvModelBrowser.Handle);
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				this.Cursor = Cursors.WaitCursor;
 				XmlDocument doc = new XmlDocument();
@@ -3707,7 +3706,6 @@ namespace UseCaseMaker
 				finally
 				{
 					this.lockUpdate = false;
-					// LockWindowUpdate(new IntPtr(0));
 					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 					tvModelBrowser.Invalidate();
 				}
@@ -3803,7 +3801,6 @@ namespace UseCaseMaker
 			tbPostconditions.HighlightDescriptors = this.hdc;
 
 			this.lockUpdate = true;
-			// LockWindowUpdate(tvModelBrowser.Handle);
 			Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			this.Cursor = Cursors.WaitCursor;
 			XmlDocument doc = new XmlDocument();
@@ -3832,7 +3829,6 @@ namespace UseCaseMaker
 			finally
 			{
 				this.lockUpdate = false;
-				// LockWindowUpdate(new IntPtr(0));
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 				tvModelBrowser.Invalidate();
 			}
@@ -4200,10 +4196,8 @@ namespace UseCaseMaker
 					}
 				}
 				this.lockUpdate = true;
-				// Win32.LockWindowUpdate(tvModelBrowser.Handle);
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				BuildView(this.model);
-				// Win32.LockWindowUpdate(new IntPtr(0));
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 				this.lockUpdate = false;
 			}
@@ -6594,10 +6588,8 @@ namespace UseCaseMaker
 				}
 
 				this.lockUpdate = true;
-				// Win32.LockWindowUpdate(tvModelBrowser.Handle);
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				BuildView(this.model);
-				// Win32.LockWindowUpdate(new IntPtr(0));
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 				this.lockUpdate = false;
 				this.UpdateView();
@@ -6758,10 +6750,8 @@ namespace UseCaseMaker
 
 					mnuEditPaste.Enabled = true;
 					this.lockUpdate = true;
-					// LockWindowUpdate(tvModelBrowser.Handle);
 					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 					BuildView(this.model);
-					// Win32.LockWindowUpdate(new IntPtr(0));
 					Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 					this.lockUpdate = false;
 					this.UpdateView();

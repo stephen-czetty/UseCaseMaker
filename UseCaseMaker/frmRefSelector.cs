@@ -30,6 +30,8 @@ namespace UseCaseMaker
 		private System.Windows.Forms.GroupBox gbRelationship;
 		private System.Windows.Forms.Label lblUseCaseTitle;
 		private System.Windows.Forms.Button btnSwap;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label lblStereotype;
 		private System.ComponentModel.IContainer components;
 
 		public frmRefSelector(UseCase caller, Model model, Localizer localizer)
@@ -87,10 +89,12 @@ namespace UseCaseMaker
 			this.tvModelBrowser = new System.Windows.Forms.TreeView();
 			this.imgListModelBrowser = new System.Windows.Forms.ImageList(this.components);
 			this.gbRelationship = new System.Windows.Forms.GroupBox();
+			this.lblStereotype = new System.Windows.Forms.Label();
 			this.btnSwap = new System.Windows.Forms.Button();
 			this.lblDepFromTitle = new System.Windows.Forms.Label();
 			this.lblLowerUseCase = new System.Windows.Forms.Label();
 			this.lblUpperUseCase = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.gbRelationship.SuspendLayout();
@@ -109,9 +113,10 @@ namespace UseCaseMaker
 			// 
 			this.tbStereotype.Location = new System.Drawing.Point(136, 8);
 			this.tbStereotype.Name = "tbStereotype";
-			this.tbStereotype.Size = new System.Drawing.Size(328, 20);
+			this.tbStereotype.Size = new System.Drawing.Size(360, 20);
 			this.tbStereotype.TabIndex = 1;
 			this.tbStereotype.Text = "";
+			this.tbStereotype.TextChanged += new System.EventHandler(this.tbStereotype_TextChanged);
 			// 
 			// lblUseCaseTitle
 			// 
@@ -128,7 +133,7 @@ namespace UseCaseMaker
 			this.tvModelBrowser.ImageList = this.imgListModelBrowser;
 			this.tvModelBrowser.Location = new System.Drawing.Point(136, 40);
 			this.tvModelBrowser.Name = "tvModelBrowser";
-			this.tvModelBrowser.Size = new System.Drawing.Size(328, 160);
+			this.tvModelBrowser.Size = new System.Drawing.Size(360, 128);
 			this.tvModelBrowser.TabIndex = 3;
 			this.tvModelBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvModelBrowser_AfterSelect);
 			// 
@@ -140,55 +145,84 @@ namespace UseCaseMaker
 			// 
 			// gbRelationship
 			// 
+			this.gbRelationship.Controls.Add(this.lblStereotype);
 			this.gbRelationship.Controls.Add(this.btnSwap);
 			this.gbRelationship.Controls.Add(this.lblDepFromTitle);
 			this.gbRelationship.Controls.Add(this.lblLowerUseCase);
 			this.gbRelationship.Controls.Add(this.lblUpperUseCase);
+			this.gbRelationship.Controls.Add(this.pictureBox1);
 			this.gbRelationship.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.gbRelationship.Location = new System.Drawing.Point(8, 208);
+			this.gbRelationship.Location = new System.Drawing.Point(8, 176);
 			this.gbRelationship.Name = "gbRelationship";
-			this.gbRelationship.Size = new System.Drawing.Size(456, 112);
+			this.gbRelationship.Size = new System.Drawing.Size(488, 184);
 			this.gbRelationship.TabIndex = 4;
 			this.gbRelationship.TabStop = false;
 			this.gbRelationship.Text = "[Relationship]";
 			// 
+			// lblStereotype
+			// 
+			this.lblStereotype.BackColor = System.Drawing.Color.White;
+			this.lblStereotype.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.lblStereotype.Location = new System.Drawing.Point(16, 96);
+			this.lblStereotype.Name = "lblStereotype";
+			this.lblStereotype.Size = new System.Drawing.Size(160, 23);
+			this.lblStereotype.TabIndex = 9;
+			this.lblStereotype.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// btnSwap
 			// 
 			this.btnSwap.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnSwap.Location = new System.Drawing.Point(344, 24);
+			this.btnSwap.Location = new System.Drawing.Point(376, 24);
 			this.btnSwap.Name = "btnSwap";
-			this.btnSwap.Size = new System.Drawing.Size(104, 80);
+			this.btnSwap.Size = new System.Drawing.Size(104, 24);
 			this.btnSwap.TabIndex = 4;
 			this.btnSwap.Text = "[Swap]";
 			this.btnSwap.Click += new System.EventHandler(this.btnSwapUseCases_Click);
 			// 
 			// lblDepFromTitle
 			// 
+			this.lblDepFromTitle.BackColor = System.Drawing.Color.White;
 			this.lblDepFromTitle.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblDepFromTitle.Location = new System.Drawing.Point(8, 56);
+			this.lblDepFromTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
+			this.lblDepFromTitle.Location = new System.Drawing.Point(232, 48);
 			this.lblDepFromTitle.Name = "lblDepFromTitle";
-			this.lblDepFromTitle.Size = new System.Drawing.Size(328, 24);
+			this.lblDepFromTitle.Size = new System.Drawing.Size(128, 24);
 			this.lblDepFromTitle.TabIndex = 6;
 			this.lblDepFromTitle.Text = "[depends from]";
 			this.lblDepFromTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// lblLowerUseCase
 			// 
-			this.lblLowerUseCase.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.lblLowerUseCase.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
 			this.lblLowerUseCase.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblLowerUseCase.Location = new System.Drawing.Point(8, 80);
+			this.lblLowerUseCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
+			this.lblLowerUseCase.Location = new System.Drawing.Point(160, 128);
 			this.lblLowerUseCase.Name = "lblLowerUseCase";
-			this.lblLowerUseCase.Size = new System.Drawing.Size(328, 24);
+			this.lblLowerUseCase.Size = new System.Drawing.Size(160, 24);
 			this.lblLowerUseCase.TabIndex = 3;
+			this.lblLowerUseCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// lblUpperUseCase
 			// 
-			this.lblUpperUseCase.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.lblUpperUseCase.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
 			this.lblUpperUseCase.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lblUpperUseCase.Location = new System.Drawing.Point(8, 24);
+			this.lblUpperUseCase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
+			this.lblUpperUseCase.Location = new System.Drawing.Point(56, 48);
 			this.lblUpperUseCase.Name = "lblUpperUseCase";
-			this.lblUpperUseCase.Size = new System.Drawing.Size(328, 24);
+			this.lblUpperUseCase.Size = new System.Drawing.Size(152, 24);
 			this.lblUpperUseCase.TabIndex = 2;
+			this.lblUpperUseCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(8, 24);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(360, 152);
+			this.pictureBox1.TabIndex = 8;
+			this.pictureBox1.TabStop = false;
 			// 
 			// btnCancel
 			// 
@@ -196,7 +230,7 @@ namespace UseCaseMaker
 			this.btnCancel.CausesValidation = false;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnCancel.Location = new System.Drawing.Point(240, 328);
+			this.btnCancel.Location = new System.Drawing.Point(256, 368);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(120, 24);
 			this.btnCancel.TabIndex = 6;
@@ -207,7 +241,7 @@ namespace UseCaseMaker
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnOK.Location = new System.Drawing.Point(112, 328);
+			this.btnOK.Location = new System.Drawing.Point(128, 368);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(120, 24);
 			this.btnOK.TabIndex = 5;
@@ -217,7 +251,7 @@ namespace UseCaseMaker
 			// frmRefSelector
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(473, 359);
+			this.ClientSize = new System.Drawing.Size(506, 400);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.gbRelationship);
@@ -427,6 +461,18 @@ namespace UseCaseMaker
 			else
 			{
 				this.callerRefType = DependencyItem.ReferenceType.Supplier;
+			}
+		}
+
+		private void tbStereotype_TextChanged(object sender, System.EventArgs e)
+		{
+			if(tbStereotype.Text != "")
+			{
+				lblStereotype.Text = "<<" + tbStereotype.Text + ">>";
+			}
+			else
+			{
+				lblStereotype.Text = "";
 			}
 		}
 	}
