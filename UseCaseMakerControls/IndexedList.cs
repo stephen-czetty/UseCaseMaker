@@ -582,7 +582,6 @@ namespace UseCaseMakerControls
 				return;
 			}
 
-			// Win32.LockWindowUpdate(this.Handle);
 			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 
 			this.items.Clear();
@@ -604,8 +603,8 @@ namespace UseCaseMakerControls
 				ili.ItemRichTextBox.ParseNow();
 			}
 
-			// Win32.LockWindowUpdate(new IntPtr(0));
 			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
+
 			this.Invalidate();
 			this.Refresh();
 		}

@@ -50,6 +50,5 @@ namespace UseCaseMakerControls
 		[DllImport("user32")] public static extern int SendMessage(HWND hwnd, int wMsg, int wParam, IntPtr lParam);
 		[DllImport("user32")] public static extern int PostMessage(HWND hwnd, int wMsg, int wParam, int lParam);
 		[DllImport("user32")] public static extern short GetKeyState(int nVirtKey);
-		[DllImport("user32")] public static extern int LockWindowUpdate(HWND hwnd);
 	}
 }

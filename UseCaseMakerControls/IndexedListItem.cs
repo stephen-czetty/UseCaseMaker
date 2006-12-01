@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace UseCaseMakerControls
 {
@@ -120,6 +121,24 @@ namespace UseCaseMakerControls
 			{
 				this._readOnly = value;
 				this.ItemRichTextBox.ReadOnly = value;
+			}
+		}
+
+		[ 
+		Category("Default"),
+		DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+		NotifyParentProperty(true)
+		]
+		public Image IndexImage
+		{
+			get
+			{
+				return this.ItemLabel.Image;
+			}
+			set
+			{
+				this.ItemLabel.Image = value;
+				this.ItemLabel.ImageAlign = ContentAlignment.BottomRight;
 			}
 		}
 

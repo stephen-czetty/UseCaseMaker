@@ -217,7 +217,6 @@ namespace UseCaseMakerControls
 			}
 
 			mParsing = true;
-			// Win32.LockWindowUpdate(Handle);
 			Win32.SendMessage(Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			base.OnTextChanged(e);
 
@@ -266,7 +265,6 @@ namespace UseCaseMakerControls
 			this.SelectionLength = 0;
 
 			SetScrollPos(scrollPos);
-			//Win32.LockWindowUpdate((IntPtr)0);
 			Win32.SendMessage(Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 			Invalidate();
 			
@@ -420,7 +418,7 @@ namespace UseCaseMakerControls
 				case Win32.WM_KEYDOWN:
 				case Win32.WM_SYSKEYDOWN:
 				{
-					if (mAutoCompleteShown)
+					if(mAutoCompleteShown)
 					{
 						switch ((Keys)(int)m.WParam)
 						{
@@ -457,21 +455,21 @@ namespace UseCaseMakerControls
 					else
 					{
 						if (((Keys)(int)m.WParam == Keys.Space) && 
-							((Win32.GetKeyState(Win32.VK_CONTROL) & Win32.KS_KEYDOWN) != 0))
+							Control.ModifierKeys == Keys.Control)
 						{
 							if(this.HighlightDescriptors.Count > 0)
 							{
 								ShowAutoComplete();
 							}
 						} 
-						else if (((Keys)(int)m.WParam == Keys.Z) && 
-							((Win32.GetKeyState(Win32.VK_CONTROL) & Win32.KS_KEYDOWN) != 0))
+						else if (((Keys)(int)m.WParam == Keys.Z) &&
+							Control.ModifierKeys == Keys.Control)
 						{
 							Undo();
 							return;
 						}
 						else if (((Keys)(int)m.WParam == Keys.Y) && 
-							((Win32.GetKeyState(Win32.VK_CONTROL) & Win32.KS_KEYDOWN) != 0))
+							Control.ModifierKeys == Keys.Control)
 						{
 							Redo();
 							return;
@@ -484,7 +482,7 @@ namespace UseCaseMakerControls
 					switch ((Keys)(int)m.WParam)
 					{
 						case Keys.Space:
-							if ((Win32.GetKeyState(Win32.VK_CONTROL) & Win32.KS_KEYDOWN )!= 0)
+							if(Control.ModifierKeys == Keys.Control)
 							{
 								return;
 							}
