@@ -980,7 +980,7 @@ namespace UseCaseMaker
 			this.toolBar.Location = new System.Drawing.Point(0, 0);
 			this.toolBar.Name = "toolBar";
 			this.toolBar.ShowToolTips = true;
-			this.toolBar.Size = new System.Drawing.Size(651, 28);
+			this.toolBar.Size = new System.Drawing.Size(652, 28);
 			this.toolBar.TabIndex = 1;
 			this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
 			// 
@@ -1074,7 +1074,7 @@ namespace UseCaseMaker
 			this.tabUseCase.Location = new System.Drawing.Point(130, 28);
 			this.tabUseCase.Name = "tabUseCase";
 			this.tabUseCase.SelectedIndex = 0;
-			this.tabUseCase.Size = new System.Drawing.Size(521, 373);
+			this.tabUseCase.Size = new System.Drawing.Size(522, 373);
 			this.tabUseCase.TabIndex = 4;
 			this.tabUseCase.SelectedIndexChanged += new System.EventHandler(this.tabUseCase_SelectedIndexChanged);
 			// 
@@ -1087,7 +1087,7 @@ namespace UseCaseMaker
 			this.pgMain.Controls.Add(this.pnlFullPathContainer);
 			this.pgMain.Location = new System.Drawing.Point(4, 22);
 			this.pgMain.Name = "pgMain";
-			this.pgMain.Size = new System.Drawing.Size(513, 347);
+			this.pgMain.Size = new System.Drawing.Size(514, 347);
 			this.pgMain.TabIndex = 8;
 			this.pgMain.Text = "[Main]";
 			// 
@@ -1100,7 +1100,7 @@ namespace UseCaseMaker
 			this.pnlAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnlAbout.Location = new System.Drawing.Point(0, 283);
 			this.pnlAbout.Name = "pnlAbout";
-			this.pnlAbout.Size = new System.Drawing.Size(513, 64);
+			this.pnlAbout.Size = new System.Drawing.Size(514, 64);
 			this.pnlAbout.TabIndex = 13;
 			// 
 			// lblVersion
@@ -1108,7 +1108,7 @@ namespace UseCaseMaker
 			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.lblVersion.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.lblVersion.Location = new System.Drawing.Point(343, 32);
+			this.lblVersion.Location = new System.Drawing.Point(344, 32);
 			this.lblVersion.Name = "lblVersion";
 			this.lblVersion.Size = new System.Drawing.Size(160, 23);
 			this.lblVersion.TabIndex = 15;
@@ -1120,7 +1120,7 @@ namespace UseCaseMaker
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
 			this.label1.ForeColor = System.Drawing.Color.LightSteelBlue;
-			this.label1.Location = new System.Drawing.Point(343, 8);
+			this.label1.Location = new System.Drawing.Point(344, 8);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(160, 23);
 			this.label1.TabIndex = 14;
@@ -1134,7 +1134,7 @@ namespace UseCaseMaker
 			this.pnlUseCasesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlUseCasesContainer.Location = new System.Drawing.Point(0, 72);
 			this.pnlUseCasesContainer.Name = "pnlUseCasesContainer";
-			this.pnlUseCasesContainer.Size = new System.Drawing.Size(513, 24);
+			this.pnlUseCasesContainer.Size = new System.Drawing.Size(514, 24);
 			this.pnlUseCasesContainer.TabIndex = 11;
 			// 
 			// lblUseCases
@@ -1145,7 +1145,7 @@ namespace UseCaseMaker
 			this.lblUseCases.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblUseCases.Location = new System.Drawing.Point(120, 8);
 			this.lblUseCases.Name = "lblUseCases";
-			this.lblUseCases.Size = new System.Drawing.Size(385, 16);
+			this.lblUseCases.Size = new System.Drawing.Size(386, 16);
 			this.lblUseCases.TabIndex = 9;
 			// 
 			// lblUseCasesTitle
@@ -1164,7 +1164,7 @@ namespace UseCaseMaker
 			this.pnlActorsContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlActorsContainer.Location = new System.Drawing.Point(0, 48);
 			this.pnlActorsContainer.Name = "pnlActorsContainer";
-			this.pnlActorsContainer.Size = new System.Drawing.Size(513, 24);
+			this.pnlActorsContainer.Size = new System.Drawing.Size(514, 24);
 			this.pnlActorsContainer.TabIndex = 10;
 			// 
 			// lblActors
@@ -1175,7 +1175,7 @@ namespace UseCaseMaker
 			this.lblActors.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblActors.Location = new System.Drawing.Point(120, 8);
 			this.lblActors.Name = "lblActors";
-			this.lblActors.Size = new System.Drawing.Size(385, 16);
+			this.lblActors.Size = new System.Drawing.Size(386, 16);
 			this.lblActors.TabIndex = 7;
 			// 
 			// lblActorsTitle
@@ -1194,7 +1194,7 @@ namespace UseCaseMaker
 			this.pnlPackagesContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlPackagesContainer.Location = new System.Drawing.Point(0, 24);
 			this.pnlPackagesContainer.Name = "pnlPackagesContainer";
-			this.pnlPackagesContainer.Size = new System.Drawing.Size(513, 24);
+			this.pnlPackagesContainer.Size = new System.Drawing.Size(514, 24);
 			this.pnlPackagesContainer.TabIndex = 9;
 			// 
 			// lblPackages
@@ -1205,7 +1205,7 @@ namespace UseCaseMaker
 			this.lblPackages.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblPackages.Location = new System.Drawing.Point(120, 8);
 			this.lblPackages.Name = "lblPackages";
-			this.lblPackages.Size = new System.Drawing.Size(385, 16);
+			this.lblPackages.Size = new System.Drawing.Size(386, 16);
 			this.lblPackages.TabIndex = 5;
 			// 
 			// lblPackagesTitle
@@ -1224,7 +1224,7 @@ namespace UseCaseMaker
 			this.pnlFullPathContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnlFullPathContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnlFullPathContainer.Name = "pnlFullPathContainer";
-			this.pnlFullPathContainer.Size = new System.Drawing.Size(513, 24);
+			this.pnlFullPathContainer.Size = new System.Drawing.Size(514, 24);
 			this.pnlFullPathContainer.TabIndex = 8;
 			// 
 			// lblFullPath
@@ -1235,7 +1235,7 @@ namespace UseCaseMaker
 			this.lblFullPath.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.lblFullPath.Location = new System.Drawing.Point(120, 8);
 			this.lblFullPath.Name = "lblFullPath";
-			this.lblFullPath.Size = new System.Drawing.Size(385, 16);
+			this.lblFullPath.Size = new System.Drawing.Size(386, 16);
 			this.lblFullPath.TabIndex = 3;
 			// 
 			// lblFullPathTitle
@@ -1259,7 +1259,7 @@ namespace UseCaseMaker
 			this.pgFlowOfEvents.Controls.Add(this.lblStepsTitle);
 			this.pgFlowOfEvents.Location = new System.Drawing.Point(4, 22);
 			this.pgFlowOfEvents.Name = "pgFlowOfEvents";
-			this.pgFlowOfEvents.Size = new System.Drawing.Size(514, 326);
+			this.pgFlowOfEvents.Size = new System.Drawing.Size(514, 347);
 			this.pgFlowOfEvents.TabIndex = 1;
 			this.pgFlowOfEvents.Text = "[Flow of events]";
 			// 
@@ -1301,10 +1301,10 @@ namespace UseCaseMaker
 			this.UCList.IndexDataField = null;
 			this.UCList.Location = new System.Drawing.Point(96, 8);
 			this.UCList.Name = "UCList";
-			this.UCList.ReadOnlyBackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.UCList.ReadOnlyBackColor = System.Drawing.SystemColors.ControlLight;
 			this.UCList.RowHeight = 46;
 			this.UCList.SelectedIndex = -1;
-			this.UCList.Size = new System.Drawing.Size(284, 306);
+			this.UCList.Size = new System.Drawing.Size(284, 327);
 			this.UCList.TabIndex = 0;
 			this.UCList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.UCList.TextColumnWidth = 229;
@@ -1388,7 +1388,7 @@ namespace UseCaseMaker
 			this.pgAGeneral.Controls.Add(this.lblAIDTitle);
 			this.pgAGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgAGeneral.Name = "pgAGeneral";
-			this.pgAGeneral.Size = new System.Drawing.Size(514, 326);
+			this.pgAGeneral.Size = new System.Drawing.Size(514, 347);
 			this.pgAGeneral.TabIndex = 7;
 			this.pgAGeneral.Text = "[General (A)]";
 			// 
@@ -1433,7 +1433,7 @@ namespace UseCaseMaker
 			this.AGList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.AGList.RowHeight = 46;
 			this.AGList.SelectedIndex = -1;
-			this.AGList.Size = new System.Drawing.Size(271, 241);
+			this.AGList.Size = new System.Drawing.Size(271, 262);
 			this.AGList.TabIndex = 1;
 			this.AGList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.AGList.TextColumnWidth = 216;
@@ -1543,7 +1543,7 @@ namespace UseCaseMaker
 			this.pgUCGeneral.Controls.Add(this.lblUCIDTitle);
 			this.pgUCGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgUCGeneral.Name = "pgUCGeneral";
-			this.pgUCGeneral.Size = new System.Drawing.Size(514, 326);
+			this.pgUCGeneral.Size = new System.Drawing.Size(514, 347);
 			this.pgUCGeneral.TabIndex = 0;
 			this.pgUCGeneral.Text = "[General (UC)]";
 			// 
@@ -1654,7 +1654,7 @@ namespace UseCaseMaker
 			this.lvActors.Location = new System.Drawing.Point(104, 216);
 			this.lvActors.MultiSelect = false;
 			this.lvActors.Name = "lvActors";
-			this.lvActors.Size = new System.Drawing.Size(274, 98);
+			this.lvActors.Size = new System.Drawing.Size(274, 119);
 			this.lvActors.TabIndex = 3;
 			this.lvActors.View = System.Windows.Forms.View.Details;
 			this.lvActors.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvActors_Layout);
@@ -1758,7 +1758,7 @@ namespace UseCaseMaker
 			this.pgAttributes.Controls.Add(this.lblDescriptionTitle);
 			this.pgAttributes.Location = new System.Drawing.Point(4, 22);
 			this.pgAttributes.Name = "pgAttributes";
-			this.pgAttributes.Size = new System.Drawing.Size(514, 326);
+			this.pgAttributes.Size = new System.Drawing.Size(514, 347);
 			this.pgAttributes.TabIndex = 4;
 			this.pgAttributes.Text = "[Attributes]";
 			// 
@@ -1844,7 +1844,7 @@ namespace UseCaseMaker
 			this.lvRelatedDocs.HideSelection = false;
 			this.lvRelatedDocs.Location = new System.Drawing.Point(104, 232);
 			this.lvRelatedDocs.Name = "lvRelatedDocs";
-			this.lvRelatedDocs.Size = new System.Drawing.Size(274, 82);
+			this.lvRelatedDocs.Size = new System.Drawing.Size(274, 103);
 			this.lvRelatedDocs.TabIndex = 2;
 			this.lvRelatedDocs.View = System.Windows.Forms.View.Details;
 			this.lvRelatedDocs.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvRelatedDocs_Layout);
@@ -1893,7 +1893,7 @@ namespace UseCaseMaker
 			this.pgPGeneral.Controls.Add(this.lblPIDTitle);
 			this.pgPGeneral.Location = new System.Drawing.Point(4, 22);
 			this.pgPGeneral.Name = "pgPGeneral";
-			this.pgPGeneral.Size = new System.Drawing.Size(514, 326);
+			this.pgPGeneral.Size = new System.Drawing.Size(514, 347);
 			this.pgPGeneral.TabIndex = 9;
 			this.pgPGeneral.Text = "[General(P)]";
 			// 
@@ -1974,7 +1974,7 @@ namespace UseCaseMaker
 			this.pgGlossary.Controls.Add(this.btnAddGlossaryItem);
 			this.pgGlossary.Location = new System.Drawing.Point(4, 22);
 			this.pgGlossary.Name = "pgGlossary";
-			this.pgGlossary.Size = new System.Drawing.Size(514, 326);
+			this.pgGlossary.Size = new System.Drawing.Size(514, 347);
 			this.pgGlossary.TabIndex = 10;
 			this.pgGlossary.Text = "[Glossary]";
 			// 
@@ -1996,7 +1996,7 @@ namespace UseCaseMaker
 			this.GList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.GList.RowHeight = 46;
 			this.GList.SelectedIndex = -1;
-			this.GList.Size = new System.Drawing.Size(368, 306);
+			this.GList.Size = new System.Drawing.Size(368, 327);
 			this.GList.TabIndex = 4;
 			this.GList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.GList.TextColumnWidth = 217;
@@ -2050,7 +2050,7 @@ namespace UseCaseMaker
 			this.pgHistory.Controls.Add(this.lvHistory);
 			this.pgHistory.Location = new System.Drawing.Point(4, 22);
 			this.pgHistory.Name = "pgHistory";
-			this.pgHistory.Size = new System.Drawing.Size(514, 326);
+			this.pgHistory.Size = new System.Drawing.Size(514, 347);
 			this.pgHistory.TabIndex = 5;
 			this.pgHistory.Text = "[History]";
 			// 
@@ -2084,7 +2084,7 @@ namespace UseCaseMaker
 			this.lvHistory.Location = new System.Drawing.Point(8, 8);
 			this.lvHistory.MultiSelect = false;
 			this.lvHistory.Name = "lvHistory";
-			this.lvHistory.Size = new System.Drawing.Size(370, 306);
+			this.lvHistory.Size = new System.Drawing.Size(370, 327);
 			this.lvHistory.TabIndex = 0;
 			this.lvHistory.View = System.Windows.Forms.View.Details;
 			this.lvHistory.Layout += new System.Windows.Forms.LayoutEventHandler(this.lvHistory_Layout);
@@ -2134,7 +2134,7 @@ namespace UseCaseMaker
 			this.pgDetails.Controls.Add(this.lblPriorityTitle);
 			this.pgDetails.Location = new System.Drawing.Point(4, 22);
 			this.pgDetails.Name = "pgDetails";
-			this.pgDetails.Size = new System.Drawing.Size(514, 326);
+			this.pgDetails.Size = new System.Drawing.Size(514, 347);
 			this.pgDetails.TabIndex = 3;
 			this.pgDetails.Text = "[Details]";
 			// 
@@ -2156,7 +2156,7 @@ namespace UseCaseMaker
 			this.OIList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.OIList.RowHeight = 46;
 			this.OIList.SelectedIndex = -1;
-			this.OIList.Size = new System.Drawing.Size(276, 82);
+			this.OIList.Size = new System.Drawing.Size(276, 103);
 			this.OIList.TabIndex = 34;
 			this.OIList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.OIList.TextColumnWidth = 221;
@@ -2393,7 +2393,7 @@ namespace UseCaseMaker
 			this.pgProse.Controls.Add(this.tbProse);
 			this.pgProse.Location = new System.Drawing.Point(4, 22);
 			this.pgProse.Name = "pgProse";
-			this.pgProse.Size = new System.Drawing.Size(514, 326);
+			this.pgProse.Size = new System.Drawing.Size(514, 347);
 			this.pgProse.TabIndex = 2;
 			this.pgProse.Text = "[Prose]";
 			// 
@@ -2407,7 +2407,7 @@ namespace UseCaseMaker
 			this.tbProse.Location = new System.Drawing.Point(8, 8);
 			this.tbProse.MaxUndoRedoSteps = 50;
 			this.tbProse.Name = "tbProse";
-			this.tbProse.Size = new System.Drawing.Size(500, 306);
+			this.tbProse.Size = new System.Drawing.Size(500, 327);
 			this.tbProse.TabIndex = 0;
 			this.tbProse.Text = "";
 			this.tbProse.ItemTextSelectionChanged += new UseCaseMakerControls.ItemTextSelectionChangedEventHandler(this.OnEditableStateChanged);
@@ -2423,7 +2423,7 @@ namespace UseCaseMaker
 			this.pgRequirements.Controls.Add(this.btnAddRequirement);
 			this.pgRequirements.Location = new System.Drawing.Point(4, 22);
 			this.pgRequirements.Name = "pgRequirements";
-			this.pgRequirements.Size = new System.Drawing.Size(514, 326);
+			this.pgRequirements.Size = new System.Drawing.Size(514, 347);
 			this.pgRequirements.TabIndex = 6;
 			this.pgRequirements.Text = "[Requirements]";
 			// 
@@ -2445,7 +2445,7 @@ namespace UseCaseMaker
 			this.RList.ReadOnlyBackColor = System.Drawing.SystemColors.Window;
 			this.RList.RowHeight = 46;
 			this.RList.SelectedIndex = -1;
-			this.RList.Size = new System.Drawing.Size(368, 306);
+			this.RList.Size = new System.Drawing.Size(368, 327);
 			this.RList.TabIndex = 3;
 			this.RList.TextBackColor = System.Drawing.SystemColors.Window;
 			this.RList.TextColumnWidth = 313;
@@ -2485,7 +2485,7 @@ namespace UseCaseMaker
 			// 
 			this.statusBar.Location = new System.Drawing.Point(0, 401);
 			this.statusBar.Name = "statusBar";
-			this.statusBar.Size = new System.Drawing.Size(651, 22);
+			this.statusBar.Size = new System.Drawing.Size(652, 22);
 			this.statusBar.TabIndex = 5;
 			// 
 			// openModelFileDialog
@@ -2553,7 +2553,7 @@ namespace UseCaseMaker
 			// frmMain
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(651, 423);
+			this.ClientSize = new System.Drawing.Size(652, 423);
 			this.Controls.Add(this.splLeft);
 			this.Controls.Add(this.tabUseCase);
 			this.Controls.Add(this.pnlModelBrowser);
