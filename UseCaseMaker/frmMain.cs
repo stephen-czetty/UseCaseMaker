@@ -5685,6 +5685,13 @@ namespace UseCaseMaker
 			this.appSettings.LoadSettings();
 			this.ImeMode = ImeMode.On;
 
+			frmAbout frm = new frmAbout(true);
+			frm.Show();
+			Application.DoEvents();
+			System.Threading.Thread.Sleep(3000);
+			frm.Close();
+			frm.Dispose();
+
 			this.SuspendLayout();
 			
 			try
@@ -6121,8 +6128,9 @@ namespace UseCaseMaker
 
 		private void mnuHelpAbout_Click(object sender, System.EventArgs e)
 		{
-			frmAbout frm = new frmAbout();
+			frmAbout frm = new frmAbout(false);
 			frm.ShowDialog(this);
+			frm.Dispose();
 		}
 
 		private void EnableElementTokenContextMenu(LinkEnabledRTB parent, bool isToken, Point location)

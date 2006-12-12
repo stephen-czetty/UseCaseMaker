@@ -110,10 +110,10 @@
 			<mnuCtxMBAddUseCase>ユースケース追加(&amp;u)</mnuCtxMBAddUseCase>
 			<mnuCtxMBRemoveUseCase>ユースケース削除(&amp;v)</mnuCtxMBRemoveUseCase>
 			<!-- Start of 0.9.6 section -->
-			<mnuCtxMBReorderElements>追加要素(Re&amp;O)</mnuCtxMBReorderElements>
+			<mnuCtxMBReorderElements>順番の入替え(Re&amp;O)</mnuCtxMBReorderElements>
 			<!-- End of 0.9.6 section -->			
 			<!-- Element token context menu items -->
-			<mnuCtxETGoToDefinition>定義に行きなさい(&amp;G)</mnuCtxETGoToDefinition>
+			<mnuCtxETGoToDefinition>定義位置を表示(&amp;G)</mnuCtxETGoToDefinition>
 			<!-- Start of 0.9.5 section -->
 			<mnuCtxETCut>切り取り(&amp;T)</mnuCtxETCut>
 			<mnuCtxETCopy>コピー(&amp;C)</mnuCtxETCopy>
@@ -303,7 +303,7 @@
 	<!-- Start of 0.9.6 section	-->
 	<frmReorder>
 		<Controls>
-			<Self>追加要素</Self>
+			<Self>順番の入替え</Self>
 			<btnMoveUp>上へ</btnMoveUp>
 			<btnMoveDown>下へ</btnMoveDown>
 			<btnOK>OK</btnOK>
