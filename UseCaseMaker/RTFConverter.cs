@@ -134,13 +134,15 @@ namespace UseCaseMaker
 			// iTextSharp
 			RtfWriter2 writer = RtfWriter2.GetInstance(document, ms);
 			
-			footerPhrase = new Phrase("",new Font(Font.HELVETICA,8));
+			footerPhrase = new Phrase("",new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA,8));
 			RtfHeaderFooter footer = new RtfHeaderFooter(footerPhrase,true);
 			footer.SetAlignment("center");
 			writer.Footer = footer;
 			
 			AssemblyName an = this.GetType().Assembly.GetName();
-			headerPhrase = new Phrase("Use Case Maker " + an.Version.ToString(3),new Font(Font.HELVETICA,8));
+			headerPhrase = new Phrase(
+				"Use Case Maker " + an.Version.ToString(3),
+				new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA,8));
 			RtfHeaderFooter header = new RtfHeaderFooter(headerPhrase,false);
 			header.SetAlignment("right");
 			writer.Header = header;

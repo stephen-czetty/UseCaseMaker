@@ -3530,6 +3530,8 @@ namespace UseCaseMaker
 			this.CloseModel();
 			this.SetDefaultButtonsState();
 
+			this.modelFileName = string.Empty;
+
 			System.Char [] separators = {' ','\r','\n',',','.','-','+','\\','\'','?','!'};
 			foreach(System.Char c in separators)
 			{

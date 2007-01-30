@@ -350,7 +350,6 @@ namespace UseCaseMakerControls
 			this.OnItemTextSelectionChanged(new ItemTextChangedEventArgs(this));
 		}
 
-
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			if(msg.Msg == Win32.WM_KEYDOWN || msg.Msg == Win32.WM_SYSKEYDOWN)
@@ -367,33 +366,6 @@ namespace UseCaseMakerControls
 			return base.ProcessCmdKey (ref msg, keyData);
 		}
 
-		protected override void OnKeyPress(KeyPressEventArgs e)
-		{
-			if(e.KeyChar == '\"')
-			{
-				int counter = this.TagCount() + 1;
-				if(mAutoCompleteShown && counter % 2 == 0)
-				{
-					HideAutoCompleteForm();
-				}
-				else if(!mAutoCompleteShown && counter % 2 != 0)
-				{
-					if(this.HighlightDescriptors.Count > 0)
-					{
-						ShowAutoComplete();
-					}
-				}
-			}
-			if(e.KeyChar == '.')
-			{
-				if(mAutoCompleteShown)
-				{
-					HideAutoCompleteForm();
-				}
-			}
-			base.OnKeyPress (e);
-		}
-
 		/// <summary>
 		/// Taking care of Keyboard events
 		/// </summary>
@@ -404,27 +376,27 @@ namespace UseCaseMakerControls
 		/// </remarks>
 		protected override void WndProc(ref Message m)
 		{
-			switch (m.Msg)
+			switch(m.Msg)
 			{
-				case Win32.WM_PAINT:
-				{
-					//Don't draw the control while parsing to avoid flicker.
-					if (mParsing)
-					{
-						return;
-					}
-					break;
-				}
+//				case Win32.WM_PAINT:
+//				{
+//					//Don't draw the control while parsing to avoid flicker.
+//					if(mParsing)
+//					{
+//						return;
+//					}
+//					break;
+//				}
 				case Win32.WM_KEYDOWN:
 				case Win32.WM_SYSKEYDOWN:
 				{
 					if(mAutoCompleteShown)
 					{
-						switch ((Keys)(int)m.WParam)
+						switch((Keys)(int)m.WParam)
 						{
 							case Keys.Down:
 							{
-								if (mAutoCompleteForm.Items.Count != 0)
+								if(mAutoCompleteForm.Items.Count != 0)
 								{
 									mAutoCompleteForm.SelectedIndex = (mAutoCompleteForm.SelectedIndex + 1) % mAutoCompleteForm.Items.Count;
 								}
@@ -432,9 +404,9 @@ namespace UseCaseMakerControls
 							}
 							case Keys.Up:
 							{
-								if (mAutoCompleteForm.Items.Count != 0)
+								if(mAutoCompleteForm.Items.Count != 0)
 								{
-									if (mAutoCompleteForm.SelectedIndex < 1)
+									if(mAutoCompleteForm.SelectedIndex < 1)
 									{
 										mAutoCompleteForm.SelectedIndex = mAutoCompleteForm.Items.Count - 1;
 									}
@@ -454,7 +426,7 @@ namespace UseCaseMakerControls
 					}
 					else
 					{
-						if (((Keys)(int)m.WParam == Keys.Space) && 
+						if(((Keys)(int)m.WParam == Keys.Space) && 
 							Control.ModifierKeys == Keys.Control)
 						{
 							if(this.HighlightDescriptors.Count > 0)
@@ -462,13 +434,13 @@ namespace UseCaseMakerControls
 								ShowAutoComplete();
 							}
 						} 
-						else if (((Keys)(int)m.WParam == Keys.Z) &&
+						else if(((Keys)(int)m.WParam == Keys.Z) &&
 							Control.ModifierKeys == Keys.Control)
 						{
 							Undo();
 							return;
 						}
-						else if (((Keys)(int)m.WParam == Keys.Y) && 
+						else if(((Keys)(int)m.WParam == Keys.Y) && 
 							Control.ModifierKeys == Keys.Control)
 						{
 							Redo();
@@ -479,17 +451,13 @@ namespace UseCaseMakerControls
 				}
 				case Win32.WM_CHAR:
 				{
-					switch ((Keys)(int)m.WParam)
+					switch((Keys)(int)m.WParam)
 					{
 						case Keys.Space:
 							if(Control.ModifierKeys == Keys.Control)
 							{
 								return;
 							}
-							break;
-						case Keys.Enter:
-						case Keys.Tab:
-							if (mAutoCompleteShown) return;
 							break;
 						case Keys.Back:
 						case Keys.Delete:
@@ -499,10 +467,32 @@ namespace UseCaseMakerControls
 							}
 							break;
 					}
+					if((int)m.WParam == '\"')
+					{
+						int counter = this.TagCount() + 1;
+						if(mAutoCompleteShown && counter % 2 == 0)
+						{
+							HideAutoCompleteForm();
+						}
+						else if(!mAutoCompleteShown && counter % 2 != 0)
+						{
+							if(this.HighlightDescriptors.Count > 0)
+							{
+								ShowAutoComplete();
+							}
+						}
+					}
+					if((int)m.WParam == '.')
+					{
+						if(mAutoCompleteShown)
+						{
+							HideAutoCompleteForm();
+						}
+					}
 				}
 				break;
 			}
-			base.WndProc (ref m);
+			base.WndProc(ref m);
 		}
 
 		/// <summary>
@@ -511,7 +501,7 @@ namespace UseCaseMakerControls
 		/// <param name="e"></param>
 		protected override void OnLostFocus(EventArgs e)
 		{
-			if (!mIgnoreLostFocus)
+			if(!mIgnoreLostFocus)
 			{
 				HideAutoCompleteForm();
 			}
@@ -557,7 +547,7 @@ namespace UseCaseMakerControls
 			// Composite token
 			found = false;
 			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
-			while(charIndex >= 0)
+			while(charIndex >= 0 && charIndex < this.Text.Length)
 			{
 				c = this.Text.Substring(charIndex,1);
 				if(c == "\"")
@@ -588,7 +578,7 @@ namespace UseCaseMakerControls
 
 			// Single word token
 			charIndex = GetCharIndexFromPosition(new Point(e.X,e.Y));
-			while(charIndex >= 0)
+			while(charIndex >= 0 && charIndex < this.Text.Length)
 			{
 				c = this.Text.Substring(charIndex,1);
 				if(c.IndexOfAny(separators) != -1)
@@ -600,6 +590,11 @@ namespace UseCaseMakerControls
 			}
 
 			charIndex += 1;
+
+			if(charIndex > this.Text.Length)
+			{
+				return string.Empty;
+			}
 
 			tokenEndIndex = this.Text.IndexOfAny(separators,charIndex);
 			if(tokenEndIndex == -1)
@@ -755,14 +750,30 @@ namespace UseCaseMakerControls
 			}
 			
 			int curTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart, Text.Length - 1)) + 1;
+			if(SelectionStart > 0)
+			{
+				int tmpTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart - 1, Text.Length - 1)) + 1;
+				if(tmpTokenStartIndex < curTokenStartIndex)
+				{
+					curTokenStartIndex = tmpTokenStartIndex;
+				}
+			}
 			int curTokenEndIndex= Text.IndexOfAny(mSeparators.GetAsCharArray(), SelectionStart);
-			if (curTokenEndIndex == -1) 
+			if(curTokenEndIndex == -1) 
 			{
 				curTokenEndIndex = Text.Length;
 			}
 			SelectionStart = Math.Max(curTokenStartIndex, 0);
 			SelectionLength = Math.Max(0,curTokenEndIndex - curTokenStartIndex);
-			SelectedText = mAutoCompleteForm.SelectedItem;
+			if(SelectedText[0] != '\"')
+			{
+				SelectedText = "\"";
+			}
+			else
+			{
+				SelectedText = "";
+			}
+			SelectedText += mAutoCompleteForm.SelectedItem;
 			SelectionStart = SelectionStart + SelectionLength;
 			SelectionLength = 0;
 
@@ -770,16 +781,27 @@ namespace UseCaseMakerControls
 			return true;
 		}
 
-
-
 		/// <summary>
 		/// Finds the and sets the best matching token as the selected item in the AutoCompleteForm.
 		/// </summary>
 		private void SetBestSelectedAutoCompleteItem()
 		{
-			int curTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart, Text.Length - 1))+1;
-			int curTokenEndIndex= Text.IndexOfAny(mSeparators.GetAsCharArray(), SelectionStart);
-			if (curTokenEndIndex == -1) 
+			if(this.Text.Length == 0)
+			{
+				return;
+			}
+
+			int curTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart, Text.Length - 1)) + 1;
+			if(SelectionStart > 0)
+			{
+				int tmpTokenStartIndex = Text.LastIndexOfAny(mSeparators.GetAsCharArray(), Math.Min(SelectionStart - 1, Text.Length - 1)) + 1;
+				if(tmpTokenStartIndex < curTokenStartIndex)
+				{
+					curTokenStartIndex = tmpTokenStartIndex;
+				}
+			}
+			int curTokenEndIndex  = Text.IndexOfAny(mSeparators.GetAsCharArray(), SelectionStart);
+			if(curTokenEndIndex == -1)
 			{
 				curTokenEndIndex = Text.Length;
 			}
@@ -792,7 +814,7 @@ namespace UseCaseMakerControls
 				}
 			}
 			
-			if ((mAutoCompleteForm.SelectedItem != null) && 
+			if((mAutoCompleteForm.SelectedItem != null) && 
 				mAutoCompleteForm.SelectedItem.ToUpper().StartsWith(curTokenString))
 			{
 				return;
@@ -946,10 +968,5 @@ namespace UseCaseMakerControls
 
 		}
 		#endregion
-
-		private void InitializeComponent()
-		{
-
-		}
 	}
 }
