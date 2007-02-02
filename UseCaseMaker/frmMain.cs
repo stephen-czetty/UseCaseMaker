@@ -4303,7 +4303,9 @@ namespace UseCaseMaker
 				if(ia.GetType() == typeof(GlossaryItem))
 				{
 					model.Glossary.Sorted("Name");
+					this.Cursor = Cursors.WaitCursor;
 					GList.DataBind();
+					this.Cursor = Cursors.Default;
 				}
 				
 				this.SetModified(true);
@@ -4473,7 +4475,9 @@ namespace UseCaseMaker
 					DependencyItem.ReferenceType.None);
 			}
 
+			this.Cursor = Cursors.WaitCursor;
 			UCList.DataBind();
+			this.Cursor = Cursors.Default;
 			this.UpdateUCList(useCase);
 
 			UCList.SelectedIndex = currentSelectedIndex;
@@ -4495,7 +4499,9 @@ namespace UseCaseMaker
 				null,
 				DependencyItem.ReferenceType.None);
 
+			this.Cursor = Cursors.WaitCursor;
 			UCList.DataBind();
+			this.Cursor = Cursors.Default;
 			this.UpdateUCList(useCase);
 
 			UCList.SelectedIndex = currentSelectedIndex;
@@ -4516,7 +4522,9 @@ namespace UseCaseMaker
 				null,
 				DependencyItem.ReferenceType.None);
 
+			this.Cursor = Cursors.WaitCursor;
 			UCList.DataBind();
+			this.Cursor = Cursors.Default;
 			this.UpdateUCList(useCase);
 
 			UCList.SelectedIndex = currentSelectedIndex;
@@ -4554,7 +4562,9 @@ namespace UseCaseMaker
 						frm.ReferenceType);
 				}
 
+				this.Cursor = Cursors.WaitCursor;
 				UCList.DataBind();
+				this.Cursor = Cursors.Default;
 				this.UpdateUCList(useCase);
 
 				UCList.SelectedIndex = currentSelectedIndex;
@@ -4579,7 +4589,9 @@ namespace UseCaseMaker
 					frm.SelectedUseCase,
 					frm.ReferenceType);
 
+				this.Cursor = Cursors.WaitCursor;
 				UCList.DataBind();
+				this.Cursor = Cursors.Default;
 				this.UpdateUCList(useCase);
 
 				UCList.SelectedIndex = currentSelectedIndex;
@@ -4596,7 +4608,9 @@ namespace UseCaseMaker
 			Step step = (Step)useCase.FindStepByUniqueID((String)ili.Tag);
 			useCase.RemoveStep(step);
 
+			this.Cursor = Cursors.WaitCursor;
 			UCList.DataBind();
+			this.Cursor = Cursors.Default;
 			this.UpdateUCList(useCase);
 
 			if(currentSelectedIndex < UCList.Items.Count)
@@ -4735,7 +4749,9 @@ namespace UseCaseMaker
 			UseCase useCase = (UseCase)this.currentElement;
 			int currentSelectedIndex = useCase.AddOpenIssue();
 
+			this.Cursor = Cursors.WaitCursor;
 			OIList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			OIList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
@@ -4750,7 +4766,9 @@ namespace UseCaseMaker
 			OpenIssue openIssue = (OpenIssue)useCase.FindOpenIssueByUniqueID((String)ili.Tag);
 			useCase.RemoveOpenIssue(openIssue);
 
+			this.Cursor = Cursors.WaitCursor;
 			OIList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			if(currentSelectedIndex < OIList.Items.Count)
 			{
@@ -4811,7 +4829,9 @@ namespace UseCaseMaker
 			Package package = (Package)this.currentElement;
 			int currentSelectedIndex = package.AddRequrement();
 
+			this.Cursor = Cursors.WaitCursor;
 			RList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			RList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
@@ -4826,7 +4846,9 @@ namespace UseCaseMaker
 			Requirement requirement = (Requirement)package.FindRequirementByUniqueID((String)ili.Tag);
 			package.RemoveRequirement(requirement);
 
+			this.Cursor = Cursors.WaitCursor;
 			RList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			if(currentSelectedIndex < RList.Items.Count)
 			{
@@ -4908,7 +4930,9 @@ namespace UseCaseMaker
 				model.AddGlossaryItem(gi);
 				model.Glossary.Sorted("Name");
 
+				this.Cursor = Cursors.WaitCursor;
 				GList.DataBind();
+				this.Cursor = Cursors.Default;
 
 				for(int counter = 0; counter < model.Glossary.Count; counter++)
 				{
@@ -4970,7 +4994,9 @@ namespace UseCaseMaker
 				token = token.Replace(".","\v");
 				RemoveHighlightDescriptor(token,null);
 
+				this.Cursor = Cursors.WaitCursor;
 				GList.DataBind();
+				this.Cursor = Cursors.Default;
 
 				if(currentSelectedIndex < GList.Items.Count)
 				{
@@ -6978,7 +7004,9 @@ namespace UseCaseMaker
 			Actor actor = (Actor)this.currentElement;
 			int currentSelectedIndex = actor.AddGoal();
 
+			this.Cursor = Cursors.WaitCursor;
 			AGList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			AGList.SelectedIndex = currentSelectedIndex;
 			this.SetModified(true);
@@ -6993,7 +7021,9 @@ namespace UseCaseMaker
 			Goal goal = (Goal)actor.FindGoalByUniqueID((String)ili.Tag);
 			actor.RemoveGoal(goal);
 
+			this.Cursor = Cursors.WaitCursor;
 			AGList.DataBind();
+			this.Cursor = Cursors.Default;
 
 			if(currentSelectedIndex < AGList.Items.Count)
 			{

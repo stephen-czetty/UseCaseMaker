@@ -436,7 +436,7 @@ namespace UseCaseMakerControls
 		{
 			IndexedListItem item;
 
-			this.SuspendLayout();
+			Win32.SendMessage(this.Handle, Win32.WM_SETREDRAW, 0, (IntPtr)0);
 
 			for(int index = 0; index < this.items.Count; index++)
 			{
@@ -456,9 +456,8 @@ namespace UseCaseMakerControls
 				}
 			}
 
-			this.ResumeLayout(true);
-
-			base.Refresh ();
+			Win32.SendMessage(this.Handle, Win32.WM_SETREDRAW, 1, (IntPtr)0);
+			this.Invalidate(this.DisplayRectangle,true);
 		}
 
 		protected override void OnSizeChanged(EventArgs e)
@@ -475,8 +474,6 @@ namespace UseCaseMakerControls
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			base.OnPaint(e);
-
 			Rectangle rect;
 			Pen pen;
 
@@ -583,6 +580,7 @@ namespace UseCaseMakerControls
 			}
 
 			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
+			this.SuspendLayout();
 
 			this.items.Clear();
 			IEnumerator ie = data.GetEnumerator();
@@ -603,9 +601,9 @@ namespace UseCaseMakerControls
 				ili.ItemRichTextBox.ParseNow();
 			}
 
+			this.ResumeLayout(true);
 			Win32.SendMessage(this.Handle,Win32.WM_SETREDRAW,1,(IntPtr)0);
 
-			this.Invalidate();
 			this.Refresh();
 		}
 
@@ -625,7 +623,7 @@ namespace UseCaseMakerControls
 				}
 				index += 1;
 			}
-			this.Invalidate();
+
 			this.Refresh();
 		}
 
@@ -646,7 +644,7 @@ namespace UseCaseMakerControls
 				}
 				index += 1;
 			}
-			this.Invalidate();
+
 			this.Refresh();
 		}
 
@@ -667,7 +665,7 @@ namespace UseCaseMakerControls
 					ili.ItemLabel.ForeColor = System.Drawing.SystemColors.WindowText;
 				}
 			}
-			this.Invalidate();
+
 			this.Refresh();
 		}
 

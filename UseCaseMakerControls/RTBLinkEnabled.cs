@@ -901,7 +901,7 @@ namespace UseCaseMakerControls
 		private void SetAutoCompleteLocation(bool moveHorizontly)
 		{
 			Point cursorLocation = GetPositionFromCharIndex(SelectionStart);
-			Screen screen = Screen.FromPoint(cursorLocation);
+			Screen screen = Screen.FromControl(this); // Screen.FromPoint(cursorLocation);
 			Point optimalLocation = new Point(PointToScreen(cursorLocation).X-15, (int)(PointToScreen(cursorLocation).Y + Font.Size*2 + 2));
 			Rectangle desiredPlace = new Rectangle(optimalLocation , mAutoCompleteForm.Size);
 			desiredPlace.Width = 152;
