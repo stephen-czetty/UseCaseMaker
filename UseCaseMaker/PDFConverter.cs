@@ -203,23 +203,23 @@ namespace UseCaseMaker
 		// we override the onEndPage method
 		public override void OnEndPage(PdfWriter writer, Document document) 
 		{
-			int pageN = writer.PageNumber;
+			int pageN = document.PageNumber;
 			string text = Convert.ToString(pageN);
 			float len = bf.GetWidthPoint(text, 8);
 			cb.BeginText();
 			cb.SetFontAndSize(bf, 8);
-			cb.SetTextMatrix(280, 29);
+			cb.SetTextMatrix((document.PageSize.Width / 2) - (len / 2), 29);
 			cb.ShowText(text);
 			cb.EndText();
 
 			cb.SetLineWidth(0.5f);
-			cb.MoveTo(50,802);
-			cb.LineTo(545,802);
+			cb.MoveTo(50,document.PageSize.Height - 40);
+			cb.LineTo(document.PageSize.Right - 50,document.PageSize.Height - 40);
 			cb.Stroke();
 
 			cb.SetLineWidth(0.5f);
 			cb.MoveTo(50,40);
-			cb.LineTo(545,40);
+			cb.LineTo(document.PageSize.Right - 50,40);
 			cb.Stroke();
 
 			cb.BeginText();
@@ -227,7 +227,7 @@ namespace UseCaseMaker
 			AssemblyName an = this.GetType().Assembly.GetName();
 			text = "Use Case Maker " + an.Version.ToString(3);
 			len = bf.GetWidthPoint(text,8);
-			cb.SetTextMatrix(545 - len,807);
+			cb.SetTextMatrix(document.PageSize.Right - len - 50, document.PageSize.Height - 35);
 			cb.ShowText(text);
 			cb.EndText();
 		}
