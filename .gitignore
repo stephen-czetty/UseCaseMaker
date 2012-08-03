@@ -2,3 +2,4 @@ bin
 obj
 *.suo
 _Resharper.*
+*.user
