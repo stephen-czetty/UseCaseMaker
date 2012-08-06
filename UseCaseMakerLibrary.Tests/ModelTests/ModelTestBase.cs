@@ -2,30 +2,32 @@
 
 namespace UseCaseMakerLibrary.Tests.ModelTests
 {
-    [Subject(typeof (Model))]
-    public class ModelTestBase
+    [Subject("Model tests")]
+    public abstract class ModelTestBase
     {
-        private Establish Context = () => _model = new Model();
-        private static Model _model;
+        private Establish Context = () => Model = new Model();
+        protected static Model Model;
+    }
 
-        public class When_searching_for_element_with_models_unique_id
+    [Subject(typeof(Model))]
+    public class When_searching_for_element_with_models_unique_id : ModelTestBase
+    {
+        private It Should_return_the_model = () => Model.FindElementByUniqueID(Model.UniqueID).ShouldEqual(Model);
+    }
+
+    [Subject(typeof(Model))]
+    public class When_searching_for_element_contained_in_model : ModelTestBase
+    {
+        // ISSUE: Dependency on two classes
+        private Because Of = () =>
         {
-            private It Should_return_the_model = () => _model.FindElementByUniqueID(_model.UniqueID).ShouldEqual(_model);
-        }
+            _element = new GlossaryItem();
+            Model.AddGlossaryItem(_element);
+        };
 
-        public class When_searching_for_element_contained_in_model
-        {
-            // ISSUE: Dependency on two classes
-            private Because Of = () =>
-                                     {
-                                         _element = new GlossaryItem();
-                                         _model.AddGlossaryItem(_element);
-                                     };
+        private It Should_return_the_element =
+            () => Model.FindElementByUniqueID(_element.UniqueID).ShouldEqual(_element);
 
-            private It Should_return_the_element =
-                () => _model.FindElementByUniqueID(_element.UniqueID).ShouldEqual(_element);
-
-            private static GlossaryItem _element;
-        }
+        private static GlossaryItem _element;
     }
 }
