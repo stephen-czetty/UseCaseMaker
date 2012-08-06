@@ -2,4 +2,56 @@
 	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=Machine_002ESpecifications_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=449324bc_002D435a_002D4c58_002Da1ff_002Df2876e1a5c66/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static, Instance" AccessRightKinds="Public" Description="MSpec context classes"&gt;&lt;ElementKinds&gt;&lt;Kind Name="Machine.Specifications_Context" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="Aa_bb" /&gt;&lt;/Policy&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=784215ad_002D03c7_002D4024_002D97a6_002D134ee64dc020/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static, Instance" AccessRightKinds="Private" Description="MSpec specifications"&gt;&lt;ElementKinds&gt;&lt;Kind Name="Machine.Specifications_Specification" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="Aa_bb" /&gt;&lt;/Policy&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=2b5e4191_002D110e_002D4bfe_002Dafaf_002D41061702ad60/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static, Instance" AccessRightKinds="Private" Description="MSpec supporting fields"&gt;&lt;ElementKinds&gt;&lt;Kind Name="Machine.Specifications_SupportingField" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=2b5e4191_002D110e_002D4bfe_002Dafaf_002D41061702ad60/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static, Instance" AccessRightKinds="Private" Description="MSpec supporting fields"&gt;&lt;ElementKinds&gt;&lt;Kind Name="Machine.Specifications_SupportingField" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Categories/=Machine_002ESpecifications/@EntryIndexedValue">Machine.Specifications</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Description/@EntryValue">Machine.Specifications It</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Field/=TEST/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Field/=TEST/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Field/=TESTNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Field/=TESTNAME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">3.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue">InCSharpTypeMember</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Shortcut/@EntryValue">it</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=53E9C98008424E45B3BD2AB09F9D41F0/Text/@EntryValue">It Should_$TESTNAME$ = () =&gt; $TEST$;$END$</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Categories/=Machine_002ESpecifications/@EntryIndexedValue">Machine.Specifications</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Description/@EntryValue">Machine.Specifications Because Of = () =&gt; {};</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">3.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Scope/=B68999B9D6B43E47A02B22C12A54C3CC/Type/@EntryValue">InCSharpTypeMember</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Shortcut/@EntryValue">because</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6B077C767EAFFF4F8E2E018B9FDE39DD/Text/@EntryValue">private Because Of = () =&gt;&#xD;
+                                 {&#xD;
+									$END$&#xD;
+                                 };</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Categories/=Machine_002ESpecifications/@EntryIndexedValue">Machine.Specifications</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Description/@EntryValue">Machine.Specifications test class</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=BASECLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=BASECLASS/Expression/@EntryValue">completeSmart()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=BASECLASS/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=CLASS/Expression/@EntryValue">completeSmart()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=CLASS/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=TESTNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Field/=TESTNAME/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">3.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Shortcut/@EntryValue">test</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F3453C589CF05543A01B0CEAF8CDEB8E/Text/@EntryValue">    [Subject(typeof($CLASS$))]&#xD;
+    public class When_$TESTNAME$ : $BASECLASS$&#xD;
+    {&#xD;
+		$END$&#xD;
+    }</s:String></wpf:ResourceDictionary>
