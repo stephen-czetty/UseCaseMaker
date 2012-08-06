@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCaseMakerControls", "Use
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCaseMakerLibrary", "UseCaseMakerLibrary\UseCaseMakerLibrary.csproj", "{2706309F-76DA-4C66-8E78-8165D570B166}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCaseMakerLibrary.Tests", "UseCaseMakerLibrary.Tests\UseCaseMakerLibrary.Tests.csproj", "{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{2706309F-76DA-4C66-8E78-8165D570B166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2706309F-76DA-4C66-8E78-8165D570B166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2706309F-76DA-4C66-8E78-8165D570B166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

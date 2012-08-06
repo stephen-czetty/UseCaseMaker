@@ -53,6 +53,11 @@ using System.Runtime.CompilerServices;
 //   (*) La firma ritardata è un'opzione avanzata. Vedere la documentazione di Microsoft
 //       .NET Framework per ulteriori informazioni.
 //
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
-[assembly: AssemblyKeyName("")]
+// These cannot be specified, even if blank, for [InternalsVisibleTo] to function
+//[assembly: AssemblyDelaySign(false)]
+//[assembly: AssemblyKeyFile("")]
+//[assembly: AssemblyKeyName("")]
+
+// For testing purposes
+// ISSUE: Probably want to avoid this, especially with unsigned assemblies
+[assembly: InternalsVisibleTo("UseCaseMakerLibrary.Tests")]
