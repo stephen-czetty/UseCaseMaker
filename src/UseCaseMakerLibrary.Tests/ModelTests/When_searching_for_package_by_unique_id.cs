@@ -3,7 +3,7 @@ using Machine.Specifications;
 namespace UseCaseMakerLibrary.Tests.ModelTests
 {
     [Subject(typeof (Model))]
-    public class When_searching_for_package : ModelTestBase
+    public class When_searching_for_package_by_unique_id : ModelTestBase
     {
         // ISSUE: Dependency on two classes
         private Because Of = () =>

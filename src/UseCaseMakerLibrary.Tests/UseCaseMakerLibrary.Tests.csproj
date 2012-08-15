@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications">
+    <Reference Include="Machine.Specifications, Version=0.5.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.0.5.8\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks">
@@ -39,16 +39,26 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="UMMO.TestingUtils">
+      <HintPath>..\..\lib\UMMO\UMMO.TestingUtils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelTests\ModelTestBase.cs" />
+    <Compile Include="ModelTests\When_searching_for_actors_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_actors_element_contained_in_model.cs" />
     <Compile Include="ModelTests\When_searching_for_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_element_contained_in_model_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_element_with_models_unique_id.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_actor_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_individual_actor_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_use_case_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_individual_use_case_contained_in_model.cs" />
-    <Compile Include="ModelTests\When_searching_for_package.cs" />
+    <Compile Include="ModelTests\When_searching_for_model_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_package_by_unique_id.cs" />
+    <Compile Include="ModelTests\When_searching_for_package_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_requirements_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_usecases_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_usecases_elment_contained_in_model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

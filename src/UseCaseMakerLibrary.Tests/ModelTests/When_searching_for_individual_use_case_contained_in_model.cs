@@ -1,4 +1,5 @@
 using Machine.Specifications;
+using UMMO.TestingUtils.RandomData;
 
 namespace UseCaseMakerLibrary.Tests.ModelTests
 {

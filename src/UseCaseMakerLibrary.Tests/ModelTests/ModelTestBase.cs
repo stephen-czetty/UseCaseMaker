@@ -1,4 +1,5 @@
 ﻿using Machine.Specifications;
+//using UMMO.TestingUtils;
 
 namespace UseCaseMakerLibrary.Tests.ModelTests
 {
@@ -13,7 +14,12 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     [Subject("Model tests")]
     public abstract class ModelTestBase
     {
-        private Establish Context = () => Model = new Model();
+        private Establish Context = () =>
+                                        {
+                                            //ModelName = A.Random.String;
+                                            Model = new Model { Name = ModelName };
+                                        };
         protected static Model Model;
+        protected static string ModelName;
     }
 }
