@@ -8,7 +8,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     {
         private Because Of = () =>
                                  {
-                                     _actorsName = A.Random.String;
+                                     _actorsName = A.Random.String.Resembling.A.FirstName;
                                      Model.Actors.Name = _actorsName;
                                  };
 
