@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelTests\ModelTestBase.cs" />
+    <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
+    <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />
     <Compile Include="ModelTests\When_searching_for_actors_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_actors_by_path.cs" />
     <Compile Include="ModelTests\When_searching_for_actors_element_contained_in_model.cs" />
