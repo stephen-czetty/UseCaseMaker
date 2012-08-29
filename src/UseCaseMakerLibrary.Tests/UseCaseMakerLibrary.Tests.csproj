@@ -68,8 +68,18 @@
     <Compile Include="ModelTests\When_searching_for_usecases_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_usecases_by_path.cs" />
     <Compile Include="ModelTests\When_searching_for_usecases_elment_contained_in_model.cs" />
-    <Compile Include="PackageTests\UseCaseTests.cs" />
+    <Compile Include="PackageTests\When_removing_a_package_that_is_in_sub_packages.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_package.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_use_case.cs" />
+    <Compile Include="PackageTests\When_creating_a_new_package.cs" />
+    <Compile Include="PackageTests\When_removing_a_package.cs" />
+    <Compile Include="PackageTests\When_removing_a_requirement.cs" />
+    <Compile Include="PackageTests\When_creating_a_new_use_case.cs" />
     <Compile Include="PackageTests\PackageTestBase.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_requirement.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case_that_is_in_sub_packages.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case_that_is_referenced_by_another_use_case.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
