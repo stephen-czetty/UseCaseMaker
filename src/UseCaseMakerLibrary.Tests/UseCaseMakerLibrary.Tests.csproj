@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1443E1E0-371C-40F5-A11B-E6D7D6E5B848}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UseCaseMakerLibrary.Tests</RootNamespace>
+    <AssemblyName>UseCaseMakerLibrary.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Machine.Specifications, Version=0.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Machine.Specifications.0.5.8\lib\net40\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UMMO.TestingUtils">
+      <HintPath>..\..\lib\UMMO\UMMO.TestingUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelTests\ModelTestBase.cs" />
+    <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
+    <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />
+    <Compile Include="ModelTests\When_searching_for_actors_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_actors_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_actors_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_element_contained_in_model_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_element_contained_in_model_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_element_with_models_unique_id.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_actor_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_actor_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_actor_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_use_case_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_individual_use_case_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_model_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_model_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_package_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_package_by_unique_id.cs" />
+    <Compile Include="ModelTests\When_searching_for_package_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_requirements_element_contained_in_model.cs" />
+    <Compile Include="ModelTests\When_searching_for_usecases_by_name.cs" />
+    <Compile Include="ModelTests\When_searching_for_usecases_by_path.cs" />
+    <Compile Include="ModelTests\When_searching_for_usecases_elment_contained_in_model.cs" />
+    <Compile Include="PackageTests\When_removing_a_package_that_is_in_sub_packages.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_package.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_use_case.cs" />
+    <Compile Include="PackageTests\When_creating_a_new_package.cs" />
+    <Compile Include="PackageTests\When_removing_a_package.cs" />
+    <Compile Include="PackageTests\When_removing_a_requirement.cs" />
+    <Compile Include="PackageTests\When_creating_a_new_use_case.cs" />
+    <Compile Include="PackageTests\PackageTestBase.cs" />
+    <Compile Include="PackageTests\When_adding_a_valid_requirement.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case_that_is_in_sub_packages.cs" />
+    <Compile Include="PackageTests\When_removing_a_use_case_that_is_referenced_by_another_use_case.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UseCaseMakerLibrary\UseCaseMakerLibrary.csproj">
+      <Project>{2706309F-76DA-4C66-8E78-8165D570B166}</Project>
+      <Name>UseCaseMakerLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

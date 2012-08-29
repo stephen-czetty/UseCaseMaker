@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UCM-Document Version="1.0">
+  <Model Type="UseCaseMakerLibrary.Model" UniqueID="32e43cb0-8050-4597-8a61-dcba1496888d" Name="Test" ID="1" Prefix="M" Path="M1">
+    <Glossary Type="UseCaseMakerLibrary.GlossaryItems" UniqueID="975caadd-8ec4-48c8-82ad-6588491c12e7" Name="" ID="-1" Prefix="" Path="M1">
+      <GlossaryItem Type="UseCaseMakerLibrary.GlossaryItem" UniqueID="ff0dd54f-5a63-4645-aea2-0f6a9fce99b1" Name="Something" ID="1" Prefix="G" Path="M1.G1">
+        <Description Type="System.String">This is something, all right!</Description>
+      </GlossaryItem>
+    </Glossary>
+    <Actors Type="UseCaseMakerLibrary.Actors" UniqueID="8b1cf072-923a-48de-a06b-666d59759c7e" Name="" ID="-1" Prefix="" Path="M1">
+      <Actor Type="UseCaseMakerLibrary.Actor" UniqueID="9f392f65-3529-43f2-a5b5-8df4ad229058" Name="Stephen" ID="1" Prefix="A" Path="M1.A1">
+        <Attributes Type="UseCaseMakerLibrary.CommonAttributes">
+          <Description Type="System.String">Developer</Description>
+          <Notes Type="System.String">I develop stuff</Notes>
+          <RelatedDocuments Type="UseCaseMakerLibrary.RelatedDocuments">
+            <RelatedDocument Type="UseCaseMakerLibrary.RelatedDocument">
+              <FileName Type="System.String">C:\Users\sczetty\Documents\Visual Studio 2010\Projects\UseCaseMaker\src\UseCaseMaker\bin\Debug\UseCaseMaker.exe.config</FileName>
+            </RelatedDocument>
+          </RelatedDocuments>
+        </Attributes>
+        <Goals Type="UseCaseMakerLibrary.Goals" UniqueID="b5d12559-6037-4eb8-a86f-25c1b74d74b4" Name="" ID="-1" Prefix="" Path="">
+          <Goal Type="UseCaseMakerLibrary.Goal" ID="1" Prefix="" Path="1">
+            <Description Type="System.String">Get this refactored</Description>
+            <UniqueID Type="System.String">005a2e0f-ec87-4e2d-9d52-4ff4097f9a98</UniqueID>
+            <Name Type="System.String">1</Name>
+          </Goal>
+        </Goals>
+      </Actor>
+    </Actors>
+    <Packages Type="UseCaseMakerLibrary.Packages" UniqueID="fecfd225-a658-4791-9a84-0dcf88e61ac8" Name="" ID="-1" Prefix="" Path="M1">
+      <Package Type="UseCaseMakerLibrary.Package" UniqueID="7bf71bc0-4b4f-43b3-92cc-6077c3989163" Name="package 1" ID="1" Prefix="P" Path="M1.P1">
+        <Actors Type="UseCaseMakerLibrary.Actors" UniqueID="4b757784-df54-4b9a-a76b-cd00162186fc" Name="" ID="-1" Prefix="" Path="M1.P1">
+          <Actor Type="UseCaseMakerLibrary.Actor" UniqueID="2363ced7-6fbf-4e6d-a435-a772a15fcd80" Name="Steve" ID="1" Prefix="A" Path="M1.P1.A1">
+            <Attributes Type="UseCaseMakerLibrary.CommonAttributes">
+              <Description Type="System.String">
+              </Description>
+              <Notes Type="System.String">
+              </Notes>
+              <RelatedDocuments Type="UseCaseMakerLibrary.RelatedDocuments" />
+            </Attributes>
+            <Goals Type="UseCaseMakerLibrary.Goals" UniqueID="6baaf49e-3526-46d2-985b-ce6ad3538e93" Name="" ID="-1" Prefix="" Path="" />
+          </Actor>
+        </Actors>
+        <Packages Type="UseCaseMakerLibrary.Packages" UniqueID="68f3ea0a-8ac3-4f5c-8f65-8e2b4757c9a8" Name="" ID="-1" Prefix="" Path="M1.P1" />
+        <UseCases Type="UseCaseMakerLibrary.UseCases" UniqueID="22cc5dea-440d-4624-b0bc-58cd0f501b6f" Name="" ID="-1" Prefix="" Path="M1.P1" />
+        <Requirements Type="UseCaseMakerLibrary.Requirements" UniqueID="e0abb94c-5e2b-4019-b69b-8707bae0289a" Name="" ID="-1" Prefix="" Path="" />
+        <Attributes Type="UseCaseMakerLibrary.CommonAttributes">
+          <Description Type="System.String">
+          </Description>
+          <Notes Type="System.String">
+          </Notes>
+          <RelatedDocuments Type="UseCaseMakerLibrary.RelatedDocuments" />
+        </Attributes>
+      </Package>
+    </Packages>
+    <UseCases Type="UseCaseMakerLibrary.UseCases" UniqueID="8401e5e5-00f6-4305-a904-99ad09de2b1e" Name="" ID="-1" Prefix="" Path="M1">
+      <UseCase Type="UseCaseMakerLibrary.UseCase" UniqueID="e9628bb6-8550-44d8-9a61-177e29e46e55" Name="Use this!" ID="1" Prefix="UC" Path="M1.UC1">
+        <Attributes Type="UseCaseMakerLibrary.CommonAttributes">
+          <Description Type="System.String">description</Description>
+          <Notes Type="System.String">notes</Notes>
+          <RelatedDocuments Type="UseCaseMakerLibrary.RelatedDocuments">
+            <RelatedDocument Type="UseCaseMakerLibrary.RelatedDocument">
+              <FileName Type="System.String">C:\Users\sczetty\Documents\Visual Studio 2010\Projects\UseCaseMaker\src\UseCaseMaker\bin\Debug\UseCaseMaker.vshost.exe.config</FileName>
+            </RelatedDocument>
+          </RelatedDocuments>
+        </Attributes>
+        <Steps Type="UseCaseMakerLibrary.Steps" UniqueID="6a9ebd3e-e169-4795-9f4e-c7245091e026" Name="" ID="-1" Prefix="" Path="">
+          <Step Type="UseCaseMakerLibrary.Step" ID="1" Prefix="" Path="1">
+            <Description Type="System.String">step 1</Description>
+            <ChildID Type="System.Int32">-1</ChildID>
+            <Type Type="UseCaseMakerLibrary.Step+StepType">Default</Type>
+            <Dependency Type="UseCaseMakerLibrary.DependencyItem">
+              <Stereotype Type="System.String">
+              </Stereotype>
+              <Type Type="UseCaseMakerLibrary.DependencyItem+ReferenceType">None</Type>
+              <PartnerUniqueID Type="System.String">
+              </PartnerUniqueID>
+            </Dependency>
+            <UniqueID Type="System.String">2d519b55-e392-4dff-9334-790dbdb73677</UniqueID>
+            <Name Type="System.String">1</Name>
+          </Step>
+          <Step Type="UseCaseMakerLibrary.Step" ID="2" Prefix="" Path="2">
+            <Description Type="System.String">step 2</Description>
+            <ChildID Type="System.Int32">-1</ChildID>
+            <Type Type="UseCaseMakerLibrary.Step+StepType">Default</Type>
+            <Dependency Type="UseCaseMakerLibrary.DependencyItem">
+              <Stereotype Type="System.String">
+              </Stereotype>
+              <Type Type="UseCaseMakerLibrary.DependencyItem+ReferenceType">None</Type>
+              <PartnerUniqueID Type="System.String">
+              </PartnerUniqueID>
+            </Dependency>
+            <UniqueID Type="System.String">69bddf55-70ee-4201-9aff-a0d6334851fc</UniqueID>
+            <Name Type="System.String">2</Name>
+          </Step>
+          <Step Type="UseCaseMakerLibrary.Step" ID="2" Prefix="A" Path="A2">
+            <Description Type="System.String">step 2a</Description>
+            <ChildID Type="System.Int32">-1</ChildID>
+            <Type Type="UseCaseMakerLibrary.Step+StepType">Alternative</Type>
+            <Dependency Type="UseCaseMakerLibrary.DependencyItem">
+              <Stereotype Type="System.String">
+              </Stereotype>
+              <Type Type="UseCaseMakerLibrary.DependencyItem+ReferenceType">None</Type>
+              <PartnerUniqueID Type="System.String">
+              </PartnerUniqueID>
+            </Dependency>
+            <UniqueID Type="System.String">48751602-6d2c-4a5f-96a1-537d6250f694</UniqueID>
+            <Name Type="System.String">2.A</Name>
+          </Step>
+          <Step Type="UseCaseMakerLibrary.Step" ID="2" Prefix="A" Path="A2">
+            <Description Type="System.String">step 2a1</Description>
+            <ChildID Type="System.Int32">1</ChildID>
+            <Type Type="UseCaseMakerLibrary.Step+StepType">AlternativeChild</Type>
+            <Dependency Type="UseCaseMakerLibrary.DependencyItem">
+              <Stereotype Type="System.String">
+              </Stereotype>
+              <Type Type="UseCaseMakerLibrary.DependencyItem+ReferenceType">None</Type>
+              <PartnerUniqueID Type="System.String">
+              </PartnerUniqueID>
+            </Dependency>
+            <UniqueID Type="System.String">7d062dd7-7e30-4397-83d6-7ac157597b56</UniqueID>
+            <Name Type="System.String">2.A.1</Name>
+          </Step>
+          <Step Type="UseCaseMakerLibrary.Step" ID="2" Prefix="A" Path="A2">
+            <Description Type="System.String">&lt;&lt;foo&gt;&gt; "Use this!"</Description>
+            <ChildID Type="System.Int32">2</ChildID>
+            <Type Type="UseCaseMakerLibrary.Step+StepType">AlternativeChild</Type>
+            <Dependency Type="UseCaseMakerLibrary.DependencyItem">
+              <Stereotype Type="System.String">foo</Stereotype>
+              <Type Type="UseCaseMakerLibrary.DependencyItem+ReferenceType">Client</Type>
+              <PartnerUniqueID Type="System.String">e9628bb6-8550-44d8-9a61-177e29e46e55</PartnerUniqueID>
+            </Dependency>
+            <UniqueID Type="System.String">bc4ba4a6-c27a-40bf-9eff-17ac3fb470ab</UniqueID>
+            <Name Type="System.String">2.A.2</Name>
+          </Step>
+        </Steps>
+        <OpenIssues Type="UseCaseMakerLibrary.OpenIssues" UniqueID="47e02080-edab-4388-9856-8272196f5b4d" Name="" ID="-1" Prefix="" Path="">
+          <OpenIssue Type="UseCaseMakerLibrary.OpenIssue" ID="1" Prefix="" Path="1">
+            <Description Type="System.String">Issue 1</Description>
+            <UniqueID Type="System.String">3d1d081d-6609-4867-95a5-f710b61cff9e</UniqueID>
+            <Name Type="System.String">1</Name>
+          </OpenIssue>
+        </OpenIssues>
+        <ActiveActors Type="UseCaseMakerLibrary.ActiveActors">
+          <ActiveActor Type="UseCaseMakerLibrary.ActiveActor">
+            <ActorUniqueID Type="System.String">9f392f65-3529-43f2-a5b5-8df4ad229058</ActorUniqueID>
+            <IsPrimary Type="System.Boolean">True</IsPrimary>
+          </ActiveActor>
+        </ActiveActors>
+        <HistoryItems Type="UseCaseMakerLibrary.HistoryItems">
+          <HistoryItem Type="UseCaseMakerLibrary.HistoryItem">
+            <DateValue Type="System.String">08/17/2012 18:54:10</DateValue>
+            <Type Type="UseCaseMakerLibrary.HistoryItem+HistoryType">Implementation</Type>
+            <Action Type="System.Int32">1</Action>
+            <Notes Type="System.String">theuteh</Notes>
+          </HistoryItem>
+        </HistoryItems>
+        <Prose Type="System.String">blah blah blah</Prose>
+        <Preconditions Type="System.String">1, 2, 3</Preconditions>
+        <Postconditions Type="System.String">4. 5. 6</Postconditions>
+        <Release Type="System.String">1.0</Release>
+        <AssignedTo Type="System.String">Stephen</AssignedTo>
+        <Priority Type="System.Int32">1</Priority>
+        <Complexity Type="UseCaseMakerLibrary.UseCase+ComplexityValue">Medium</Complexity>
+        <Implementation Type="UseCaseMakerLibrary.UseCase+ImplementationValue">Started</Implementation>
+        <Level Type="UseCaseMakerLibrary.UseCase+LevelValue">Summary</Level>
+        <Status Type="UseCaseMakerLibrary.UseCase+StatusValue">Named</Status>
+      </UseCase>
+    </UseCases>
+    <Requirements Type="UseCaseMakerLibrary.Requirements" UniqueID="f2e7f90a-9862-4cdd-880c-091d1b31e327" Name="" ID="-1" Prefix="" Path="">
+      <Requirement Type="UseCaseMakerLibrary.Requirement" ID="1" Prefix="" Path="1">
+        <Description Type="System.String">Do one thing</Description>
+        <UniqueID Type="System.String">975fe4b5-3aca-41d8-bc40-5a2a3d7ef0c6</UniqueID>
+        <Name Type="System.String">1</Name>
+      </Requirement>
+      <Requirement Type="UseCaseMakerLibrary.Requirement" ID="2" Prefix="" Path="2">
+        <Name Type="System.String">2</Name>
+        <Description Type="System.String">Then do another</Description>
+        <UniqueID Type="System.String">35d7683f-abd4-4060-a7b6-77a4a73e099a</UniqueID>
+      </Requirement>
+    </Requirements>
+    <Attributes Type="UseCaseMakerLibrary.CommonAttributes">
+      <Description Type="System.String">Test</Description>
+      <Notes Type="System.String">This is a test</Notes>
+      <RelatedDocuments Type="UseCaseMakerLibrary.RelatedDocuments">
+        <RelatedDocument Type="UseCaseMakerLibrary.RelatedDocument">
+          <FileName Type="System.String">C:\Users\sczetty\Documents\Visual Studio 2010\Projects\UseCaseMaker\src\UseCaseMaker\bin\Debug\UseCaseMaker.config</FileName>
+        </RelatedDocument>
+      </RelatedDocuments>
+    </Attributes>
+  </Model>
+</UCM-Document>
