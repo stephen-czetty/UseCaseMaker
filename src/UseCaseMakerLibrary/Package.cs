@@ -184,9 +184,9 @@ namespace UseCaseMakerLibrary
 				requirement.ID = ((Requirement)this.requirements[index - 1]).ID + 1;
 			}
 
-			ret = this.requirements.Add(requirement);
+			this.requirements.Add(requirement);
 
-			return ret;
+		    return requirements.Count - 1;
 		}
 
 		public void RemoveRequirement(Requirement requirement)

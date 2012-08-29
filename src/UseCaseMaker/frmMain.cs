@@ -3268,10 +3268,10 @@ namespace UseCaseMaker
 				}			
 			}
 
-			IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+			var coll = (this.currentElement as IIdentificableObject);
 			if(coll != null)
 			{
-				lblFullPath.Text = ((IdentificableObjectCollection)this.currentElement).Path;
+				lblFullPath.Text = ((IIdentificableObject)this.currentElement).Path;
 			}
 			else
 			{
@@ -4105,7 +4105,7 @@ namespace UseCaseMaker
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
-				IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+				var coll = (this.currentElement as IIdentificableObject);
 				if(coll == null)
 				{
 					owner = (Package)this.currentElement;
@@ -4126,7 +4126,7 @@ namespace UseCaseMaker
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
-				IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+				var coll = (this.currentElement as IIdentificableObject);
 				if(coll == null)
 				{
 					owner = (Package)this.currentElement;

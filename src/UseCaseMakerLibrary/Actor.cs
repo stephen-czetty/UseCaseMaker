@@ -52,9 +52,8 @@ namespace UseCaseMakerLibrary
 		{
 			Goal goal = new Goal();
 			Int32 index = this.goals.Count;
-			Int32 ret;
 
-			if(index == 0)
+		    if(index == 0)
 			{
 				goal.ID = 1;
 			}
@@ -63,9 +62,9 @@ namespace UseCaseMakerLibrary
 				goal.ID = ((Goal)this.goals[index - 1]).ID + 1;
 			}
 
-			ret = this.goals.Add(goal);
+			goals.Add(goal);
 
-			return ret;
+		    return goals.Count - 1;
 		}
 
 		public void RemoveGoal(Goal goal)

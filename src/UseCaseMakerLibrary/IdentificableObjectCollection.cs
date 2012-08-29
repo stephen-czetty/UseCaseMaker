@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace UseCaseMakerLibrary
@@ -7,17 +9,12 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per IdentificableObjectCollection.
 	/// </summary>
-	public class IdentificableObjectCollection : ICollection, IIdentificableObject, IXMLNodeSerializable
+	public abstract class IdentificableObjectCollection<T> : ICollection<T>, IIdentificableObject, IXMLNodeSerializable
+        where T : IIdentificableObject
 	{
-		#region Private Enumerators and Constants
-		#endregion
-
-		#region Public Enumerators and Constants
-		#endregion
-
 		#region Class Members
-		private ArrayList items = new ArrayList();
-		private IdentificableObject ia = new IdentificableObject();
+		private readonly IList<T> _items = new List<T>();
+		private readonly IdentificableObject _ia = new IdentificableObject();
 		#endregion
 
 		#region Constructors
@@ -30,7 +27,13 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
-		/// <summary>
+
+	    public bool Remove(T item)
+	    {
+	        return _items.Remove(item);
+	    }
+
+	    /// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
 		[XMLSerializeIgnore]
@@ -38,34 +41,21 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
-		{
-			get
-			{
-				return items.IsSynchronized;
-			}
-		}
-
-		[XMLSerializeIgnore]
-		public object SyncRoot
-		{
-			get
-			{
-				return items.SyncRoot;
-			}
-		}
+	    public bool IsReadOnly
+	    {
+	        get { throw new NotImplementedException(); }
+	    }
 
 		[XMLSerializeIgnore]
 		public object this[int index]
 		{
 			get
 			{
-				return items[index];
+				return _items[index];
 			}
 		}
 
@@ -75,11 +65,11 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return this.ia.UniqueID;
+				return this._ia.UniqueID;
 			}
 			set
 			{
-				this.ia.UniqueID = value;
+				this._ia.UniqueID = value;
 			}
 		}
 
@@ -88,11 +78,11 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return this.ia.Owner;
+				return this._ia.Owner;
 			}
 			set
 			{
-				this.ia.Owner = value;
+				this._ia.Owner = value;
 			}
 		}
 
@@ -101,11 +91,11 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return this.ia.Name;
+				return this._ia.Name;
 			}
 			set
 			{
-				this.ia.Name = value;
+				this._ia.Name = value;
 			}
 		}
 
@@ -114,11 +104,11 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return this.ia.ID;
+				return this._ia.ID;
 			}
 			set
 			{
-				this.ia.ID = value;
+				this._ia.ID = value;
 			}
 		}
 
@@ -127,11 +117,11 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return this.ia.Prefix;
+				return this._ia.Prefix;
 			}
 			set
 			{
-				this.ia.Prefix = value;
+				this._ia.Prefix = value;
 			}
 		}
 
@@ -160,69 +150,51 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Methods
-		public int Add(object item)
+		public void Add(T item)
 		{
-			int result = items.Add(item);
-
-			return result;
+             _items.Add(item);
 		}
 
-		public void Clear()
+        public void Insert(int index, T item)
+        {
+            _items.Insert(index, item);
+        }
+
+	    public void Clear()
 		{
-			items.Clear();
+			_items.Clear();
 		}
 
-		public bool Contains(object item)
-		{
-			return items.Contains(item);
-		}
+	    public bool Contains(T item)
+	    {
+	        throw new NotImplementedException();
+	    }
 
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
+	    public void CopyTo(T[] array, int arrayIndex)
+	    {
+	        throw new NotImplementedException();
+	    }
 
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
+	    public IEnumerator<T> GetEnumerator()
+	    {
+	        return _items.GetEnumerator();
+	    }
 
-		public void Remove(object item)
-		{
-			items.Remove(item);
-		}
+	    IEnumerator IEnumerable.GetEnumerator()
+	    {
+	        return GetEnumerator();
+	    }
 
-		public void RemoveAt(int index)
-		{
-			items.RemoveAt(index);
-		}
+        public ICollection<T> Sorted(string propertyName)
+        {
+            var ps = new PropertySorter<T>(propertyName, "ASC");
+            return _items.OrderBy(x => x, ps).ToList();
+        }
 
-		public void CopyTo(Array array, int index)
+		public IIdentificableObject FindByName(String name)
 		{
-			items.CopyTo(array, index);
-		}
-
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
-
-		public ICollection Sorted(string propertyName)
-		{
-			ArrayList sorter = new ArrayList(this);
-			sorter.Sort(new PropertySorter(propertyName,"ASC"));
-			this.Clear();
-			foreach(object element in sorter)
-			{
-				this.Add(element);
-			}
-			return this;
-		}
-
-		public object FindByName(String name)
-		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			IIdentificableObject element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.Name == name)
 				{
@@ -233,10 +205,10 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByUniqueID(String uniqueID)
+		public IIdentificableObject FindByUniqueID(String uniqueID)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			IIdentificableObject element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.UniqueID == uniqueID)
 				{
@@ -249,8 +221,8 @@ namespace UseCaseMakerLibrary
 
 		public object FindByElementID(String elementID)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			IIdentificableObject element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.ElementID == elementID)
 				{
@@ -263,8 +235,8 @@ namespace UseCaseMakerLibrary
 
 		public object FindByPath(String path)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			IIdentificableObject element = null;
+			foreach(IIdentificableObject tmpElement in this)
 			{
 				if(tmpElement.Path == path)
 				{
@@ -278,7 +250,7 @@ namespace UseCaseMakerLibrary
 		public Int32 GetNextFreeID()
 		{
 			int id = 0;
-			foreach(IdentificableObject tmpElement in this)
+			foreach(IIdentificableObject tmpElement in this)
 			{
 				if(tmpElement.ID > id)
 				{

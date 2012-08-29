@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class Steps : IdentificableObjectCollection
+	public class Steps : IdentificableObjectCollection<Step>
 	{
 		#region Private Enumerators and Constants
 		#endregion

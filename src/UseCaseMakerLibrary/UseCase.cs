@@ -264,8 +264,8 @@ namespace UseCaseMakerLibrary
 			if(previousStep == null)
 			{
 				step.ID = 1;
-				ret = this.steps.Add(step);
-				return ret;
+				steps.Add(step);
+			    return steps.Count - 1;
 			}
 			else
 			{
@@ -434,7 +434,8 @@ namespace UseCaseMakerLibrary
 			index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
 			if(index == this.steps.Count)
 			{
-				ret = this.steps.Add(step);
+				this.steps.Add(step);
+			    return steps.Count - 1;
 			}
 			else
 			{
@@ -640,9 +641,9 @@ namespace UseCaseMakerLibrary
 				openIssue.ID = ((OpenIssue)this.openIssues[index - 1]).ID + 1;
 			}
 
-			ret = this.openIssues.Add(openIssue);
+			this.openIssues.Add(openIssue);
 
-			return ret;
+		    return openIssues.Count - 1;
 		}
 
 		public void RemoveOpenIssue(OpenIssue openIssue)

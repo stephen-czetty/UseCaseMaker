@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class OpenIssues : IdentificableObjectCollection
+	public class OpenIssues : IdentificableObjectCollection<OpenIssue>
 	{
 		#region Private Enumerators and Constants
 		#endregion

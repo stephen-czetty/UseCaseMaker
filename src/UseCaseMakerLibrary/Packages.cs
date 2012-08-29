@@ -2,7 +2,7 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-	public class Packages : IdentificableObjectCollection
+	public class Packages : IdentificableObjectCollection<Package>
 	{
 		internal Packages(Package owner)
 		{

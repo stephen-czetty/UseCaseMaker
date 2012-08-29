@@ -2,7 +2,7 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-	public class UseCases : IdentificableObjectCollection
+	public class UseCases : IdentificableObjectCollection<UseCase>
 	{
 		internal UseCases(Package owner)
 		{
