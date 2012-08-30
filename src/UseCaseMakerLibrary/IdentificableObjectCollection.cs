@@ -17,15 +17,6 @@ namespace UseCaseMakerLibrary
 		private readonly IdentificableObject _ia = new IdentificableObject();
 		#endregion
 
-		#region Constructors
-		internal IdentificableObjectCollection()
-		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
-		}
-		#endregion
-
 		#region Public Properties
 
 	    public bool Remove(T item)
@@ -51,7 +42,7 @@ namespace UseCaseMakerLibrary
 	    }
 
 		[XMLSerializeIgnore]
-		public object this[int index]
+		public T this[int index]
 		{
 			get
 			{
@@ -146,7 +137,12 @@ namespace UseCaseMakerLibrary
 				return Owner.ElementID;
 			}
 		}
-		#endregion
+
+	    public void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+	    {
+	    }
+
+	    #endregion
 		#endregion
 
 		#region Public Methods

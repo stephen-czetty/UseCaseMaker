@@ -14,12 +14,13 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
                                      _useCase2.AddStep(null, Step.StepType.Default, "", _useCase1,
                                                        DependencyItem.ReferenceType.Client);
                                      Package.AddUseCase(_useCase2);
+                                     Package.UseCases.ShouldContain(_useCase1, _useCase2);
 
                                      Package.RemoveUseCase(_useCase1, "", "", "", "", false);
                                  };
 
         private It Should_remove_the_reference_in_the_second_use_case =
-            () => ((Step) _useCase2.Steps[0]).Dependency.PartnerUniqueID.ShouldNotEqual(_useCase1.UniqueID);
+            () => _useCase2.Steps[0].Dependency.PartnerUniqueID.ShouldNotEqual(_useCase1.UniqueID);
 
         private It Should_remove_the_use_case = () => Package.UseCases.ShouldNotContain(_useCase1);
         

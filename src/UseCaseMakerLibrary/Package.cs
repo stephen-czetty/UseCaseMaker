@@ -6,36 +6,38 @@ namespace UseCaseMakerLibrary
 	public class Package : IdentificableObject
 	{
 		#region Class Members
-		private readonly Actors actors = null;
-		private readonly Packages packages = null;
-		private readonly UseCases useCases = null;
-		private CommonAttributes commonAttributes = new CommonAttributes();
-		private Requirements requirements = new Requirements();
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal Package()
 			: base()
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 
 		internal Package(String name, String prefix, Int32 id)
 			: base(name,prefix,id)
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 
 		internal Package(String name, String prefix, Int32 id, Package owner)
 			: base(name,prefix,id,owner)
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 		#endregion
 
@@ -83,7 +85,7 @@ namespace UseCaseMakerLibrary
 		{
 			StringCollection sc = new StringCollection();
 
-			this.RecursiveGetActorNameList(sc);
+			RecursiveGetActorNameList(sc);
 
 			String [] actorNames = new String[sc.Count];
 			sc.CopyTo(actorNames,0);
@@ -172,7 +174,7 @@ namespace UseCaseMakerLibrary
 		public Int32 AddRequrement()
 		{
 			Requirement requirement = new Requirement();
-			Int32 index = this.requirements.Count;
+			Int32 index = Requirements.Count;
 			Int32 ret;
 
 			if(index == 0)
@@ -181,31 +183,31 @@ namespace UseCaseMakerLibrary
 			}
 			else
 			{
-				requirement.ID = ((Requirement)this.requirements[index - 1]).ID + 1;
+				requirement.ID = Requirements[index - 1].ID + 1;
 			}
 
-			this.requirements.Add(requirement);
+			this.Requirements.Add(requirement);
 
-		    return requirements.Count - 1;
+		    return Requirements.Count - 1;
 		}
 
 		public void RemoveRequirement(Requirement requirement)
 		{
-			foreach(Requirement tmpRequirement in this.requirements)
+			foreach(Requirement tmpRequirement in Requirements)
 			{
 				if(tmpRequirement.ID > requirement.ID)
 				{
 					tmpRequirement.ID -= 1;
 				}
 			}
-			this.requirements.Remove(requirement);
+			this.Requirements.Remove(requirement);
 		}
 
 		public Requirement FindRequirementByUniqueID(String uniqueID)
 		{
 			Requirement requirement = null;
 
-			foreach(Requirement tmpRequirement in this.requirements)
+			foreach(Requirement tmpRequirement in Requirements)
 			{
 				if(tmpRequirement.UniqueID == uniqueID)
 				{
@@ -257,46 +259,18 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
-		public Actors Actors
-		{
-			get
-			{
-				return this.actors;
-			}
-		}
 
-		public Packages Packages
-		{
-			get
-			{
-				return this.packages;
-			}
-		}
+	    public Actors Actors { get; private set; }
 
-		public UseCases UseCases
-		{
-			get
-			{
-				return this.useCases;
-			}
-		}
+	    public Packages Packages { get; private set; }
 
-		public Requirements Requirements
-		{
-			get
-			{
-				return this.requirements;
-			}
-		}
+	    public UseCases UseCases { get; private set; }
 
-		public CommonAttributes Attributes
-		{
-			get
-			{
-				return this.commonAttributes;
-			}
-		}
-		#endregion
+	    public Requirements Requirements { get; private set; }
+
+	    public CommonAttributes Attributes { get; private set; }
+
+	    #endregion
 
 		#region Private Methods
 		void ValidateActor(Actor actor)
@@ -313,12 +287,12 @@ namespace UseCaseMakerLibrary
 
 		void RecursiveGetActorNameList(StringCollection sc)
 		{
-			foreach(Actor actor in this.actors)
+			foreach(Actor actor in Actors)
 			{
 				sc.Add(actor.Name);
 			}
 
-			foreach(Package subPackage in this.packages)
+			foreach(Package subPackage in Packages)
 			{
 				subPackage.RecursiveGetActorNameList(sc);
 			}
@@ -338,12 +312,12 @@ namespace UseCaseMakerLibrary
 			String oldFullName = oldNameStartTag + oldName + oldNameEndTag;
 			String newFullName = newNameStartTag + newName + newNameEndTag;
 
-			foreach(Requirement requirement in this.requirements)
+			foreach(Requirement requirement in Requirements)
 			{
 				requirement.Description = requirement.Description.Replace(oldFullName,newFullName);
 			}
 
-			foreach(UseCase useCase in this.UseCases)
+			foreach(UseCase useCase in UseCases)
 			{
 				foreach(OpenIssue openIssue in useCase.OpenIssues)
 				{
@@ -361,7 +335,7 @@ namespace UseCaseMakerLibrary
 
 			if(deep)
 			{
-				foreach(Package package in this.Packages)
+				foreach(Package package in Packages)
 				{
 					package.ChangeReferences(
 						oldName,
@@ -375,8 +349,64 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
+        public override void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+        {
+            foreach(Actor a in Actors)
+		        {
+		            currentPackage.PurgeReferences(
+		                a,
+		                null,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                newNameStartTag,
+		                newNameEndTag,
+		                dontMark);
+		        }
+		        foreach(UseCase uc in UseCases)
+		        {
+		            currentPackage.PurgeReferences(
+		                uc,
+		                null,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                newNameStartTag,
+		                newNameEndTag,
+		                dontMark);
+		        }
+		        foreach(Package p in Packages)
+		        {
+		            currentPackage.PurgeReferences(
+		                p,
+		                null,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                newNameStartTag,
+		                newNameEndTag,
+		                dontMark);
+		        }
+		        if(!dontMark)
+		        {
+		            thisPackage.ChangeReferences(
+		                Name,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Name,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		            thisPackage.ChangeReferences(
+		                Path,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Path,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		        }
+        }
+
 		internal void PurgeReferences(
-			object element,
+			IIdentificableObject element,
 			Package targetPackage,
 			String oldNameStartTag,
 			String oldNameEndTag,
@@ -394,157 +424,7 @@ namespace UseCaseMakerLibrary
 				}
 			}
 
-			if(element.GetType() == typeof(Package))
-			{
-				foreach(Actor actor in ((Package)element).Actors)
-				{
-					currentPackage.PurgeReferences(
-						actor,
-						null,
-						oldNameStartTag,
-						oldNameEndTag,
-						newNameStartTag,
-						newNameEndTag,
-						dontMark);
-				}
-				foreach(UseCase useCase in ((Package)element).UseCases)
-				{
-					currentPackage.PurgeReferences(
-						useCase,
-						null,
-						oldNameStartTag,
-						oldNameEndTag,
-						newNameStartTag,
-						newNameEndTag,
-						dontMark);
-				}
-				foreach(Package package in ((Package)element).Packages)
-				{
-					currentPackage.PurgeReferences(
-						package,
-						null,
-						oldNameStartTag,
-						oldNameEndTag,
-						newNameStartTag,
-						newNameEndTag,
-						dontMark);
-				}
-				if(!dontMark)
-				{
-					this.ChangeReferences(
-						((Package)element).Name,
-						oldNameStartTag,
-						oldNameEndTag,
-						((Package)element).Name,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-					this.ChangeReferences(
-						((Package)element).Path,
-						oldNameStartTag,
-						oldNameEndTag,
-						((Package)element).Path,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-				}
-			}
-
-			if(element.GetType() == typeof(UseCase))
-			{
-				foreach(Package package in this.Packages)
-				{
-					package.PurgeReferences(
-						element,
-						null,
-						oldNameStartTag,
-						oldNameEndTag,
-						newNameStartTag,
-						newNameEndTag,
-						dontMark);
-				}
-				if(!dontMark)
-				{
-					this.ChangeReferences(
-						((UseCase)element).Name,
-						oldNameStartTag,
-						oldNameEndTag,
-						((UseCase)element).Name,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-					this.ChangeReferences(
-						((UseCase)element).Path,
-						oldNameStartTag,
-						oldNameEndTag,
-						((UseCase)element).Path,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-				}
-				// remove use case references in use case's steps
-				foreach(UseCase useCase in this.UseCases)
-				{
-					foreach(Step step in useCase.Steps)
-					{
-						if(step.Dependency.PartnerUniqueID == ((UseCase)element).UniqueID)
-						{
-							step.Dependency.Type = DependencyItem.ReferenceType.None;
-							step.Dependency.PartnerUniqueID = "";
-							step.Dependency.Stereotype = "";
-						}
-					}
-				}
-			}
-
-			if(element.GetType() == typeof(Actor))
-			{
-				foreach(UseCase useCase in this.UseCases)
-				{
-					ActiveActor tmpAActor = null;
-					foreach(ActiveActor aactor in useCase.ActiveActors)
-					{
-						if(aactor.ActorUniqueID == ((Actor)element).UniqueID)
-						{
-							tmpAActor = aactor;
-						}
-					}
-					if(tmpAActor != null)
-					{
-						useCase.ActiveActors.Remove(tmpAActor);
-					}
-				}
-				foreach(Package package in this.Packages)
-				{
-					package.PurgeReferences(
-						element,
-						null,
-						oldNameStartTag,
-						oldNameEndTag,
-						newNameStartTag,
-						newNameEndTag,
-						dontMark);
-				}
-				if(!dontMark)
-				{
-					this.ChangeReferences(
-						((Actor)element).Name,
-						oldNameStartTag,
-						oldNameEndTag,
-						((Actor)element).Name,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-					this.ChangeReferences(
-						((Actor)element).Path,
-						oldNameStartTag,
-						oldNameEndTag,
-						((Actor)element).Path,
-						newNameStartTag,
-						newNameEndTag,
-						false);
-				}
-			}
+		    element.PurgeReferences(this, currentPackage, oldNameStartTag, oldNameEndTag, newNameStartTag, newNameEndTag, dontMark);
 		}
 		#endregion
 	}

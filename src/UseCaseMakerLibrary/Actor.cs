@@ -96,6 +96,56 @@ namespace UseCaseMakerLibrary
 		#endregion
 		#endregion
 
+        public override void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+        {
+            foreach(UseCase uc in thisPackage.UseCases)
+		        {
+		            ActiveActor tmpAActor = null;
+		            foreach(ActiveActor aactor in uc.ActiveActors)
+		            {
+		                if(aactor.ActorUniqueID == UniqueID)
+		                {
+		                    tmpAActor = aactor;
+		                }
+		            }
+		            if(tmpAActor != null)
+		            {
+		                uc.ActiveActors.Remove(tmpAActor);
+		            }
+		        }
+		        foreach(Package p in thisPackage.Packages)
+		        {
+		            p.PurgeReferences(
+		                this,
+		                null,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                newNameStartTag,
+		                newNameEndTag,
+		                dontMark);
+		        }
+		        if(!dontMark)
+		        {
+		            thisPackage.ChangeReferences(
+		                Name,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Name,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		            thisPackage.ChangeReferences(
+		                Path,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Path,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		        }
+		    }
+        
+
 		#region Static Members
 		#endregion
 	}
