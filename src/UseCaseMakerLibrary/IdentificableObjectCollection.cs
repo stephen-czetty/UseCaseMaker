@@ -10,7 +10,7 @@ namespace UseCaseMakerLibrary
 	/// Descrizione di riepilogo per IdentificableObjectCollection.
 	/// </summary>
     public abstract class IdentificableObjectCollection<T> : IdentificableObject, ICollection<T>
-        where T : IIdentificableObject
+        where T : class, IIdentificableObject
 	{
 		private readonly IList<T> _items = new List<T>();
 
@@ -124,9 +124,9 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public IIdentificableObject FindByUniqueID(String uniqueID)
+		public T FindByUniqueID(String uniqueID)
 		{
-			IIdentificableObject element = null;
+			T element = null;
 			foreach(T tmpElement in this)
 			{
 				if(tmpElement.UniqueID == uniqueID)
@@ -138,9 +138,9 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByElementID(String elementID)
+		public T FindByElementID(String elementID)
 		{
-			IIdentificableObject element = null;
+			T element = null;
 			foreach(T tmpElement in this)
 			{
 				if(tmpElement.ElementID == elementID)
@@ -152,9 +152,9 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByPath(String path)
+		public T FindByPath(String path)
 		{
-			IIdentificableObject element = null;
+			T element = null;
 			foreach(T tmpElement in _items)
 			{
 				if(tmpElement.Path == path)

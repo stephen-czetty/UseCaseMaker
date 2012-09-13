@@ -78,7 +78,7 @@ namespace UseCaseMakerLibrary
 
 		public Actor GetActor(String uniqueID)
 		{
-			return (Actor)Actors.FindByUniqueID(uniqueID);
+			return Actors.FindByUniqueID(uniqueID);
 		}
 
 		public String [] GetActorNames()
@@ -128,7 +128,7 @@ namespace UseCaseMakerLibrary
 
 		public Package GetPackage(String uniqueID)
 		{
-			return (Package)Packages.FindByUniqueID(uniqueID);
+			return Packages.FindByUniqueID(uniqueID);
 		}
 		#endregion // Packages Handling
 
@@ -166,7 +166,7 @@ namespace UseCaseMakerLibrary
 
 		public UseCase GetUseCase(String uniqueID)
 		{
-			return (UseCase)UseCases.FindByUniqueID(uniqueID);
+			return UseCases.FindByUniqueID(uniqueID);
 		}
 		#endregion // UseCase Handling
 
