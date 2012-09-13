@@ -9,9 +9,6 @@ namespace UseCaseMakerLibrary
 			base.Owner = owner;
 		}
 
-		#region Public Properties
-		#endregion
-
 		public object FindElementByUniqueID(String uniqueID)
 		{
 			object element = null;
