@@ -9,15 +9,10 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per IdentificableObjectCollection.
 	/// </summary>
-	public abstract class IdentificableObjectCollection<T> : ICollection<T>, IIdentificableObject, IXMLNodeSerializable
+    public abstract class IdentificableObjectCollection<T> : IdentificableObject, ICollection<T>
         where T : IIdentificableObject
 	{
-		#region Class Members
 		private readonly IList<T> _items = new List<T>();
-		private readonly IdentificableObject _ia = new IdentificableObject();
-		#endregion
-
-		#region Public Properties
 
 	    public bool Remove(T item)
 	    {
@@ -38,7 +33,7 @@ namespace UseCaseMakerLibrary
 
 	    public bool IsReadOnly
 	    {
-	        get { throw new NotImplementedException(); }
+	        get { return _items.IsReadOnly; }
 	    }
 
 		[XMLSerializeIgnore]
@@ -50,74 +45,10 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		#region IIdentificableObject implementation
-		[XMLSerializeAsAttribute]
-		public String UniqueID
-		{
-			get
-			{
-				return this._ia.UniqueID;
-			}
-			set
-			{
-				this._ia.UniqueID = value;
-			}
-		}
-
-		[XMLSerializeIgnore]
-		public Package Owner
-		{
-			get
-			{
-				return this._ia.Owner;
-			}
-			set
-			{
-				this._ia.Owner = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public String Name
-		{
-			get
-			{
-				return this._ia.Name;
-			}
-			set
-			{
-				this._ia.Name = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public Int32 ID
-		{
-			get
-			{
-				return this._ia.ID;
-			}
-			set
-			{
-				this._ia.ID = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public String Prefix
-		{
-			get
-			{
-				return this._ia.Prefix;
-			}
-			set
-			{
-				this._ia.Prefix = value;
-			}
-		}
+	
 
 		[XMLSerializeAsAttribute(true)]
-		public String Path
+		public override String Path
 		{
 			get
 			{
@@ -130,7 +61,7 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
-		public String ElementID
+		public override String ElementID
 		{
 			get
 			{
@@ -138,14 +69,6 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-	    public void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
-	    {
-	    }
-
-	    #endregion
-		#endregion
-
-		#region Public Methods
 		public void Add(T item)
 		{
              _items.Add(item);
@@ -163,12 +86,12 @@ namespace UseCaseMakerLibrary
 
 	    public bool Contains(T item)
 	    {
-	        throw new NotImplementedException();
+	        return _items.Contains(item);
 	    }
 
 	    public void CopyTo(T[] array, int arrayIndex)
 	    {
-	        throw new NotImplementedException();
+	        _items.CopyTo(array, arrayIndex);
 	    }
 
 	    public IEnumerator<T> GetEnumerator()
@@ -232,7 +155,7 @@ namespace UseCaseMakerLibrary
 		public object FindByPath(String path)
 		{
 			IIdentificableObject element = null;
-			foreach(IIdentificableObject tmpElement in this)
+			foreach(T tmpElement in _items)
 			{
 				if(tmpElement.Path == path)
 				{
@@ -246,7 +169,7 @@ namespace UseCaseMakerLibrary
 		public Int32 GetNextFreeID()
 		{
 			int id = 0;
-			foreach(IIdentificableObject tmpElement in this)
+			foreach(T tmpElement in _items)
 			{
 				if(tmpElement.ID > id)
 				{
@@ -256,21 +179,14 @@ namespace UseCaseMakerLibrary
 
 			return (id + 1);
 		}
-		#endregion
-
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
 
 		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
+		public override XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
 		{
 			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
+		public override void XmlDeserialize(XmlNode fromNode, object instance)
 		{
 			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}

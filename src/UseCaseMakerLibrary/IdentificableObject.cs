@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class IdentificableObject : IIdentificableObject, IXMLNodeSerializable
+	public abstract class IdentificableObject : IIdentificableObject, IXMLNodeSerializable
 	{
 		#region Constructors
 		internal IdentificableObject()
@@ -58,7 +58,7 @@ namespace UseCaseMakerLibrary
 	    public string Prefix { get; set; }
 
 	    [XMLSerializeAsAttribute(true)]
-		public String Path
+		public virtual String Path
 		{
 			get
 			{
@@ -74,7 +74,7 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
-		public String ElementID
+		public virtual String ElementID
 		{
 			get
 			{
@@ -100,12 +100,12 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
+		public virtual XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
 		{
 			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
+		public virtual void XmlDeserialize(XmlNode fromNode, object instance)
 		{
 			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
