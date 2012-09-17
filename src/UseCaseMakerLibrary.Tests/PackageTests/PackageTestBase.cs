@@ -83,7 +83,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
         private It Should_contain_the_actor_in_its_collection = () => Package.Actors.ShouldContain(_actor);
 
         private It Should_set_the_actor_owner_to_the_package =
-            () => ((Actor) Package.Actors[0]).Owner.ShouldEqual(Package);
+            () => Package.Actors[0].Owner.ShouldEqual(Package);
         
         
         private static Actor _actor;
@@ -165,10 +165,10 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
                                  };
 
         private It Should_remove_the_actor_from_the_usecase =
-            () => ((UseCase) Package.UseCases[0]).ActiveActors.ShouldNotContain(_actor);
+            () => Package.UseCases[0].ActiveActors.ShouldNotContain(_actor);
 
         private It Should_not_remove_the_actor_from_the_sub_package = // Really???
-            () => ((Package) Package.Packages[0]).Actors.ShouldContain(_actor); 
+            () => Package.Packages[0].Actors.ShouldContain(_actor); 
 
         private It Should_remove_the_actor = () => Package.Actors.ShouldNotContain(_actor);
         

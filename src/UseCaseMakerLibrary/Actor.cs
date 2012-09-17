@@ -59,7 +59,7 @@ namespace UseCaseMakerLibrary
 			}
 			else
 			{
-				goal.ID = ((Goal)this.goals[index - 1]).ID + 1;
+				goal.ID = goals[index - 1].ID + 1;
 			}
 
 			goals.Add(goal);

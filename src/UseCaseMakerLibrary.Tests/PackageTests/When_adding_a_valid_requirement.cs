@@ -14,12 +14,12 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
 
         [Ignore("Doesn't do this, but maybe it should?")]
         private It Should_set_the_requirement_owner_to_the_package =
-            () => ((Requirement)Package.Requirements[0]).Owner.ShouldEqual(Package);
+            () => Package.Requirements[0].Owner.ShouldEqual(Package);
 
         // TODO: This test is contrived
         private It Should_return_the_requirement_from_unique_id =
             () =>
-            Package.FindRequirementByUniqueID(((Requirement) Package.Requirements[0]).UniqueID).ShouldEqual(
+            Package.FindRequirementByUniqueID(Package.Requirements[0].UniqueID).ShouldEqual(
                 Package.Requirements[0]);
 
 
