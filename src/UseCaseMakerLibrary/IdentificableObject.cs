@@ -3,117 +3,70 @@ using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class IdentificableObject : IIdentificableObject, IXMLNodeSerializable
+	public abstract class IdentificableObject : IIdentificableObject, IXMLNodeSerializable
 	{
-		#region Class Members
-		private Int32 id = -1;
-		private String name = String.Empty;
-		private String prefix = String.Empty;
-		private String uniqueID = String.Empty;
-		private Package owner = null;
-		private UserViewStatus userViewStatus = new UserViewStatus();
-		#endregion
-
 		#region Constructors
 		internal IdentificableObject()
 		{
-			MakeUniqueID();
+		    ObjectUserViewStatus = new UserViewStatus();
+		    Prefix = String.Empty;
+		    ID = -1;
+		    UniqueID = String.Empty;
+		    Name = String.Empty;
+		    Owner = null;
+		    MakeUniqueId();
 		}
 
-		internal IdentificableObject(String name, String prefix, Int32 id)
+	    internal IdentificableObject(String name, String prefix, Int32 id)
 		{
-			MakeUniqueID();
-			this.name = name;
-			this.prefix = prefix;
-			this.id = id;
+	        ObjectUserViewStatus = new UserViewStatus();
+	        UniqueID = String.Empty;
+	        Owner = null;
+	        MakeUniqueId();
+			Name = name;
+			Prefix = prefix;
+			ID = id;
 		}
 
 		internal IdentificableObject(String name, String prefix, Int32 id, Package owner)
 		{
-			MakeUniqueID();
-			this.name = name;
-			this.prefix = prefix;
-			this.id = id;
-			this.owner = owner;
+		    ObjectUserViewStatus = new UserViewStatus();
+		    UniqueID = String.Empty;
+		    MakeUniqueId();
+			Name = name;
+			Prefix = prefix;
+			ID = id;
+			Owner = owner;
 		}
 		#endregion
 
 		#region Public Properties
-		[XMLSerializeAsAttribute]
-		public String UniqueID
-		{
-			get
-			{
-				return this.uniqueID;
-			}
-			set
-			{
-				this.uniqueID = value;
-			}
-		}
 
-		[XMLSerializeIgnore]
-		public Package Owner
-		{
-			get
-			{
-				return this.owner;
-			}
-			set
-			{
-				this.owner = value;
-			}
-		}
+	    [XMLSerializeAsAttribute]
+	    public string UniqueID { get; set; }
 
-		[XMLSerializeAsAttribute]
-		public String Name
-		{
-			get
-			{
-				return this.name;
-			}
-			set
-			{
-				this.name = value;
-			}
-		}
+	    [XMLSerializeIgnore]
+	    public Package Owner { get; set; }
 
-		[XMLSerializeAsAttribute]
-		public Int32 ID
-		{
-			get
-			{
-				return this.id;
-			}
-			set
-			{
-				this.id = value;
-			}
-		}
+	    [XMLSerializeAsAttribute]
+	    public string Name { get; set; }
 
-		[XMLSerializeAsAttribute]
-		public String Prefix
-		{
-			get
-			{
-				return this.prefix;
-			}
-			set
-			{
-				this.prefix = value;
-			}
-		}
+	    [XMLSerializeAsAttribute]
+	    public int ID { get; set; }
 
-		[XMLSerializeAsAttribute(true)]
-		public String Path
+	    [XMLSerializeAsAttribute]
+	    public string Prefix { get; set; }
+
+	    [XMLSerializeAsAttribute(true)]
+		public virtual String Path
 		{
 			get
 			{
-				string path = this.Prefix + this.ID.ToString();
-				IdentificableObject owner = this.Owner;
+				string path = ElementID;
+				IdentificableObject owner = Owner;
 				while(owner != null)
 				{
-					path = owner.Prefix + owner.ID.ToString() + "." + path;
+					path = owner.ElementID + "." + path;
 					owner = owner.Owner;
 				}
 				return path;
@@ -121,39 +74,38 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
-		public String ElementID
+		public virtual String ElementID
 		{
 			get
 			{
-				return this.prefix + this.id.ToString();
+				return Prefix + ID;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public UserViewStatus ObjectUserViewStatus
-		{
-			get
-			{
-				return this.userViewStatus;
-			}
-		}
-		#endregion
+	    public virtual void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+	    {
+	    }
+
+	    [XMLSerializeIgnore]
+	    public UserViewStatus ObjectUserViewStatus { get; private set; }
+
+	    #endregion
 	
 		#region Private Methods
-		private void MakeUniqueID()
+		private void MakeUniqueId()
 		{
 			Guid guid = Guid.NewGuid();
-			uniqueID = guid.ToString();
+			UniqueID = guid.ToString();
 		}
 		#endregion
 
 		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
+		public virtual XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
 		{
 			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
+		public virtual void XmlDeserialize(XmlNode fromNode, object instance)
 		{
 			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}

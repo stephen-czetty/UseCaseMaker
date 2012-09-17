@@ -153,7 +153,7 @@ namespace UseCaseMakerLibrary
 								if(element.GetType().GetInterface("IXMLNodeSerializable") != null)
 								{
 									XmlNode methodNode = XmlSerialize(document,element,string.Empty,deep);
-									propertyNode.AppendChild((XmlElement)document.ImportNode(methodNode,true));
+									propertyNode.AppendChild(document.ImportNode(methodNode,true));
 									mainNode.AppendChild(propertyNode);
 								}
 							}

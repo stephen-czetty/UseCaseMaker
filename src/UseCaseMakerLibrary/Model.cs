@@ -81,13 +81,13 @@ namespace UseCaseMakerLibrary
 
 		public GlossaryItem GetGlossaryItem(String uniqueID)
 		{
-			return (GlossaryItem)this.glossary.FindByUniqueID(uniqueID);
+			return glossary.FindByUniqueID(uniqueID);
 		}
 		#endregion // Packages Handling
 
-		public object FindElementByUniqueID(String uniqueID)
+		public IIdentificableObject FindElementByUniqueID(String uniqueID)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.UniqueID == uniqueID)
 			{
@@ -128,9 +128,9 @@ namespace UseCaseMakerLibrary
 			return this.Packages.FindElementByUniqueID(uniqueID);
 		}
 
-		public object FindElementByName(String name)
+		public IIdentificableObject FindElementByName(String name)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.Name == name)
 			{
@@ -166,9 +166,9 @@ namespace UseCaseMakerLibrary
 			return this.Packages.FindElementByName(name);
 		}
 
-		public object FindElementByPath(String path)
+		public IIdentificableObject FindElementByPath(String path)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.Path == path)
 			{

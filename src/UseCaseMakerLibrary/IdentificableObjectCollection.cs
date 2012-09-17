@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace UseCaseMakerLibrary
@@ -7,30 +9,17 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per IdentificableObjectCollection.
 	/// </summary>
-	public class IdentificableObjectCollection : ICollection, IIdentificableObject, IXMLNodeSerializable
+    public abstract class IdentificableObjectCollection<T> : IdentificableObject, ICollection<T>
+        where T : class, IIdentificableObject
 	{
-		#region Private Enumerators and Constants
-		#endregion
+		private readonly IList<T> _items = new List<T>();
 
-		#region Public Enumerators and Constants
-		#endregion
+	    public bool Remove(T item)
+	    {
+	        return _items.Remove(item);
+	    }
 
-		#region Class Members
-		private ArrayList items = new ArrayList();
-		private IdentificableObject ia = new IdentificableObject();
-		#endregion
-
-		#region Constructors
-		internal IdentificableObjectCollection()
-		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
-		}
-		#endregion
-
-		#region Public Properties
-		/// <summary>
+	    /// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
 		[XMLSerializeIgnore]
@@ -38,105 +27,28 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
+
+	    public bool IsReadOnly
+	    {
+	        get { return _items.IsReadOnly; }
+	    }
 
 		[XMLSerializeIgnore]
-		public bool IsSynchronized
+		public T this[int index]
 		{
 			get
 			{
-				return items.IsSynchronized;
+				return _items[index];
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
-		{
-			get
-			{
-				return items.SyncRoot;
-			}
-		}
-
-		[XMLSerializeIgnore]
-		public object this[int index]
-		{
-			get
-			{
-				return items[index];
-			}
-		}
-
-		#region IIdentificableObject implementation
-		[XMLSerializeAsAttribute]
-		public String UniqueID
-		{
-			get
-			{
-				return this.ia.UniqueID;
-			}
-			set
-			{
-				this.ia.UniqueID = value;
-			}
-		}
-
-		[XMLSerializeIgnore]
-		public Package Owner
-		{
-			get
-			{
-				return this.ia.Owner;
-			}
-			set
-			{
-				this.ia.Owner = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public String Name
-		{
-			get
-			{
-				return this.ia.Name;
-			}
-			set
-			{
-				this.ia.Name = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public Int32 ID
-		{
-			get
-			{
-				return this.ia.ID;
-			}
-			set
-			{
-				this.ia.ID = value;
-			}
-		}
-
-		[XMLSerializeAsAttribute]
-		public String Prefix
-		{
-			get
-			{
-				return this.ia.Prefix;
-			}
-			set
-			{
-				this.ia.Prefix = value;
-			}
-		}
+	
 
 		[XMLSerializeAsAttribute(true)]
-		public String Path
+		public override String Path
 		{
 			get
 			{
@@ -149,80 +61,59 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
-		public String ElementID
+		public override String ElementID
 		{
 			get
 			{
 				return Owner.ElementID;
 			}
 		}
-		#endregion
-		#endregion
 
-		#region Public Methods
-		public int Add(object item)
+		public void Add(T item)
 		{
-			int result = items.Add(item);
-
-			return result;
+             _items.Add(item);
 		}
 
-		public void Clear()
+        public void Insert(int index, T item)
+        {
+            _items.Insert(index, item);
+        }
+
+	    public void Clear()
 		{
-			items.Clear();
+			_items.Clear();
 		}
 
-		public bool Contains(object item)
-		{
-			return items.Contains(item);
-		}
+	    public bool Contains(T item)
+	    {
+	        return _items.Contains(item);
+	    }
 
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
+	    public void CopyTo(T[] array, int arrayIndex)
+	    {
+	        _items.CopyTo(array, arrayIndex);
+	    }
 
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
+	    public IEnumerator<T> GetEnumerator()
+	    {
+	        return _items.GetEnumerator();
+	    }
 
-		public void Remove(object item)
-		{
-			items.Remove(item);
-		}
+	    IEnumerator IEnumerable.GetEnumerator()
+	    {
+	        return GetEnumerator();
+	    }
 
-		public void RemoveAt(int index)
-		{
-			items.RemoveAt(index);
-		}
+        public ICollection<T> Sorted(string propertyName)
+        {
+            var ps = new PropertySorter<T>(propertyName, "ASC");
+            return _items.OrderBy(x => x, ps).ToList();
+        }
 
-		public void CopyTo(Array array, int index)
+		public IIdentificableObject FindByName(String name)
 		{
-			items.CopyTo(array, index);
-		}
-
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
-
-		public ICollection Sorted(string propertyName)
-		{
-			ArrayList sorter = new ArrayList(this);
-			sorter.Sort(new PropertySorter(propertyName,"ASC"));
-			this.Clear();
-			foreach(object element in sorter)
-			{
-				this.Add(element);
-			}
-			return this;
-		}
-
-		public object FindByName(String name)
-		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			IIdentificableObject element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.Name == name)
 				{
@@ -233,10 +124,10 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByUniqueID(String uniqueID)
+		public T FindByUniqueID(String uniqueID)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			T element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.UniqueID == uniqueID)
 				{
@@ -247,10 +138,10 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByElementID(String elementID)
+		public T FindByElementID(String elementID)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			T element = null;
+			foreach(T tmpElement in this)
 			{
 				if(tmpElement.ElementID == elementID)
 				{
@@ -261,10 +152,10 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindByPath(String path)
+		public T FindByPath(String path)
 		{
-			IdentificableObject element = null;
-			foreach(IdentificableObject tmpElement in this)
+			T element = null;
+			foreach(T tmpElement in _items)
 			{
 				if(tmpElement.Path == path)
 				{
@@ -278,7 +169,7 @@ namespace UseCaseMakerLibrary
 		public Int32 GetNextFreeID()
 		{
 			int id = 0;
-			foreach(IdentificableObject tmpElement in this)
+			foreach(T tmpElement in _items)
 			{
 				if(tmpElement.ID > id)
 				{
@@ -288,21 +179,14 @@ namespace UseCaseMakerLibrary
 
 			return (id + 1);
 		}
-		#endregion
-
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
 
 		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
+		public override XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
 		{
 			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
+		public override void XmlDeserialize(XmlNode fromNode, object instance)
 		{
 			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}

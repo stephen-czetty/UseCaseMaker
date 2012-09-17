@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class ActiveActors : ICollection, IXMLNodeSerializable
+	public class ActiveActors : ICollection<ActiveActor>, IXMLNodeSerializable
 	{
 		#region Class Members
-		private ArrayList items = new ArrayList();
+		private readonly IList<ActiveActor> _items = new List<ActiveActor>();
 		#endregion
 
 		#region Constructors
@@ -22,90 +23,80 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
-		{
-			get
-			{
-				return items.IsSynchronized;
-			}
-		}
+	    public bool IsReadOnly
+	    {
+	        get { return _items.IsReadOnly; }
+	    }
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
+	    [XMLSerializeIgnore]
+		public ActiveActor this[int index]
 		{
 			get
 			{
-				return items.SyncRoot;
-			}
-		}
-
-		[XMLSerializeIgnore]
-		public object this[int index]
-		{
-			get
-			{
-				return items[index];
+				return _items[index];
 			}
 		}
 		#endregion
 
 		#region Public Methods
-		public int Add(object item)
+		public void Add(ActiveActor item)
 		{
-			int result = items.Add(item);
-
-			return result;
+			_items.Add(item);
 		}
 
 		public void Clear()
 		{
-			items.Clear();
+			_items.Clear();
 		}
 
-		public bool Contains(object item)
+		public bool Contains(ActiveActor item)
 		{
-			return items.Contains(item);
+			return _items.Contains(item);
 		}
 
-		public int IndexOf(object item)
+	    public void CopyTo(ActiveActor[] array, int arrayIndex)
+	    {
+	        _items.CopyTo(array, arrayIndex);
+	    }
+
+	    public int IndexOf(ActiveActor item)
 		{
-			return items.IndexOf(item);
+			return _items.IndexOf(item);
 		}
 
-		public void Insert(int index, object item)
+		public void Insert(int index, ActiveActor item)
 		{
-			items.Insert(index, item);
+			_items.Insert(index, item);
 		}
 
-		public void Remove(object item)
+		public bool Remove(ActiveActor item)
 		{
-			items.Remove(item);
+			return _items.Remove(item);
 		}
 
 		public void RemoveAt(int index)
 		{
-			items.RemoveAt(index);
+			_items.RemoveAt(index);
 		}
 
-		public void CopyTo(Array array, int index)
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			items.CopyTo(array, index);
+		    return GetEnumerator();
 		}
 
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
+        public IEnumerator<ActiveActor> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
 
-		public object FindByUniqueID(String uniqueID)
+		public ActiveActor FindByUniqueID(String uniqueID)
 		{
 			ActiveActor aactor = null;
-			foreach(ActiveActor tmpAActor in this.items)
+			foreach(ActiveActor tmpAActor in this._items)
 			{
 				if(tmpAActor.ActorUniqueID == uniqueID)
 				{

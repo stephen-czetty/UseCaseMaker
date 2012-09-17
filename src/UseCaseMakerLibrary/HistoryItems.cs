@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace UseCaseMakerLibrary
@@ -7,29 +7,15 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per HistoryItems.
 	/// </summary>
-	public class HistoryItems : ICollection, IXMLNodeSerializable
+	public class HistoryItems : ICollection<HistoryItem>, IXMLNodeSerializable
 	{
-		#region Private Enumerators and Constants
-		#endregion
+		private readonly IList<HistoryItem> _items = new List<HistoryItem>();
 
-		#region Public Enumerators and Constants
-		#endregion
-
-		#region Class Members
-		private ArrayList items = new ArrayList();
-		#endregion
-
-		#region Constructors
 		internal HistoryItems()
 		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
 		}
-		#endregion
 
-		#region Public Properties
-		/// <summary>
+        /// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
 		[XMLSerializeIgnore]
@@ -37,97 +23,54 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
+	    public bool IsReadOnly
+	    {
+            get { return _items.IsReadOnly; }
+	    }
+
+		public void Add(HistoryItem item)
 		{
-			get
-			{
-				return items.IsSynchronized;
-			}
+		    _items.Add(item);
 		}
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
+	    public void Clear()
 		{
-			get
-			{
-				return items.SyncRoot;
-			}
+			_items.Clear();
 		}
 
-		[XMLSerializeIgnore]
-		public object this[int index]
+		public bool Contains(HistoryItem item)
 		{
-			get
-			{
-				return items[index];
-			}
-		}
-		#endregion
-
-		#region Public Methods
-		public int Add(object item)
-		{
-			int result = items.Add(item);
-
-			return result;
+			return _items.Contains(item);
 		}
 
-		public void AddRange(RelatedDocuments items)
+	    public bool Remove(HistoryItem item)
 		{
-			items.AddRange(items);
-		}
-
-		public void Clear()
-		{
-			items.Clear();
-		}
-
-		public bool Contains(object item)
-		{
-			return items.Contains(item);
-		}
-
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
-
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
-
-		public void Remove(object item)
-		{
-			items.Remove(item);
+			return _items.Remove(item);
 		}
 
 		public void RemoveAt(int index)
 		{
-			items.RemoveAt(index);
+			_items.RemoveAt(index);
 		}
 
-		public void CopyTo(Array array, int index)
+		public void CopyTo(HistoryItem[] array, int index)
 		{
-			items.CopyTo(array, index);
+			_items.CopyTo(array, index);
 		}
 
-		public IEnumerator GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return items.GetEnumerator();
+			return GetEnumerator();
 		}
-		#endregion
 
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
+        public IEnumerator<HistoryItem> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        } 
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)

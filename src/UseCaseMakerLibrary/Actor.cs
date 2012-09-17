@@ -52,20 +52,19 @@ namespace UseCaseMakerLibrary
 		{
 			Goal goal = new Goal();
 			Int32 index = this.goals.Count;
-			Int32 ret;
 
-			if(index == 0)
+		    if(index == 0)
 			{
 				goal.ID = 1;
 			}
 			else
 			{
-				goal.ID = ((Goal)this.goals[index - 1]).ID + 1;
+				goal.ID = goals[index - 1].ID + 1;
 			}
 
-			ret = this.goals.Add(goal);
+			goals.Add(goal);
 
-			return ret;
+		    return goals.Count - 1;
 		}
 
 		public void RemoveGoal(Goal goal)
@@ -96,6 +95,56 @@ namespace UseCaseMakerLibrary
 		}
 		#endregion
 		#endregion
+
+        public override void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+        {
+            foreach(UseCase uc in thisPackage.UseCases)
+		        {
+		            ActiveActor tmpAActor = null;
+		            foreach(ActiveActor aactor in uc.ActiveActors)
+		            {
+		                if(aactor.ActorUniqueID == UniqueID)
+		                {
+		                    tmpAActor = aactor;
+		                }
+		            }
+		            if(tmpAActor != null)
+		            {
+		                uc.ActiveActors.Remove(tmpAActor);
+		            }
+		        }
+		        foreach(Package p in thisPackage.Packages)
+		        {
+		            p.PurgeReferences(
+		                this,
+		                null,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                newNameStartTag,
+		                newNameEndTag,
+		                dontMark);
+		        }
+		        if(!dontMark)
+		        {
+		            thisPackage.ChangeReferences(
+		                Name,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Name,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		            thisPackage.ChangeReferences(
+		                Path,
+		                oldNameStartTag,
+		                oldNameEndTag,
+		                Path,
+		                newNameStartTag,
+		                newNameEndTag,
+		                false);
+		        }
+		    }
+        
 
 		#region Static Members
 		#endregion

@@ -1,31 +1,17 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
-	public class RelatedDocuments : ICollection, IXMLNodeSerializable
+	public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable
 	{
-		#region Private Enumerators and Constants
-		#endregion
+	    private readonly IList<RelatedDocument> _items = new List<RelatedDocument>();
 
-		#region Public Enumerators and Constants
-		#endregion
-
-		#region Class Members
-		private ArrayList items = new ArrayList();
-		#endregion
-
-		#region Constructors
 		internal RelatedDocuments()
 		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
 		}
-		#endregion
 
-		#region Public Properties
 		/// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
@@ -34,97 +20,63 @@ namespace UseCaseMakerLibrary
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
-		{
-			get
-			{
-				return items.IsSynchronized;
-			}
-		}
+	    public bool IsReadOnly
+	    {
+            get { return _items.IsReadOnly; }
+	    }
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
-		{
-			get
-			{
-				return items.SyncRoot;
-			}
-		}
-
-		[XMLSerializeIgnore]
+	    [XMLSerializeIgnore]
 		public object this[int index]
 		{
 			get
 			{
-				return items[index];
+				return _items[index];
 			}
 		}
-		#endregion
 
-		#region Public Methods
-		public int Add(object item)
+		public void Add(RelatedDocument item)
 		{
-			int result = items.Add(item);
-
-			return result;
+			_items.Add(item);
 		}
 
-		public void AddRange(RelatedDocuments items)
+	    public void Clear()
 		{
-			items.AddRange(items);
+			_items.Clear();
 		}
 
-		public void Clear()
+		public bool Contains(RelatedDocument item)
 		{
-			items.Clear();
+			return _items.Contains(item);
 		}
 
-		public bool Contains(object item)
+	    public bool Remove(RelatedDocument item)
 		{
-			return items.Contains(item);
-		}
-
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
-
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
-
-		public void Remove(object item)
-		{
-			items.Remove(item);
+			return _items.Remove(item);
 		}
 
 		public void RemoveAt(int index)
 		{
-			items.RemoveAt(index);
+			_items.RemoveAt(index);
 		}
 
-		public void CopyTo(Array array, int index)
+		public void CopyTo(RelatedDocument[] array, int index)
 		{
-			items.CopyTo(array, index);
+			_items.CopyTo(array, index);
 		}
 
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
-		#endregion
+	    public IEnumerator<RelatedDocument>GetEnumerator()
+	    {
+	        return _items.GetEnumerator();
+	    }
 
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
+	    IEnumerator IEnumerable.GetEnumerator()
+	    {
+	        return GetEnumerator();
+	    }
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
