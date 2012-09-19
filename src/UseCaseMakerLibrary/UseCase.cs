@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -111,12 +112,20 @@ namespace UseCaseMakerLibrary
 
 	    public CommonAttributes Attributes { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("Step")]
 	    public Steps Steps { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("OpenIssue")]
 	    public OpenIssues OpenIssues { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("ActiveActor")]
 	    public ActiveActors ActiveActors { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("HistoryItem")]
 	    public HistoryItems HistoryItems { get; private set; }
 
 	    public string Prose { get; set; }

@@ -82,6 +82,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UseCaseMaker.Ioc\UseCaseMaker.Ioc.csproj">
+      <Project>{D47A22B3-1B70-4031-92F3-8FA40B09C927}</Project>
+      <Name>UseCaseMaker.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UseCaseMakerControls\UseCaseMakerControls.csproj">
       <Name>UseCaseMakerControls</Name>
       <Project>{08BAF1B1-10D0-4426-BC09-C56C98AA5A6A}</Project>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -260,12 +261,20 @@ namespace UseCaseMakerLibrary
 
 		#region Public Properties
 
+        [XmlArray]
+        [XmlArrayItem("Actor")]
 	    public Actors Actors { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("Package")]
 	    public Packages Packages { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("UseCase")]
 	    public UseCases UseCases { get; private set; }
 
+        [XmlArray]
+        [XmlArrayItem("Requirement")]
 	    public Requirements Requirements { get; private set; }
 
 	    public CommonAttributes Attributes { get; private set; }

@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -32,6 +33,7 @@ namespace UseCaseMakerLibrary
 
 		#region Public Properties
 		[XMLSerializeIgnore]
+        [XmlIgnore]
 		public String LocalizatedDateValue
 		{
 			get
@@ -41,6 +43,7 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
+        [XmlIgnore]
 		public DateTime Date
 		{
 			get

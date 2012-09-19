@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -43,21 +44,27 @@ namespace UseCaseMakerLibrary
 		#region Public Properties
 
 	    [XMLSerializeAsAttribute]
+        [XmlAttribute]
 	    public string UniqueID { get; set; }
 
 	    [XMLSerializeIgnore]
+        [XmlIgnore]
 	    public Package Owner { get; set; }
 
 	    [XMLSerializeAsAttribute]
+        [XmlAttribute]
 	    public string Name { get; set; }
 
 	    [XMLSerializeAsAttribute]
+        [XmlAttribute]
 	    public int ID { get; set; }
 
 	    [XMLSerializeAsAttribute]
+        [XmlAttribute]
 	    public string Prefix { get; set; }
 
 	    [XMLSerializeAsAttribute(true)]
+        [XmlIgnore]
 		public virtual String Path
 		{
 			get
@@ -74,6 +81,7 @@ namespace UseCaseMakerLibrary
 		}
 
 		[XMLSerializeIgnore]
+        [XmlIgnore]
 		public virtual String ElementID
 		{
 			get
@@ -87,6 +95,7 @@ namespace UseCaseMakerLibrary
 	    }
 
 	    [XMLSerializeIgnore]
+        [XmlIgnore]
 	    public UserViewStatus ObjectUserViewStatus { get; private set; }
 
 	    #endregion

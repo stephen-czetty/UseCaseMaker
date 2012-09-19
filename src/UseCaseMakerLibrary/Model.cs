@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -26,6 +27,8 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
+        [XmlArray]
+        [XmlArrayItem("GlossaryItem")]
 		public GlossaryItems Glossary
 		{
 			get

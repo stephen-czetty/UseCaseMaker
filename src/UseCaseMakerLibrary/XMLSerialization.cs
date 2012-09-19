@@ -69,12 +69,8 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per XMLNodeRetriever.
 	/// </summary>
-	public class XmlSerializer
+	public static class XmlSerializer
 	{
-		internal XmlSerializer()
-		{
-		}
-
 		static public XmlDocument XmlSerialize(
 			string mainNodeName,
 			string namespaceURI,
