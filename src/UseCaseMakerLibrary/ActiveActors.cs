@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
@@ -31,7 +30,6 @@ namespace UseCaseMakerLibrary
 	        CopyTo((ActiveActor[]) array, index);
 	    }
 
-	    [XMLSerializeIgnore]
         [XmlIgnore]
 		public int Count
 		{
@@ -65,14 +63,12 @@ namespace UseCaseMakerLibrary
 	        get { return false; }
 	    }
 
-        [XMLSerializeIgnore]
         [XmlIgnore]
 	    public bool IsReadOnly
 	    {
 	        get { return _items.IsReadOnly; }
 	    }
 
-	    [XMLSerializeIgnore]
         [XmlIgnore]
 		public ActiveActor this[int index]
 		{
@@ -146,18 +142,6 @@ namespace UseCaseMakerLibrary
 			}
 
 			return aactor;
-		}
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
 		#endregion
 	}

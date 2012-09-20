@@ -32,7 +32,6 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public String LocalizatedDateValue
 		{
@@ -42,7 +41,6 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public DateTime Date
 		{
@@ -102,18 +100,6 @@ namespace UseCaseMakerLibrary
 			{
 				this.notes = value;
 			}
-		}
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
 		#endregion
 	}

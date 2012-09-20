@@ -43,27 +43,21 @@ namespace UseCaseMakerLibrary
 
 		#region Public Properties
 
-	    [XMLSerializeAsAttribute]
         [XmlAttribute]
 	    public string UniqueID { get; set; }
 
-	    [XMLSerializeIgnore]
         [XmlIgnore]
 	    public Package Owner { get; set; }
 
-	    [XMLSerializeAsAttribute]
         [XmlAttribute]
 	    public string Name { get; set; }
 
-	    [XMLSerializeAsAttribute]
         [XmlAttribute]
 	    public int ID { get; set; }
 
-	    [XMLSerializeAsAttribute]
         [XmlAttribute]
 	    public string Prefix { get; set; }
 
-	    [XMLSerializeAsAttribute(true)]
         [XmlIgnore]
 		public virtual String Path
 		{
@@ -80,7 +74,6 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public virtual String ElementID
 		{
@@ -94,7 +87,6 @@ namespace UseCaseMakerLibrary
 	    {
 	    }
 
-	    [XMLSerializeIgnore]
         [XmlIgnore]
 	    public UserViewStatus ObjectUserViewStatus { get; private set; }
 
@@ -105,18 +97,6 @@ namespace UseCaseMakerLibrary
 		{
 			Guid guid = Guid.NewGuid();
 			UniqueID = guid.ToString();
-		}
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public virtual XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
-		}
-
-		public virtual void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
 		#endregion
 	}

@@ -2,50 +2,12 @@ using System;
 using System.Collections;
 using System.Reflection;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
 	public interface IXMLNodeSerializable
 	{
-		XmlNode	XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep);
-		void	XmlDeserialize(XmlNode fromNode, object instance);
-	}
-
-	public class XMLSerializeIgnoreAttribute : System.Attribute
-	{
-		public XMLSerializeIgnoreAttribute()
-		{
-		}
-	}
-
-	public class XMLSerializeAsAttributeAttribute : System.Attribute
-	{
-		Boolean getOnly = false;
-
-		public XMLSerializeAsAttributeAttribute()
-		{
-			this.getOnly = false;
-		}
-
-		public XMLSerializeAsAttributeAttribute(Boolean getOnly)
-		{
-			this.getOnly = getOnly;
-		}
-
-		public Boolean HasGetOnly
-		{
-			get
-			{
-				return this.getOnly;
-			}
-		}
-	}
-
-	public class XMLSerializeCollectionKeyAttribute : System.Attribute
-	{
-		public XMLSerializeCollectionKeyAttribute()
-		{
-		}
 	}
 
 	public class XmlSerializerException : Exception
@@ -114,10 +76,10 @@ namespace UseCaseMakerLibrary
 
 			for(i = 0; i < pi.Length; i++)
 			{
-				if(!pi[i].IsDefined(typeof(XMLSerializeIgnoreAttribute),false))
+				if(!pi[i].IsDefined(typeof(XmlIgnoreAttribute),false))
 				{
 					XmlElement propertyNode = document.CreateElement(string.Empty,pi[i].Name,namespaceURI);
-					if(pi[i].PropertyType.GetInterface("IXMLNodeSerializable") != null
+					if(typeof(IXMLNodeSerializable).IsAssignableFrom(pi[i].PropertyType)
 						&& pi[i].GetValue(instance,null) != null)
 					{
 						if(deep)
@@ -126,7 +88,7 @@ namespace UseCaseMakerLibrary
 							propertyNode = (XmlElement)document.ImportNode(methodNode,true);
 							mainNode.AppendChild(propertyNode);
 						}
-						if(pi[i].PropertyType.GetInterface("ICollection") != null)
+						if(typeof(ICollection).IsAssignableFrom(pi[i].PropertyType))
 						{
 							IEnumerator ie = ((ICollection)pi[i].GetValue(instance,null)).GetEnumerator();
 							while(ie.MoveNext())
@@ -146,7 +108,7 @@ namespace UseCaseMakerLibrary
 									GetItemParameters[0] = ie.Current;
 									element = GetItem.Invoke(pi[i].GetValue(instance,null),GetItemParameters);
 								}
-								if(element.GetType().GetInterface("IXMLNodeSerializable") != null)
+								if(element is IXMLNodeSerializable)
 								{
 									XmlNode methodNode = XmlSerialize(document,element,string.Empty,deep);
 									propertyNode.AppendChild(document.ImportNode(methodNode,true));
@@ -157,7 +119,7 @@ namespace UseCaseMakerLibrary
 					}
 					else
 					{
-						if(pi[i].IsDefined(typeof(XMLSerializeAsAttributeAttribute),false))
+						if(pi[i].IsDefined(typeof(XmlAttributeAttribute),false))
 						{
 							XmlAttribute xmlAttribute = document.CreateAttribute(pi[i].Name);
 							xmlAttribute.Value = pi[i].GetValue(instance,null).ToString();
@@ -239,13 +201,13 @@ namespace UseCaseMakerLibrary
 				try
 				{
 					PropertyInfo pi = instance.GetType().GetProperty(node.Name,Type.GetType(node.Attributes["Type"].Value));
-					if(pi.PropertyType.GetInterface("ICollection") != null)
+					if(typeof(ICollection).IsAssignableFrom(pi.PropertyType))
 					{
 						foreach(XmlNode itemNode in node.ChildNodes)
 						{
-							if(itemNode.GetType() == typeof(XmlElement))
+							if (itemNode.GetType() == typeof(XmlElement))
 							{
-								if(itemNode.Attributes["Type"] == null)
+								if (itemNode.Attributes["Type"] == null)
 								{
 									throw new XmlSerializerException("Type attribute not found!");
 								}
@@ -256,35 +218,18 @@ namespace UseCaseMakerLibrary
 									new Type[0],
 									null);
 								object item = ctor.Invoke(new Type[0]); // Default constructor
-								XmlDeserialize(itemNode,item);
-								PropertyInfo itemPiKey = null;
-								foreach(PropertyInfo itemPi in item.GetType().GetProperties())
-								{
-									if(itemPi.IsDefined(typeof(XMLSerializeCollectionKeyAttribute),true))
-									{
-										itemPiKey = itemPi;
-										break;
-									}
-								}
-								if(itemPiKey != null)
-								{
-									MethodInfo add = pi.PropertyType.GetMethod("Add");
-									object [] addParameters = new Object[2];
-									addParameters[0] = itemPiKey.GetValue(item,null);
-									addParameters[1] = item;
-									add.Invoke(pi.GetValue(instance,null),addParameters);
-								}
-								else
-								{
-									MethodInfo add = pi.PropertyType.GetMethod("Add");
-									object [] addParameters = new Object[1];
-									addParameters[0] = item;
-									add.Invoke(pi.GetValue(instance,null),addParameters);
-								}
+								XmlDeserialize(itemNode, item);
+
+								MethodInfo add = pi.PropertyType.GetMethod("Add");
+								object[] addParameters = new Object[1];
+								addParameters[0] = item;
+								add.Invoke(pi.GetValue(instance, null), addParameters);
+
 							}
 						}
 					}
-					if(pi.PropertyType.GetInterface("IXMLNodeSerializable") == null)
+
+					if (!typeof(IXMLNodeSerializable).IsAssignableFrom(pi.PropertyType))
 					{
 						foreach(XmlNode nodeValue in node.ChildNodes)
 						{
@@ -323,14 +268,9 @@ namespace UseCaseMakerLibrary
 					try
 					{
 						PropertyInfo pi = instance.GetType().GetProperty(attr.Name);
-						if(pi.IsDefined(typeof(XMLSerializeAsAttributeAttribute),true))
+						if(pi.CanWrite && pi.IsDefined(typeof(XmlAttributeAttribute), false))
 						{
-							object [] pa = pi.GetCustomAttributes(typeof(XMLSerializeAsAttributeAttribute),false);
-							PropertyInfo pai = pa[0].GetType().GetProperty("HasGetOnly");
-							if((Boolean)pai.GetValue(pa[0],null) == false)
-							{
-								pi.SetValue(instance,Convert.ChangeType(attr.Value,pi.PropertyType),null);
-							}
+							pi.SetValue(instance,Convert.ChangeType(attr.Value,pi.PropertyType),null);
 						}
 					}
 					catch(NullReferenceException)

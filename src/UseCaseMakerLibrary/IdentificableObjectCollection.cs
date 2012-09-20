@@ -33,7 +33,6 @@ namespace UseCaseMakerLibrary
 	    /// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public int Count
 		{
@@ -67,14 +66,12 @@ namespace UseCaseMakerLibrary
 	        get { return false; }
 	    }
 
-        [XMLSerializeIgnore]
         [XmlIgnore]
 	    public bool IsReadOnly
 	    {
 	        get { return _items.IsReadOnly; }
 	    }
 
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public T this[int index]
 		{
@@ -84,9 +81,6 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-	
-
-		[XMLSerializeAsAttribute(true)]
         [XmlIgnore]
 		public override String Path
 		{
@@ -100,7 +94,6 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		[XMLSerializeIgnore]
         [XmlIgnore]
 		public override String ElementID
 		{
@@ -220,17 +213,5 @@ namespace UseCaseMakerLibrary
 
 			return (id + 1);
 		}
-
-		#region IXMLNodeSerializable Implementation
-		public override XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
-		}
-
-		public override void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
 	}
 }
