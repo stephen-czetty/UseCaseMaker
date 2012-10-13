@@ -11,6 +11,11 @@ namespace UseCaseMakerLibrary
 	{
 	}
 
+    public interface IXmlCollectionSerializable
+    {
+        void Add(object item);
+    }
+
 	public class XmlSerializerException : Exception
 	{
 		public XmlSerializerException(string message) : base(message)
@@ -202,7 +207,7 @@ namespace UseCaseMakerLibrary
 								object item = ctor.Invoke(new object[0]); // Default constructor
 								XmlDeserialize(itemNode, item);
 
-								MethodInfo add = pi.PropertyType.GetMethod("Add");
+							    MethodInfo add = pi.PropertyType.GetMethod("Add", new[] {itemType});
 								object[] addParameters = new Object[1];
 								addParameters[0] = item;
 								add.Invoke(pi.GetValue(instance, null), addParameters);

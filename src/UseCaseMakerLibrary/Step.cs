@@ -71,31 +71,31 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		public new String UniqueID
-		{
-			get
-			{
-				return base.UniqueID;
-			}
-			set
-			{
-				base.UniqueID = value;
-			}
-		}
+        //public new String UniqueID
+        //{
+        //    get
+        //    {
+        //        return base.UniqueID;
+        //    }
+        //    set
+        //    {
+        //        base.UniqueID = value;
+        //    }
+        //}
 
-		public new String Name
-		{
-			get
-			{
-				return this.ID.ToString() + 
-					((this.Prefix != String.Empty) ? "." + this.Prefix : String.Empty) + 
-					((this.ChildID != -1) ? "." + this.ChildID.ToString() :  String.Empty);
-			}
-			set
-			{
-				base.Name = value;
-			}
-		}
+        //public new String Name
+        //{
+        //    get
+        //    {
+        //        return this.ID.ToString() + 
+        //            ((this.Prefix != String.Empty) ? "." + this.Prefix : String.Empty) + 
+        //            ((this.ChildID != -1) ? "." + this.ChildID.ToString() :  String.Empty);
+        //    }
+        //    set
+        //    {
+        //        base.Name = value;
+        //    }
+        //}
 		#endregion
 	}
 }

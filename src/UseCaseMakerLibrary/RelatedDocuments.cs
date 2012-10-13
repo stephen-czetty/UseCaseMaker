@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
-	public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection
+	public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
 	{
 	    private readonly IList<RelatedDocument> _items = new List<RelatedDocument>();
 	    private readonly object _syncRoot = new object();
@@ -74,6 +74,14 @@ namespace UseCaseMakerLibrary
 				return _items[index];
 			}
 		}
+
+        public void Add(object item)
+        {
+            var obj = item as RelatedDocument;
+            if (obj == null)
+                throw new ArgumentException();
+            Add(obj);
+        }
 
 		public void Add(RelatedDocument item)
 		{
