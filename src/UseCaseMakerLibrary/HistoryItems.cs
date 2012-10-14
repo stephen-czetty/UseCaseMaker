@@ -9,7 +9,8 @@ namespace UseCaseMakerLibrary
 	/// <summary>
 	/// Descrizione di riepilogo per HistoryItems.
 	/// </summary>
-	public class HistoryItems : ICollection<HistoryItem>, IXMLNodeSerializable, ICollection
+	[XmlInclude(typeof(HistoryItem))]
+	public class HistoryItems : ICollection<HistoryItem>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
 	{
 		private readonly IList<HistoryItem> _items = new List<HistoryItem>();
 	    private readonly object _syncRoot = new object();
@@ -107,6 +108,20 @@ namespace UseCaseMakerLibrary
         public IEnumerator<HistoryItem> GetEnumerator()
         {
             return _items.GetEnumerator();
-        } 
+        }
+
+	    public void Add(object item)
+	    {
+	        var obj = item as HistoryItem;
+            if (obj == null)
+                throw new ArgumentException();
+	        Add(obj);
+	    }
+
+	    public object this[int idx]
+	    {
+            get { return _items[idx]; }
+	        set {  }
+	    }
 	}
 }

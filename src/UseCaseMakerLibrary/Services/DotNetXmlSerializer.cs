@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Xml.Serialization;
 using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary.Services
@@ -7,17 +8,30 @@ namespace UseCaseMakerLibrary.Services
     {
         public Model DeSerialize(TextReader inputDataStream)
         {
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof (Model));
-            var obj = serializer.Deserialize(inputDataStream) as Model;
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof (UcmDocument));
+            var obj = serializer.Deserialize(inputDataStream) as UcmDocument;
             if (obj == null)
                 throw new XmlSerializerException("Could not decode XML file");
-            return obj;
+            return obj.Model;
         }
 
         public void Serialize(Model data, TextWriter outputDataStream)
         {
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof (Model));
-            serializer.Serialize(outputDataStream, data);
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof (UcmDocument));
+            serializer.Serialize(outputDataStream, new UcmDocument { Model = data });
+        }
+
+        [XmlRoot("UCM-Document")]
+        public class UcmDocument
+        {
+            [XmlAttribute]
+            public string Version
+            {
+                get { return "1.1"; }
+                set { }
+            }
+
+            public Model Model { get; set; }
         }
     }
 }

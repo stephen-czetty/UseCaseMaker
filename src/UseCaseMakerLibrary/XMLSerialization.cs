@@ -14,9 +14,10 @@ namespace UseCaseMakerLibrary
     public interface IXmlCollectionSerializable
     {
         void Add(object item);
+        object this[int idx] { get; set; }
     }
 
-	public class XmlSerializerException : Exception
+    public class XmlSerializerException : Exception
 	{
 		public XmlSerializerException(string message) : base(message)
 		{

@@ -263,21 +263,21 @@ namespace UseCaseMakerLibrary
 
         [XmlArray]
         [XmlArrayItem("Actor")]
-	    public Actors Actors { get; private set; }
+	    public Actors Actors { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("Package")]
-	    public Packages Packages { get; private set; }
+	    public Packages Packages { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("UseCase")]
-	    public UseCases UseCases { get; private set; }
+	    public UseCases UseCases { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("Requirement")]
-	    public Requirements Requirements { get; private set; }
+	    public Requirements Requirements { get;  set; }
 
-	    public CommonAttributes Attributes { get; private set; }
+	    public CommonAttributes Attributes { get;  set; }
 
 	    #endregion
 

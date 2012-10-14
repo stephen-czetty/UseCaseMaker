@@ -31,7 +31,7 @@ namespace UseCaseMaker.Ioc
             containerBuilder.RegisterType<XmlSerializerSelector>().As<IXmlSerializerSelector>();
             containerBuilder.RegisterType<DotNetXmlSerializer>().As<ISerializer<Model>>();
             containerBuilder.RegisterType<LegacyXmlSerializer>().Named<ISerializer<Model>>("Version1.0");
-            containerBuilder.RegisterType<DotNetXmlSerializer>().Named<ISerializer<Model>>("Version2.0");
+            containerBuilder.RegisterType<DotNetXmlSerializer>().Named<ISerializer<Model>>("Version1.1");
 
             _container = containerBuilder.Build();
         }

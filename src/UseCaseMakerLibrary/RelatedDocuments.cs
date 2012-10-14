@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
+    [XmlInclude(typeof(RelatedDocument))]
 	public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
 	{
 	    private readonly IList<RelatedDocument> _items = new List<RelatedDocument>();
@@ -73,6 +73,7 @@ namespace UseCaseMakerLibrary
 			{
 				return _items[index];
 			}
+            set { }
 		}
 
         public void Add(object item)

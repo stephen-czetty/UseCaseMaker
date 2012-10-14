@@ -110,23 +110,23 @@ namespace UseCaseMakerLibrary
 	
 		#region Public Properties
 
-	    public CommonAttributes Attributes { get; private set; }
+	    public CommonAttributes Attributes { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("Step")]
-	    public Steps Steps { get; private set; }
+	    public Steps Steps { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("OpenIssue")]
-	    public OpenIssues OpenIssues { get; private set; }
+	    public OpenIssues OpenIssues { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("ActiveActor")]
-	    public ActiveActors ActiveActors { get; private set; }
+	    public ActiveActors ActiveActors { get;  set; }
 
         [XmlArray]
         [XmlArrayItem("HistoryItem")]
-	    public HistoryItems HistoryItems { get; private set; }
+	    public HistoryItems HistoryItems { get;  set; }
 
 	    public string Prose { get; set; }
 
