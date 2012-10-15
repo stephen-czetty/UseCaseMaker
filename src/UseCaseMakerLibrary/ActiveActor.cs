@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
@@ -39,18 +38,6 @@ namespace UseCaseMakerLibrary
 			{
 				this.isPrimary = value;
 			}
-		}
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
 		#endregion
 	}

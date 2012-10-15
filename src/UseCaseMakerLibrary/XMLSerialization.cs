@@ -1,80 +1,34 @@
 using System;
 using System.Collections;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
 	public interface IXMLNodeSerializable
 	{
-		XmlNode	XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep);
-		void	XmlDeserialize(XmlNode fromNode, object instance);
 	}
 
-	public class XMLSerializeIgnoreAttribute : System.Attribute
+    public interface IXmlCollectionSerializable
+    {
+        void Add(object item);
+        object this[int idx] { get; set; }
+    }
+
+    public class XmlSerializerException : Exception
 	{
-		public XMLSerializeIgnoreAttribute()
+		public XmlSerializerException(string message) : base(message)
 		{
-		}
-	}
-
-	public class XMLSerializeAsAttributeAttribute : System.Attribute
-	{
-		Boolean getOnly = false;
-
-		public XMLSerializeAsAttributeAttribute()
-		{
-			this.getOnly = false;
-		}
-
-		public XMLSerializeAsAttributeAttribute(Boolean getOnly)
-		{
-			this.getOnly = getOnly;
-		}
-
-		public Boolean HasGetOnly
-		{
-			get
-			{
-				return this.getOnly;
-			}
-		}
-	}
-
-	public class XMLSerializeCollectionKeyAttribute : System.Attribute
-	{
-		public XMLSerializeCollectionKeyAttribute()
-		{
-		}
-	}
-
-	public class XmlSerializerException : Exception
-	{
-		string message = string.Empty;
-
-		public XmlSerializerException(string message)
-		{
-			this.message = message;		
-		}
-
-		public new string Message
-		{
-			get
-			{
-				return this.message;
-			}
 		}
 	}
 
 	/// <summary>
 	/// Descrizione di riepilogo per XMLNodeRetriever.
 	/// </summary>
-	public class XmlSerializer
+	public static class XmlSerializer
 	{
-		internal XmlSerializer()
-		{
-		}
-
 		static public XmlDocument XmlSerialize(
 			string mainNodeName,
 			string namespaceURI,
@@ -82,6 +36,10 @@ namespace UseCaseMakerLibrary
 			object instance,
 			bool deep)
 		{
+			Contract.Requires<ArgumentException>(!String.IsNullOrWhiteSpace(mainNodeName));
+			Contract.Requires<ArgumentNullException>(instance != null);
+			Contract.Ensures(Contract.Result<XmlDocument>() != null);
+
 			XmlDocument document = new XmlDocument();
 			XmlDeclaration decl = document.CreateXmlDeclaration("1.0","UTF-8","");
 			XmlElement mainNode = document.CreateElement(string.Empty, mainNodeName, namespaceURI);
@@ -95,21 +53,18 @@ namespace UseCaseMakerLibrary
 			return document;
 		}
 
-		static internal XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
+		private static XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
 		{
+			Contract.Requires<ArgumentNullException>(document != null);
+			Contract.Requires<ArgumentNullException>(instance != null);
+			Contract.Ensures(Contract.Result<XmlNode>() != null);
+
 			string namespaceURI = document.DocumentElement.NamespaceURI;
 
-			XmlElement mainNode;
 			int i;
 
-			if(propertyName == string.Empty)
-			{
-				mainNode = document.CreateElement(string.Empty,instance.GetType().Name,namespaceURI);
-			}
-			else
-			{
-				mainNode = document.CreateElement(string.Empty,propertyName,namespaceURI);
-			}
+			XmlElement mainNode = document.CreateElement(string.Empty, propertyName == string.Empty ? instance.GetType().Name : propertyName, namespaceURI);
+
 			XmlAttribute instanceType = document.CreateAttribute("Type");
 			instanceType.Value = instance.GetType().ToString();
 			mainNode.SetAttributeNode(instanceType);
@@ -118,64 +73,64 @@ namespace UseCaseMakerLibrary
 
 			for(i = 0; i < pi.Length; i++)
 			{
-				if(!pi[i].IsDefined(typeof(XMLSerializeIgnoreAttribute),false))
+				if (pi[i].IsDefined(typeof (XmlIgnoreAttribute), false))
+					continue;
+
+				XmlElement propertyNode = document.CreateElement(string.Empty,pi[i].Name,namespaceURI);
+				if(typeof(IXMLNodeSerializable).IsAssignableFrom(pi[i].PropertyType)
+				   && pi[i].GetValue(instance,null) != null)
 				{
-					XmlElement propertyNode = document.CreateElement(string.Empty,pi[i].Name,namespaceURI);
-					if(pi[i].PropertyType.GetInterface("IXMLNodeSerializable") != null
-						&& pi[i].GetValue(instance,null) != null)
+					if(deep)
 					{
-						if(deep)
+						XmlNode methodNode = XmlSerialize(document,pi[i].GetValue(instance,null),pi[i].Name,deep);
+						propertyNode = (XmlElement)document.ImportNode(methodNode,true);
+						mainNode.AppendChild(propertyNode);
+					}
+					if(typeof(ICollection).IsAssignableFrom(pi[i].PropertyType))
+					{
+						IEnumerator ie = ((ICollection)pi[i].GetValue(instance,null)).GetEnumerator();
+						while(ie.MoveNext())
 						{
-							XmlNode methodNode = XmlSerialize(document,pi[i].GetValue(instance,null),pi[i].Name,deep);
-							propertyNode = (XmlElement)document.ImportNode(methodNode,true);
-							mainNode.AppendChild(propertyNode);
-						}
-						if(pi[i].PropertyType.GetInterface("ICollection") != null)
-						{
-							IEnumerator ie = ((ICollection)pi[i].GetValue(instance,null)).GetEnumerator();
-							while(ie.MoveNext())
+							object element = null;
+							Type [] parameters = new Type[1];
+							parameters[0] = ie.Current.GetType();
+							PropertyInfo Item = pi[i].PropertyType.GetProperty("Item",parameters);
+							if(Item == null)
 							{
-								object element = null;
-								Type [] parameters = new Type[1];
-								parameters[0] = ie.Current.GetType();
-								PropertyInfo Item = pi[i].PropertyType.GetProperty("Item",parameters);
-								if(Item == null)
-								{
-									element = ie.Current;
-								}
-								else
-								{
-									MethodInfo GetItem = Item.GetGetMethod(false);
-									object [] GetItemParameters = new object[1];
-									GetItemParameters[0] = ie.Current;
-									element = GetItem.Invoke(pi[i].GetValue(instance,null),GetItemParameters);
-								}
-								if(element.GetType().GetInterface("IXMLNodeSerializable") != null)
-								{
-									XmlNode methodNode = XmlSerialize(document,element,string.Empty,deep);
-									propertyNode.AppendChild(document.ImportNode(methodNode,true));
-									mainNode.AppendChild(propertyNode);
-								}
+								element = ie.Current;
+							}
+							else
+							{
+								MethodInfo GetItem = Item.GetGetMethod(false);
+								object [] GetItemParameters = new object[1];
+								GetItemParameters[0] = ie.Current;
+								element = GetItem.Invoke(pi[i].GetValue(instance,null),GetItemParameters);
+							}
+							if(element is IXMLNodeSerializable)
+							{
+								XmlNode methodNode = XmlSerialize(document,element,string.Empty,deep);
+								propertyNode.AppendChild(document.ImportNode(methodNode,true));
+								mainNode.AppendChild(propertyNode);
 							}
 						}
 					}
+				}
+				else
+				{
+					if(pi[i].IsDefined(typeof(XmlAttributeAttribute),false))
+					{
+						XmlAttribute xmlAttribute = document.CreateAttribute(pi[i].Name);
+						xmlAttribute.Value = pi[i].GetValue(instance,null).ToString();
+						mainNode.SetAttributeNode(xmlAttribute);
+					}
 					else
 					{
-						if(pi[i].IsDefined(typeof(XMLSerializeAsAttributeAttribute),false))
-						{
-							XmlAttribute xmlAttribute = document.CreateAttribute(pi[i].Name);
-							xmlAttribute.Value = pi[i].GetValue(instance,null).ToString();
-							mainNode.SetAttributeNode(xmlAttribute);
-						}
-						else
-						{
-							propertyNode.InnerText = (pi[i].GetValue(instance,null) == null)
-								? string.Empty : pi[i].GetValue(instance,null).ToString();
-							XmlAttribute propertyType = document.CreateAttribute("Type");
-							propertyType.Value = pi[i].PropertyType.ToString();
-							propertyNode.SetAttributeNode(propertyType);
-							mainNode.AppendChild(propertyNode);
-						}
+						propertyNode.InnerText = (pi[i].GetValue(instance,null) == null)
+						                         	? string.Empty : pi[i].GetValue(instance,null).ToString();
+						XmlAttribute propertyType = document.CreateAttribute("Type");
+						propertyType.Value = pi[i].PropertyType.ToString();
+						propertyNode.SetAttributeNode(propertyType);
+						mainNode.AppendChild(propertyNode);
 					}
 				}
 			}
@@ -190,131 +145,96 @@ namespace UseCaseMakerLibrary
 			string version,
 			object instance)
 		{
+			Contract.Requires<NullReferenceException>(document != null);
+			Contract.Requires<NullReferenceException>(instance != null);
+
 			// Check document and instance
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(document.NameTable);
 			nsmgr.AddNamespace(string.Empty, namespaceURI);
 			XmlNode node = document.DocumentElement;
-			if(node.Name != mainNodeName)
-			{
+			if (node.Name != mainNodeName)
 				throw new XmlSerializerException("Invalid document!");
-			}
+
 			XmlAttribute attr = node.Attributes["Version"];
-			if(attr == null)
-			{
+			if (attr == null)
 				throw new XmlSerializerException("Invalid document!");
-			}
-			else
-			{
-				string [] currentVersion = version.Split('.');
-				string [] fileVersion = attr.Value.Split('.');
-				if(fileVersion.Length != 2)
-				{
-					throw new XmlSerializerException("Invalid document!");
-				}
-				if(fileVersion[0].CompareTo(currentVersion[0]) > 0)
-				{
+
+			string [] currentVersion = version.Split('.');
+			string [] fileVersion = attr.Value.Split('.');
+			if (fileVersion.Length != 2)
+				throw new XmlSerializerException("Invalid document!");
+
+			if (fileVersion[0].CompareTo(currentVersion[0]) > 0)
+				throw new XmlSerializerException("Incompatible version!");
+
+			if (fileVersion[0] == currentVersion[0])
+				if (fileVersion[1].CompareTo(currentVersion[1]) > 0)
 					throw new XmlSerializerException("Incompatible version!");
-				}
-				if(fileVersion[0] == currentVersion[0])
-				{
-					if(fileVersion[1].CompareTo(currentVersion[1]) > 0)
-					{
-						throw new XmlSerializerException("Incompatible version!");
-					}
-				}
-			}
+
 			XmlDeserialize(node.FirstChild, instance);
 		}
 
-		static internal void XmlDeserialize(XmlNode fromNode, object instance)
+		private static void XmlDeserialize(XmlNode fromNode, object instance)
 		{
-			if(fromNode.Attributes["Type"] == null)
-			{
+			Contract.Requires<ArgumentNullException>(fromNode != null);
+			Contract.Requires<ArgumentNullException>(instance != null);
+
+			if (fromNode.Attributes["Type"] == null)
 				throw new XmlSerializerException("Type attribute not found!");
-			}
 
 			foreach(XmlNode node in fromNode.ChildNodes)
 			{
-				if(node.Attributes["Type"] == null)
-				{
+				if (node.Attributes["Type"] == null)
 					throw new XmlSerializerException("Type attribute not found!");
-				}
 
 				try
 				{
 					PropertyInfo pi = instance.GetType().GetProperty(node.Name,Type.GetType(node.Attributes["Type"].Value));
-					if(pi.PropertyType.GetInterface("ICollection") != null)
+					if(typeof(ICollection).IsAssignableFrom(pi.PropertyType))
 					{
 						foreach(XmlNode itemNode in node.ChildNodes)
 						{
-							if(itemNode.GetType() == typeof(XmlElement))
+							if (itemNode.GetType() == typeof(XmlElement))
 							{
-								if(itemNode.Attributes["Type"] == null)
-								{
+								if (itemNode.Attributes["Type"] == null)
 									throw new XmlSerializerException("Type attribute not found!");
-								}
+
 								Type itemType = instance.GetType().Assembly.GetType(itemNode.Attributes["Type"].Value);
 								ConstructorInfo ctor = itemType.GetConstructor(
 									BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
 									null,
-									new Type[0],
+									Type.EmptyTypes,
 									null);
-								object item = ctor.Invoke(new Type[0]); // Default constructor
-								XmlDeserialize(itemNode,item);
-								PropertyInfo itemPiKey = null;
-								foreach(PropertyInfo itemPi in item.GetType().GetProperties())
-								{
-									if(itemPi.IsDefined(typeof(XMLSerializeCollectionKeyAttribute),true))
-									{
-										itemPiKey = itemPi;
-										break;
-									}
-								}
-								if(itemPiKey != null)
-								{
-									MethodInfo add = pi.PropertyType.GetMethod("Add");
-									object [] addParameters = new Object[2];
-									addParameters[0] = itemPiKey.GetValue(item,null);
-									addParameters[1] = item;
-									add.Invoke(pi.GetValue(instance,null),addParameters);
-								}
-								else
-								{
-									MethodInfo add = pi.PropertyType.GetMethod("Add");
-									object [] addParameters = new Object[1];
-									addParameters[0] = item;
-									add.Invoke(pi.GetValue(instance,null),addParameters);
-								}
+								object item = ctor.Invoke(new object[0]); // Default constructor
+								XmlDeserialize(itemNode, item);
+
+							    MethodInfo add = pi.PropertyType.GetMethod("Add", new[] {itemType});
+								object[] addParameters = new Object[1];
+								addParameters[0] = item;
+								add.Invoke(pi.GetValue(instance, null), addParameters);
+
 							}
 						}
 					}
-					if(pi.PropertyType.GetInterface("IXMLNodeSerializable") == null)
+
+					if (!typeof(IXMLNodeSerializable).IsAssignableFrom(pi.PropertyType))
 					{
 						foreach(XmlNode nodeValue in node.ChildNodes)
 						{
-							if(nodeValue.GetType() == typeof(XmlText) && nodeValue.Value != null)
-							{
-								if(pi.PropertyType.IsEnum)
-								{
-									pi.SetValue(instance,Enum.Parse(pi.PropertyType,nodeValue.Value,true),null);
-								}
-								else
-								{
-									pi.SetValue(instance,Convert.ChangeType(nodeValue.Value,pi.PropertyType),null);
-								}
-							}
+							if (nodeValue.GetType() == typeof (XmlText) && nodeValue.Value != null)
+								pi.SetValue(instance,
+								            pi.PropertyType.IsEnum
+								            	? Enum.Parse(pi.PropertyType, nodeValue.Value, true)
+								            	: Convert.ChangeType(nodeValue.Value, pi.PropertyType), null);
 						}
 					}
 					else
 					{
-						if(pi.GetValue(instance,null) == null)
-						{
-							pi.SetValue(instance,Convert.ChangeType(node.Value,pi.PropertyType),null);
-						}
-						if(node.HasChildNodes)
-						{
-							XmlDeserialize(node,pi.GetValue(instance,null));
-						}
+						if (pi.GetValue(instance, null) == null)
+							pi.SetValue(instance, Convert.ChangeType(node.Value, pi.PropertyType), null);
+
+						if (node.HasChildNodes)
+							XmlDeserialize(node, pi.GetValue(instance, null));
 					}
 				}
 				catch(NullReferenceException)
@@ -327,15 +247,8 @@ namespace UseCaseMakerLibrary
 					try
 					{
 						PropertyInfo pi = instance.GetType().GetProperty(attr.Name);
-						if(pi.IsDefined(typeof(XMLSerializeAsAttributeAttribute),true))
-						{
-							object [] pa = pi.GetCustomAttributes(typeof(XMLSerializeAsAttributeAttribute),false);
-							PropertyInfo pai = pa[0].GetType().GetProperty("HasGetOnly");
-							if((Boolean)pai.GetValue(pa[0],null) == false)
-							{
-								pi.SetValue(instance,Convert.ChangeType(attr.Value,pi.PropertyType),null);
-							}
-						}
+						if (pi.CanWrite && pi.IsDefined(typeof (XmlAttributeAttribute), false))
+							pi.SetValue(instance, Convert.ChangeType(attr.Value, pi.PropertyType), null);
 					}
 					catch(NullReferenceException)
 					{

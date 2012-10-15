@@ -1,58 +1,35 @@
+
 using System;
 
 namespace UseCaseMakerLibrary
 {
-	public class Goal : IdentificableObject
-	{
-		#region Public Constants and Enumerators
-		#endregion
+    public class Goal : IdentificableObject
+    {
+        #region Public Constants and Enumerators
+        #endregion
 
-		#region Class Members
-		private String description = String.Empty;
-		#endregion
+        #region Class Members
+        private String description = String.Empty;
+        #endregion
 
-		#region Constructors
-		internal Goal()
-		{
-		}
-		#endregion
+        #region Constructors
+        internal Goal()
+        {
+        }
+        #endregion
 
-		#region Public Properties
-		public String Description
-		{
-			get
-			{
-				return this.description;
-			}
-			set
-			{
-				this.description = value;
-			}
-		}
-
-		public new String UniqueID
-		{
-			get
-			{
-				return base.UniqueID;
-			}
-			set
-			{
-				base.UniqueID = value;
-			}
-		}
-
-		public new String Name
-		{
-			get
-			{
-				return base.ID.ToString();
-			}
-			set
-			{
-				base.Name = value;
-			}
-		}
-		#endregion
-	}
+        #region Public Properties
+        public String Description
+        {
+            get
+            {
+                return this.description;
+            }
+            set
+            {
+                this.description = value;
+            }
+        }
+        #endregion
+    }
 }
