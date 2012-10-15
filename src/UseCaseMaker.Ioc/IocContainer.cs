@@ -1,7 +1,5 @@
-﻿using Autofac;
-using UseCaseMakerLibrary;
-using UseCaseMakerLibrary.Contracts;
-using UseCaseMakerLibrary.Services;
+﻿using System.Reflection;
+using Autofac;
 
 namespace UseCaseMaker.Ioc
 {
@@ -25,13 +23,7 @@ namespace UseCaseMaker.Ioc
         {
             var containerBuilder = new ContainerBuilder();
 
-            containerBuilder.RegisterType<SerializedSaveDataService>().As<ISavedDataService>();
-
-            // Xml Serialization
-            containerBuilder.RegisterType<XmlSerializerSelector>().As<IXmlSerializerSelector>();
-            containerBuilder.RegisterType<DotNetXmlSerializer>().As<ISerializer<Model>>();
-            containerBuilder.RegisterType<LegacyXmlSerializer>().Named<ISerializer<Model>>("Version1.0");
-            containerBuilder.RegisterType<DotNetXmlSerializer>().Named<ISerializer<Model>>("Version1.1");
+            containerBuilder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
 
             _container = containerBuilder.Build();
         }
