@@ -145,6 +145,7 @@
     <Compile Include="Contracts\ISavedDataService.cs" />
     <Compile Include="Contracts\ISerializer.cs" />
     <Compile Include="Contracts\IXmlSerializerSelector.cs" />
+    <Compile Include="Contracts\ResharperAnnotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
