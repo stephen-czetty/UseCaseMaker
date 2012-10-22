@@ -76,6 +76,34 @@
     <Compile Include="ModelTests\When_searching_for_usecases_by_name.cs" />
     <Compile Include="ModelTests\When_searching_for_usecases_by_path.cs" />
     <Compile Include="ModelTests\When_searching_for_usecases_elment_contained_in_model.cs" />
+    <Compile Include="PackagesTests\PackagesTestBase.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actors_collection_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actors_collection_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actors_collection_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actor_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actor_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_actor_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_inner_package_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_inner_package_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_inner_package_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_package_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_package_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_package_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirements_collection_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirements_collection_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirements_collection_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirement_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirement_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_requirement_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_collection_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_collection_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_inner_use_case_collection_by_unique_id.cs" />
+    <Compile Include="PackagesTests\When_searching_for_packages_element_by_name.cs" />
+    <Compile Include="PackagesTests\When_searching_for_packages_element_by_path.cs" />
+    <Compile Include="PackagesTests\When_searching_for_packages_element_by_unique_id.cs" />
     <Compile Include="PackageTests\When_removing_a_package_that_is_in_sub_packages.cs" />
     <Compile Include="PackageTests\When_adding_a_valid_package.cs" />
     <Compile Include="PackageTests\When_adding_a_valid_use_case.cs" />
@@ -89,6 +117,8 @@
     <Compile Include="PackageTests\When_removing_a_use_case_that_is_in_sub_packages.cs" />
     <Compile Include="PackageTests\When_removing_a_use_case_that_is_referenced_by_another_use_case.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepTests\StepTestBase.cs" />
+    <Compile Include="StepTests\When_getting_name_from_step.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
