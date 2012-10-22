@@ -44,6 +44,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActorsTests\ActorsTestBase.cs" />
+    <Compile Include="ActorsTests\When_getting_actor_by_index.cs" />
+    <Compile Include="ActorsTests\When_getting_count_of_items.cs" />
+    <Compile Include="ActorsTests\When_getting_owner.cs" />
+    <Compile Include="ActorTests\ActorTestsBase.cs" />
+    <Compile Include="ActorTests\When_adding_first_goal.cs" />
+    <Compile Include="ActorTests\When_adding_multiple_goals.cs" />
+    <Compile Include="ActorTests\When_removing_goal.cs" />
     <Compile Include="ModelTests\ModelTestBase.cs" />
     <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
     <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />

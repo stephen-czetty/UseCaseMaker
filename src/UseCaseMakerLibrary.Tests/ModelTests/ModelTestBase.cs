@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Machine.Specifications;
+﻿using Machine.Specifications;
 using UMMO.TestingUtils;
 
 namespace UseCaseMakerLibrary.Tests.ModelTests
@@ -21,6 +19,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                             ModelName = A.Random.String.Resembling.A.Noun;
                                             Model = new Model { Name = ModelName };
                                         };
+
         protected static Model Model;
         protected static string ModelName;
     }
