@@ -57,6 +57,16 @@
     <Compile Include="ActorTests\When_removing_goal.cs" />
     <Compile Include="Behaviors\NonSynchronizedCollectionBehavior.cs" />
     <Compile Include="Behaviors\CollectionTestBase.cs" />
+    <Compile Include="HistoryItemsTests\HistoryItemsTestBase.cs" />
+    <Compile Include="HistoryItemsTests\When_adding_range_of_related_documents.cs" />
+    <Compile Include="HistoryItemsTests\When_calling_clear.cs" />
+    <Compile Include="HistoryItemsTests\When_checking_if_collection_contains_item.cs" />
+    <Compile Include="HistoryItemsTests\When_getting_by_index.cs" />
+    <Compile Include="HistoryItemsTests\When_getting_index_of_an_item.cs" />
+    <Compile Include="HistoryItemsTests\When_inserting_new_item_at_index_zero.cs" />
+    <Compile Include="HistoryItemsTests\When_removing_item.cs" />
+    <Compile Include="HistoryItemsTests\When_removing_item_at_index.cs" />
+    <Compile Include="HistoryItemsTests\When_using_history_items_as_a_collection.cs" />
     <Compile Include="ModelTests\ModelTestBase.cs" />
     <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
     <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />
@@ -134,6 +144,7 @@
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
     <Compile Include="StepTests\When_getting_name_from_step.cs" />
+    <Compile Include="UseCaseTests\UseCaseTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

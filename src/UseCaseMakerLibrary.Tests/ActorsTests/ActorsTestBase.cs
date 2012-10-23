@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-using Machine.Specifications;
+﻿using Machine.Specifications;
 
 using UseCaseMakerLibrary.Tests.Behaviors;
 
@@ -12,10 +10,14 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
         private Establish Context = () =>
             {
                 Package = new Package();
-                Actors = new Actors(Package);
+                Actor = new Actor();
+                Actors = new Actors(Package) { Actor };
+                ExpectedCount = 1;
             };
 
         protected static Package Package;
+
+        protected static Actor Actor;
 
         protected static Actors Actors
         {
