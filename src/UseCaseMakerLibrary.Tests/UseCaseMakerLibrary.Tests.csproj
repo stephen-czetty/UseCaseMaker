@@ -161,6 +161,7 @@
     <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_alternative_previous_step.cs" />
     <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_default_previous_step.cs" />
     <Compile Include="UseCaseTests\When_adding_first_open_issue.cs" />
+    <Compile Include="UseCaseTests\When_adding_history_item.cs" />
     <Compile Include="UseCaseTests\When_adding_second_open_issue.cs" />
     <Compile Include="UseCaseTests\When_adding_the_first_default_step.cs" />
     <Compile Include="UseCaseTests\When_finding_step_by_unique_id.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="UseCaseTests\When_removing_an_alternative_child_step.cs" />
     <Compile Include="UseCaseTests\When_removing_an_alternative_step.cs" />
     <Compile Include="UseCaseTests\When_removing_a_default_step.cs" />
+    <Compile Include="UseCaseTests\When_removing_history_item.cs" />
     <Compile Include="UseCaseTests\When_removing_open_issue.cs" />
     <Compile Include="UseCaseTests\When_searching_for_open_issue_by_unique_id.cs" />
     <Compile Include="UseCaseTests\When_testing_if_alternative_child_step_has_alternatives.cs" />

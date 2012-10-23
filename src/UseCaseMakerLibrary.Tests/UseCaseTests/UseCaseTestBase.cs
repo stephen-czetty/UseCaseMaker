@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Machine.Specifications;
+﻿using Machine.Specifications;
 using UMMO.TestingUtils;
 using UseCaseMakerLibrary.Tests.Behaviors;
 
