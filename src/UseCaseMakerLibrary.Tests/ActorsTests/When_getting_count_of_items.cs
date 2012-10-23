@@ -7,6 +7,6 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
     {
         private Because Of = () => Actors.Add(new Actor());
 
-        private It Should_return_the_number_of_actors = () => Actors.Count.ShouldEqual(1);
+        private It Should_return_the_number_of_actors = () => Actors.Count.ShouldEqual(2);
     }
 }

@@ -7,6 +7,7 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
     {
         private Because Of = () =>
             {
+                Actors.Clear();
                 Actors.Add(new Actor("B", "", 1));
                 Actors.Add(new Actor("A", "", 2));
             };
