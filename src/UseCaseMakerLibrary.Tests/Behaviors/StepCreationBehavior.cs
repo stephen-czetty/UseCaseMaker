@@ -1,6 +1,8 @@
 using Machine.Specifications;
 
-namespace UseCaseMakerLibrary.Tests.UseCaseTests
+using UseCaseMakerLibrary.Tests.UseCaseTests;
+
+namespace UseCaseMakerLibrary.Tests.Behaviors
 {
     [Behaviors]
     public class StepCreationBehavior : StepCreationTestBase

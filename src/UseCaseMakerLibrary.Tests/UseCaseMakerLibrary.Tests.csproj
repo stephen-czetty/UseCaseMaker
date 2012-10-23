@@ -57,6 +57,8 @@
     <Compile Include="ActorTests\When_removing_goal.cs" />
     <Compile Include="Behaviors\NonSynchronizedCollectionBehavior.cs" />
     <Compile Include="Behaviors\CollectionTestBase.cs" />
+    <Compile Include="Behaviors\StepCreationBehavior.cs" />
+    <Compile Include="Behaviors\StepCreationTestBase.cs" />
     <Compile Include="HistoryItemsTests\HistoryItemsTestBase.cs" />
     <Compile Include="HistoryItemsTests\When_adding_range_of_related_documents.cs" />
     <Compile Include="HistoryItemsTests\When_calling_clear.cs" />
@@ -144,17 +146,30 @@
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
     <Compile Include="StepTests\When_getting_name_from_step.cs" />
-    <Compile Include="UseCaseTests\StepCreationBehavior.cs" />
-    <Compile Include="UseCaseTests\StepCreationTestBase.cs" />
     <Compile Include="UseCaseTests\UseCaseTestBase.cs" />
+    <Compile Include="UseCaseTests\When_adding_alternative_step_after_alternative_step.cs" />
+    <Compile Include="UseCaseTests\When_adding_alternative_step_after_default_step.cs" />
+    <Compile Include="UseCaseTests\When_adding_alternative_step_between_two_default_steps.cs" />
     <Compile Include="UseCaseTests\When_adding_a_default_step_after_an_alternative_child_step.cs" />
     <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_alternative_previous_step.cs" />
     <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_default_previous_step.cs" />
     <Compile Include="UseCaseTests\When_adding_the_first_default_step.cs" />
+    <Compile Include="UseCaseTests\When_finding_step_by_unique_id.cs" />
     <Compile Include="UseCaseTests\When_inserting_a_default_step_between_an_alternative_step_and_a_default_step.cs" />
     <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_alternative_child_steps.cs" />
     <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_alternative_steps.cs" />
     <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_existing_default_steps.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_step_before_alternative_child_step.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_step_before_alternative_step.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_step_before_default_step.cs" />
+    <Compile Include="UseCaseTests\When_removing_an_alternative_child_step.cs" />
+    <Compile Include="UseCaseTests\When_removing_an_alternative_step.cs" />
+    <Compile Include="UseCaseTests\When_removing_a_default_step.cs" />
+    <Compile Include="UseCaseTests\When_testing_if_alternative_child_step_has_alternatives.cs" />
+    <Compile Include="UseCaseTests\When_testing_if_alternative_step_with_child_step_has_alternatives.cs" />
+    <Compile Include="UseCaseTests\When_testing_if_alternative_step_with_sibling_step_has_alternatives.cs" />
+    <Compile Include="UseCaseTests\When_testing_if_default_step_with_alternative_step_has_alternatives.cs" />
+    <Compile Include="UseCaseTests\When_testing_if_single_default_step_has_alternatives.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

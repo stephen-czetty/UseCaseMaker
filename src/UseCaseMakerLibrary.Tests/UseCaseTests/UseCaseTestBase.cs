@@ -1,6 +1,6 @@
 ﻿using Machine.Specifications;
-
 using UMMO.TestingUtils;
+using UseCaseMakerLibrary.Tests.Behaviors;
 
 namespace UseCaseMakerLibrary.Tests.UseCaseTests
 {
@@ -14,6 +14,5 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
                 OtherUseCaseName = A.Random.String;
                 OtherUseCase = new UseCase { Name = OtherUseCaseName };
             };
-
     }
 }

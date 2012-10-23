@@ -1,5 +1,7 @@
 using Machine.Specifications;
 
+using UseCaseMakerLibrary.Tests.Behaviors;
+
 namespace UseCaseMakerLibrary.Tests.UseCaseTests
 {
     [Subject(typeof(UseCase))]

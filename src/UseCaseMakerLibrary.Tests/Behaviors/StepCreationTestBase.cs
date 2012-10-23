@@ -1,4 +1,4 @@
-namespace UseCaseMakerLibrary.Tests.UseCaseTests
+namespace UseCaseMakerLibrary.Tests.Behaviors
 {
     public abstract class StepCreationTestBase
     {
