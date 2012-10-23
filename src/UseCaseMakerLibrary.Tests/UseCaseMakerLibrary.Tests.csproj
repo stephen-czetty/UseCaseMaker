@@ -144,7 +144,17 @@
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
     <Compile Include="StepTests\When_getting_name_from_step.cs" />
+    <Compile Include="UseCaseTests\StepCreationBehavior.cs" />
+    <Compile Include="UseCaseTests\StepCreationTestBase.cs" />
     <Compile Include="UseCaseTests\UseCaseTestBase.cs" />
+    <Compile Include="UseCaseTests\When_adding_a_default_step_after_an_alternative_child_step.cs" />
+    <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_alternative_previous_step.cs" />
+    <Compile Include="UseCaseTests\When_adding_a_default_step_that_has_a_default_previous_step.cs" />
+    <Compile Include="UseCaseTests\When_adding_the_first_default_step.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_default_step_between_an_alternative_step_and_a_default_step.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_alternative_child_steps.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_alternative_steps.cs" />
+    <Compile Include="UseCaseTests\When_inserting_a_default_step_between_two_existing_default_steps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

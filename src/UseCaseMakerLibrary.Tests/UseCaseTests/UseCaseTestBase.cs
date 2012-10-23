@@ -1,12 +1,19 @@
 ﻿using Machine.Specifications;
 
+using UMMO.TestingUtils;
+
 namespace UseCaseMakerLibrary.Tests.UseCaseTests
 {
     [Subject("UseCase Tests")]
-    public abstract class UseCaseTestBase
+    public abstract class UseCaseTestBase : StepCreationTestBase
     {
-        private Establish Context = () => UseCase = new UseCase();
+        private Establish Context = () =>
+            {
+                UseCase = new UseCase();
+                Stereotype = A.Random.String;
+                OtherUseCaseName = A.Random.String;
+                OtherUseCase = new UseCase { Name = OtherUseCaseName };
+            };
 
-        protected static UseCase UseCase;
     }
 }
