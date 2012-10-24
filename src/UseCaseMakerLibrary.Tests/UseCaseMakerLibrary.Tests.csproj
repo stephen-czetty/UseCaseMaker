@@ -51,6 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveActorsTests\ActiveActorsTestBase.cs" />
+    <Compile Include="ActiveActorsTests\When_calling_clear.cs" />
+    <Compile Include="ActiveActorsTests\When_checking_if_collection_contains_item.cs" />
+    <Compile Include="ActiveActorsTests\When_getting_active_actor_by_index.cs" />
+    <Compile Include="ActiveActorsTests\When_getting_count_of_items.cs" />
+    <Compile Include="ActiveActorsTests\When_getting_index_of_an_item.cs" />
+    <Compile Include="ActiveActorsTests\When_inserting_new_item_at_index_zero.cs" />
+    <Compile Include="ActiveActorsTests\When_removing_item_at_index.cs" />
+    <Compile Include="ActiveActorsTests\When_using_as_a_collection.cs" />
     <Compile Include="ActorsTests\ActorsTestBase.cs" />
     <Compile Include="ActorsTests\When_getting_actor_by_index.cs" />
     <Compile Include="ActorsTests\When_getting_count_of_items.cs" />
