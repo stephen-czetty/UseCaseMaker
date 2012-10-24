@@ -8,29 +8,22 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Class Members
-		private String description = String.Empty;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal OpenIssue()
 		{
+		    Description = String.Empty;
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public String Description
-		{
-			get
-			{
-				return this.description;
-			}
-			set
-			{
-				this.description = value;
-			}
-		}
 
-		public new String UniqueID
+	    public string Description { get; set; }
+
+	    public new String UniqueID
 		{
 			get
 			{

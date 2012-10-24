@@ -13,9 +13,6 @@ namespace UseCaseMakerLibrary
 
 	public class XMLSerializeIgnoreAttribute : System.Attribute
 	{
-		public XMLSerializeIgnoreAttribute()
-		{
-		}
 	}
 
 	public class XMLSerializeAsAttributeAttribute : System.Attribute
@@ -43,9 +40,6 @@ namespace UseCaseMakerLibrary
 
 	public class XMLSerializeCollectionKeyAttribute : System.Attribute
 	{
-		public XMLSerializeCollectionKeyAttribute()
-		{
-		}
 	}
 
 	public class XmlSerializerException : Exception

@@ -18,17 +18,16 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Class Members
-		private DateTime date;
-		private HistoryType type;
-		private Int32 action;
-		private String notes = String.Empty;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		public HistoryItem()
 		{
+		    Notes = String.Empty;
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
 		[XMLSerializeIgnore]
@@ -40,67 +39,28 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public DateTime Date
+	    [XMLSerializeIgnore]
+	    public DateTime Date { get; set; }
+
+	    public String DateValue
 		{
 			get
 			{
-				return this.date;
+				return Convert.ToString(this.Date,DateTimeFormatInfo.InvariantInfo);
 			}
 			set
 			{
-				this.date = value;
+				this.Date = Convert.ToDateTime(value,DateTimeFormatInfo.InvariantInfo);
 			}
 		}
 
-		public String DateValue
-		{
-			get
-			{
-				return Convert.ToString(this.date,DateTimeFormatInfo.InvariantInfo);
-			}
-			set
-			{
-				this.date = Convert.ToDateTime(value,DateTimeFormatInfo.InvariantInfo);
-			}
-		}
+	    public HistoryType Type { get; set; }
 
-		public HistoryType Type
-		{
-			get
-			{
-				return this.type;
-			}
-			set
-			{
-				this.type = value;
-			}
-		}
+	    public int Action { get; set; }
 
-		public Int32 Action
-		{
-			get
-			{
-				return this.action;
-			}
-			set
-			{
-				this.action = value;
-			}
-		}
+	    public string Notes { get; set; }
 
-		public String Notes
-		{
-			get
-			{
-				return this.notes;
-			}
-			set
-			{
-				this.notes = value;
-			}
-		}
-		#endregion
+	    #endregion
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)

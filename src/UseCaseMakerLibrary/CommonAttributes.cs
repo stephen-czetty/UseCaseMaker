@@ -6,47 +6,28 @@ namespace UseCaseMakerLibrary
 	public class CommonAttributes : IXMLNodeSerializable
 	{
 		#region Class Members
-		private String description = String.Empty;
-		private String notes = String.Empty;
-		private RelatedDocuments relatedDocuments = new RelatedDocuments();
-		#endregion
+
+	    public CommonAttributes()
+	    {
+	        RelatedDocuments = new RelatedDocuments();
+	        Notes = String.Empty;
+	        Description = String.Empty;
+	    }
+
+	    #endregion
 
 		#region Constructors
 		#endregion
 
 		#region Public Properties
-		public String Description
-		{
-			get
-			{
-				return this.description;
-			}
-			set
-			{
-				this.description = value;
-			}
-		}
 
-		public String Notes
-		{
-			get
-			{
-				return this.notes;
-			}
-			set
-			{
-				this.notes = value;
-			}
-		}
+	    public string Description { get; set; }
 
-		public RelatedDocuments RelatedDocuments
-		{
-			get
-			{
-				return this.relatedDocuments;
-			}
-		}
-		#endregion
+	    public string Notes { get; set; }
+
+	    public RelatedDocuments RelatedDocuments { get; private set; }
+
+	    #endregion
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)

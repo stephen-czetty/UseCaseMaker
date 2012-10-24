@@ -6,41 +6,25 @@ namespace UseCaseMakerLibrary
 	public class ActiveActor : IXMLNodeSerializable
 	{
 		#region Class Members
-		private Boolean isPrimary = false;
-		private String actorUniqueID = String.Empty;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal ActiveActor()
 		{
+		    IsPrimary = false;
+		    ActorUniqueID = String.Empty;
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public String ActorUniqueID
-		{
-			get
-			{
-				return this.actorUniqueID;
-			}
-			set
-			{
-				this.actorUniqueID = value;
-			}
-		}
 
-		public Boolean IsPrimary
-		{
-			get
-			{
-				return this.isPrimary;
-			}
-			set
-			{
-				this.isPrimary = value;
-			}
-		}
-		#endregion
+	    public string ActorUniqueID { get; set; }
+
+	    public bool IsPrimary { get; set; }
+
+	    #endregion
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)

@@ -14,64 +14,31 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Class Members
-		private String description = String.Empty;
-		private Int32 childID = -1;
-		private StepType type = StepType.Default;
-		private DependencyItem dependencyItem = new DependencyItem();
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal Step()
 		{
+		    Dependency = new DependencyItem();
+		    Type = StepType.Default;
+		    ChildID = -1;
+		    Description = String.Empty;
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public String Description
-		{
-			get
-			{
-				return this.description;
-			}
-			set
-			{
-				this.description = value;
-			}
-		}
 
-		public Int32 ChildID
-		{
-			get
-			{
-				return this.childID;
-			}
-			set
-			{
-				this.childID = value;
-			}
-		}
+	    public string Description { get; set; }
 
-		public StepType Type
-		{
-			get
-			{
-				return this.type;
-			}
-			set
-			{
-				this.type = value;
-			}
-		}
+	    public int ChildID { get; set; }
 
-		public DependencyItem Dependency
-		{
-			get
-			{
-				return this.dependencyItem;
-			}
-		}
+	    public StepType Type { get; set; }
 
-		public new String UniqueID
+	    public DependencyItem Dependency { get; private set; }
+
+	    public new String UniqueID
 		{
 			get
 			{

@@ -18,57 +18,31 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Class Members
-		private String stereotype = "";
-		private ReferenceType type = ReferenceType.None;
-		private String partnerUniqueID = "";
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		public DependencyItem()
 		{
-			//
+		    PartnerUniqueID = "";
+		    Type = ReferenceType.None;
+		    Stereotype = "";
+		    //
 			// TODO: aggiungere qui la logica del costruttore
 			//
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public String Stereotype
-		{
-			get
-			{
-				return this.stereotype;
-			}
-			set
-			{
-				this.stereotype = value;
-			}
-		}
 
-		public ReferenceType Type
-		{
-			get
-			{
-				return this.type;
-			}
-			set
-			{
-				this.type = value;
-			}
-		}
+	    public string Stereotype { get; set; }
 
-		public String PartnerUniqueID
-		{
-			get
-			{
-				return this.partnerUniqueID;
-			}
-			set 
-			{
-				this.partnerUniqueID = value;
-			}
-		}
-		#endregion
+	    public ReferenceType Type { get; set; }
+
+	    public string PartnerUniqueID { get; set; }
+
+	    #endregion
 
 		#region IXMLNodeSerializable Implementation
 		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)

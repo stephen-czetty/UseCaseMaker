@@ -9,38 +9,34 @@ namespace UseCaseMakerLibrary
 	public class GlossaryItem : IdentificableObject
 	{
 		#region Class Members
-		String description = String.Empty;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal GlossaryItem()
 			: base()
 		{
+		    Description = String.Empty;
 		}
 
-		internal GlossaryItem(String name, String prefix, Int32 id)
+	    internal GlossaryItem(String name, String prefix, Int32 id)
 			: base(name,prefix,id)
-		{
-		}
+	    {
+	        Description = String.Empty;
+	    }
 
-		internal GlossaryItem(String name, String prefix, Int32 id, Package owner)
+	    internal GlossaryItem(String name, String prefix, Int32 id, Package owner)
 			: base(name,prefix,id,owner)
-		{
-		}
-		#endregion
+	    {
+	        Description = String.Empty;
+	    }
+
+	    #endregion
 
 		#region Public Properties
-		public String Description
-		{
-			get
-			{
-				return this.description;
-			}
-			set
-			{
-				this.description = value;
-			}
-		}
-		#endregion
+
+	    public string Description { get; set; }
+
+	    #endregion
 	}
 }

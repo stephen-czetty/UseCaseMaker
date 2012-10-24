@@ -6,27 +6,21 @@ namespace UseCaseMakerLibrary
 	public class UserViewStatus
 	{
 		#region Class Members
-		private TabPage currentPage = null;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		public UserViewStatus()
 		{
+		    CurrentTabPage = null;
 		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public TabPage CurrentTabPage
-		{
-			get
-			{
-				return this.currentPage;
-			}
-			set
-			{
-				this.currentPage = value;
-			}
-		}
-		#endregion
+
+	    public TabPage CurrentTabPage { get; set; }
+
+	    #endregion
 	}
 }

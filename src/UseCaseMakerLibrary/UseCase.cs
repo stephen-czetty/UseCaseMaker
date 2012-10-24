@@ -41,201 +41,105 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Class Members
-		private ActiveActors activeActors = new ActiveActors();
-		private String assignedTo = String.Empty;
-		private CommonAttributes commonAttributes = new CommonAttributes();
-		private ComplexityValue complexity = ComplexityValue.Low;
-		private ImplementationValue implementation = ImplementationValue.Scheduled;
-		private StatusValue status = StatusValue.Named;
-		private LevelValue level = LevelValue.Summary;
-		private String postconditions = String.Empty;
-		private String preconditions = String.Empty;
-		private Int32 priority = 1;
-		private String prose = String.Empty;
-		private String release = String.Empty;
-		private Steps steps = new Steps();
-		private OpenIssues openIssues = new OpenIssues();
-		private HistoryItems historyItems = new HistoryItems();
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal UseCase()
 			: base()
 		{
+		    Status = StatusValue.Named;
+		    Level = LevelValue.Summary;
+		    Implementation = ImplementationValue.Scheduled;
+		    Complexity = ComplexityValue.Low;
+		    Priority = 1;
+		    AssignedTo = String.Empty;
+		    Release = String.Empty;
+		    Postconditions = String.Empty;
+		    Preconditions = String.Empty;
+		    Prose = String.Empty;
+		    ActiveActors = new ActiveActors();
+		    HistoryItems = new HistoryItems();
+		    OpenIssues = new OpenIssues();
+		    Steps = new Steps();
+		    Attributes = new CommonAttributes();
 		}
 
-		internal UseCase(String name, String prefix, Int32 id)
+	    internal UseCase(String name, String prefix, Int32 id)
 			: base(name,prefix,id)
-		{
-		}
+	    {
+	        Status = StatusValue.Named;
+	        Level = LevelValue.Summary;
+	        Implementation = ImplementationValue.Scheduled;
+	        Complexity = ComplexityValue.Low;
+	        Priority = 1;
+	        AssignedTo = String.Empty;
+	        Release = String.Empty;
+	        Postconditions = String.Empty;
+	        Preconditions = String.Empty;
+	        Prose = String.Empty;
+	        ActiveActors = new ActiveActors();
+	        HistoryItems = new HistoryItems();
+	        OpenIssues = new OpenIssues();
+	        Steps = new Steps();
+	        Attributes = new CommonAttributes();
+	    }
 
-		internal UseCase(String name, String prefix, Int32 id, Package owner)
+	    internal UseCase(String name, String prefix, Int32 id, Package owner)
 			: base(name,prefix,id,owner)
-		{
-		}
-		#endregion
+	    {
+	        Status = StatusValue.Named;
+	        Level = LevelValue.Summary;
+	        Implementation = ImplementationValue.Scheduled;
+	        Complexity = ComplexityValue.Low;
+	        Priority = 1;
+	        AssignedTo = String.Empty;
+	        Release = String.Empty;
+	        Postconditions = String.Empty;
+	        Preconditions = String.Empty;
+	        Prose = String.Empty;
+	        ActiveActors = new ActiveActors();
+	        HistoryItems = new HistoryItems();
+	        OpenIssues = new OpenIssues();
+	        Steps = new Steps();
+	        Attributes = new CommonAttributes();
+	    }
+
+	    #endregion
 	
 		#region Public Properties
-		public CommonAttributes Attributes
-		{
-			get
-			{
-				return this.commonAttributes;
-			}
-		}
 
-		public Steps Steps
-		{
-			get
-			{
-				return this.steps;
-			}
-		}
+	    public CommonAttributes Attributes { get; private set; }
 
-		public OpenIssues OpenIssues
-		{
-			get
-			{
-				return this.openIssues;
-			}
-		}
+	    public Steps Steps { get; private set; }
 
-		public ActiveActors ActiveActors
-		{
-			get
-			{
-				return this.activeActors;
-			}
-		}
+	    public OpenIssues OpenIssues { get; private set; }
 
-		public HistoryItems HistoryItems
-		{
-			get
-			{
-				return this.historyItems;
-			}
-		}
+	    public ActiveActors ActiveActors { get; private set; }
 
-		public String Prose
-		{
-			get
-			{
-				return this.prose;
-			}
-			set
-			{
-				this.prose = value;
-			}
-		}
+	    public HistoryItems HistoryItems { get; private set; }
 
-		public String Preconditions
-		{
-			get
-			{
-				return this.preconditions;
-			}
-			set
-			{
-				this.preconditions = value;
-			}
-		}
+	    public string Prose { get; set; }
 
-		public String Postconditions
-		{
-			get
-			{
-				return this.postconditions;
-			}
-			set
-			{
-				this.postconditions = value;
-			}
-		}
+	    public string Preconditions { get; set; }
 
-		public String Release
-		{
-			get
-			{
-				return this.release;
-			}
-			set
-			{
-				this.release = value;
-			}
-		}
+	    public string Postconditions { get; set; }
 
-		public String AssignedTo
-		{
-			get
-			{
-				return this.assignedTo;
-			}
-			set
-			{
-				this.assignedTo = value;
-			}
-		}
+	    public string Release { get; set; }
 
-		public Int32 Priority
-		{
-			get
-			{
-				return this.priority;
-			}
-			set
-			{
-				this.priority = value;
-			}
-		}
+	    public string AssignedTo { get; set; }
 
-		public ComplexityValue Complexity
-		{
-			get
-			{
-				return this.complexity;
-			}
-			set
-			{
-				this.complexity = value;
-			}
-		}
+	    public int Priority { get; set; }
 
-		public ImplementationValue Implementation
-		{
-			get
-			{
-				return this.implementation;
-			}
-			set
-			{
-				this.implementation = value;
-			}
-		}
+	    public ComplexityValue Complexity { get; set; }
 
-		public LevelValue Level
-		{
-			get
-			{
-				return this.level;
-			}
-			set
-			{
-				this.level = value;
-			}
-		}
+	    public ImplementationValue Implementation { get; set; }
 
-		public StatusValue Status
-		{
-			get
-			{
-				return this.status;
-			}
-			set
-			{
-				this.status = value;
-			}
-		}
-		#endregion
+	    public LevelValue Level { get; set; }
+
+	    public StatusValue Status { get; set; }
+
+	    #endregion
 
 		#region Public Methods
 		#region Step Handling
@@ -264,7 +168,7 @@ namespace UseCaseMakerLibrary
 			if(previousStep == null)
 			{
 				step.ID = 1;
-				ret = this.steps.Add(step);
+				ret = this.Steps.Add(step);
 				return ret;
 			}
 			else
@@ -278,21 +182,21 @@ namespace UseCaseMakerLibrary
 							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
 							while(true)
 							{
-								if(index == this.steps.Count)
+								if(index == this.Steps.Count)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
-								Step tmpStep = (Step)this.steps[index];
+								Step tmpStep = (Step)this.Steps[index];
 								if(tmpStep.ID != step.ID)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
 								index += 1;
 							}
 							step.ID = previousStep.ID + 1;
-							foreach(Step tmpStep in this.steps)
+							foreach(Step tmpStep in this.Steps)
 							{
 								if(tmpStep.ID >= step.ID)
 								{
@@ -308,15 +212,15 @@ namespace UseCaseMakerLibrary
 							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
 							while(true)
 							{
-								if(index == this.steps.Count)
+								if(index == this.Steps.Count)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
-								Step tmpStep = (Step)this.steps[index];
+								Step tmpStep = (Step)this.Steps[index];
 								if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
 								index += 1;
@@ -333,7 +237,7 @@ namespace UseCaseMakerLibrary
 								step.Prefix = "A";
 							}
 						
-							foreach(Step tmpStep in this.steps)
+							foreach(Step tmpStep in this.Steps)
 							{
 								if(tmpStep.ID == step.ID)
 								{
@@ -355,15 +259,15 @@ namespace UseCaseMakerLibrary
 							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
 							while(true)
 							{
-								if(index == this.steps.Count)
+								if(index == this.Steps.Count)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
-								Step tmpStep = (Step)this.steps[index];
+								Step tmpStep = (Step)this.Steps[index];
 								if(tmpStep.ID != step.ID || tmpStep.Prefix != step.Prefix)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
 								index += 1;
@@ -382,15 +286,15 @@ namespace UseCaseMakerLibrary
 							index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
 							while(true)
 							{
-								if(index == this.steps.Count)
+								if(index == this.Steps.Count)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
-								Step tmpStep = (Step)this.steps[index];
+								Step tmpStep = (Step)this.Steps[index];
 								if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
 								{
-									previousStep = (Step)this.steps[index - 1];
+									previousStep = (Step)this.Steps[index - 1];
 									break;
 								}
 								index += 1;
@@ -407,7 +311,7 @@ namespace UseCaseMakerLibrary
 								step.Prefix = "A";
 							}
 						
-							foreach(Step tmpStep in this.steps)
+							foreach(Step tmpStep in this.Steps)
 							{
 								if(tmpStep.ID == step.ID)
 								{
@@ -432,13 +336,13 @@ namespace UseCaseMakerLibrary
 			}
 
 			index = this.FindStepIndexByUniqueID(previousStep.UniqueID) + 1;
-			if(index == this.steps.Count)
+			if(index == this.Steps.Count)
 			{
-				ret = this.steps.Add(step);
+				ret = this.Steps.Add(step);
 			}
 			else
 			{
-				this.steps.Insert(index, step);
+				this.Steps.Insert(index, step);
 				ret = index;
 			}
 
@@ -468,7 +372,7 @@ namespace UseCaseMakerLibrary
 			if(previousStep.Type == Step.StepType.Default)
 			{
 				step.ID = previousStep.ID;
-				foreach(Step tmpStep in this.steps)
+				foreach(Step tmpStep in this.Steps)
 				{
 					if(tmpStep.ID >= step.ID)
 					{
@@ -486,7 +390,7 @@ namespace UseCaseMakerLibrary
 				step.ID = previousStep.ID;
 				step.Type = Step.StepType.Alternative;
 
-				foreach(Step tmpStep in this.steps)
+				foreach(Step tmpStep in this.Steps)
 				{
 					if(tmpStep.ID == step.ID)
 					{
@@ -505,7 +409,7 @@ namespace UseCaseMakerLibrary
 				step.ID = previousStep.ID;
 				step.Prefix = previousStep.Prefix;
 				step.ChildID = previousStep.ChildID;
-				foreach(Step tmpStep in this.steps)
+				foreach(Step tmpStep in this.Steps)
 				{
 					if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
 					{
@@ -518,7 +422,7 @@ namespace UseCaseMakerLibrary
 			}
 
 			int index = this.FindStepIndexByUniqueID(previousStep.UniqueID);
-			this.steps.Insert(index,step);
+			this.Steps.Insert(index,step);
 			ret = index;
 
 			return ret;
@@ -526,15 +430,15 @@ namespace UseCaseMakerLibrary
 
 		public void RemoveStep(Step step)
 		{
-			for(int i = this.steps.Count - 1; i >= 0; i--)
+			for(int i = this.Steps.Count - 1; i >= 0; i--)
 			{
-				Step tmpStep = (Step)this.steps[i];
+				Step tmpStep = (Step)this.Steps[i];
 				switch(step.Type)
 				{
 					case Step.StepType.Default:
 						if(tmpStep.ID == step.ID)
 						{
-							this.steps.Remove(tmpStep);
+							this.Steps.Remove(tmpStep);
 						}
 						if(tmpStep.ID > step.ID)
 						{
@@ -546,7 +450,7 @@ namespace UseCaseMakerLibrary
 						{
 							if(tmpStep.Prefix == step.Prefix)
 							{
-								this.steps.Remove(tmpStep);
+								this.Steps.Remove(tmpStep);
 							}
 							if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) > 0)
 							{
@@ -561,7 +465,7 @@ namespace UseCaseMakerLibrary
 						{
 							if(tmpStep.ChildID == step.ChildID)
 							{
-								this.steps.Remove(step);
+								this.Steps.Remove(step);
 							}
 							if(tmpStep.ChildID > step.ChildID)
 							{
@@ -628,7 +532,7 @@ namespace UseCaseMakerLibrary
 		public Int32 AddOpenIssue()
 		{
 			OpenIssue openIssue = new OpenIssue();
-			Int32 index = this.openIssues.Count;
+			Int32 index = this.OpenIssues.Count;
 			Int32 ret;
 
 			if(index == 0)
@@ -637,31 +541,31 @@ namespace UseCaseMakerLibrary
 			}
 			else
 			{
-				openIssue.ID = ((OpenIssue)this.openIssues[index - 1]).ID + 1;
+				openIssue.ID = ((OpenIssue)this.OpenIssues[index - 1]).ID + 1;
 			}
 
-			ret = this.openIssues.Add(openIssue);
+			ret = this.OpenIssues.Add(openIssue);
 
 			return ret;
 		}
 
 		public void RemoveOpenIssue(OpenIssue openIssue)
 		{
-			foreach(OpenIssue tmpOpenIssue in this.openIssues)
+			foreach(OpenIssue tmpOpenIssue in this.OpenIssues)
 			{
 				if(tmpOpenIssue.ID > openIssue.ID)
 				{
 					tmpOpenIssue.ID -= 1;
 				}
 			}
-			this.openIssues.Remove(openIssue);
+			this.OpenIssues.Remove(openIssue);
 		}
 
 		public OpenIssue FindOpenIssueByUniqueID(String uniqueID)
 		{
 			OpenIssue openIssue = null;
 
-			foreach(OpenIssue tmpOpenIssue in this.openIssues)
+			foreach(OpenIssue tmpOpenIssue in this.OpenIssues)
 			{
 				if(tmpOpenIssue.UniqueID == uniqueID)
 				{

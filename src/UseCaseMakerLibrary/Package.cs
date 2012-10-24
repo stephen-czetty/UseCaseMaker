@@ -6,36 +6,38 @@ namespace UseCaseMakerLibrary
 	public class Package : IdentificableObject
 	{
 		#region Class Members
-		private readonly Actors actors = null;
-		private readonly Packages packages = null;
-		private readonly UseCases useCases = null;
-		private CommonAttributes commonAttributes = new CommonAttributes();
-		private Requirements requirements = new Requirements();
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		internal Package()
 			: base()
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 
 		internal Package(String name, String prefix, Int32 id)
 			: base(name,prefix,id)
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 
 		internal Package(String name, String prefix, Int32 id, Package owner)
 			: base(name,prefix,id,owner)
 		{
-			this.actors = new Actors(this);
-			this.packages = new Packages(this);
-			this.useCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
 		}
 		#endregion
 
@@ -172,7 +174,7 @@ namespace UseCaseMakerLibrary
 		public Int32 AddRequrement()
 		{
 			Requirement requirement = new Requirement();
-			Int32 index = this.requirements.Count;
+			Int32 index = this.Requirements.Count;
 			Int32 ret;
 
 			if(index == 0)
@@ -181,31 +183,31 @@ namespace UseCaseMakerLibrary
 			}
 			else
 			{
-				requirement.ID = ((Requirement)this.requirements[index - 1]).ID + 1;
+				requirement.ID = ((Requirement)this.Requirements[index - 1]).ID + 1;
 			}
 
-			ret = this.requirements.Add(requirement);
+			ret = this.Requirements.Add(requirement);
 
 			return ret;
 		}
 
 		public void RemoveRequirement(Requirement requirement)
 		{
-			foreach(Requirement tmpRequirement in this.requirements)
+			foreach(Requirement tmpRequirement in this.Requirements)
 			{
 				if(tmpRequirement.ID > requirement.ID)
 				{
 					tmpRequirement.ID -= 1;
 				}
 			}
-			this.requirements.Remove(requirement);
+			this.Requirements.Remove(requirement);
 		}
 
 		public Requirement FindRequirementByUniqueID(String uniqueID)
 		{
 			Requirement requirement = null;
 
-			foreach(Requirement tmpRequirement in this.requirements)
+			foreach(Requirement tmpRequirement in this.Requirements)
 			{
 				if(tmpRequirement.UniqueID == uniqueID)
 				{
@@ -257,46 +259,18 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
-		public Actors Actors
-		{
-			get
-			{
-				return this.actors;
-			}
-		}
 
-		public Packages Packages
-		{
-			get
-			{
-				return this.packages;
-			}
-		}
+	    public Actors Actors { get; private set; }
 
-		public UseCases UseCases
-		{
-			get
-			{
-				return this.useCases;
-			}
-		}
+	    public Packages Packages { get; private set; }
 
-		public Requirements Requirements
-		{
-			get
-			{
-				return this.requirements;
-			}
-		}
+	    public UseCases UseCases { get; private set; }
 
-		public CommonAttributes Attributes
-		{
-			get
-			{
-				return this.commonAttributes;
-			}
-		}
-		#endregion
+	    public Requirements Requirements { get; private set; }
+
+	    public CommonAttributes Attributes { get; private set; }
+
+	    #endregion
 
 		#region Private Methods
 		void ValidateActor(Actor actor)
@@ -313,12 +287,12 @@ namespace UseCaseMakerLibrary
 
 		void RecursiveGetActorNameList(StringCollection sc)
 		{
-			foreach(Actor actor in this.actors)
+			foreach(Actor actor in this.Actors)
 			{
 				sc.Add(actor.Name);
 			}
 
-			foreach(Package subPackage in this.packages)
+			foreach(Package subPackage in this.Packages)
 			{
 				subPackage.RecursiveGetActorNameList(sc);
 			}
@@ -338,7 +312,7 @@ namespace UseCaseMakerLibrary
 			String oldFullName = oldNameStartTag + oldName + oldNameEndTag;
 			String newFullName = newNameStartTag + newName + newNameEndTag;
 
-			foreach(Requirement requirement in this.requirements)
+			foreach(Requirement requirement in this.Requirements)
 			{
 				requirement.Description = requirement.Description.Replace(oldFullName,newFullName);
 			}
