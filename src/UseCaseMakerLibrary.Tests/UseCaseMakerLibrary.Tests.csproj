@@ -45,6 +45,7 @@
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
     <Reference Include="UMMO.TestingUtils">
       <HintPath>..\..\lib\UMMO\UMMO.TestingUtils.dll</HintPath>
     </Reference>
@@ -184,6 +185,9 @@
     <Compile Include="UseCaseTests\When_testing_if_alternative_step_with_sibling_step_has_alternatives.cs" />
     <Compile Include="UseCaseTests\When_testing_if_default_step_with_alternative_step_has_alternatives.cs" />
     <Compile Include="UseCaseTests\When_testing_if_single_default_step_has_alternatives.cs" />
+    <Compile Include="XmlSerializeTests\When_deserializing_from_xml.cs" />
+    <Compile Include="XmlSerializeTests\When_serializing_model.cs" />
+    <Compile Include="XmlSerializeTests\XmlSerializeTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
