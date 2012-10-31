@@ -83,6 +83,10 @@
     <Compile Include="HistoryItemsTests\When_removing_item_at_index.cs" />
     <Compile Include="HistoryItemsTests\When_using_history_items_as_a_collection.cs" />
     <Compile Include="HistoryItemTests\HistoryItemTestBase.cs" />
+    <Compile Include="HistoryItemTests\When_retrieving_date_value.cs" />
+    <Compile Include="HistoryItemTests\When_retrieving_localized_date_value_and_only_the_date.cs" />
+    <Compile Include="HistoryItemTests\When_setting_date_from_validly_formatted_string.cs" />
+    <Compile Include="HistoryItemTests\When_setting_the_date_with_an_invalid_string.cs" />
     <Compile Include="ModelTests\ModelTestBase.cs" />
     <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
     <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />

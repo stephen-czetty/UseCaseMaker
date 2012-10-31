@@ -23,29 +23,6 @@ namespace UseCaseMakerLibrary
 
 	    public string Description { get; set; }
 
-	    public new String UniqueID
-		{
-			get
-			{
-				return base.UniqueID;
-			}
-			set
-			{
-				base.UniqueID = value;
-			}
-		}
-
-		public new String Name
-		{
-			get
-			{
-				return base.ID.ToString();
-			}
-			set
-			{
-				base.Name = value;
-			}
-		}
 		#endregion
 	}
 }
