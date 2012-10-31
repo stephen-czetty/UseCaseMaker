@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using Machine.Specifications;
 
@@ -21,5 +22,11 @@ namespace UseCaseMakerLibrary.Tests.Behaviors
         private It Should_return_non_null_enumerator = () => Collection.GetEnumerator().ShouldNotBeNull();
 
         private It Should_return_correct_synchronization_status = () => Collection.IsSynchronized.ShouldBeFalse();
+
+        private It Should_throw_argument_null_exception_when_calling_copy_to_with_null_array = () => Catch.Exception(() => Collection.CopyTo(null, 0)).ShouldBeOfType<ArgumentNullException>();
+
+        private It Should_throw_argument_out_of_range_exception_when_calling_copy_to_with_index_less_than_zero = () => Catch.Exception(() => Collection.CopyTo(new object[0], -1)).ShouldBeOfType<ArgumentOutOfRangeException>();
+
+        private It Should_throw_throw_argument_exception_when_calling_copy_to_if_array_is_smaller_than_collection = () => Catch.Exception(() => Collection.CopyTo(new object[0], 0)).ShouldBeOfType<ArgumentException>();
     }
 }
