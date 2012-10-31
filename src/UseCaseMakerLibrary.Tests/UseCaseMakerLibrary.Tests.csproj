@@ -85,6 +85,7 @@
     <Compile Include="HistoryItemsTests\When_removing_item.cs" />
     <Compile Include="HistoryItemsTests\When_removing_item_at_index.cs" />
     <Compile Include="HistoryItemsTests\When_using_history_items_as_a_collection.cs" />
+    <Compile Include="HistoryItemTests\HistoryItemTestBase.cs" />
     <Compile Include="ModelTests\ModelTestBase.cs" />
     <Compile Include="ModelTests\When_creating_a_new_glossary_item.cs" />
     <Compile Include="ModelTests\When_removing_a_glossary_item.cs" />

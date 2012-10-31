@@ -1,0 +1,8 @@
+# Get the EditorConfig extension for Visual Studio to use this file
+
+root = true
+
+[*]
+indent_style = space
+indent_size  = 4
+
