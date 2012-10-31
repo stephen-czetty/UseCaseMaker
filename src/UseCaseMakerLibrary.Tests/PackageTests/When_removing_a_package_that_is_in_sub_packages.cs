@@ -18,7 +18,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
                                  };
 
         private It Should_not_remove_the_package_from_the_sub_package = // Really???
-            () => ((Package) Package.Packages[0]).Packages.ShouldContain(_package);
+            () => Package.Packages[0].Packages.ShouldContain(_package);
 
         private It Should_remove_the_package = () => Package.Packages.ShouldNotContain(_package);
 

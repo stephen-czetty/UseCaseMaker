@@ -7,8 +7,8 @@ namespace UseCaseMakerLibrary.Tests.ActiveActorsTests
     {
         private Because Of = () =>
             {
-                ActiveActors.Insert(0, new RelatedDocument());
-                ActiveActors.RemoveAt(1);
+                ActiveActors.Add(new ActiveActor());
+                ActiveActors.RemoveAt(0);
             };
 
         private It Should_not_contain_item = () => ActiveActors.ShouldNotContain(ActiveActor);

@@ -43,17 +43,5 @@ namespace UseCaseMakerLibrary
 	    public string PartnerUniqueID { get; set; }
 
 	    #endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
 	}
 }

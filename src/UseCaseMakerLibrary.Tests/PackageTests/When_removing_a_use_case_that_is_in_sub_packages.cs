@@ -17,7 +17,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
                                  };
 
         private It Should_not_remove_the_use_case_from_the_sub_package = // Really???
-            () => ((Package)Package.Packages[0]).UseCases.ShouldContain(_useCase);
+            () => Package.Packages[0].UseCases.ShouldContain(_useCase);
 
         private It Should_remove_the_use_case = () => Package.UseCases.ShouldNotContain(_useCase);
 

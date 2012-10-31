@@ -2,50 +2,26 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-	public class Requirement : IdentificableObject
-	{
-		#region Public Constants and Enumerators
+    public class Requirement : IdentificableObject
+    {
+        #region Public Constants and Enumerators
+        #endregion
+
+        #region Class Members
+
 		#endregion
 
-		#region Class Members
-
-	    #endregion
-
-		#region Constructors
-		internal Requirement()
-		{
+        #region Constructors
+        internal Requirement()
+        {
 		    Description = String.Empty;
-		}
+        }
 
-	    #endregion
+		#endregion
 
-		#region Public Properties
+        #region Public Properties
 
 	    public string Description { get; set; }
-
-	    public new String UniqueID
-		{
-			get
-			{
-				return base.UniqueID;
-			}
-			set
-			{
-				base.UniqueID = value;
-			}
-		}
-
-		public new String Name
-		{
-			get
-			{
-				return base.ID.ToString();
-			}
-			set
-			{
-				base.Name = value;
-			}
-		}
-		#endregion
-	}
+        #endregion
+    }
 }

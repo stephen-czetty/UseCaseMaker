@@ -1,141 +1,127 @@
 using System;
 using System.Collections;
-using System.Xml;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
-	public class RelatedDocuments : ICollection, IXMLNodeSerializable
-	{
-		#region Private Enumerators and Constants
-		#endregion
+    [XmlInclude(typeof(RelatedDocument))]
+    public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
+    {
+        private readonly IList<RelatedDocument> _items = new List<RelatedDocument>();
+        private readonly object _syncRoot = new object();
 
-		#region Public Enumerators and Constants
-		#endregion
+        internal RelatedDocuments()
+        {
+        }
 
-		#region Class Members
-		private ArrayList items = new ArrayList();
-		#endregion
+        /// <summary>
+        /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+        /// </summary>
+        /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception><filterpriority>2</filterpriority>
+        void ICollection.CopyTo(Array array, int index)
+        {
+            CopyTo((RelatedDocument[]) array, index);
+        }
 
-		#region Constructors
-		internal RelatedDocuments()
-		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
-		}
-		#endregion
+        /// <summary>
+        /// Returns the number of elements in the MenuItemCollection
+        /// </summary>
+        [XmlIgnore]
+        public int Count
+        {
+            get
+            {
+                return _items.Count;
+            }
+        }
 
-		#region Public Properties
-		/// <summary>
-		/// Returns the number of elements in the MenuItemCollection
-		/// </summary>
-		[XMLSerializeIgnore]
-		public int Count
-		{
-			get
-			{
-				return items.Count;
-			}
-		}
+        /// <summary>
+        /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+        /// </summary>
+        /// <returns>
+        /// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        object ICollection.SyncRoot
+        {
+            get { return _syncRoot; }
+        }
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
-		{
-			get
-			{
-				return items.IsSynchronized;
-			}
-		}
+        /// <summary>
+        /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+        /// </summary>
+        /// <returns>
+        /// true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
-		{
-			get
-			{
-				return items.SyncRoot;
-			}
-		}
+        [XmlIgnore]
+        public bool IsReadOnly
+        {
+            get { return _items.IsReadOnly; }
+        }
 
-		[XMLSerializeIgnore]
-		public object this[int index]
-		{
-			get
-			{
-				return items[index];
-			}
-		}
-		#endregion
+        [XmlIgnore]
+        public object this[int index]
+        {
+            get
+            {
+                return _items[index];
+            }
+            set { }
+        }
 
-		#region Public Methods
-		public int Add(object item)
-		{
-			int result = items.Add(item);
+        public void Add(object item)
+        {
+            var obj = item as RelatedDocument;
+            if (obj == null)
+                throw new ArgumentException();
+            Add(obj);
+        }
 
-			return result;
-		}
+        public void Add(RelatedDocument item)
+        {
+            _items.Add(item);
+        }
 
-		public void AddRange(RelatedDocuments items)
-		{
-			items.AddRange(items);
-		}
+        public void Clear()
+        {
+            _items.Clear();
+        }
 
-		public void Clear()
-		{
-			items.Clear();
-		}
+        public bool Contains(RelatedDocument item)
+        {
+            return _items.Contains(item);
+        }
 
-		public bool Contains(object item)
-		{
-			return items.Contains(item);
-		}
+        public bool Remove(RelatedDocument item)
+        {
+            return _items.Remove(item);
+        }
 
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
+        public void RemoveAt(int index)
+        {
+            _items.RemoveAt(index);
+        }
 
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
+        public void CopyTo(RelatedDocument[] array, int index)
+        {
+            _items.CopyTo(array, index);
+        }
 
-		public void Remove(object item)
-		{
-			items.Remove(item);
-		}
+        public IEnumerator<RelatedDocument>GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
 
-		public void RemoveAt(int index)
-		{
-			items.RemoveAt(index);
-		}
-
-		public void CopyTo(Array array, int index)
-		{
-			items.CopyTo(array, index);
-		}
-
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
-		#endregion
-
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
-	}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

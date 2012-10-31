@@ -18,7 +18,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
         private It Should_remove_glossary_item = () => Model.Glossary.ShouldNotContain(_glossaryItem1);
 
         private It Should_reset_glossary_item_2_id_to_one =
-            () => ((GlossaryItem)Model.Glossary[0]).ID.ShouldEqual(1);
+            () => Model.Glossary[0].ID.ShouldEqual(1);
         
 
         private static GlossaryItem _glossaryItem1;

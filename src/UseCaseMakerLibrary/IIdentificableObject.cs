@@ -42,5 +42,8 @@ namespace UseCaseMakerLibrary
 		{
 			get;
 		}
+
+        // TODO: This is not ideal, target for refactoring later.
+	    void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark);
 	}
 }

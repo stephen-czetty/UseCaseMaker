@@ -8,7 +8,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
         private Because Of = () =>
                                  {
                                      Package.AddRequrement();
-                                     _requirement = (Requirement) Package.Requirements[0];
+                                     _requirement = Package.Requirements[0];
                                      Package.Requirements.ShouldContain(_requirement);
                                      Package.RemoveRequirement(_requirement);
                                  };

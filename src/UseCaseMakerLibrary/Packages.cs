@@ -2,19 +2,16 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-	public class Packages : IdentificableObjectCollection
+	public class Packages : IdentificableObjectCollection<Package>
 	{
 		internal Packages(Package owner)
 		{
 			base.Owner = owner;
 		}
 
-		#region Public Properties
-		#endregion
-
-		public object FindElementByUniqueID(String uniqueID)
+		public IIdentificableObject FindElementByUniqueID(String uniqueID)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.UniqueID == uniqueID)
 			{
@@ -71,9 +68,9 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindElementByName(String name)
+		public IIdentificableObject FindElementByName(String name)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.Name == name)
 			{
@@ -130,9 +127,9 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public object FindElementByPath(String path)
+		public IIdentificableObject FindElementByPath(String path)
 		{
-			object element = null;
+			IIdentificableObject element = null;
 
 			if(this.Path == path)
 			{

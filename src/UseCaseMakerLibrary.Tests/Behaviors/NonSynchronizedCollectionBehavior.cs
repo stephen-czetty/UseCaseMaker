@@ -5,7 +5,7 @@ using Machine.Specifications;
 namespace UseCaseMakerLibrary.Tests.Behaviors
 {
     [Behaviors]
-    public class NonSynchronizedCollectionBehavior : CollectionTestBase
+    public class NonSynchronizedCollectionBehavior<T> : CollectionTestBase
     {
         private It Should_return_the_expected_count = () => Collection.Count.ShouldEqual(ExpectedCount);
 
@@ -13,7 +13,7 @@ namespace UseCaseMakerLibrary.Tests.Behaviors
 
         private It Should_copy_all_values_to_array = () =>
             {
-                var arr = new object[Collection.Count];
+                var arr = new T[Collection.Count];
                 Collection.CopyTo(arr, 0);
                 arr.Count(x => x != null).ShouldEqual(Collection.Count);
             };

@@ -7,8 +7,8 @@ namespace UseCaseMakerLibrary.Tests.HistoryItemsTests
     {
         private Because Of = () =>
             {
-                HistoryItems.Insert(0, new RelatedDocument());
-                HistoryItems.RemoveAt(1);
+                HistoryItems.Add(new HistoryItem());
+                HistoryItems.RemoveAt(0);
             };
 
         private It Should_not_contain_item = () => HistoryItems.ShouldNotContain(HistoryItem);

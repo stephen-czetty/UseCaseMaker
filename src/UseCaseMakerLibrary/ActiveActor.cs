@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 
 namespace UseCaseMakerLibrary
 {
@@ -20,22 +19,10 @@ namespace UseCaseMakerLibrary
 
 		#region Public Properties
 
-	    public string ActorUniqueID { get; set; }
+	    public String ActorUniqueID { get; set; }
 
-	    public bool IsPrimary { get; set; }
+	    public Boolean IsPrimary { get; set; }
 
-	    #endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
 		#endregion
 	}
 }

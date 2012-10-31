@@ -6,6 +6,6 @@ namespace UseCaseMakerLibrary.Tests.ActiveActorsTests
     [Subject(typeof(ActiveActors))]
     public class When_using_as_a_collection : ActiveActorsTestBase
     {
-        private Behaves_like<NonSynchronizedCollectionBehavior> a_collection;
+        private Behaves_like<NonSynchronizedCollectionBehavior<ActiveActor>> a_collection;
     }
 }

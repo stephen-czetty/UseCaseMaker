@@ -8,6 +8,6 @@ namespace UseCaseMakerLibrary.Tests.HistoryItemsTests
         private It Should_return_true_if_item_exists = () => HistoryItems.Contains(HistoryItem).ShouldBeTrue();
 
         private It Should_return_false_if_item_does_not_exist =
-            () => HistoryItems.Contains(new RelatedDocument()).ShouldBeFalse();
+            () => HistoryItems.Contains(new HistoryItem()).ShouldBeFalse();
     }
 }

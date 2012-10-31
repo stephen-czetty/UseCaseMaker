@@ -9,8 +9,10 @@ using System.Xml;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using UseCaseMaker.Ioc;
 using UseCaseMakerLibrary;
 using UseCaseMakerControls;
+using UseCaseMakerLibrary.Contracts;
 
 /**
  * @defgroup user_interface Interfaccia utente
@@ -3268,10 +3270,10 @@ namespace UseCaseMaker
 				}			
 			}
 
-			IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+			var coll = (this.currentElement as IIdentificableObject);
 			if(coll != null)
 			{
-				lblFullPath.Text = ((IdentificableObjectCollection)this.currentElement).Path;
+				lblFullPath.Text = ((IIdentificableObject)this.currentElement).Path;
 			}
 			else
 			{
@@ -3684,17 +3686,9 @@ namespace UseCaseMaker
 				this.lockUpdate = true;
 				Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 				this.Cursor = Cursors.WaitCursor;
-				XmlDocument doc = new XmlDocument();
 				try
 				{
-					doc.Load(openModelFileDialog.FileName);
-					model = new Model();
-					UseCaseMakerLibrary.XmlSerializer.XmlDeserialize(
-						doc,
-						"UCM-Document",
-						"",
-						this.GetType().Assembly.GetName().Version.ToString(2),
-						model);
+				    model = IocContainer.Instance.Resolve<ISavedDataService>().Load(openModelFileDialog.FileName);
 					BuildView(model);
 				}
 				catch(XmlException e)
@@ -3807,17 +3801,9 @@ namespace UseCaseMaker
 			this.lockUpdate = true;
 			Win32.SendMessage(tvModelBrowser.Handle,Win32.WM_SETREDRAW,0,(IntPtr)0);
 			this.Cursor = Cursors.WaitCursor;
-			XmlDocument doc = new XmlDocument();
 			try
 			{
-				doc.Load(modelFilePath);
-				model = new Model();
-				UseCaseMakerLibrary.XmlSerializer.XmlDeserialize(
-					doc,
-					"UCM-Document",
-					"",
-					Application.ProductVersion,
-					model);
+			    model = IocContainer.Instance.Resolve<ISavedDataService>().Load(modelFilePath);
 				BuildView(model);
 			}
 			catch(XmlException e)
@@ -3871,13 +3857,7 @@ namespace UseCaseMaker
 					this.appSettings.AddToRecentFileList(saveModelFileDialog.FileName);
 					this.UpdateRecentFileList();
 
-					XmlDocument doc = UseCaseMakerLibrary.XmlSerializer.XmlSerialize(
-						"UCM-Document",
-						"",
-						this.GetType().Assembly.GetName().Version.ToString(2),
-						model,
-						true);
-					doc.Save(saveModelFileDialog.FileName);
+				    IocContainer.Instance.Resolve<ISavedDataService>().Save(model, saveModelFileDialog.FileName);
 					this.appSettings.ModelFilePath = Path.GetDirectoryName(saveModelFileDialog.FileName);
 					this.modelFilePath = Path.GetDirectoryName(saveModelFileDialog.FileName);
 					this.modelFileName = Path.GetFileName(saveModelFileDialog.FileName);
@@ -3886,13 +3866,7 @@ namespace UseCaseMaker
 			}
 			else
 			{
-				XmlDocument doc = UseCaseMakerLibrary.XmlSerializer.XmlSerialize(
-					"UCM-Document",
-					"",
-					this.GetType().Assembly.GetName().Version.ToString(2),
-					model,
-					true);
-				doc.Save(Path.Combine(this.modelFilePath,this.modelFileName));
+			    IocContainer.Instance.Resolve<ISavedDataService>().Save(model, saveModelFileDialog.FileName);
 				this.SetModified(false);
 			}
 
@@ -4105,7 +4079,7 @@ namespace UseCaseMaker
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
-				IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+				var coll = (this.currentElement as IIdentificableObject);
 				if(coll == null)
 				{
 					owner = (Package)this.currentElement;
@@ -4126,7 +4100,7 @@ namespace UseCaseMaker
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
-				IdentificableObjectCollection coll = (this.currentElement as IdentificableObjectCollection);
+				var coll = (this.currentElement as IIdentificableObject);
 				if(coll == null)
 				{
 					owner = (Package)this.currentElement;

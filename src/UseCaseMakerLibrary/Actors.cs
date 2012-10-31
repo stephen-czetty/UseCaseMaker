@@ -1,18 +1,10 @@
-using System;
-
 namespace UseCaseMakerLibrary
 {
-	public class Actors : IdentificableObjectCollection
+	public class Actors : IdentificableObjectCollection<Actor>
 	{
 		internal Actors(Package owner)
 		{
-			base.Owner = owner;
+			Owner = owner;
 		}
-
-		#region Public Properties
-		#endregion
-
-		#region Public Methods
-		#endregion
 	}
 }

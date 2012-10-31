@@ -14,7 +14,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
         private It Should_contain_the_actor_in_its_collection = () => Package.UseCases.ShouldContain(_useCase);
 
         private It Should_set_the_actor_owner_to_the_package =
-            () => ((UseCase)Package.UseCases[0]).Owner.ShouldEqual(Package);
+            () => Package.UseCases[0].Owner.ShouldEqual(Package);
 
 
         private static UseCase _useCase;

@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -30,7 +31,7 @@ namespace UseCaseMakerLibrary
 	    #endregion
 
 		#region Public Properties
-		[XMLSerializeIgnore]
+        [XmlIgnore]
 		public String LocalizatedDateValue
 		{
 			get
@@ -39,7 +40,7 @@ namespace UseCaseMakerLibrary
 			}
 		}
 
-	    [XMLSerializeIgnore]
+        [XmlIgnore]
 	    public DateTime Date { get; set; }
 
 	    public String DateValue
@@ -61,17 +62,5 @@ namespace UseCaseMakerLibrary
 	    public string Notes { get; set; }
 
 	    #endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
-	}
+    }
 }

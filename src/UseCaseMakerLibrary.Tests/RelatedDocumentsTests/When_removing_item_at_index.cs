@@ -7,8 +7,8 @@ namespace UseCaseMakerLibrary.Tests.RelatedDocumentsTests
     {
         private Because Of = () =>
             {
-                RelatedDocuments.Insert(0, new RelatedDocument());
-                RelatedDocuments.RemoveAt(1);
+                RelatedDocuments.Add(new RelatedDocument());
+                RelatedDocuments.RemoveAt(0);
             };
 
         private It Should_not_contain_item = () => RelatedDocuments.ShouldNotContain(RelatedDocument);

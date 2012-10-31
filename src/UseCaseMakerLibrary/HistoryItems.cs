@@ -1,144 +1,127 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
 	/// <summary>
 	/// Descrizione di riepilogo per HistoryItems.
 	/// </summary>
-	public class HistoryItems : ICollection, IXMLNodeSerializable
+	[XmlInclude(typeof(HistoryItem))]
+	public class HistoryItems : ICollection<HistoryItem>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
 	{
-		#region Private Enumerators and Constants
-		#endregion
+		private readonly IList<HistoryItem> _items = new List<HistoryItem>();
+	    private readonly object _syncRoot = new object();
 
-		#region Public Enumerators and Constants
-		#endregion
-
-		#region Class Members
-		private ArrayList items = new ArrayList();
-		#endregion
-
-		#region Constructors
-		internal HistoryItems()
+	    internal HistoryItems()
 		{
-			//
-			// TODO: aggiungere qui la logica del costruttore
-			//
 		}
-		#endregion
 
-		#region Public Properties
-		/// <summary>
+	    /// <summary>
+	    /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+	    /// </summary>
+	    /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception><filterpriority>2</filterpriority>
+	    void ICollection.CopyTo(Array array, int index)
+	    {
+	        CopyTo((HistoryItem[]) array, index);
+	    }
+
+	    /// <summary>
 		/// Returns the number of elements in the MenuItemCollection
 		/// </summary>
-		[XMLSerializeIgnore]
+        [XmlIgnore]
 		public int Count
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
+	    /// <summary>
+	    /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+	    /// </summary>
+	    /// <returns>
+	    /// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+	    /// </returns>
+	    /// <filterpriority>2</filterpriority>
+	    object ICollection.SyncRoot
+	    {
+	        get { return _syncRoot; }
+	    }
+
+	    /// <summary>
+	    /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+	    /// </summary>
+	    /// <returns>
+	    /// true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+	    /// </returns>
+	    /// <filterpriority>2</filterpriority>
+	    bool ICollection.IsSynchronized
+	    {
+	        get { return false; }
+	    }
+
+        [XmlIgnore]
+	    public bool IsReadOnly
+	    {
+            get { return _items.IsReadOnly; }
+	    }
+
+		public void Add(HistoryItem item)
 		{
-			get
-			{
-				return items.IsSynchronized;
-			}
+		    _items.Add(item);
 		}
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
+	    public void Clear()
 		{
-			get
-			{
-				return items.SyncRoot;
-			}
+			_items.Clear();
 		}
 
-		[XMLSerializeIgnore]
-		public object this[int index]
+		public bool Contains(HistoryItem item)
 		{
-			get
-			{
-				return items[index];
-			}
-		}
-		#endregion
-
-		#region Public Methods
-		public int Add(object item)
-		{
-			int result = items.Add(item);
-
-			return result;
+			return _items.Contains(item);
 		}
 
-		public void AddRange(RelatedDocuments items)
+	    public bool Remove(HistoryItem item)
 		{
-			items.AddRange(items);
-		}
-
-		public void Clear()
-		{
-			items.Clear();
-		}
-
-		public bool Contains(object item)
-		{
-			return items.Contains(item);
-		}
-
-		public int IndexOf(object item)
-		{
-			return items.IndexOf(item);
-		}
-
-		public void Insert(int index, object item)
-		{
-			items.Insert(index, item);
-		}
-
-		public void Remove(object item)
-		{
-			items.Remove(item);
+			return _items.Remove(item);
 		}
 
 		public void RemoveAt(int index)
 		{
-			items.RemoveAt(index);
+			_items.RemoveAt(index);
 		}
 
-		public void CopyTo(Array array, int index)
+		public void CopyTo(HistoryItem[] array, int index)
 		{
-			items.CopyTo(array, index);
+			_items.CopyTo(array, index);
 		}
 
-		public IEnumerator GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return items.GetEnumerator();
-		}
-		#endregion
-
-		#region Protected Methods
-		#endregion
-
-		#region Private Methods
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
+			return GetEnumerator();
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
+        public IEnumerator<HistoryItem> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+	    public void Add(object item)
+	    {
+	        var obj = item as HistoryItem;
+            if (obj == null)
+                throw new ArgumentException();
+	        Add(obj);
+	    }
+
+	    public object this[int idx]
+	    {
+            get { return _items[idx]; }
+	        set {  }
+	    }
 	}
 }

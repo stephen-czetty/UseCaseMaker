@@ -1,5 +1,5 @@
 using System;
-using System.Xml;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
@@ -25,20 +25,12 @@ namespace UseCaseMakerLibrary
 
 	    public string Notes { get; set; }
 
+        [XmlArray]
+        [XmlArrayItem("RelatedDocument")]
 	    public RelatedDocuments RelatedDocuments { get; private set; }
 
 	    #endregion
 
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,true);
 		}
 
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
-		}
-		#endregion
-	}
 }

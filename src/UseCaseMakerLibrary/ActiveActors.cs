@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
-using System.Xml;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
-	public class ActiveActors : ICollection, IXMLNodeSerializable
+	public class ActiveActors : ICollection<ActiveActor>, IXMLNodeSerializable, ICollection
 	{
 		#region Class Members
-		private ArrayList items = new ArrayList();
-		#endregion
+		private readonly IList<ActiveActor> _items = new List<ActiveActor>();
+	    private readonly object _syncRoot = new object();
+
+	    #endregion
 
 		#region Constructors
 		internal ActiveActors()
@@ -17,95 +20,120 @@ namespace UseCaseMakerLibrary
 		#endregion
 
 		#region Public Properties
-		[XMLSerializeIgnore]
+
+	    /// <summary>
+	    /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+	    /// </summary>
+	    /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception><filterpriority>2</filterpriority>
+	    void ICollection.CopyTo(Array array, int index)
+	    {
+	        CopyTo((ActiveActor[]) array, index);
+	    }
+
+        [XmlIgnore]
 		public int Count
 		{
 			get
 			{
-				return items.Count;
+				return _items.Count;
 			}
 		}
 
-		[XMLSerializeIgnore]
-		public bool IsSynchronized
-		{
-			get
-			{
-				return items.IsSynchronized;
-			}
-		}
+	    /// <summary>
+	    /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+	    /// </summary>
+	    /// <returns>
+	    /// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+	    /// </returns>
+	    /// <filterpriority>2</filterpriority>
+	    object ICollection.SyncRoot
+	    {
+            get { return _syncRoot; }
+	    }
 
-		[XMLSerializeIgnore]
-		public object SyncRoot
-		{
-			get
-			{
-				return items.SyncRoot;
-			}
-		}
+	    /// <summary>
+	    /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+	    /// </summary>
+	    /// <returns>
+	    /// true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+	    /// </returns>
+	    /// <filterpriority>2</filterpriority>
+	    bool ICollection.IsSynchronized
+	    {
+	        get { return false; }
+	    }
 
-		[XMLSerializeIgnore]
-		public object this[int index]
+        [XmlIgnore]
+	    public bool IsReadOnly
+	    {
+	        get { return _items.IsReadOnly; }
+	    }
+
+        [XmlIgnore]
+		public ActiveActor this[int index]
 		{
 			get
 			{
-				return items[index];
+				return _items[index];
 			}
 		}
 		#endregion
 
 		#region Public Methods
-		public int Add(object item)
+		public void Add(ActiveActor item)
 		{
-			int result = items.Add(item);
-
-			return result;
+			_items.Add(item);
 		}
 
 		public void Clear()
 		{
-			items.Clear();
+			_items.Clear();
 		}
 
-		public bool Contains(object item)
+		public bool Contains(ActiveActor item)
 		{
-			return items.Contains(item);
+			return _items.Contains(item);
 		}
 
-		public int IndexOf(object item)
+	    public void CopyTo(ActiveActor[] array, int arrayIndex)
+	    {
+	        _items.CopyTo(array, arrayIndex);
+	    }
+
+	    public int IndexOf(ActiveActor item)
 		{
-			return items.IndexOf(item);
+			return _items.IndexOf(item);
 		}
 
-		public void Insert(int index, object item)
+		public void Insert(int index, ActiveActor item)
 		{
-			items.Insert(index, item);
+			_items.Insert(index, item);
 		}
 
-		public void Remove(object item)
+		public bool Remove(ActiveActor item)
 		{
-			items.Remove(item);
+			return _items.Remove(item);
 		}
 
 		public void RemoveAt(int index)
 		{
-			items.RemoveAt(index);
+			_items.RemoveAt(index);
 		}
 
-		public void CopyTo(Array array, int index)
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			items.CopyTo(array, index);
+		    return GetEnumerator();
 		}
 
-		public IEnumerator GetEnumerator()
-		{
-			return items.GetEnumerator();
-		}
+        public IEnumerator<ActiveActor> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
 
-		public object FindByUniqueID(String uniqueID)
+		public ActiveActor FindByUniqueID(String uniqueID)
 		{
 			ActiveActor aactor = null;
-			foreach(ActiveActor tmpAActor in this.items)
+			foreach(ActiveActor tmpAActor in this._items)
 			{
 				if(tmpAActor.ActorUniqueID == uniqueID)
 				{
@@ -114,18 +142,6 @@ namespace UseCaseMakerLibrary
 			}
 
 			return aactor;
-		}
-		#endregion
-
-		#region IXMLNodeSerializable Implementation
-		public XmlNode XmlSerialize(XmlDocument document, object instance, string propertyName, bool deep)
-		{
-			return XmlSerializer.XmlSerialize(document,this,propertyName,deep);
-		}
-
-		public void XmlDeserialize(XmlNode fromNode, object instance)
-		{
-			XmlSerializer.XmlDeserialize(fromNode,instance);
 		}
 		#endregion
 	}

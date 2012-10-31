@@ -14,7 +14,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
         private It Should_contain_the_package_in_its_collection = () => Package.Packages.ShouldContain(_package);
 
         private It Should_set_the_package_owner_to_the_package =
-            () => ((Package) Package.Packages[0]).Owner.ShouldEqual(Package);
+            () => Package.Packages[0].Owner.ShouldEqual(Package);
 
 
         private static Package _package;
