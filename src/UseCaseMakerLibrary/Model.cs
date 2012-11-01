@@ -6,37 +6,32 @@ namespace UseCaseMakerLibrary
 	public class Model : Package
 	{
 		#region Class Members
-		private readonly GlossaryItems glossary = null;
-		#endregion
+
+	    #endregion
 
 		#region Constructors
 		public Model() : base()
 		{
-			this.glossary = new GlossaryItems(this);
+			this.Glossary = new GlossaryItems(this);
 		}
 
 		public Model(String name, String prefix, Int32 id) : base(name,prefix,id)
 		{
-			this.glossary = new GlossaryItems(this);
+			this.Glossary = new GlossaryItems(this);
 		}
 
 		public Model(String name, String prefix, Int32 id, Package owner) : base(name,prefix,id,owner)
 		{
-			this.glossary = new GlossaryItems(this);
+			this.Glossary = new GlossaryItems(this);
 		}
 		#endregion
 
 		#region Public Properties
         [XmlArray]
         [XmlArrayItem("GlossaryItem")]
-		public GlossaryItems Glossary
-		{
-			get
-			{
-				return this.glossary;
-			}
-		}
-		#endregion
+	    public GlossaryItems Glossary { get; private set; }
+
+	    #endregion
 
 		#region Public Methods
 		#region Glossary Handling
@@ -49,7 +44,7 @@ namespace UseCaseMakerLibrary
 		public void AddGlossaryItem(GlossaryItem gi)
 		{
 			gi.Owner = this;
-			this.glossary.Add(gi);
+			this.Glossary.Add(gi);
 		}
 
 		public void RemoveGlossaryItem(
@@ -72,19 +67,19 @@ namespace UseCaseMakerLibrary
 					false);
 			}
 
-			foreach(GlossaryItem tmpGi in this.glossary)
+			foreach(GlossaryItem tmpGi in this.Glossary)
 			{
 				if(tmpGi.ID > gi.ID)
 				{
 					tmpGi.ID -= 1;
 				}
 			}
-			this.glossary.Remove(gi);
+			this.Glossary.Remove(gi);
 		}
 
 		public GlossaryItem GetGlossaryItem(String uniqueID)
 		{
-			return glossary.FindByUniqueID(uniqueID);
+			return Glossary.FindByUniqueID(uniqueID);
 		}
 		#endregion // Packages Handling
 
@@ -97,7 +92,7 @@ namespace UseCaseMakerLibrary
 				return this;
 			}
 
-			element = this.glossary.FindByUniqueID(uniqueID);
+			element = this.Glossary.FindByUniqueID(uniqueID);
 			if(element != null)
 			{
 				return element;
@@ -140,7 +135,7 @@ namespace UseCaseMakerLibrary
 				return this;
 			}
 
-			element = this.glossary.FindByName(name);
+			element = this.Glossary.FindByName(name);
 			if(element != null)
 			{
 				return element;
@@ -178,7 +173,7 @@ namespace UseCaseMakerLibrary
 				return this;
 			}
 
-			element = this.glossary.FindByPath(path);
+			element = this.Glossary.FindByPath(path);
 			if(element != null)
 			{
 				return element;

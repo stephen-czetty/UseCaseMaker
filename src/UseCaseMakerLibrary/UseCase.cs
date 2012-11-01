@@ -43,112 +43,112 @@ namespace UseCaseMakerLibrary
 
         #region Class Members
 
-        #endregion
+		#endregion
 
         #region Constructors
         internal UseCase()
             : base()
         {
-            Status = StatusValue.Named;
-            Level = LevelValue.Summary;
-            Implementation = ImplementationValue.Scheduled;
-            Complexity = ComplexityValue.Low;
-            Priority = 1;
-            AssignedTo = String.Empty;
-            Release = String.Empty;
-            Postconditions = String.Empty;
-            Preconditions = String.Empty;
-            Prose = String.Empty;
-            HistoryItems = new HistoryItems();
-            ActiveActors = new ActiveActors();
-            OpenIssues = new OpenIssues();
-            Steps = new Steps();
-            Attributes = new CommonAttributes();
+		    Status = StatusValue.Named;
+		    Level = LevelValue.Summary;
+		    Implementation = ImplementationValue.Scheduled;
+		    Complexity = ComplexityValue.Low;
+		    Priority = 1;
+		    AssignedTo = String.Empty;
+		    Release = String.Empty;
+		    Postconditions = String.Empty;
+		    Preconditions = String.Empty;
+		    Prose = String.Empty;
+		    ActiveActors = new ActiveActors();
+		    HistoryItems = new HistoryItems();
+		    OpenIssues = new OpenIssues();
+		    Steps = new Steps();
+		    Attributes = new CommonAttributes();
         }
 
-        internal UseCase(String name, String prefix, Int32 id)
+		internal UseCase(String name, String prefix, Int32 id)
             : base(name,prefix,id)
-        {
-            Status = StatusValue.Named;
-            Level = LevelValue.Summary;
-            Implementation = ImplementationValue.Scheduled;
-            Complexity = ComplexityValue.Low;
-            Priority = 1;
-            AssignedTo = String.Empty;
-            Release = String.Empty;
-            Postconditions = String.Empty;
-            Preconditions = String.Empty;
-            Prose = String.Empty;
-            HistoryItems = new HistoryItems();
-            ActiveActors = new ActiveActors();
-            OpenIssues = new OpenIssues();
-            Steps = new Steps();
-            Attributes = new CommonAttributes();
-        }
+		{
+	        Status = StatusValue.Named;
+	        Level = LevelValue.Summary;
+	        Implementation = ImplementationValue.Scheduled;
+	        Complexity = ComplexityValue.Low;
+	        Priority = 1;
+	        AssignedTo = String.Empty;
+	        Release = String.Empty;
+	        Postconditions = String.Empty;
+	        Preconditions = String.Empty;
+	        Prose = String.Empty;
+	        ActiveActors = new ActiveActors();
+	        HistoryItems = new HistoryItems();
+	        OpenIssues = new OpenIssues();
+	        Steps = new Steps();
+	        Attributes = new CommonAttributes();
+		}
 
-        internal UseCase(String name, String prefix, Int32 id, Package owner)
+		internal UseCase(String name, String prefix, Int32 id, Package owner)
             : base(name,prefix,id,owner)
-        {
-            Status = StatusValue.Named;
-            Level = LevelValue.Summary;
-            Implementation = ImplementationValue.Scheduled;
-            Complexity = ComplexityValue.Low;
-            Priority = 1;
-            AssignedTo = String.Empty;
-            Release = String.Empty;
-            Postconditions = String.Empty;
-            Preconditions = String.Empty;
-            Prose = String.Empty;
-            HistoryItems = new HistoryItems();
-            ActiveActors = new ActiveActors();
-            OpenIssues = new OpenIssues();
-            Steps = new Steps();
-            Attributes = new CommonAttributes();
-        }
+		{
+	        Status = StatusValue.Named;
+	        Level = LevelValue.Summary;
+	        Implementation = ImplementationValue.Scheduled;
+	        Complexity = ComplexityValue.Low;
+	        Priority = 1;
+	        AssignedTo = String.Empty;
+	        Release = String.Empty;
+	        Postconditions = String.Empty;
+	        Preconditions = String.Empty;
+	        Prose = String.Empty;
+	        ActiveActors = new ActiveActors();
+	        HistoryItems = new HistoryItems();
+	        OpenIssues = new OpenIssues();
+	        Steps = new Steps();
+	        Attributes = new CommonAttributes();
+		}
 
-        #endregion
+		#endregion
     
         #region Public Properties
 
-        public CommonAttributes Attributes { get;  set; }
+	    public CommonAttributes Attributes { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("Step")]
-        public Steps Steps { get;  set; }
+	    public Steps Steps { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("OpenIssue")]
-        public OpenIssues OpenIssues { get;  set; }
+	    public OpenIssues OpenIssues { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("ActiveActor")]
-        public ActiveActors ActiveActors { get;  set; }
+	    public ActiveActors ActiveActors { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("HistoryItem")]
-        public HistoryItems HistoryItems { get;  set; }
+	    public HistoryItems HistoryItems { get; private set; }
 
-        public string Prose { get; set; }
+	    public string Prose { get; set; }
 
-        public string Preconditions { get; set; }
+	    public string Preconditions { get; set; }
 
-        public string Postconditions { get; set; }
+	    public string Postconditions { get; set; }
 
-        public string Release { get; set; }
+	    public string Release { get; set; }
 
-        public string AssignedTo { get; set; }
+	    public string AssignedTo { get; set; }
 
-        public int Priority { get; set; }
+	    public int Priority { get; set; }
 
-        public ComplexityValue Complexity { get; set; }
+	    public ComplexityValue Complexity { get; set; }
 
-        public ImplementationValue Implementation { get; set; }
+	    public ImplementationValue Implementation { get; set; }
 
-        public LevelValue Level { get; set; }
+	    public LevelValue Level { get; set; }
 
-        public StatusValue Status { get; set; }
+	    public StatusValue Status { get; set; }
 
-        #endregion
+	    #endregion
 
         #region Public Methods
         #region Step Handling
@@ -380,7 +380,7 @@ namespace UseCaseMakerLibrary
             if(previousStep.Type == Step.StepType.Default)
             {
                 step.ID = previousStep.ID;
-                foreach(Step tmpStep in this.Steps)
+				foreach(Step tmpStep in this.Steps)
                 {
                     if(tmpStep.ID >= step.ID)
                     {

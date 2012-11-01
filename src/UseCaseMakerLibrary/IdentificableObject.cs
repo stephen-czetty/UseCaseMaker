@@ -17,10 +17,10 @@ namespace UseCaseMakerLibrary
             MakeUniqueId();
         }
 
-        internal IdentificableObject(String name, String prefix, Int32 id)
+		internal IdentificableObject(String name, String prefix, Int32 id)
         {
-            ObjectUserViewStatus = new UserViewStatus();
-            UniqueID = String.Empty;
+	        ObjectUserViewStatus = new UserViewStatus();
+	        UniqueID = String.Empty;
             Owner = null;
             MakeUniqueId();
             Name = name;
@@ -43,16 +43,16 @@ namespace UseCaseMakerLibrary
         #region Public Properties
 
         [XmlAttribute]
-        public string UniqueID { get; set; }
+	    public string UniqueID { get; set; }
 
         [XmlIgnore]
-        public Package Owner { get; set; }
+	    public Package Owner { get; set; }
 
         [XmlAttribute]
-        public string Name { get; set; }
+	    public virtual string Name { get; set; }
 
         [XmlAttribute]
-        public int ID { get; set; }
+	    public int ID { get; set; }
 
         [XmlAttribute]
         public string Prefix { get; set; }
@@ -78,18 +78,17 @@ namespace UseCaseMakerLibrary
         {
             get
             {
-                return Prefix + ID;
+				return Prefix + ID.ToString();
             }
         }
 
         public virtual void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
         {
         }
-
         [XmlIgnore]
         public UserViewStatus ObjectUserViewStatus { get; private set; }
 
-        #endregion
+		#endregion
     
         #region Private Methods
         private void MakeUniqueId()

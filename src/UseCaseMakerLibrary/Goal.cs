@@ -3,33 +3,26 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-    public class Goal : IdentificableObject
-    {
-        #region Public Constants and Enumerators
-        #endregion
+	public class Goal : IdentificableObject
+	{
+		#region Public Constants and Enumerators
+		#endregion
 
-        #region Class Members
-        private String description = String.Empty;
-        #endregion
+		#region Class Members
 
-        #region Constructors
-        internal Goal()
-        {
-        }
-        #endregion
+	    #endregion
 
-        #region Public Properties
-        public String Description
-        {
-            get
-            {
-                return this.description;
-            }
-            set
-            {
-                this.description = value;
-            }
-        }
+		#region Constructors
+		internal Goal()
+		{
+		    Description = String.Empty;
+		}
+
+	    #endregion
+
+		#region Public Properties
+
+	    public string Description { get; set; }
         #endregion
     }
 }

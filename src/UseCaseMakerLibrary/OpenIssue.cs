@@ -2,33 +2,27 @@ using System;
 
 namespace UseCaseMakerLibrary
 {
-    public class OpenIssue : IdentificableObject
-    {
-        #region Public Constants and Enumerators
-        #endregion
+	public class OpenIssue : IdentificableObject
+	{
+		#region Public Constants and Enumerators
+		#endregion
 
-        #region Class Members
-        private String description = String.Empty;
-        #endregion
+		#region Class Members
 
-        #region Constructors
-        internal OpenIssue()
-        {
-        }
-        #endregion
+	    #endregion
 
-        #region Public Properties
-        public String Description
-        {
-            get
-            {
-                return this.description;
-            }
-            set
-            {
-                this.description = value;
-            }
-        }
-        #endregion
-    }
+		#region Constructors
+		internal OpenIssue()
+		{
+		    Description = String.Empty;
+		}
+
+	    #endregion
+
+		#region Public Properties
+
+	    public string Description { get; set; }
+
+		#endregion
+	}
 }

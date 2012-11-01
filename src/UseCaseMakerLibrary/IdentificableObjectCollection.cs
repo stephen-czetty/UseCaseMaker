@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -27,7 +28,15 @@ namespace UseCaseMakerLibrary
 	    /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception><filterpriority>2</filterpriority>
 	    void ICollection.CopyTo(Array array, int index)
 	    {
-	        CopyTo((T[]) array, index);
+            Contract.Requires<ArgumentNullException>(array != null);
+            Contract.Requires<ArgumentOutOfRangeException>(index >= 0);
+            if (array.Rank > 1 || array.Length < _items.Count + index)
+                throw new ArgumentException("array");
+
+            foreach (T item in _items)
+            {
+                array.SetValue(item, index++);
+            }
 	    }
 
 	    /// <summary>
@@ -138,7 +147,7 @@ namespace UseCaseMakerLibrary
 	        return GetEnumerator();
 	    }
 
-        public ICollection<T> Sorted(string propertyName)
+        public IList<T> Sorted(string propertyName)
         {
             var ps = new PropertySorter<T>(propertyName, "ASC");
             return _items.OrderBy(x => x, ps).ToList();

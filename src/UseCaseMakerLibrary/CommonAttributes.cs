@@ -3,51 +3,34 @@ using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
 {
-    public class CommonAttributes : IXMLNodeSerializable
-    {
-        #region Class Members
-        private String description = String.Empty;
-        private String notes = String.Empty;
-        private RelatedDocuments relatedDocuments = new RelatedDocuments();
-        #endregion
+	public class CommonAttributes : IXMLNodeSerializable
+	{
+		#region Class Members
 
-        #region Constructors
-        #endregion
+	    public CommonAttributes()
+	    {
+	        RelatedDocuments = new RelatedDocuments();
+	        Notes = String.Empty;
+	        Description = String.Empty;
+	    }
 
-        #region Public Properties
-        public String Description
-        {
-            get
-            {
-                return this.description;
-            }
-            set
-            {
-                this.description = value;
-            }
-        }
+	    #endregion
 
-        public String Notes
-        {
-            get
-            {
-                return this.notes;
-            }
-            set
-            {
-                this.notes = value;
-            }
-        }
+		#region Constructors
+		#endregion
+
+		#region Public Properties
+
+	    public string Description { get; set; }
+
+	    public string Notes { get; set; }
 
         [XmlArray]
         [XmlArrayItem("RelatedDocument")]
-        public RelatedDocuments RelatedDocuments
-        {
-            get
-            {
-                return this.relatedDocuments;
-            }
-        }
-        #endregion
-    }
+	    public RelatedDocuments RelatedDocuments { get; private set; }
+
+	    #endregion
+
+		}
+
 }

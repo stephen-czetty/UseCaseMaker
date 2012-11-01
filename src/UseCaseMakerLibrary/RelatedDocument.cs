@@ -8,27 +8,22 @@ namespace UseCaseMakerLibrary
 	public class RelatedDocument : IXMLNodeSerializable
 	{
 		#region Class Members
-		String fileName = String.Empty;
-		#endregion
+
+	    public RelatedDocument()
+	    {
+	        FileName = String.Empty;
+	    }
+
+	    #endregion
 
 		#region Constructors
-		public RelatedDocument()
-		{
-		}
-		#endregion
+
+	    #endregion
 
 		#region Public Properties
-		public String FileName
-		{
-			get
-			{
-				return this.fileName;
-			}
-			set
-			{
-				this.fileName = value;
-			}
-		}
-		#endregion
+
+	    public string FileName { get; set; }
+
+	    #endregion
 	}
 }

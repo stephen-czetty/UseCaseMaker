@@ -8,37 +8,37 @@ namespace UseCaseMakerLibrary
     {
         #region Class Members
 
-        #endregion
+		#endregion
 
         #region Constructors
         internal Package()
             : base()
         {
-            Attributes = new CommonAttributes();
-            Requirements = new Requirements();
-            this.Actors = new Actors(this);
-            this.Packages = new Packages(this);
-            this.UseCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
         }
 
         internal Package(String name, String prefix, Int32 id)
             : base(name,prefix,id)
         {
-            Attributes = new CommonAttributes();
-            Requirements = new Requirements();
-            this.Actors = new Actors(this);
-            this.Packages = new Packages(this);
-            this.UseCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
         }
 
         internal Package(String name, String prefix, Int32 id, Package owner)
             : base(name,prefix,id,owner)
         {
-            Attributes = new CommonAttributes();
-            Requirements = new Requirements();
-            this.Actors = new Actors(this);
-            this.Packages = new Packages(this);
-            this.UseCases = new UseCases(this);
+		    Attributes = new CommonAttributes();
+		    Requirements = new Requirements();
+		    this.Actors = new Actors(this);
+			this.Packages = new Packages(this);
+			this.UseCases = new UseCases(this);
         }
         #endregion
 
@@ -201,7 +201,7 @@ namespace UseCaseMakerLibrary
                     tmpRequirement.ID -= 1;
                 }
             }
-            this.Requirements.Remove(requirement);
+			this.Requirements.Remove(requirement);
         }
 
         public Requirement FindRequirementByUniqueID(String uniqueID)
@@ -263,7 +263,7 @@ namespace UseCaseMakerLibrary
 
         [XmlArray]
         [XmlArrayItem("Actor")]
-        public Actors Actors { get;  set; }
+	    public Actors Actors { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("Package")]
@@ -279,7 +279,7 @@ namespace UseCaseMakerLibrary
 
         public CommonAttributes Attributes { get;  set; }
 
-        #endregion
+		#endregion
 
         #region Private Methods
         void ValidateActor(Actor actor)
