@@ -49,7 +49,7 @@ namespace UseCaseMakerLibrary
 	    public Package Owner { get; set; }
 
         [XmlAttribute]
-	    public string Name { get; set; }
+	    public virtual string Name { get; set; }
 
         [XmlAttribute]
 	    public int ID { get; set; }

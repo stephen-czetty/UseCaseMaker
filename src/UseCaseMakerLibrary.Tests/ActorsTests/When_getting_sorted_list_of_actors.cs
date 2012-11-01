@@ -13,9 +13,9 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
             };
 
         private It Should_have_actor_b_in_first_position_in_unsorted_state =
-            () => ((Actor)Actors[0]).Name.ShouldEqual("B");
+            () => Actors[0].Name.ShouldEqual("B");
 
         private It Should_have_actor_a_in_first_position_in_sorted_state =
-            () => ((Actor)((Actors)Actors.Sorted("Name"))[0]).Name.ShouldEqual("A");
+            () => Actors.Sorted("Name")[0].Name.ShouldEqual("A");
     }
 }

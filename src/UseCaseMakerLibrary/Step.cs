@@ -1,5 +1,3 @@
-using System;
-
 namespace UseCaseMakerLibrary
 {
     public class Step : IdentificableObject
@@ -13,30 +11,41 @@ namespace UseCaseMakerLibrary
         }
         #endregion
 
-        #region Class Members
-
-		#endregion
-
         #region Constructors
         internal Step()
         {
-		    Dependency = new DependencyItem();
-		    Type = StepType.Default;
-		    ChildID = -1;
-		    Description = String.Empty;
+            Dependency = new DependencyItem();
+            Type = StepType.Default;
+            ChildID = -1;
+            Description = "";
         }
 
-		#endregion
+        #endregion
 
         #region Public Properties
 
-	    public string Description { get; set; }
+        public string Description { get; set; }
 
-	    public int ChildID { get; set; }
+        public int ChildID { get; set; }
 
-	    public StepType Type { get; set; }
+        public StepType Type { get; set; }
 
-	    public DependencyItem Dependency { get; private set; }
+        public DependencyItem Dependency { get; private set; }
+
+        public override string Name
+        {
+            get
+            {
+                return this.ID +
+                    ((Prefix != "") ? "." + Prefix : "") +
+                    ((ChildID != -1) ? "." + ChildID : "");
+            }
+
+            set
+            {
+                base.Name = value;
+            }
+        }
         #endregion
     }
 }

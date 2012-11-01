@@ -147,7 +147,7 @@ namespace UseCaseMakerLibrary
 	        return GetEnumerator();
 	    }
 
-        public ICollection<T> Sorted(string propertyName)
+        public IList<T> Sorted(string propertyName)
         {
             var ps = new PropertySorter<T>(propertyName, "ASC");
             return _items.OrderBy(x => x, ps).ToList();
