@@ -31,18 +31,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Machine.Fakes">
+      <HintPath>..\packages\Machine.Fakes.1.0.0\lib\net40\Machine.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Fakes.Adapters.Moq">
+      <HintPath>..\packages\Machine.Fakes.Moq.1.0.0\lib\net40\Machine.Fakes.Adapters.Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Specifications, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4">
+    <Reference Include="Machine.Specifications.Clr4, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.TDNetRunner">
+    <Reference Include="Machine.Specifications.TDNetRunner, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.TDNetRunner.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -159,6 +164,8 @@
     <Compile Include="RelatedDocumentsTests\When_removing_item.cs" />
     <Compile Include="RelatedDocumentsTests\When_removing_item_at_index.cs" />
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
+    <Compile Include="Services\SerializedSaveDataService\When_loading_from_saved_data_service.cs" />
+    <Compile Include="Services\SerializedSaveDataService\When_saving_to_saved_data_service.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
     <Compile Include="StepTests\When_getting_name_from_step.cs" />
     <Compile Include="UseCaseTests\UseCaseTestBase.cs" />
@@ -198,15 +205,14 @@
     <Compile Include="XmlSerializeTests\XmlSerializeTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\UseCaseMakerLibrary\UseCaseMakerLibrary.csproj">
       <Project>{2706309F-76DA-4C66-8E78-8165D570B166}</Project>
       <Name>UseCaseMakerLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
