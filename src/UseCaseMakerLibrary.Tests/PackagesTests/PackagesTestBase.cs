@@ -11,9 +11,7 @@ namespace UseCaseMakerLibrary.Tests.PackagesTests
             {
                 Package = new Package { Name = A.Random.String, ID = 1 };
                 PackageContainer = new Packages(Package) { Name = A.Random.String, ID = 2 };
-                InnerPackage = new Package { Name = A.Random.String, ID = 3 };
-                InnerPackage.Actors.Name = A.Random.String;
-                InnerPackage.Actors.ID = 4;
+                InnerPackage = new Package { Name = A.Random.String, ID = 3, Actors = { Name = A.Random.String, ID = 4 } };
                 Actor = new Actor { Name = A.Random.String, ID = 5 };
                 InnerPackage.Actors.Add(Actor);
                 InnerPackage.UseCases.Name = A.Random.String;

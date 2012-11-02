@@ -5,10 +5,6 @@ namespace UseCaseMakerLibrary
 {
 	public class Model : Package
 	{
-		#region Class Members
-
-	    #endregion
-
 		#region Constructors
 		public Model() : base()
 		{
@@ -20,11 +16,7 @@ namespace UseCaseMakerLibrary
 			this.Glossary = new GlossaryItems(this);
 		}
 
-		public Model(String name, String prefix, Int32 id, Package owner) : base(name,prefix,id,owner)
-		{
-			this.Glossary = new GlossaryItems(this);
-		}
-		#endregion
+	    #endregion
 
 		#region Public Properties
         [XmlArray]
@@ -201,9 +193,6 @@ namespace UseCaseMakerLibrary
 
 			return this.Packages.FindElementByPath(path);
 		}
-		#endregion
-
-		#region Private Methods
 		#endregion
 	}
 }

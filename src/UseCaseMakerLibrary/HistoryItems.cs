@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
@@ -81,6 +80,7 @@ namespace UseCaseMakerLibrary
 
 		public void Add(HistoryItem item)
 		{
+		    Contract.Requires<ArgumentNullException>(item != null);
 		    _items.Add(item);
 		}
 

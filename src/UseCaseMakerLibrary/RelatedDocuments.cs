@@ -95,6 +95,7 @@ namespace UseCaseMakerLibrary
 
         public void Add(RelatedDocument item)
         {
+            Contract.Requires<ArgumentNullException>(item != null);
             _items.Add(item);
         }
 

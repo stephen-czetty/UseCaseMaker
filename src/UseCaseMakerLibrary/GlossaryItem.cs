@@ -19,12 +19,6 @@ namespace UseCaseMakerLibrary
 		    Description = String.Empty;
 		}
 
-	    internal GlossaryItem(String name, String prefix, Int32 id)
-			: base(name,prefix,id)
-	    {
-	        Description = String.Empty;
-	    }
-
 	    internal GlossaryItem(String name, String prefix, Int32 id, Package owner)
 			: base(name,prefix,id,owner)
 	    {
