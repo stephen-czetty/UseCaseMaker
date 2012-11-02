@@ -21,6 +21,8 @@ namespace UseCaseMakerLibrary.Tests.Services.SerializedSaveDataService
 
         private It Should_call_serializer_selector = () => The<IXmlSerializerSelector>().WasToldTo(x => x.GetSerializerForInputFile(GivenIt.IsAny<string>()));
 
+// ReSharper disable ReturnValueOfPureMethodIsNotUsed
         private It Should_call_deserialize = () => The<ISerializer<Model>>().WasToldTo(x => x.DeSerialize(GivenIt.IsAny<TextReader>()));
+// ReSharper restore ReturnValueOfPureMethodIsNotUsed
     }
 }

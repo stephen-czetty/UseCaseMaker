@@ -12,7 +12,7 @@ namespace UseCaseMakerLibrary.Services
         /// De-serialize the input text
         /// </summary>
         /// <param name="inputDataStream">The input data stream.</param>
-        /// <returns>A deserialized object of type {T}</returns>
+        /// <returns>A deserialized object of type <see cref="UseCaseMakerLibrary.Model"/>.</returns>
         public Model DeSerialize(TextReader inputDataStream)
         {
             var doc = new XmlDocument();

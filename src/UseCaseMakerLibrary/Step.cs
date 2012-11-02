@@ -1,3 +1,5 @@
+using System.Xml.Serialization;
+
 namespace UseCaseMakerLibrary
 {
     public class Step : IdentificableObject
@@ -30,8 +32,9 @@ namespace UseCaseMakerLibrary
 
         public StepType Type { get; set; }
 
-        public DependencyItem Dependency { get; private set; }
+        public DependencyItem Dependency { get; set; }
 
+        [XmlAttribute]
         public override string Name
         {
             get

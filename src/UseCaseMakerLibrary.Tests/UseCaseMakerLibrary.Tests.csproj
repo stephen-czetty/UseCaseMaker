@@ -164,6 +164,14 @@
     <Compile Include="RelatedDocumentsTests\When_removing_item.cs" />
     <Compile Include="RelatedDocumentsTests\When_removing_item_at_index.cs" />
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_invalid_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_version_1_0_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_version_1_1_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_serializing_model.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_invalid_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_0_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_1_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_serializing_model.cs" />
     <Compile Include="Services\SerializedSaveDataService\When_loading_from_saved_data_service.cs" />
     <Compile Include="Services\SerializedSaveDataService\When_saving_to_saved_data_service.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
@@ -213,6 +221,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
