@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UseCaseMakerLibrary.Contracts
 {
@@ -22,6 +23,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// Indicates that marked element should be localized or not.
     /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
+    [ExcludeFromCodeCoverage]
     public sealed class LocalizationRequiredAttribute : Attribute
     {
         /// <summary>
@@ -69,6 +71,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// The format string should be in <see cref="string.Format(IFormatProvider,string,object[])"/> -like form
     /// </summary>
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [ExcludeFromCodeCoverage]
     public sealed class StringFormatMethodAttribute : Attribute
     {
         /// <summary>
@@ -113,6 +116,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// </summary>
     /// <seealso cref="AssertionConditionType"/>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+    [ExcludeFromCodeCoverage]
     public sealed class AssertionConditionAttribute : Attribute
     {
         /// <summary>
@@ -213,6 +217,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// </example>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [BaseTypeRequired(typeof (Attribute))]
+    [ExcludeFromCodeCoverage]
     public sealed class BaseTypeRequiredAttribute : Attribute
     {
         /// <summary>
@@ -235,6 +240,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// so this symbol will not be marked as unused (as well as by other usage inspections)
     /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
+    [ExcludeFromCodeCoverage]
     public sealed class UsedImplicitlyAttribute : Attribute
     {
         [UsedImplicitly]
@@ -276,6 +282,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections)
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    [ExcludeFromCodeCoverage]
     public sealed class MeansImplicitUseAttribute : Attribute
     {
         [UsedImplicitly]
@@ -365,6 +372,7 @@ namespace UseCaseMakerLibrary.Contracts
     /// This attribute is intended to mark publicly available API which should not be removed and so is treated as used.
     /// </summary>
     [MeansImplicitUse]
+    [ExcludeFromCodeCoverage]
     public sealed class PublicAPIAttribute : Attribute
     {
         public PublicAPIAttribute()
@@ -400,6 +408,7 @@ namespace UseCaseMakerLibrary.Contracts
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
+    [ExcludeFromCodeCoverage]
     public class PathReferenceAttribute : Attribute
     {
         public PathReferenceAttribute()
@@ -419,6 +428,7 @@ namespace UseCaseMakerLibrary.Contracts
     // ASP.NET MVC attributes
 
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
+    [ExcludeFromCodeCoverage]
     public sealed class AspMvcActionAttribute : Attribute
     {
         [UsedImplicitly]
@@ -435,6 +445,7 @@ namespace UseCaseMakerLibrary.Contracts
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
+    [ExcludeFromCodeCoverage]
     public sealed class AspMvcAreaAttribute : PathReferenceAttribute
     {
         [UsedImplicitly]
@@ -452,6 +463,7 @@ namespace UseCaseMakerLibrary.Contracts
     }
 
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
+    [ExcludeFromCodeCoverage]
     public sealed class AspMvcControllerAttribute : Attribute
     {
         [UsedImplicitly]

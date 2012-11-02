@@ -8,10 +8,16 @@ namespace UseCaseMakerLibrary.Services
     {
         public Model DeSerialize(TextReader inputDataStream)
         {
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof (UcmDocument));
-            var obj = serializer.Deserialize(inputDataStream) as UcmDocument;
-            if (obj == null)
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(UcmDocument));
+            UcmDocument obj;
+            try
+            {
+                obj = serializer.Deserialize(inputDataStream) as UcmDocument;
+            }
+            catch
+            {
                 throw new XmlSerializerException("Could not decode XML file");
+            }
             return obj.Model;
         }
 
@@ -27,8 +33,16 @@ namespace UseCaseMakerLibrary.Services
             [XmlAttribute]
             public string Version
             {
-                get { return "1.1"; }
-                set { }
+                get
+                {
+                    return "1.1";
+                }
+
+                set
+                {
+                    if (value != "1.1")
+                        throw new XmlSerializerException("Invalid version for this type");
+                }
             }
 
             public Model Model { get; set; }

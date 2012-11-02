@@ -28,10 +28,7 @@ namespace UseCaseMakerLibrary
             {
                 return ic1.CompareTo(ic2);
             }
-            else
-            {
-                return ic2.CompareTo(ic1);
-            }
+	        return ic2.CompareTo(ic1);
 	    }
 
 	    #endregion

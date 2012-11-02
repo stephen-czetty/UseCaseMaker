@@ -5,8 +5,16 @@ using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMaker.Ioc
 {
+    /// <summary>
+    /// Selects a serializer based on the version of a file.
+    /// </summary>
     public class XmlSerializerSelector : IXmlSerializerSelector
     {
+        /// <summary>
+        /// Gets the serializer for input file.
+        /// </summary>
+        /// <param name="inputFile">The input filename.</param>
+        /// <returns>An appropriate serializer for the version of the file.</returns>
         public ISerializer<Model> GetSerializerForInputFile(string inputFile)
         {
             string version = "";

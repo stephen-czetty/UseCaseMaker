@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
@@ -181,21 +180,7 @@ namespace UseCaseMakerLibrary
 			return element;
 		}
 
-		public T FindByElementID(String elementID)
-		{
-			T element = null;
-			foreach(T tmpElement in this)
-			{
-				if(tmpElement.ElementID == elementID)
-				{
-					element = tmpElement;
-				}
-			}
-
-			return element;
-		}
-
-		public T FindByPath(String path)
+	    public T FindByPath(String path)
 		{
 			T element = null;
 			foreach(T tmpElement in _items)

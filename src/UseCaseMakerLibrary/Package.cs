@@ -6,9 +6,6 @@ namespace UseCaseMakerLibrary
 {
     public class Package : IdentificableObject
     {
-        #region Class Members
-
-		#endregion
 
         #region Constructors
         internal Package()
@@ -77,11 +74,6 @@ namespace UseCaseMakerLibrary
             Actors.Remove(actor);
         }
 
-        public Actor GetActor(String uniqueID)
-        {
-            return Actors.FindByUniqueID(uniqueID);
-        }
-
         public String [] GetActorNames()
         {
             StringCollection sc = new StringCollection();
@@ -127,10 +119,6 @@ namespace UseCaseMakerLibrary
             Packages.Remove(package);
         }
 
-        public Package GetPackage(String uniqueID)
-        {
-            return Packages.FindByUniqueID(uniqueID);
-        }
         #endregion // Packages Handling
 
         #region UseCases Handling
@@ -165,10 +153,6 @@ namespace UseCaseMakerLibrary
             UseCases.Remove(useCase);
         }
 
-        public UseCase GetUseCase(String uniqueID)
-        {
-            return UseCases.FindByUniqueID(uniqueID);
-        }
         #endregion // UseCase Handling
 
         #region Requirements Handling

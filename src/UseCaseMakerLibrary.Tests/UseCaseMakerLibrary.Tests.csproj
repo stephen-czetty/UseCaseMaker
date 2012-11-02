@@ -31,18 +31,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Machine.Fakes">
+      <HintPath>..\packages\Machine.Fakes.1.0.0\lib\net40\Machine.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Fakes.Adapters.Moq">
+      <HintPath>..\packages\Machine.Fakes.Moq.1.0.0\lib\net40\Machine.Fakes.Adapters.Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Specifications, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.Clr4">
+    <Reference Include="Machine.Specifications.Clr4, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.Clr4.dll</HintPath>
     </Reference>
-    <Reference Include="Machine.Specifications.TDNetRunner">
+    <Reference Include="Machine.Specifications.TDNetRunner, Version=0.5.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.0.5.9\lib\net40\Machine.Specifications.TDNetRunner.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -61,10 +66,14 @@
     <Compile Include="ActiveActorsTests\When_removing_item_at_index.cs" />
     <Compile Include="ActiveActorsTests\When_using_as_a_collection.cs" />
     <Compile Include="ActorsTests\ActorsTestBase.cs" />
+    <Compile Include="ActorsTests\When_copying_contents_into_actors_array.cs" />
     <Compile Include="ActorsTests\When_getting_actor_by_index.cs" />
     <Compile Include="ActorsTests\When_getting_count_of_items.cs" />
+    <Compile Include="ActorsTests\When_getting_element_id.cs" />
+    <Compile Include="ActorsTests\When_getting_next_element_id.cs" />
     <Compile Include="ActorsTests\When_getting_owner.cs" />
     <Compile Include="ActorsTests\When_getting_sorted_list_of_actors.cs" />
+    <Compile Include="ActorsTests\When_using_actors_as_a_generic_collection.cs" />
     <Compile Include="ActorsTests\When_using_as_a_collection.cs" />
     <Compile Include="ActorTests\ActorTestsBase.cs" />
     <Compile Include="ActorTests\When_adding_first_goal.cs" />
@@ -75,13 +84,21 @@
     <Compile Include="Behaviors\CollectionTestBase.cs" />
     <Compile Include="Behaviors\StepCreationBehavior.cs" />
     <Compile Include="Behaviors\StepCreationTestBase.cs" />
+    <Compile Include="GoalsTests\GoalsTests.cs" />
     <Compile Include="HistoryItemsTests\HistoryItemsTestBase.cs" />
+    <Compile Include="HistoryItemsTests\When_adding_history_item.cs" />
+    <Compile Include="HistoryItemsTests\When_adding_history_item_as_object.cs" />
+    <Compile Include="HistoryItemsTests\When_adding_non_history_item.cs" />
+    <Compile Include="HistoryItemsTests\When_adding_null_history_item.cs" />
     <Compile Include="HistoryItemsTests\When_calling_clear.cs" />
     <Compile Include="HistoryItemsTests\When_checking_if_collection_contains_item.cs" />
+    <Compile Include="HistoryItemsTests\When_copying_to_history_item_array.cs" />
     <Compile Include="HistoryItemsTests\When_getting_by_index.cs" />
     <Compile Include="HistoryItemsTests\When_removing_item.cs" />
     <Compile Include="HistoryItemsTests\When_removing_item_at_index.cs" />
+    <Compile Include="HistoryItemsTests\When_setting_history_item_by_index.cs" />
     <Compile Include="HistoryItemsTests\When_using_history_items_as_a_collection.cs" />
+    <Compile Include="HistoryItemsTests\When_using_history_items_as_generic_collection.cs" />
     <Compile Include="HistoryItemTests\HistoryItemTestBase.cs" />
     <Compile Include="HistoryItemTests\When_retrieving_date_value.cs" />
     <Compile Include="HistoryItemTests\When_retrieving_localized_date_value_and_only_the_date.cs" />
@@ -153,12 +170,29 @@
     <Compile Include="PackageTests\When_removing_a_use_case_that_is_referenced_by_another_use_case.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatedDocumentsTests\RelatedDocumentsTestBase.cs" />
+    <Compile Include="RelatedDocumentsTests\When_adding_non_related_document.cs" />
+    <Compile Include="RelatedDocumentsTests\When_adding_null_related_document.cs" />
+    <Compile Include="RelatedDocumentsTests\When_adding_related_document.cs" />
+    <Compile Include="RelatedDocumentsTests\When_adding_related_document_as_object.cs" />
     <Compile Include="RelatedDocumentsTests\When_calling_clear.cs" />
     <Compile Include="RelatedDocumentsTests\When_checking_if_collection_contains_item.cs" />
+    <Compile Include="RelatedDocumentsTests\When_copying_to_related_document_array.cs" />
     <Compile Include="RelatedDocumentsTests\When_getting_by_index.cs" />
     <Compile Include="RelatedDocumentsTests\When_removing_item.cs" />
     <Compile Include="RelatedDocumentsTests\When_removing_item_at_index.cs" />
+    <Compile Include="RelatedDocumentsTests\When_setting_related_document_by_index.cs" />
     <Compile Include="RelatedDocumentsTests\When_using_as_a_collection.cs" />
+    <Compile Include="RelatedDocumentsTests\When_using_related_documents_as_generic_collection.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_invalid_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_version_1_0_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_deserializing_version_1_1_document.cs" />
+    <Compile Include="Services\DotNetXmlSerializer\When_serializing_model.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_invalid_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_0_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_1_document.cs" />
+    <Compile Include="Services\LegacyXmlSerializer\When_serializing_model.cs" />
+    <Compile Include="Services\SerializedSaveDataService\When_loading_from_saved_data_service.cs" />
+    <Compile Include="Services\SerializedSaveDataService\When_saving_to_saved_data_service.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />
     <Compile Include="StepTests\When_getting_name_from_step.cs" />
     <Compile Include="UseCaseTests\UseCaseTestBase.cs" />
@@ -198,13 +232,13 @@
     <Compile Include="XmlSerializeTests\XmlSerializeTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\UseCaseMakerLibrary\UseCaseMakerLibrary.csproj">
       <Project>{2706309F-76DA-4C66-8E78-8165D570B166}</Project>
       <Name>UseCaseMakerLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
