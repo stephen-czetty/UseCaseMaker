@@ -3,7 +3,7 @@ using UseCaseMakerLibrary;
 using UseCaseMakerLibrary.Contracts;
 using UseCaseMakerLibrary.Services;
 
-namespace UseCaseMaker.Ioc.Tests
+namespace UseCaseMaker.Ioc.Tests.SerializerSelectorTests
 {
     [Subject(typeof(XmlSerializerSelector))]
     public class When_getting_serializer_for_a_1_1_versioned_file : SerializerSelectorTestsBase

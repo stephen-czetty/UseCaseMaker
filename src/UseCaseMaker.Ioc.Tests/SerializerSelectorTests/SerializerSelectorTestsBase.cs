@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace UseCaseMaker.Ioc.Tests
+namespace UseCaseMaker.Ioc.Tests.SerializerSelectorTests
 {
     public abstract class SerializerSelectorTestsBase
     {
