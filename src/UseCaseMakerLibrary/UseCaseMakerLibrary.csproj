@@ -142,10 +142,38 @@
     <Compile Include="Actors.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Annotations\AspMvcActionAttribute.cs" />
+    <Compile Include="Annotations\AspMvcAreaAttribute.cs" />
+    <Compile Include="Annotations\AspMvcControllerAttribute.cs" />
+    <Compile Include="Annotations\AspMvcMasterAttribute.cs" />
+    <Compile Include="Annotations\AspMvcModelTypeAttribute.cs" />
+    <Compile Include="Annotations\AspMvcPartialViewAttribute.cs" />
+    <Compile Include="Annotations\AspMvcSupressViewErrorAttribute.cs" />
+    <Compile Include="Annotations\AspMvcTemplateAttribute.cs" />
+    <Compile Include="Annotations\AspMvcViewAttribute.cs" />
+    <Compile Include="Annotations\AssertionConditionAttribute.cs" />
+    <Compile Include="Annotations\AssertionConditionType.cs" />
+    <Compile Include="Annotations\AssertionMethodAttribute.cs" />
+    <Compile Include="Annotations\BaseTypeRequiredAttribute.cs" />
+    <Compile Include="Annotations\CanBeNullAttribute.cs" />
+    <Compile Include="Annotations\CannotApplyEqualityOperatorAttribute.cs" />
+    <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
+    <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
+    <Compile Include="Annotations\InstantHandleAttribute.cs" />
+    <Compile Include="Annotations\InvokerParameterNameAttribute.cs" />
+    <Compile Include="Annotations\MeansImplicitUseAttribute.cs" />
+    <Compile Include="Annotations\NotNullAttribute.cs" />
+    <Compile Include="Annotations\PathReferenceAttribute.cs" />
+    <Compile Include="Annotations\PublicAPIAttribute.cs" />
+    <Compile Include="Annotations\PureAttribute.cs" />
+    <Compile Include="Annotations\RazorSectionAttribute.cs" />
+    <Compile Include="Annotations\LocalizationRequiredAttribute.cs" />
+    <Compile Include="Annotations\StringFormatMethodAttribute.cs" />
+    <Compile Include="Annotations\TerminatesProgramAttribute.cs" />
+    <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
     <Compile Include="Contracts\ISavedDataService.cs" />
     <Compile Include="Contracts\ISerializer.cs" />
     <Compile Include="Contracts\IXmlSerializerSelector.cs" />
-    <Compile Include="Contracts\ResharperAnnotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

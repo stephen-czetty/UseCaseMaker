@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using UseCaseMakerLibrary;
+using UseCaseMakerLibrary.Annotations;
 using UseCaseMakerLibrary.Contracts;
 using UseCaseMakerLibrary.Services;
 

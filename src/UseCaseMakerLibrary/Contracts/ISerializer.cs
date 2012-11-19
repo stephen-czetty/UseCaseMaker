@@ -14,7 +14,7 @@ namespace UseCaseMakerLibrary.Contracts
         /// <param name="inputDataStream">The input data stream.</param>
         /// <typeparam name="T">The type that will be deserialized</typeparam>
         /// <returns>A deserialized object of type {T}</returns>
-        [Pure]
+        [Annotations.Pure]
         T DeSerialize(TextReader inputDataStream);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace UseCaseMakerLibrary.Contracts
     internal abstract class SerializerContract<T> : ISerializer<T>
         where T : class
     {
-        [Pure]
+        [Annotations.Pure]
         public T DeSerialize(TextReader inputDataStream)
         {
             Contract.Requires<ArgumentNullException>(inputDataStream != null);
