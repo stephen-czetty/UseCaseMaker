@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SerializerSelectorTestsBase.cs" />
     <Compile Include="When_getting_serializer_for_a_1_0_versioned_file.cs" />
+    <Compile Include="When_getting_serializer_for_a_1_1_versioned_file.cs" />
+    <Compile Include="When_getting_serializer_for_unknown_version.cs" />
     <Compile Include="When_using_ioc_container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
