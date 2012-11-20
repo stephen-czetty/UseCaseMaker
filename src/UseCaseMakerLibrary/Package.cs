@@ -12,31 +12,31 @@ namespace UseCaseMakerLibrary
         internal Package()
             : base()
         {
-		    Attributes = new CommonAttributes();
-		    Requirements = new Requirements();
-		    this.Actors = new Actors(this);
-			this.Packages = new Packages(this);
-			this.UseCases = new UseCases(this);
+            Attributes = new CommonAttributes();
+            Requirements = new Requirements();
+            this.Actors = new Actors(this);
+            this.Packages = new Packages(this);
+            this.UseCases = new UseCases(this);
         }
 
         internal Package(String name, String prefix, Int32 id)
             : base(name,prefix,id)
         {
-		    Attributes = new CommonAttributes();
-		    Requirements = new Requirements();
-		    this.Actors = new Actors(this);
-			this.Packages = new Packages(this);
-			this.UseCases = new UseCases(this);
+            Attributes = new CommonAttributes();
+            Requirements = new Requirements();
+            this.Actors = new Actors(this);
+            this.Packages = new Packages(this);
+            this.UseCases = new UseCases(this);
         }
 
         internal Package(String name, String prefix, Int32 id, Package owner)
             : base(name,prefix,id,owner)
         {
-		    Attributes = new CommonAttributes();
-		    Requirements = new Requirements();
-		    this.Actors = new Actors(this);
-			this.Packages = new Packages(this);
-			this.UseCases = new UseCases(this);
+            Attributes = new CommonAttributes();
+            Requirements = new Requirements();
+            this.Actors = new Actors(this);
+            this.Packages = new Packages(this);
+            this.UseCases = new UseCases(this);
         }
         #endregion
 
@@ -61,7 +61,7 @@ namespace UseCaseMakerLibrary
             String oldNameEndTag,
             String newNameStartTag,
             String newNameEndTag,
-            Boolean dontMarkOccurrences)
+            Boolean doNotMarkOccurrences)
         {
             ValidateActor(actor);
             this.PurgeReferences(
@@ -71,7 +71,7 @@ namespace UseCaseMakerLibrary
                 oldNameEndTag,
                 newNameStartTag,
                 newNameEndTag,
-                dontMarkOccurrences);
+                doNotMarkOccurrences);
             Actors.Remove(actor);
         }
 
@@ -107,7 +107,7 @@ namespace UseCaseMakerLibrary
             String oldNameEndTag,
             String newNameStartTag,
             String newNameEndTag,
-            Boolean dontMarkOccurrences)
+            Boolean doNotMarkOccurrences)
         {
             this.PurgeReferences(
                 package,
@@ -116,7 +116,7 @@ namespace UseCaseMakerLibrary
                 oldNameEndTag,
                 newNameStartTag,
                 newNameEndTag,
-                dontMarkOccurrences);
+                doNotMarkOccurrences);
             Packages.Remove(package);
         }
 
@@ -141,7 +141,7 @@ namespace UseCaseMakerLibrary
             String oldNameEndTag,
             String newNameStartTag,
             String newNameEndTag,
-            Boolean dontMarkOccurrences)
+            Boolean doNotMarkOccurrences)
         {
             this.PurgeReferences(
                 useCase,
@@ -150,7 +150,7 @@ namespace UseCaseMakerLibrary
                 oldNameEndTag,
                 newNameStartTag,
                 newNameEndTag,
-                dontMarkOccurrences);
+                doNotMarkOccurrences);
             UseCases.Remove(useCase);
         }
 
@@ -186,7 +186,7 @@ namespace UseCaseMakerLibrary
                     tmpRequirement.ID -= 1;
                 }
             }
-			this.Requirements.Remove(requirement);
+            this.Requirements.Remove(requirement);
         }
 
         public Requirement FindRequirementByUniqueID(String uniqueID)
@@ -248,7 +248,7 @@ namespace UseCaseMakerLibrary
 
         [XmlArray]
         [XmlArrayItem("Actor")]
-	    public Actors Actors { get; private set; }
+        public Actors Actors { get; private set; }
 
         [XmlArray]
         [XmlArrayItem("Package")]
@@ -264,7 +264,7 @@ namespace UseCaseMakerLibrary
 
         public CommonAttributes Attributes { get;  set; }
 
-		#endregion
+        #endregion
 
         #region Private Methods
         void ValidateActor(Actor actor)
