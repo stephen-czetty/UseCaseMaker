@@ -34,8 +34,8 @@ namespace UseCaseMakerLibrary.Tests.Services.DotNetXmlSerializer
         private It Should_serialize_document_with_correct_version = () => _xmlDocument.GetElementsByTagName("UCM-Document")[0].Attributes["Version"].Value.ShouldEqual("1.1");
         // ReSharper restore PossibleNullReferenceException
 
-        private static Model _model;
-        private static ISerializer<Model> _serializer;
+        private static IModel _model;
+        private static ISerializer<IModel> _serializer;
         private static MemoryStream _memoryStream;
         private static TextWriter _textWriter;
         private static XmlDocument _xmlDocument;

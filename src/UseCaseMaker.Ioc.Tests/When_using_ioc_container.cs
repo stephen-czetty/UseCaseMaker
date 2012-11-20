@@ -17,9 +17,9 @@ namespace UseCaseMaker.Ioc.Tests
 
         private It Should_fetch_concrete_type_from_container = () => _container.Resolve<IXmlSerializerSelector>().ShouldBeOfType<XmlSerializerSelector>();
 
-        private It Should_fetch_named_concrete_type_from_container = () => _container.Resolve<ISerializer<Model>>("Version1.0").ShouldBeOfType<LegacyXmlSerializer>();
+        private It Should_fetch_named_concrete_type_from_container = () => _container.Resolve<ISerializer<IModel>>("Version1.0").ShouldBeOfType<LegacyXmlSerializer>();
 
-        private It Should_return_null_when_requesting_type_with_unknown_name = () => _container.Resolve<ISerializer<Model>>("notAVerson").ShouldBeNull();
+        private It Should_return_null_when_requesting_type_with_unknown_name = () => _container.Resolve<ISerializer<IModel>>("notAVerson").ShouldBeNull();
 
         private static Exception _exception;
         private static IocContainer _container;

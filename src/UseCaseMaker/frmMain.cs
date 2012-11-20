@@ -33,7 +33,7 @@ namespace UseCaseMaker
 	    /// </summary>
 	    private readonly IModelRepository _modelRepository = IocContainer.Instance.Resolve<IModelRepository>();
 
-		private Model model = null;
+		private IModel model;
 		private object currentElement = null;
 		private bool lockUpdate = false;
 		private SepararatorCollection separators = new SepararatorCollection();
@@ -2617,11 +2617,11 @@ namespace UseCaseMaker
 		 * 
 		 * Ritorna il modello correntemente in uso dall'applicazione
 		 */
-		public Model Model
+		public IModel Model
 		{
 			get
 			{
-				return this.model;
+				return model;
 			}
 		}
 		#endregion
@@ -3585,7 +3585,7 @@ namespace UseCaseMaker
 			tbPostconditions.HighlightDescriptors = this.hdc;
 
 			this.lockUpdate = true;
-		    model = (Model)_modelRepository.CreateNewModel();
+		    model = _modelRepository.CreateNewModel();
 			BuildView(model);
 		    this.lockUpdate = false;
 

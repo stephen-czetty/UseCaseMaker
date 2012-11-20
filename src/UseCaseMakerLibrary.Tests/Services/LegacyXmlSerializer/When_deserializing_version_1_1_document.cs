@@ -26,8 +26,8 @@ namespace UseCaseMakerLibrary.Tests.Services.LegacyXmlSerializer
         private It Should_throw_xml_serializer_exception = () => _exception.ShouldBeOfType<XmlSerializerException>();
 
         private static TextReader _textReader;
-        private static ISerializer<Model> _serializer;
-        private static Model _model;
+        private static ISerializer<IModel> _serializer;
+        private static IModel _model;
         private static Exception _exception;
     }
 }

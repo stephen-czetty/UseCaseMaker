@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using UseCaseMakerLibrary;
 using UseCaseMakerLibrary.Annotations;
 using UseCaseMakerLibrary.Contracts;
 using UseCaseMakerLibrary.Services;
@@ -24,11 +23,11 @@ namespace UseCaseMaker.Ioc.Modules
             builder.RegisterType<XmlSerializerSelector>().As<IXmlSerializerSelector>();
 
             // Default save file format
-            builder.RegisterType<DotNetXmlSerializer>().As<ISerializer<Model>>();
+            builder.RegisterType<DotNetXmlSerializer>().As<ISerializer<IModel>>();
 
             // Save file formats
-            builder.RegisterType<LegacyXmlSerializer>().Named<ISerializer<Model>>("Version1.0");
-            builder.RegisterType<DotNetXmlSerializer>().Named<ISerializer<Model>>("Version1.1");
+            builder.RegisterType<LegacyXmlSerializer>().Named<ISerializer<IModel>>("Version1.0");
+            builder.RegisterType<DotNetXmlSerializer>().Named<ISerializer<IModel>>("Version1.1");
         }
     }
 }

@@ -14,14 +14,14 @@ namespace UseCaseMakerLibrary.Contracts
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>The loaded <see cref="Model"/></returns>
-        Model Load(string fileName);
+        IModel Load(string fileName);
 
         /// <summary>
         /// Saves the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="fileName">Name of the file.</param>
-        void Save(Model model, string fileName);
+        void Save(IModel model, string fileName);
     }
 
     /// <summary>
@@ -35,11 +35,11 @@ namespace UseCaseMakerLibrary.Contracts
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>The loaded <see cref="Model"/></returns>
-        public Model Load(string fileName)
+        public IModel Load(string fileName)
         {
             Contract.Requires<ArgumentNullException>(fileName != null);
             Contract.Requires<ArgumentException>(fileName.Length > 0);
-            Contract.Ensures(Contract.Result<Model>() != null);
+            Contract.Ensures(Contract.Result<IModel>() != null);
             return default(Model);
         }
 
@@ -48,7 +48,7 @@ namespace UseCaseMakerLibrary.Contracts
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="fileName">Name of the file.</param>
-        public void Save(Model model, string fileName)
+        public void Save(IModel model, string fileName)
         {
             Contract.Requires<ArgumentNullException>(model != null);
             Contract.Requires<ArgumentNullException>(fileName != null);

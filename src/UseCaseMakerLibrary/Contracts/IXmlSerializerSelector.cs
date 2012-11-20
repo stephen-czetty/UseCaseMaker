@@ -4,6 +4,6 @@ namespace UseCaseMakerLibrary.Contracts
 {
     public interface IXmlSerializerSelector
     {
-        ISerializer<Model> GetSerializerForInputFile(string inputFile);
+        ISerializer<IModel> GetSerializerForInputFile(string inputFile);
     }
 }

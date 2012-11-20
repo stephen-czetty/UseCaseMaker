@@ -14,7 +14,7 @@ namespace UseCaseMaker
 	/// </summary>
 	public class frmRefSelector : System.Windows.Forms.Form
 	{
-		private Model model;
+		private IModel model;
 		private UseCase caller;
 		private DependencyItem.ReferenceType callerRefType;
 		private UseCase selected;
@@ -36,7 +36,7 @@ namespace UseCaseMaker
 		private System.Windows.Forms.Label lblStereotype;
 		private System.ComponentModel.IContainer components;
 
-		public frmRefSelector(UseCase caller, Model model, ILocalizationService localizationService)
+		public frmRefSelector(UseCase caller, IModel model, ILocalizationService localizationService)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form

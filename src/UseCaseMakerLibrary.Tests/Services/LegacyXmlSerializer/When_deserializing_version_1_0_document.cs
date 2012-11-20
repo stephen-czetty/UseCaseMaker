@@ -26,8 +26,8 @@ namespace UseCaseMakerLibrary.Tests.Services.LegacyXmlSerializer
         private It Should_return_valid_model = () => _model.ShouldNotBeNull();
 
         private static TextReader _textReader;
-        private static ISerializer<Model> _serializer;
+        private static ISerializer<IModel> _serializer;
         private static Exception _exception;
-        private static Model _model;
+        private static IModel _model;
     }
 }

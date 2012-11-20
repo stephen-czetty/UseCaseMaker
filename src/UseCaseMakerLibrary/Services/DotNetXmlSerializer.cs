@@ -4,9 +4,9 @@ using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary.Services
 {
-    public class DotNetXmlSerializer : ISerializer<Model>
+    public class DotNetXmlSerializer : ISerializer<IModel>
     {
-        public Model DeSerialize(TextReader inputDataStream)
+        public IModel DeSerialize(TextReader inputDataStream)
         {
             var serializer = new System.Xml.Serialization.XmlSerializer(typeof(UcmDocument));
             UcmDocument obj;
@@ -21,10 +21,10 @@ namespace UseCaseMakerLibrary.Services
             return obj.Model;
         }
 
-        public void Serialize(Model data, TextWriter outputDataStream)
+        public void Serialize(IModel data, TextWriter outputDataStream)
         {
             var serializer = new System.Xml.Serialization.XmlSerializer(typeof (UcmDocument));
-            serializer.Serialize(outputDataStream, new UcmDocument { Model = data });
+            serializer.Serialize(outputDataStream, new UcmDocument { Model = (Model)data });
         }
 
         [XmlRoot("UCM-Document")]

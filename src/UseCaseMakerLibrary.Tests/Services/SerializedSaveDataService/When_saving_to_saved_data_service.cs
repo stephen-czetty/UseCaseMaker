@@ -11,6 +11,6 @@ namespace UseCaseMakerLibrary.Tests.Services.SerializedSaveDataService
     {
         private Because Of = () => Subject.Save(new Model(), Path.GetTempFileName());
 
-        private It Should_call_serialize = () => The<ISerializer<Model>>().WasToldTo(x => x.Serialize(GivenIt.IsAny<Model>(), GivenIt.IsAny<TextWriter>()));
+        private It Should_call_serialize = () => The<ISerializer<IModel>>().WasToldTo(x => x.Serialize(GivenIt.IsAny<Model>(), GivenIt.IsAny<TextWriter>()));
     }
 }

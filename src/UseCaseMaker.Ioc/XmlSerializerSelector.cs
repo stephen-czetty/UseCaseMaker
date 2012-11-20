@@ -15,7 +15,7 @@ namespace UseCaseMaker.Ioc
         /// </summary>
         /// <param name="inputFile">The input filename.</param>
         /// <returns>An appropriate serializer for the version of the file.</returns>
-        public ISerializer<Model> GetSerializerForInputFile(string inputFile)
+        public ISerializer<IModel> GetSerializerForInputFile(string inputFile)
         {
             string version = "";
             using (Stream inputStream = File.OpenRead(inputFile))
@@ -32,8 +32,8 @@ namespace UseCaseMaker.Ioc
                 }
             }
 
-            return IocContainer.Instance.Resolve<ISerializer<Model>>("Version" + version) ??
-                   IocContainer.Instance.Resolve<ISerializer<Model>>();
+            return IocContainer.Instance.Resolve<ISerializer<IModel>>("Version" + version) ??
+                   IocContainer.Instance.Resolve<ISerializer<IModel>>();
         } 
     }
 }

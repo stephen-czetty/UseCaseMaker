@@ -12,8 +12,8 @@ namespace UseCaseMakerLibrary.Tests.Services.SerializedSaveDataService
         private Establish Context = () =>
             {
                 The<IXmlSerializerSelector>().WhenToldTo(x => x.GetSerializerForInputFile(GivenIt.IsAny<string>()))
-                    .Return(The<ISerializer<Model>>);
-                The<ISerializer<Model>>().WhenToldTo(x => x.DeSerialize(GivenIt.IsAny<TextReader>()))
+                    .Return(The<ISerializer<IModel>>);
+                The<ISerializer<IModel>>().WhenToldTo(x => x.DeSerialize(GivenIt.IsAny<TextReader>()))
                     .Return(new Model());
             };
 
@@ -22,7 +22,7 @@ namespace UseCaseMakerLibrary.Tests.Services.SerializedSaveDataService
         private It Should_call_serializer_selector = () => The<IXmlSerializerSelector>().WasToldTo(x => x.GetSerializerForInputFile(GivenIt.IsAny<string>()));
 
 // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-        private It Should_call_deserialize = () => The<ISerializer<Model>>().WasToldTo(x => x.DeSerialize(GivenIt.IsAny<TextReader>()));
+        private It Should_call_deserialize = () => The<ISerializer<IModel>>().WasToldTo(x => x.DeSerialize(GivenIt.IsAny<TextReader>()));
 // ReSharper restore ReturnValueOfPureMethodIsNotUsed
     }
 }

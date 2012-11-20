@@ -19,6 +19,6 @@ namespace UseCaseMaker.Ioc.Tests.SerializerSelectorTests
         private It Should_return_dot_net_serializer = () => _serializer.ShouldBeOfType<DotNetXmlSerializer>();
 
         private static XmlSerializerSelector _selector;
-        private static ISerializer<Model> _serializer;
+        private static ISerializer<IModel> _serializer;
     }
 }
