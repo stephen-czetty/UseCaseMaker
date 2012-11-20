@@ -13,7 +13,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                      Model.AddUseCase(_useCase);
                                  };
 
-        private It Should_return_the_specific_use_case = () => Model.FindElementByUniqueID(_useCase.UniqueID).ShouldEqual(_useCase);
+        private It Should_return_the_specific_use_case = () => Model.FindElementByUniqueId(_useCase.UniqueID).ShouldEqual(_useCase);
       
         private static UseCase _useCase;
     }

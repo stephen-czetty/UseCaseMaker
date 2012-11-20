@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -11,7 +13,7 @@ namespace UseCaseMaker
 	/// </summary>
 	public class frmCreator : System.Windows.Forms.Form
 	{
-		private Localizer localizer = null;
+		private ILocalizationService localizationService = null;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Label lblNameTitle;
@@ -21,7 +23,7 @@ namespace UseCaseMaker
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public frmCreator(Localizer localizer, string elementType)
+		public frmCreator(ILocalizationService localizationService, string elementType)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -31,8 +33,8 @@ namespace UseCaseMaker
 			//
 			// TODO: aggiungere il codice del costruttore dopo la chiamata a InitializeComponent
 			//
-			this.localizer = localizer;
-			this.localizer.LocalizeControls(this);
+			this.localizationService = localizationService;
+			this.localizationService.LocalizeControls(this);
 			this.Text += ": " + elementType;
 		}
 
@@ -143,7 +145,7 @@ namespace UseCaseMaker
 				// [Name already in use!]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","nameAlreadyInUse"),
+					this.localizationService.GetValue("UserMessages","nameAlreadyInUse"),
 					Application.ProductName);
 			}		
 		}

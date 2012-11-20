@@ -1,22 +1,22 @@
-using System;
 using System.Reflection;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.XPath;
-using System.Windows.Forms;
+using UseCaseMakerLibrary.Contracts;
 
-namespace UseCaseMaker
+namespace UseCaseMakerLibrary.Services
 {
-	/// <summary>
-	/// Descrizione di riepilogo per Localizer.
+    /// <summary>
+	/// Service for getting localized strings
 	/// </summary>
-	public class Localizer
-	{
+	public class LocalizationService : ILocalizationService
+    {
 		#region Class Memebers
 		private XmlDocument langDoc = null;
 		#endregion
 
 		#region Constructors
-		public Localizer()
+		public LocalizationService()
 		{
 		}
 		#endregion

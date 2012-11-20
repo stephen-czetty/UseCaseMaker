@@ -14,7 +14,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                  };
 
         private It Should_return_the_specific_actor =
-            () => Model.FindElementByUniqueID(_actor.UniqueID).ShouldEqual(_actor);
+            () => Model.FindElementByUniqueId(_actor.UniqueID).ShouldEqual(_actor);
         
 
         private static Actor _actor;

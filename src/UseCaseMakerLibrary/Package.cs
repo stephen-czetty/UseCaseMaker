@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Specialized;
 using System.Xml.Serialization;
+using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary
 {
-    public class Package : IdentificableObject
+    public class Package : IdentificableObject, IPackage
     {
 
         #region Constructors

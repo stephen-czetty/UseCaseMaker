@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Forms;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -26,7 +28,7 @@ namespace UseCaseMaker
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public frmReorder(Localizer localizer, string prefix)
+		public frmReorder(ILocalizationService localizationService, string prefix)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -37,7 +39,7 @@ namespace UseCaseMaker
 			// TODO: aggiungere il codice del costruttore dopo la chiamata a InitializeComponent
 			//
 			this.prefix = prefix;
-			localizer.LocalizeControls(this);
+			localizationService.LocalizeControls(this);
 
 			btnMoveDown.Enabled = false;
 			btnMoveUp.Enabled = false;

@@ -6,6 +6,8 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Net;
 using System.Reflection;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -16,16 +18,16 @@ namespace UseCaseMaker
 	{
 		private string stylesheetFilesPath = string.Empty;
 		private string htmlFilesPath = string.Empty;
-		private Localizer localizer = null;
+		private ILocalizationService localizationService = null;
 
 		public HTMLConverter(
 			string stylesheetFilesPath,
 			string htmlFilesPath,
-			Localizer localizer)
+			ILocalizationService localizationService)
 		{
 			this.stylesheetFilesPath = stylesheetFilesPath;
 			this.htmlFilesPath = htmlFilesPath;
-			this.localizer = localizer;
+			this.localizationService = localizationService;
 		}
 
 		public void BuildNavigator(string modelFilePath)
@@ -39,8 +41,8 @@ namespace UseCaseMaker
 			transform.Load(this.stylesheetFilesPath + Path.DirectorySeparatorChar + "ModelTree.xsl",resolver);
 			StreamWriter sw = new StreamWriter(this.htmlFilesPath + Path.DirectorySeparatorChar + "ModelTree.htm",false);
 			XsltArgumentList al = new XsltArgumentList();
-			al.AddParam("modelBrowser","",this.localizer.GetValue("Globals","ModelBrowser"));
-			al.AddParam("glossary","",this.localizer.GetValue("Globals","Glossary"));
+			al.AddParam("modelBrowser","",this.localizationService.GetValue("Globals","ModelBrowser"));
+			al.AddParam("glossary","",this.localizationService.GetValue("Globals","Glossary"));
 			transform.Transform(doc,al,sw,null);
 			sw.Close();
 
@@ -109,64 +111,64 @@ namespace UseCaseMaker
 			al.AddParam("elementUniqueID","",currentNode.Attributes["UniqueID"].InnerText);
 			if(currentNode.Name == "Glossary")
 			{
-				al.AddParam("glossary","",this.localizer.GetValue("Globals","Glossary"));
-				al.AddParam("glossaryItem","",this.localizer.GetValue("Globals","GlossaryItem"));
-				al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
+				al.AddParam("glossary","",this.localizationService.GetValue("Globals","Glossary"));
+				al.AddParam("glossaryItem","",this.localizationService.GetValue("Globals","GlossaryItem"));
+				al.AddParam("description","",this.localizationService.GetValue("Globals","Description"));
 			}
 			if(currentNode.Name == "Model" || currentNode.Name == "Package")
 			{
 				if(currentNode.Name == "Model")
 				{
-					al.AddParam("elementType","",this.localizer.GetValue("Globals","Model"));
+					al.AddParam("elementType","",this.localizationService.GetValue("Globals","Model"));
 				}
 				else
 				{
-					al.AddParam("elementType","",this.localizer.GetValue("Globals","Package"));
+					al.AddParam("elementType","",this.localizationService.GetValue("Globals","Package"));
 				}
-				al.AddParam("actors","",this.localizer.GetValue("Globals","Actors"));
-				al.AddParam("useCases","",this.localizer.GetValue("Globals","UseCases"));
-				al.AddParam("packages","",this.localizer.GetValue("Globals","Packages"));
-				al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
-				al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
-				al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
-				al.AddParam("requirements","",this.localizer.GetValue("Globals","Requirements"));
+				al.AddParam("actors","",this.localizationService.GetValue("Globals","Actors"));
+				al.AddParam("useCases","",this.localizationService.GetValue("Globals","UseCases"));
+				al.AddParam("packages","",this.localizationService.GetValue("Globals","Packages"));
+				al.AddParam("description","",this.localizationService.GetValue("Globals","Description"));
+				al.AddParam("notes","",this.localizationService.GetValue("Globals","Notes"));
+				al.AddParam("relatedDocs","",this.localizationService.GetValue("Globals","RelatedDocuments"));
+				al.AddParam("requirements","",this.localizationService.GetValue("Globals","Requirements"));
 			}
 			if(currentNode.Name == "Actor")
 			{
-				al.AddParam("elementType","",this.localizer.GetValue("Globals","Actor"));
-				al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
-				al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
-				al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
-				al.AddParam("goals","",this.localizer.GetValue("Globals","Goals"));
+				al.AddParam("elementType","",this.localizationService.GetValue("Globals","Actor"));
+				al.AddParam("description","",this.localizationService.GetValue("Globals","Description"));
+				al.AddParam("notes","",this.localizationService.GetValue("Globals","Notes"));
+				al.AddParam("relatedDocs","",this.localizationService.GetValue("Globals","RelatedDocuments"));
+				al.AddParam("goals","",this.localizationService.GetValue("Globals","Goals"));
 			}
 			if(currentNode.Name == "UseCase")
 			{
-				al.AddParam("statusNodeSet","",this.localizer.GetNodeSet("cmbStatus","Item"));
-				al.AddParam("levelNodeSet","",this.localizer.GetNodeSet("cmbLevel","Item"));
-				al.AddParam("complexityNodeSet","",this.localizer.GetNodeSet("cmbComplexity","Item"));
-				al.AddParam("implementationNodeSet","",this.localizer.GetNodeSet("cmbImplementation","Item"));
-				al.AddParam("historyTypeNodeSet","",this.localizer.GetNodeSet("HistoryType","Item"));
+				al.AddParam("statusNodeSet","",this.localizationService.GetNodeSet("cmbStatus","Item"));
+				al.AddParam("levelNodeSet","",this.localizationService.GetNodeSet("cmbLevel","Item"));
+				al.AddParam("complexityNodeSet","",this.localizationService.GetNodeSet("cmbComplexity","Item"));
+				al.AddParam("implementationNodeSet","",this.localizationService.GetNodeSet("cmbImplementation","Item"));
+				al.AddParam("historyTypeNodeSet","",this.localizationService.GetNodeSet("HistoryType","Item"));
 
-				al.AddParam("elementType","",this.localizer.GetValue("Globals","UseCase"));
-				al.AddParam("preconditions","",this.localizer.GetValue("Globals","Preconditions"));
-				al.AddParam("postconditions","",this.localizer.GetValue("Globals","Postconditions"));
-				al.AddParam("openIssues","",this.localizer.GetValue("Globals","OpenIssues"));
-				al.AddParam("flowOfEvents","",this.localizer.GetValue("Globals","FlowOfEvents"));
-				al.AddParam("prose","",this.localizer.GetValue("Globals","Prose"));
-				al.AddParam("details","",this.localizer.GetValue("Globals","Details"));
-				al.AddParam("priority","",this.localizer.GetValue("Globals","Priority"));
-				al.AddParam("status","",this.localizer.GetValue("Globals","Status"));
-				al.AddParam("level","",this.localizer.GetValue("Globals","Level"));
-				al.AddParam("complexity","",this.localizer.GetValue("Globals","Complexity"));
-				al.AddParam("implementation","",this.localizer.GetValue("Globals","Implementation"));
-				al.AddParam("assignedTo","",this.localizer.GetValue("Globals","AssignedTo"));
-				al.AddParam("release","",this.localizer.GetValue("Globals","Release"));
-				al.AddParam("activeActors","",this.localizer.GetValue("Globals","ActiveActors"));
-				al.AddParam("primary","",this.localizer.GetValue("Globals","Primary"));
-				al.AddParam("history","",this.localizer.GetValue("Globals","History"));
-				al.AddParam("description","",this.localizer.GetValue("Globals","Description"));
-				al.AddParam("notes","",this.localizer.GetValue("Globals","Notes"));
-				al.AddParam("relatedDocs","",this.localizer.GetValue("Globals","RelatedDocuments"));
+				al.AddParam("elementType","",this.localizationService.GetValue("Globals","UseCase"));
+				al.AddParam("preconditions","",this.localizationService.GetValue("Globals","Preconditions"));
+				al.AddParam("postconditions","",this.localizationService.GetValue("Globals","Postconditions"));
+				al.AddParam("openIssues","",this.localizationService.GetValue("Globals","OpenIssues"));
+				al.AddParam("flowOfEvents","",this.localizationService.GetValue("Globals","FlowOfEvents"));
+				al.AddParam("prose","",this.localizationService.GetValue("Globals","Prose"));
+				al.AddParam("details","",this.localizationService.GetValue("Globals","Details"));
+				al.AddParam("priority","",this.localizationService.GetValue("Globals","Priority"));
+				al.AddParam("status","",this.localizationService.GetValue("Globals","Status"));
+				al.AddParam("level","",this.localizationService.GetValue("Globals","Level"));
+				al.AddParam("complexity","",this.localizationService.GetValue("Globals","Complexity"));
+				al.AddParam("implementation","",this.localizationService.GetValue("Globals","Implementation"));
+				al.AddParam("assignedTo","",this.localizationService.GetValue("Globals","AssignedTo"));
+				al.AddParam("release","",this.localizationService.GetValue("Globals","Release"));
+				al.AddParam("activeActors","",this.localizationService.GetValue("Globals","ActiveActors"));
+				al.AddParam("primary","",this.localizationService.GetValue("Globals","Primary"));
+				al.AddParam("history","",this.localizationService.GetValue("Globals","History"));
+				al.AddParam("description","",this.localizationService.GetValue("Globals","Description"));
+				al.AddParam("notes","",this.localizationService.GetValue("Globals","Notes"));
+				al.AddParam("relatedDocs","",this.localizationService.GetValue("Globals","RelatedDocuments"));
 			}
 
 			XslTransform transform = new XslTransform();

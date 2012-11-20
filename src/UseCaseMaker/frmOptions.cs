@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -26,9 +28,9 @@ namespace UseCaseMaker
 		private string previousLanguage = string.Empty;
 		public string SelectedLanguage = string.Empty;
 		private ApplicationSettings appSettings = null;
-		private Localizer localizer = null;
+		private ILocalizationService localizationService = null;
 
-		public frmOptions(ApplicationSettings appSettings, Localizer localizer)
+		public frmOptions(ApplicationSettings appSettings, ILocalizationService localizationService)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -96,8 +98,8 @@ namespace UseCaseMaker
 
 			this.previousLanguage = appSettings.UILanguage;
 			this.appSettings = appSettings;
-			this.localizer = localizer;
-			localizer.LocalizeControls(this);
+			this.localizationService = localizationService;
+			localizationService.LocalizeControls(this);
 		}
 
 		#region Codice generato da Progettazione Windows Form
@@ -249,7 +251,7 @@ namespace UseCaseMaker
 			{
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","cannotOpenFile"),
+					this.localizationService.GetValue("UserMessages","cannotOpenFile"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Stop);

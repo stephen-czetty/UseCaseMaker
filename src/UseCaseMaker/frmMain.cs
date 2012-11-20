@@ -13,6 +13,7 @@ using UseCaseMaker.Ioc;
 using UseCaseMakerLibrary;
 using UseCaseMakerControls;
 using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 /**
  * @defgroup user_interface Interfaccia utente
@@ -31,6 +32,9 @@ namespace UseCaseMaker
 		private const string defaultMPrefix = "M";
 		private const string defaultGPrefix = "G";
 
+        // New stuff
+	    private IModelRepository _modelRepository = IocContainer.Instance.Resolve<IModelRepository>();
+
 		private Model model = null;
 		private object currentElement = null;
 		private bool lockUpdate = false;
@@ -40,7 +44,7 @@ namespace UseCaseMaker
 		private string modelFileName = string.Empty;
 		private bool modified = false;
 		private bool modifiedLocked = false;
-		private Localizer localizer = new Localizer();
+		private ILocalizationService localizationService = IocContainer.Instance.Resolve<ILocalizationService>();
 		private ApplicationSettings appSettings = new ApplicationSettings();
 
 		ToolTip lvRelatedDocsTooltip = new ToolTip();
@@ -2627,16 +2631,16 @@ namespace UseCaseMaker
 		/**
 		 * @brief Localizzazione dei controlli
 		 * 
-		 * Utilizza la classe Localizer per impostare il testo dei 
+		 * Utilizza la classe LocalizationService per impostare il testo dei 
 		 * controlli dell'applicazione nella lingua in uso dall'utente
 		 * 
 		 * @param languageFilePath Percorso al file xml contenente la lingua
 		 */
 		private void LocalizeControls(string languageFilePath)
 		{
-			this.localizer.Load(languageFilePath);
+			this.localizationService.Load(languageFilePath);
 
-			this.localizer.LocalizeControls(this);
+			this.localizationService.LocalizeControls(this);
 		}
 
 		/**
@@ -2712,7 +2716,7 @@ namespace UseCaseMaker
 			{
 				// [Save current model?]
 				if(MessageBox.Show(
-					this.localizer.GetValue("UserMessages","saveModel"),
+					this.localizationService.GetValue("UserMessages","saveModel"),
 					Application.ProductName,
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Question) == DialogResult.Yes)
@@ -2811,7 +2815,7 @@ namespace UseCaseMaker
 			TreeNode node = tvModelBrowser.SelectedNode;
 
 			// Cerca il nodo selezionato
-			this.currentElement = model.FindElementByUniqueID((String)node.Tag);
+			this.currentElement = model.FindElementByUniqueId((String)node.Tag);
 			if(currentElement != null)
 			{
 				if(this.currentElement.GetType() == typeof(Model))
@@ -3181,7 +3185,7 @@ namespace UseCaseMaker
 					lvActors.Items.Clear();
 					foreach(ActiveActor aactor in useCase.ActiveActors)
 					{
-						Actor actor = (Actor)model.FindElementByUniqueID(aactor.ActorUniqueID);
+						Actor actor = (Actor)model.FindElementByUniqueId(aactor.ActorUniqueID);
 						ListViewItem lvi = new ListViewItem();
 						lvi.Text = actor.Name;
 						if(aactor.IsPrimary)
@@ -3254,13 +3258,13 @@ namespace UseCaseMaker
 						lvi.Text = hi.LocalizatedDateValue;
 						if(hi.Type == HistoryItem.HistoryType.Implementation)
 						{
-							lvi.SubItems.Add(this.localizer.GetValue("Globals","Implementation"));
+							lvi.SubItems.Add(this.localizationService.GetValue("Globals","Implementation"));
 							lvi.SubItems.Add((string)cmbImplementation.Items[hi.Action]);
 							lvi.SubItems.Add(hi.Notes);
 						}
 						else
 						{
-							lvi.SubItems.Add(this.localizer.GetValue("Globals","Status"));
+							lvi.SubItems.Add(this.localizationService.GetValue("Globals","Status"));
 							lvi.SubItems.Add((string)cmbStatus.Items[hi.Action]);
 							lvi.SubItems.Add(hi.Notes);
 						}
@@ -3390,10 +3394,10 @@ namespace UseCaseMaker
 				tvModelBrowser.Nodes.Add(node);
 				tvModelBrowser.SelectedNode = node;
 				TreeNode ownerNode = node;
-				node = new TreeNode(this.localizer.GetValue("Globals","Actors"),1,1);
+				node = new TreeNode(this.localizationService.GetValue("Globals","Actors"),1,1);
 				node.Tag = model.Actors.UniqueID;
 				ownerNode.Nodes.Add(node);
-				node = new TreeNode(this.localizer.GetValue("Globals","UseCases"),2,2);
+				node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),2,2);
 				node.Tag = model.UseCases.UniqueID;
 				ownerNode.Nodes.Add(node);
 				sub = "\"" + model.Path + "\"";
@@ -3424,10 +3428,10 @@ namespace UseCaseMaker
 					ownerNode.Nodes.Add(node);
 					tvModelBrowser.SelectedNode = node;
 					ownerNode = node;
-					node = new TreeNode(this.localizer.GetValue("Globals","Actors"),1,1);
+					node = new TreeNode(this.localizationService.GetValue("Globals","Actors"),1,1);
 					node.Tag = package.Actors.UniqueID;
 					ownerNode.Nodes.Add(node);
-					node = new TreeNode(this.localizer.GetValue("Globals","UseCases"),2,2);
+					node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),2,2);
 					node.Tag = package.UseCases.UniqueID;
 					ownerNode.Nodes.Add(node);
 				}
@@ -3583,9 +3587,9 @@ namespace UseCaseMaker
 			tbPostconditions.HighlightDescriptors = this.hdc;
 
 			this.lockUpdate = true;
-			model = new Model(this.localizer.GetValue("Globals","NewModel"),defaultMPrefix,1);
+		    model = (Model)_modelRepository.CreateNewModel();
 			BuildView(model);
-			this.lockUpdate = false;
+		    this.lockUpdate = false;
 
 			this.UpdateView();
 
@@ -3624,7 +3628,7 @@ namespace UseCaseMaker
 			}
 
 			// [Open Model]
-			openModelFileDialog.Title = this.localizer.GetValue("UserMessages","openModel");
+			openModelFileDialog.Title = this.localizationService.GetValue("UserMessages","openModel");
 			openModelFileDialog.FileName = string.Empty;
 			if(openModelFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
@@ -3742,7 +3746,7 @@ namespace UseCaseMaker
 
 			if(!File.Exists(modelFilePath))
 			{
-				MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile"));
+				MessageBox.Show(this,this.localizationService.GetValue("UserMessages","cannotOpenFile"));
 				return;
 			}
 
@@ -3849,7 +3853,7 @@ namespace UseCaseMaker
 			if(showSaveAsDialog)
 			{
 				// [Save Model As]
-				saveModelFileDialog.Title = this.localizer.GetValue("UserMessages","saveModelAs");
+				saveModelFileDialog.Title = this.localizationService.GetValue("UserMessages","saveModelAs");
 				saveModelFileDialog.FileName = ((this.modelFileName == string.Empty)
 					? model.Name : Path.GetFileNameWithoutExtension(this.modelFileName));
 				if(saveModelFileDialog.ShowDialog(this) == DialogResult.OK)
@@ -4018,44 +4022,44 @@ namespace UseCaseMaker
 			{
 				Model root = (Model)element;
 
-				elementInfo = this.localizer.GetValue("Globals","Model") + ": " + root.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Identifier") + ": " + root.Path + "\r\n" +
-					this.localizer.GetValue("Globals","Owner") + ":\r\n" +
-					this.localizer.GetValue("Globals","Description") + ": " + root.Attributes.Description;
+				elementInfo = this.localizationService.GetValue("Globals","Model") + ": " + root.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Identifier") + ": " + root.Path + "\r\n" +
+					this.localizationService.GetValue("Globals","Owner") + ":\r\n" +
+					this.localizationService.GetValue("Globals","Description") + ": " + root.Attributes.Description;
 			}
 			if(element.GetType() == typeof(Package))
 			{
 				Package package = (Package)element;
 
-				elementInfo = this.localizer.GetValue("Globals","Package") + ": " + package.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Identifier") + ": " + package.Path + "\r\n" +
-					this.localizer.GetValue("Globals","Owner") + ": " + package.Owner.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Description") + ": " + package.Attributes.Description;
+				elementInfo = this.localizationService.GetValue("Globals","Package") + ": " + package.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Identifier") + ": " + package.Path + "\r\n" +
+					this.localizationService.GetValue("Globals","Owner") + ": " + package.Owner.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Description") + ": " + package.Attributes.Description;
 			}
 			if(element.GetType() == typeof(Actor))
 			{
 				Actor actor = (Actor)element;
 
-				elementInfo = this.localizer.GetValue("Globals","Actor") + ": " + actor.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Identifier") + ": " + actor.Path + "\r\n" +
-					this.localizer.GetValue("Globals","Owner") + ": " + actor.Owner.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Description") + ": " + actor.Attributes.Description;
+				elementInfo = this.localizationService.GetValue("Globals","Actor") + ": " + actor.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Identifier") + ": " + actor.Path + "\r\n" +
+					this.localizationService.GetValue("Globals","Owner") + ": " + actor.Owner.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Description") + ": " + actor.Attributes.Description;
 			}
 			if(element.GetType() == typeof(UseCase))
 			{
 				UseCase useCase = (UseCase)element;
 
-				elementInfo = this.localizer.GetValue("Globals","UseCase") + ": " + useCase.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Identifier") + ": " + useCase.Path + "\r\n" +
-					this.localizer.GetValue("Globals","Owner") + ": " + useCase.Owner.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Description") + ": " + useCase.Attributes.Description;
+				elementInfo = this.localizationService.GetValue("Globals","UseCase") + ": " + useCase.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Identifier") + ": " + useCase.Path + "\r\n" +
+					this.localizationService.GetValue("Globals","Owner") + ": " + useCase.Owner.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Description") + ": " + useCase.Attributes.Description;
 			}
 			if(element.GetType() == typeof(GlossaryItem))
 			{
 				GlossaryItem gi = (GlossaryItem)element;
 
-				elementInfo = this.localizer.GetValue("Globals","GlossaryItem") + ": " + gi.Name + "\r\n" +
-					this.localizer.GetValue("Globals","Description") + ": " + gi.Description;
+				elementInfo = this.localizationService.GetValue("Globals","GlossaryItem") + ": " + gi.Name + "\r\n" +
+					this.localizationService.GetValue("Globals","Description") + ": " + gi.Description;
 			}
 
 			return elementInfo;
@@ -4063,7 +4067,7 @@ namespace UseCaseMaker
 
 		private void AddPackage()
 		{
-			frmCreator frm = new frmCreator(this.localizer,this.localizer.GetValue("Globals","Package"));
+			frmCreator frm = new frmCreator(this.localizationService,this.localizationService.GetValue("Globals","Package"));
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = (Package)this.currentElement;
@@ -4075,7 +4079,7 @@ namespace UseCaseMaker
 
 		private void AddActor()
 		{
-			frmCreator frm = new frmCreator(this.localizer,this.localizer.GetValue("Globals","Actor"));
+			frmCreator frm = new frmCreator(this.localizationService,this.localizationService.GetValue("Globals","Actor"));
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
@@ -4096,7 +4100,7 @@ namespace UseCaseMaker
 
 		private void AddUseCase()
 		{
-			frmCreator frm = new frmCreator(this.localizer,this.localizer.GetValue("Globals","UseCase"));
+			frmCreator frm = new frmCreator(this.localizationService,this.localizationService.GetValue("Globals","UseCase"));
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = null;
@@ -4124,7 +4128,7 @@ namespace UseCaseMaker
 
 		private void ReorderElements()
 		{
-			frmReorder frm = new frmReorder(this.localizer,string.Empty);
+			frmReorder frm = new frmReorder(this.localizationService,string.Empty);
 
 			if(this.currentElement.GetType() == typeof(Actors))
 			{
@@ -4218,26 +4222,26 @@ namespace UseCaseMaker
 
 			if(ia.GetType() == typeof(Model))
 			{
-				type = this.localizer.GetValue("Globals","Model");
+				type = this.localizationService.GetValue("Globals","Model");
 			}
 			if(ia.GetType() == typeof(Package))
 			{
-				type = this.localizer.GetValue("Globals","Package");
+				type = this.localizationService.GetValue("Globals","Package");
 			}
 			if(ia.GetType() == typeof(Actor))
 			{
-				type = this.localizer.GetValue("Globals","Actor");
+				type = this.localizationService.GetValue("Globals","Actor");
 			}
 			if(ia.GetType() == typeof(UseCase))
 			{
-				type = this.localizer.GetValue("Globals","UseCase");
+				type = this.localizationService.GetValue("Globals","UseCase");
 			}
 			if(ia.GetType() == typeof(GlossaryItem))
 			{
-				type = this.localizer.GetValue("Globals","GlossaryItem");
+				type = this.localizationService.GetValue("Globals","GlossaryItem");
 			}
 
-			frmNameChanger frm = new frmNameChanger(this.localizer,type);
+			frmNameChanger frm = new frmNameChanger(this.localizationService,type);
 			frm.lblOldName.Text = ia.Name;
 
 			if(frm.ShowDialog(this) == DialogResult.OK)
@@ -4294,22 +4298,22 @@ namespace UseCaseMaker
 
 			if(this.currentElement.GetType() == typeof(Model))
 			{
-				type = this.localizer.GetValue("Globals","Model");
+				type = this.localizationService.GetValue("Globals","Model");
 			}
 			if(this.currentElement.GetType() == typeof(Package))
 			{
-				type = this.localizer.GetValue("Globals","Package");
+				type = this.localizationService.GetValue("Globals","Package");
 			}
 			if(this.currentElement.GetType() == typeof(Actor))
 			{
-				type = this.localizer.GetValue("Globals","Actor");
+				type = this.localizationService.GetValue("Globals","Actor");
 			}
 			if(this.currentElement.GetType() == typeof(UseCase))
 			{
-				type = this.localizer.GetValue("Globals","UseCase");
+				type = this.localizationService.GetValue("Globals","UseCase");
 			}
 
-			frmDeleter frm = new frmDeleter(this.localizer,type);
+			frmDeleter frm = new frmDeleter(this.localizationService,type);
 
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
@@ -4508,7 +4512,7 @@ namespace UseCaseMaker
 
 		private void btnAddRefStep_Click(object sender, System.EventArgs e)
 		{
-			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
+			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizationService);
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				UseCase useCase = (UseCase)this.currentElement;
@@ -4548,7 +4552,7 @@ namespace UseCaseMaker
 
 		private void btnInsertRefStep_Click(object sender, System.EventArgs e)
 		{
-			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizer);
+			frmRefSelector frm = new frmRefSelector((UseCase)this.currentElement,model,this.localizationService);
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				UseCase useCase = (UseCase)this.currentElement;
@@ -4895,7 +4899,7 @@ namespace UseCaseMaker
 
 		private void btnAddGlossaryItem_Click(object sender, System.EventArgs e)
 		{
-			frmCreator frm = new frmCreator(this.localizer,this.localizer.GetValue("Globals","GlossaryItem"));
+			frmCreator frm = new frmCreator(this.localizationService,this.localizationService.GetValue("Globals","GlossaryItem"));
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Model model = (Model)this.currentElement;
@@ -4951,7 +4955,7 @@ namespace UseCaseMaker
 			IndexedListItem ili = GList.Items[currentSelectedIndex];
 			GlossaryItem gi = model.GetGlossaryItem((String)ili.Tag);
 
-			frmDeleter frm = new frmDeleter(this.localizer,this.localizer.GetValue("Globals","GlossaryItem"));
+			frmDeleter frm = new frmDeleter(this.localizationService,this.localizationService.GetValue("Globals","GlossaryItem"));
 
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
@@ -5098,7 +5102,7 @@ namespace UseCaseMaker
 
 			String [] actors = model.GetActorNames();
 
-			frmActorChooser frm = new frmActorChooser(actors,this.localizer);
+			frmActorChooser frm = new frmActorChooser(actors,this.localizationService);
 
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
@@ -5107,7 +5111,7 @@ namespace UseCaseMaker
 				if(useCase.ActiveActors.FindByUniqueID(actor.UniqueID) != null)
 				{
 					// [Actor already present!]
-					MessageBox.Show(this,this.localizer.GetValue("UserMessages","actorAlreadyPresent"));
+					MessageBox.Show(this,this.localizationService.GetValue("UserMessages","actorAlreadyPresent"));
 					return;
 				}
 
@@ -5336,7 +5340,7 @@ namespace UseCaseMaker
 					if(rd.FileName == selectDocFileDialog.FileName)
 					{
 						// [File already present!]
-						MessageBox.Show(this,this.localizer.GetValue("UserMessages","fileAlreadyPresent"));
+						MessageBox.Show(this,this.localizationService.GetValue("UserMessages","fileAlreadyPresent"));
 						return;
 					}
 				}
@@ -5420,7 +5424,7 @@ namespace UseCaseMaker
 			catch(Win32Exception ex)
 			{
 				// [Cannot open file!]
-				MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile") + "\r\n" + 
+				MessageBox.Show(this,this.localizationService.GetValue("UserMessages","cannotOpenFile") + "\r\n" + 
 					ex.Message);
 			}
 		}
@@ -5445,7 +5449,7 @@ namespace UseCaseMaker
 
 			if((e.Control && e.KeyCode == Keys.X) || (e.Shift && e.KeyCode == Keys.Delete))
 			{
-				if(model.FindElementByUniqueID((String)dstNode.Tag).GetType() == typeof(Model))
+				if(model.FindElementByUniqueId((String)dstNode.Tag).GetType() == typeof(Model))
 				{
 					return;
 				}
@@ -5459,8 +5463,8 @@ namespace UseCaseMaker
 				if(Clipboard.GetDataObject().GetDataPresent(typeof(TreeNode)))
 				{
 					srcNode = (TreeNode)Clipboard.GetDataObject().GetData(typeof(TreeNode));
-					srcElement = model.FindElementByUniqueID((String)srcNode.Tag);
-					dstElement = model.FindElementByUniqueID((String)dstNode.Tag);
+					srcElement = model.FindElementByUniqueId((String)srcNode.Tag);
+					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
 					if(((IIdentificableObject)dstElement).UniqueID ==
@@ -5587,7 +5591,7 @@ namespace UseCaseMaker
 			// [Do you really want to exit?]
 			if(MessageBox.Show(
 				this,
-				this.localizer.GetValue("UserMessages","exitConfirm"),
+				this.localizationService.GetValue("UserMessages","exitConfirm"),
 				Application.ProductName,
 				MessageBoxButtons.YesNo,
 				MessageBoxIcon.Question) == DialogResult.No)
@@ -5604,7 +5608,7 @@ namespace UseCaseMaker
 
 		private void btnStatusToHistory_Click(object sender, System.EventArgs e)
 		{
-			frmHistoryNotes frm = new frmHistoryNotes(this.localizer);
+			frmHistoryNotes frm = new frmHistoryNotes(this.localizationService);
 
 			if(frm.ShowDialog() == DialogResult.OK)
 			{
@@ -5623,7 +5627,7 @@ namespace UseCaseMaker
 
 		private void btnImplToHistory_Click(object sender, System.EventArgs e)
 		{
-			frmHistoryNotes frm = new frmHistoryNotes(this.localizer);
+			frmHistoryNotes frm = new frmHistoryNotes(this.localizationService);
 
 			if(frm.ShowDialog() == DialogResult.OK)
 			{
@@ -5777,7 +5781,7 @@ namespace UseCaseMaker
 				// [Model must be saved before exporting...]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","saveBeforeExport"),
+					this.localizationService.GetValue("UserMessages","saveBeforeExport"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Hand);
@@ -5789,7 +5793,7 @@ namespace UseCaseMaker
 				folderBrowserDialog.SelectedPath = this.appSettings.HtmlFilesPath;
 			}
 			// [Select destination folder for generated HTML files]
-			folderBrowserDialog.Description = this.localizer.GetValue("UserMessages","selectHTMLdestination");
+			folderBrowserDialog.Description = this.localizationService.GetValue("UserMessages","selectHTMLdestination");
 			if(folderBrowserDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				try
@@ -5817,7 +5821,7 @@ namespace UseCaseMaker
 					HTMLConverter hc = new HTMLConverter(
 						folderBrowserDialog.SelectedPath,
 						folderBrowserDialog.SelectedPath,
-						this.localizer);
+						this.localizationService);
 					this.Cursor = Cursors.WaitCursor;
 					hc.BuildNavigator(this.modelFilePath + Path.DirectorySeparatorChar + this.modelFileName);
 					hc.BuildPages(this.modelFilePath + Path.DirectorySeparatorChar + this.modelFileName);
@@ -5859,7 +5863,7 @@ namespace UseCaseMaker
 				// [Export complete. Do you want to see the HTML files?]
 				if(MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","htmlExportCompleted"),
+					this.localizationService.GetValue("UserMessages","htmlExportCompleted"),
 					Application.ProductName,
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Information) == DialogResult.Yes)
@@ -5874,7 +5878,7 @@ namespace UseCaseMaker
 					catch(Win32Exception ex)
 					{
 						// [Cannot open file!]
-						MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile") + 
+						MessageBox.Show(this,this.localizationService.GetValue("UserMessages","cannotOpenFile") + 
 							"\r\n" + ex.Message);
 					}
 				}
@@ -5888,7 +5892,7 @@ namespace UseCaseMaker
 				// [Model must be saved before exporting...]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","saveBeforeExport"),
+					this.localizationService.GetValue("UserMessages","saveBeforeExport"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Hand);
@@ -5896,7 +5900,7 @@ namespace UseCaseMaker
 			}
 
 			SaveFileDialog saveXMIFileDialog = new SaveFileDialog();
-			saveXMIFileDialog.Title = this.localizer.GetValue("UserMessages","exportAsXMI");
+			saveXMIFileDialog.Title = this.localizationService.GetValue("UserMessages","exportAsXMI");
 			saveXMIFileDialog.FileName = ((this.modelFileName == string.Empty)
 				? model.Name : Path.GetFileNameWithoutExtension(this.modelFileName));
 			saveXMIFileDialog.DefaultExt = "xml";
@@ -5930,7 +5934,7 @@ namespace UseCaseMaker
 				// [Export complete.]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","xmiExportCompleted"),
+					this.localizationService.GetValue("UserMessages","xmiExportCompleted"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
@@ -5944,7 +5948,7 @@ namespace UseCaseMaker
 				// [Model must be saved before exporting...]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","saveBeforeExport"),
+					this.localizationService.GetValue("UserMessages","saveBeforeExport"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Hand);
@@ -5952,7 +5956,7 @@ namespace UseCaseMaker
 			}
 
 			SaveFileDialog savePDFFileDialog = new SaveFileDialog();
-			savePDFFileDialog.Title = this.localizer.GetValue("UserMessages","exportAsPDF");
+			savePDFFileDialog.Title = this.localizationService.GetValue("UserMessages","exportAsPDF");
 			savePDFFileDialog.FileName = ((this.modelFileName == string.Empty)
 				? model.Name : Path.GetFileNameWithoutExtension(this.modelFileName));
 			savePDFFileDialog.DefaultExt = "pdf";
@@ -5962,7 +5966,7 @@ namespace UseCaseMaker
 				PDFConverter pdf = new PDFConverter(
 					this.appSettings.ReportsFilesPath,
 					savePDFFileDialog.FileName,
-					this.localizer);
+					this.localizationService);
 
 				this.Cursor = Cursors.WaitCursor;
 
@@ -5987,7 +5991,7 @@ namespace UseCaseMaker
 				// [Export complete. Do you want to see the PDF file?]
 				if(MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","pdfExportCompleted"),
+					this.localizationService.GetValue("UserMessages","pdfExportCompleted"),
 					Application.ProductName,
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Information) == DialogResult.Yes)
@@ -6001,7 +6005,7 @@ namespace UseCaseMaker
 					catch(Win32Exception ex)
 					{
 						// [Cannot open file!]
-						MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile") + 
+						MessageBox.Show(this,this.localizationService.GetValue("UserMessages","cannotOpenFile") + 
 							"\r\n" + ex.Message);
 					}
 				}
@@ -6016,7 +6020,7 @@ namespace UseCaseMaker
 				// [Model must be saved before exporting...]
 				MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","saveBeforeExport"),
+					this.localizationService.GetValue("UserMessages","saveBeforeExport"),
 					Application.ProductName,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Hand);
@@ -6024,7 +6028,7 @@ namespace UseCaseMaker
 			}
 
 			SaveFileDialog saveRTFFileDialog = new SaveFileDialog();
-			saveRTFFileDialog.Title = this.localizer.GetValue("UserMessages","exportAsRTF");
+			saveRTFFileDialog.Title = this.localizationService.GetValue("UserMessages","exportAsRTF");
 			saveRTFFileDialog.FileName = ((this.modelFileName == string.Empty)
 				? model.Name : Path.GetFileNameWithoutExtension(this.modelFileName));
 			saveRTFFileDialog.DefaultExt = "rtf";
@@ -6034,7 +6038,7 @@ namespace UseCaseMaker
 				RTFConverter rtf = new RTFConverter(
 					this.appSettings.ReportsFilesPath,
 					saveRTFFileDialog.FileName,
-					this.localizer);
+					this.localizationService);
 
 				this.Cursor = Cursors.WaitCursor;
 
@@ -6059,7 +6063,7 @@ namespace UseCaseMaker
 				// [Export complete. Do you want to see the PDF file?]
 				if(MessageBox.Show(
 					this,
-					this.localizer.GetValue("UserMessages","rtfExportCompleted"),
+					this.localizationService.GetValue("UserMessages","rtfExportCompleted"),
 					Application.ProductName,
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Information) == DialogResult.Yes)
@@ -6073,7 +6077,7 @@ namespace UseCaseMaker
 					catch(Win32Exception ex)
 					{
 						// [Cannot open file!]
-						MessageBox.Show(this,this.localizer.GetValue("UserMessages","cannotOpenFile") + 
+						MessageBox.Show(this,this.localizationService.GetValue("UserMessages","cannotOpenFile") + 
 							"\r\n" + ex.Message);
 					}
 				}
@@ -6112,7 +6116,7 @@ namespace UseCaseMaker
 
 		private void mnuToolsOptions_Click(object sender, System.EventArgs e)
 		{
-			frmOptions frm = new frmOptions(this.appSettings,this.localizer);
+			frmOptions frm = new frmOptions(this.appSettings,this.localizationService);
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				if(frm.SelectedLanguage != string.Empty
@@ -6396,7 +6400,7 @@ namespace UseCaseMaker
 				return;
 			}
 
-			if(model.FindElementByUniqueID((String)node.Tag).GetType() == typeof(Model))
+			if(model.FindElementByUniqueId((String)node.Tag).GetType() == typeof(Model))
 			{
 				((TreeView)sender).DoDragDrop(e.Item,DragDropEffects.None);
 				return;
@@ -6417,14 +6421,14 @@ namespace UseCaseMaker
 			Type srcType, dstType;
 
 			srcNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-			srcType = model.FindElementByUniqueID((String)srcNode.Tag).GetType();
+			srcType = model.FindElementByUniqueId((String)srcNode.Tag).GetType();
 
 			Point pt = new Point(e.X,e.Y);
 			pt = tvModelBrowser.PointToClient(pt);
 			dstNode = tvModelBrowser.GetNodeAt(pt);
 			if(dstNode != null)
 			{
-				dstType = model.FindElementByUniqueID((String)dstNode.Tag).GetType();
+				dstType = model.FindElementByUniqueId((String)dstNode.Tag).GetType();
 				if(dstType == typeof(Package) || dstType == typeof(Model))
 				{
 					if(srcType == typeof(Package))
@@ -6486,14 +6490,14 @@ namespace UseCaseMaker
 			string oldPath;
 
 			srcNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-			srcElement = model.FindElementByUniqueID((String)srcNode.Tag);
+			srcElement = model.FindElementByUniqueId((String)srcNode.Tag);
 
 			Point pt = new Point(e.X,e.Y);
 			pt = tvModelBrowser.PointToClient(pt);
 			dstNode = tvModelBrowser.GetNodeAt(pt);
 			if(dstNode != null)
 			{
-				dstElement = model.FindElementByUniqueID((String)dstNode.Tag);
+				dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 				// Sorgente e destinazione sono lo stesso elemento
 				if(((IIdentificableObject)dstElement).UniqueID ==
@@ -6654,12 +6658,12 @@ namespace UseCaseMaker
 				object srcElement, dstElement;
 
 				srcNode = (TreeNode)Clipboard.GetDataObject().GetData(typeof(TreeNode));
-				srcElement = model.FindElementByUniqueID((String)srcNode.Tag);
+				srcElement = model.FindElementByUniqueId((String)srcNode.Tag);
 
 				dstNode = tvModelBrowser.SelectedNode;
 				if(dstNode != null)
 				{
-					dstElement = model.FindElementByUniqueID((String)dstNode.Tag);
+					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
 					if(((IIdentificableObject)dstElement).UniqueID ==
@@ -6823,7 +6827,7 @@ namespace UseCaseMaker
 					return;
 				}
 
-				if(model.FindElementByUniqueID((String)dstNode.Tag).GetType() == typeof(Model))
+				if(model.FindElementByUniqueId((String)dstNode.Tag).GetType() == typeof(Model))
 				{
 					mnuEditCut.Enabled = false;
 					mnuEditCopy.Enabled = false;
@@ -6836,8 +6840,8 @@ namespace UseCaseMaker
 				if(Clipboard.GetDataObject().GetDataPresent(typeof(TreeNode)))
 				{
 					srcNode = (TreeNode)Clipboard.GetDataObject().GetData(typeof(TreeNode));
-					srcElement = model.FindElementByUniqueID((String)srcNode.Tag);
-					dstElement = model.FindElementByUniqueID((String)dstNode.Tag);
+					srcElement = model.FindElementByUniqueId((String)srcNode.Tag);
+					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
 					if(((IIdentificableObject)dstElement).UniqueID ==

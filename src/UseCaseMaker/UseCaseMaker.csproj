@@ -156,9 +156,6 @@
     <Compile Include="HTMLConverter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Localizer.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PDFConverter.cs">
       <SubType>Code</SubType>
     </Compile>

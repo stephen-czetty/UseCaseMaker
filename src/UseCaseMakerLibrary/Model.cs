@@ -1,9 +1,10 @@
 using System;
 using System.Xml.Serialization;
+using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary
 {
-	public class Model : Package
+	public class Model : Package, IModel
 	{
 		#region Constructors
 		public Model() : base()
@@ -45,9 +46,9 @@ namespace UseCaseMakerLibrary
 			String oldNameEndTag,
 			String newNameStartTag,
 			String newNameEndTag,
-			Boolean dontMarkOccurrences)
+			Boolean doNotMarkOccurrences)
 		{
-			if(!dontMarkOccurrences)
+			if(!doNotMarkOccurrences)
 			{
 				this.ChangeReferences(
 					gi.Name,
@@ -75,47 +76,47 @@ namespace UseCaseMakerLibrary
 		}
 		#endregion // Packages Handling
 
-		public IIdentificableObject FindElementByUniqueID(String uniqueID)
+		public IIdentificableObject FindElementByUniqueId(String uniqueId)
 		{
 			IIdentificableObject element = null;
 
-			if(this.UniqueID == uniqueID)
+			if(this.UniqueID == uniqueId)
 			{
 				return this;
 			}
 
-			element = this.Glossary.FindByUniqueID(uniqueID);
+			element = this.Glossary.FindByUniqueID(uniqueId);
 			if(element != null)
 			{
 				return element;
 			}
 
-			if(this.Requirements.UniqueID == uniqueID)
+			if(this.Requirements.UniqueID == uniqueId)
 			{
 				return this.Requirements;
 			}
 
-			if(this.Actors.UniqueID == uniqueID)
+			if(this.Actors.UniqueID == uniqueId)
 			{
 				return this.Actors;
 			}
-			element = this.Actors.FindByUniqueID(uniqueID);
+			element = this.Actors.FindByUniqueID(uniqueId);
 			if(element != null)
 			{
 				return element;
 			}
 
-			if(this.UseCases.UniqueID == uniqueID)
+			if(this.UseCases.UniqueID == uniqueId)
 			{
 				return this.UseCases;
 			}
-			element = this.UseCases.FindByUniqueID(uniqueID);
+			element = this.UseCases.FindByUniqueID(uniqueId);
 			if(element != null)
 			{
 				return element;
 			}
 
-			return this.Packages.FindElementByUniqueID(uniqueID);
+			return this.Packages.FindElementByUniqueID(uniqueId);
 		}
 
 		public IIdentificableObject FindElementByName(String name)

@@ -10,7 +10,7 @@ namespace UseCaseMaker.Ioc.Modules
     /// Ioc Registration for serialization routines
     /// </summary>
     [UsedImplicitly]
-    public sealed class SerializationModule : Module
+    internal sealed class SerializationModule : Module
     {
         /// <summary>
         /// Override to add registrations to the container.

@@ -4,6 +4,8 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using UseCaseMakerLibrary;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -16,7 +18,7 @@ namespace UseCaseMaker
 		private UseCase caller;
 		private DependencyItem.ReferenceType callerRefType;
 		private UseCase selected;
-		private Localizer localizer;
+		private ILocalizationService localizationService;
 
 		private System.Windows.Forms.Label lblStereotypeTitle;
 		private System.Windows.Forms.TextBox tbStereotype;
@@ -34,7 +36,7 @@ namespace UseCaseMaker
 		private System.Windows.Forms.Label lblStereotype;
 		private System.ComponentModel.IContainer components;
 
-		public frmRefSelector(UseCase caller, Model model, Localizer localizer)
+		public frmRefSelector(UseCase caller, Model model, ILocalizationService localizationService)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -46,8 +48,8 @@ namespace UseCaseMaker
 			//
 			this.caller = caller;
 			this.model = model;
-			this.localizer = localizer;
-			this.localizer.LocalizeControls(this);
+			this.localizationService = localizationService;
+			this.localizationService.LocalizeControls(this);
 			this.lblUpperUseCase.Text = caller.Name;
 
 			BuildView(this.model);
@@ -343,7 +345,7 @@ namespace UseCaseMaker
 				tvModelBrowser.Nodes.Add(node);
 				tvModelBrowser.SelectedNode = node;
 				TreeNode ownerNode = node;
-				node = new TreeNode(this.localizer.GetValue("Globals","UseCases"),1,1);
+				node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),1,1);
 				node.Tag = model.UseCases.UniqueID;
 				ownerNode.Nodes.Add(node);
 			}
@@ -360,7 +362,7 @@ namespace UseCaseMaker
 					ownerNode.Nodes.Add(node);
 					tvModelBrowser.SelectedNode = node;
 					ownerNode = node;
-					node = new TreeNode(this.localizer.GetValue("Globals","UseCases"),1,1);
+					node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),1,1);
 					node.Tag = package.UseCases.UniqueID;
 					ownerNode.Nodes.Add(node);
 				}
@@ -434,7 +436,7 @@ namespace UseCaseMaker
 		private void tvModelBrowser_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
 		{
 			TreeNode node = tvModelBrowser.SelectedNode;
-			object element = model.FindElementByUniqueID((String)node.Tag);
+			object element = model.FindElementByUniqueId((String)node.Tag);
 			if(element.GetType() == typeof(UseCase))
 			{
 				selected = (UseCase)element;

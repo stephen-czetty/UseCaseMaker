@@ -191,6 +191,7 @@
     <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_0_document.cs" />
     <Compile Include="Services\LegacyXmlSerializer\When_deserializing_version_1_1_document.cs" />
     <Compile Include="Services\LegacyXmlSerializer\When_serializing_model.cs" />
+    <Compile Include="Services\ModelRepository\When_creating_new_model.cs" />
     <Compile Include="Services\SerializedSaveDataService\When_loading_from_saved_data_service.cs" />
     <Compile Include="Services\SerializedSaveDataService\When_saving_to_saved_data_service.cs" />
     <Compile Include="StepTests\StepTestBase.cs" />

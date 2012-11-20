@@ -14,7 +14,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                  };
 
         private It Should_return_the_element =
-            () => Model.FindElementByUniqueID(_element.UniqueID).ShouldEqual(_element);
+            () => Model.FindElementByUniqueId(_element.UniqueID).ShouldEqual(_element);
 
         private It Should_return_the_element_from_get_glossary_item =
             () => Model.GetGlossaryItem(_element.UniqueID).ShouldEqual(_element);

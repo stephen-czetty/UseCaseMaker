@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using UseCaseMakerLibrary.Contracts;
+using UseCaseMakerLibrary.Services;
 
 namespace UseCaseMaker
 {
@@ -20,7 +22,7 @@ namespace UseCaseMaker
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public frmActorChooser(String [] actors, Localizer localizer)
+		public frmActorChooser(String [] actors, ILocalizationService localizationService)
 		{
 			//
 			// Necessario per il supporto di Progettazione Windows Form
@@ -30,7 +32,7 @@ namespace UseCaseMaker
 			//
 			// TODO: aggiungere il codice del costruttore dopo la chiamata a InitializeComponent
 			//
-			localizer.LocalizeControls(this);
+			localizationService.LocalizeControls(this);
 			lbActors.Items.Clear();
 			foreach(String actor in actors)
 			{
