@@ -21,7 +21,7 @@ namespace UseCaseMakerLibrary.Contracts
         void Load(string languageFilePath);
 
         /// <summary>
-        /// Gets the value.
+        /// Gets a localized string.
         /// </summary>
         /// <param name="section">The section.</param>
         /// <param name="name">The name.</param>

@@ -24,7 +24,6 @@ namespace UseCaseMaker
 		private const string defaultUCPrefix = "UC";
 		private const string defaultPPrefix = "P";
 		private const string defaultAPrefix = "A";
-		private const string defaultMPrefix = "M";
 		private const string defaultGPrefix = "G";
 
         // New stuff
