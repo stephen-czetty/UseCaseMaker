@@ -96,7 +96,7 @@ namespace UseCaseMakerLibrary
 		#endregion
 		#endregion
 
-        public override void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool dontMark)
+        public override void PurgeReferences(Package thisPackage, Package currentPackage, string oldNameStartTag, string oldNameEndTag, string newNameStartTag, string newNameEndTag, bool doNotMark)
         {
             foreach(UseCase uc in thisPackage.UseCases)
 		        {
@@ -122,9 +122,9 @@ namespace UseCaseMakerLibrary
 		                oldNameEndTag,
 		                newNameStartTag,
 		                newNameEndTag,
-		                dontMark);
+		                doNotMark);
 		        }
-		        if(!dontMark)
+		        if(!doNotMark)
 		        {
 		            thisPackage.ChangeReferences(
 		                Name,
