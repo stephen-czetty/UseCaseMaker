@@ -62,7 +62,7 @@ namespace UseCaseMakerLibrary.Services
         }
 
         /// <summary>
-        /// Localizes the controls.
+        /// Localizes the controls in a form.
         /// </summary>
         /// <param name="form">The form.</param>
         public void LocalizeControls(Form form)

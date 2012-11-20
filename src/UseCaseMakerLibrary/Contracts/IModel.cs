@@ -49,9 +49,9 @@ namespace UseCaseMakerLibrary.Contracts
         /// <summary>
         /// Gets a glossary item by unique id.
         /// </summary>
-        /// <param name="uniqueID">The unique ID.</param>
+        /// <param name="uniqueId">The unique ID.</param>
         /// <returns>The element, or <c>null</c> if not found.</returns>
-        GlossaryItem GetGlossaryItem(string uniqueID);
+        GlossaryItem GetGlossaryItem(string uniqueId);
 
         /// <summary>
         /// Finds the element by unique ID.
