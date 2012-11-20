@@ -1,19 +1,14 @@
 using System;
 using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Data;
-using System.Runtime.InteropServices;
 using System.Xml;
 using System.IO;
-using System.Reflection;
 using System.Diagnostics;
 using UseCaseMaker.Ioc;
 using UseCaseMakerLibrary;
 using UseCaseMakerControls;
 using UseCaseMakerLibrary.Contracts;
-using UseCaseMakerLibrary.Services;
 
 /**
  * @defgroup user_interface Interfaccia utente
@@ -33,7 +28,11 @@ namespace UseCaseMaker
 		private const string defaultGPrefix = "G";
 
         // New stuff
-	    private IModelRepository _modelRepository = IocContainer.Instance.Resolve<IModelRepository>();
+
+	    /// <summary>
+	    /// Model Repository
+	    /// </summary>
+	    private readonly IModelRepository _modelRepository = IocContainer.Instance.Resolve<IModelRepository>();
 
 		private Model model = null;
 		private object currentElement = null;
