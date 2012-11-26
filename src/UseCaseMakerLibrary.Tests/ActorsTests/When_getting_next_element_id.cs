@@ -7,6 +7,6 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
     {
         private Establish Context = () => Actors.Add(new Actor{ Id = 1});
 
-        private It Should_return_two = () => Actors.GetNextFreeID().ShouldEqual(2); 
+        private It Should_return_two = () => Actors.GetNextFreeId().ShouldEqual(2); 
     }
 }

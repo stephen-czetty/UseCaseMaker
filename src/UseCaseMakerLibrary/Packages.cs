@@ -31,7 +31,7 @@ namespace UseCaseMakerLibrary
 					element = child.Actors;
 					break;
 				}
-				element = child.Actors.FindByUniqueID(uniqueID);
+				element = child.Actors.FindByUniqueId(uniqueID);
 				if(element != null)
 				{
 					break;
@@ -41,7 +41,7 @@ namespace UseCaseMakerLibrary
 					element = child.UseCases;
 					break;
 				}
-				element = child.UseCases.FindByUniqueID(uniqueID);
+				element = child.UseCases.FindByUniqueId(uniqueID);
 				if(element != null)
 				{
 					break;
@@ -51,7 +51,7 @@ namespace UseCaseMakerLibrary
 					element = child.Requirements;
 					break;
 				}
-				element = child.Requirements.FindByUniqueID(uniqueID);
+				element = child.Requirements.FindByUniqueId(uniqueID);
 				if(element != null)
 				{
 					break;

@@ -4069,7 +4069,7 @@ namespace UseCaseMaker
 			if(frm.ShowDialog(this) == DialogResult.OK)
 			{
 				Package owner = (Package)this.currentElement;
-				Package package = owner.NewPackage(frm.tbName.Text,defaultPPrefix,owner.Packages.GetNextFreeID());
+				Package package = owner.NewPackage(frm.tbName.Text,defaultPPrefix,owner.Packages.GetNextFreeId());
 				this.AddElement(package,owner,true);
 			}
 			frm.Dispose();
@@ -4090,7 +4090,7 @@ namespace UseCaseMaker
 				{
 					owner = coll.Owner;
 				}
-				Actor actor = owner.NewActor(frm.tbName.Text,defaultAPrefix,owner.Actors.GetNextFreeID());
+				Actor actor = owner.NewActor(frm.tbName.Text,defaultAPrefix,owner.Actors.GetNextFreeId());
 				this.AddElement(actor,owner,true);
 			}
 			frm.Dispose();
@@ -4111,7 +4111,7 @@ namespace UseCaseMaker
 				{
 					owner = coll.Owner;
 				}
-				UseCase useCase = owner.NewUseCase(frm.tbName.Text,defaultUCPrefix,owner.UseCases.GetNextFreeID());
+				UseCase useCase = owner.NewUseCase(frm.tbName.Text,defaultUCPrefix,owner.UseCases.GetNextFreeId());
 				this.AddElement(useCase,owner,true);
 			}
 			frm.Dispose();
@@ -4902,7 +4902,7 @@ namespace UseCaseMaker
 			{
 				Model model = (Model)this.currentElement;
 				GlossaryItem gi = 
-					model.NewGlossaryItem(frm.tbName.Text,defaultGPrefix,model.Glossary.GetNextFreeID());
+					model.NewGlossaryItem(frm.tbName.Text,defaultGPrefix,model.Glossary.GetNextFreeId());
 				model.AddGlossaryItem(gi);
 				model.Glossary.Sorted("Name");
 
@@ -6521,7 +6521,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.Id = dst.Packages.GetNextFreeID();
+						src.Id = dst.Packages.GetNextFreeId();
 						dst.AddPackage(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6536,7 +6536,7 @@ namespace UseCaseMaker
 						foreach(Actor actor in owner.Actors)
 						{
 							oldPath = actor.Path;
-							actor.Id = dst.Actors.GetNextFreeID();
+							actor.Id = dst.Actors.GetNextFreeId();
 							dst.AddActor(actor);
 							model.ReplaceElementPath(oldPath,"","","","",actor.Path);
 						}
@@ -6555,7 +6555,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.Id = dst.Actors.GetNextFreeID();
+						src.Id = dst.Actors.GetNextFreeId();
 						dst.AddActor(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6570,7 +6570,7 @@ namespace UseCaseMaker
 						foreach(UseCase useCase in owner.UseCases)
 						{
 							oldPath = useCase.Path;
-							useCase.Id = dst.UseCases.GetNextFreeID();
+							useCase.Id = dst.UseCases.GetNextFreeId();
 							dst.AddUseCase(useCase);
 							model.ReplaceElementPath(oldPath,"","","","",useCase.Path);
 						}
@@ -6589,7 +6589,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.Id = dst.UseCases.GetNextFreeID();
+						src.Id = dst.UseCases.GetNextFreeId();
 						dst.AddUseCase(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6686,7 +6686,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.Id = dst.Packages.GetNextFreeID();
+							src.Id = dst.Packages.GetNextFreeId();
 							dst.AddPackage(src);
 							Clipboard.SetDataObject(new DataObject());
 						}
@@ -6700,7 +6700,7 @@ namespace UseCaseMaker
 							Package owner = src.Owner;
 							foreach(Actor actor in owner.Actors)
 							{
-								actor.Id = dst.Actors.GetNextFreeID();
+								actor.Id = dst.Actors.GetNextFreeId();
 								dst.AddActor(actor);
 							}
 							owner.Actors.Clear();
@@ -6718,7 +6718,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.Id = dst.Actors.GetNextFreeID();
+							src.Id = dst.Actors.GetNextFreeId();
 							dst.AddActor(src);
 							Clipboard.SetDataObject(new DataObject());
 						}
@@ -6732,7 +6732,7 @@ namespace UseCaseMaker
 							Package owner = src.Owner;
 							foreach(UseCase useCase in owner.UseCases)
 							{
-								useCase.Id = dst.UseCases.GetNextFreeID();
+								useCase.Id = dst.UseCases.GetNextFreeId();
 								dst.AddUseCase(useCase);
 							}
 							owner.UseCases.Clear();
@@ -6750,7 +6750,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.Id = dst.UseCases.GetNextFreeID();
+							src.Id = dst.UseCases.GetNextFreeId();
 							dst.AddUseCase(src);
 							Clipboard.SetDataObject(new DataObject());
 						}

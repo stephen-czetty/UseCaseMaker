@@ -112,7 +112,7 @@ namespace UseCaseMakerLibrary
         /// </returns>
         public GlossaryItem GetGlossaryItem(string uniqueId)
         {
-            return Glossary.FindByUniqueID(uniqueId);
+            return Glossary.FindByUniqueId(uniqueId);
         }
         #endregion // Packages Handling
 
@@ -128,7 +128,7 @@ namespace UseCaseMakerLibrary
             if (this.UniqueId == uniqueId)
                 return this;
 
-            IIdentificableObject element = this.Glossary.FindByUniqueID(uniqueId);
+            IIdentificableObject element = this.Glossary.FindByUniqueId(uniqueId);
             if (element != null)
                 return element;
 
@@ -138,14 +138,14 @@ namespace UseCaseMakerLibrary
             if (this.Actors.UniqueId == uniqueId)
                 return this.Actors;
 
-            element = this.Actors.FindByUniqueID(uniqueId);
+            element = this.Actors.FindByUniqueId(uniqueId);
             if (element != null)
                 return element;
 
             if (this.UseCases.UniqueId == uniqueId)
                 return this.UseCases;
 
-            element = this.UseCases.FindByUniqueID(uniqueId);
+            element = this.UseCases.FindByUniqueId(uniqueId);
             return element ?? this.Packages.FindElementByUniqueID(uniqueId);
         }
 
