@@ -340,22 +340,22 @@ namespace UseCaseMaker
 			{
 				Model model = (Model)element;
 				tvModelBrowser.Nodes.Clear();
-				TreeNode node = new TreeNode(model.Name + " (" + model.ElementID + ")");
-				node.Tag = model.UniqueID;
+				TreeNode node = new TreeNode(model.Name + " (" + model.ElementId + ")");
+				node.Tag = model.UniqueId;
 				tvModelBrowser.Nodes.Add(node);
 				tvModelBrowser.SelectedNode = node;
 				TreeNode ownerNode = node;
 				node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),1,1);
-				node.Tag = model.UseCases.UniqueID;
+				node.Tag = model.UseCases.UniqueId;
 				ownerNode.Nodes.Add(node);
 			}
 
 			if(element.GetType() == typeof(Package))
 			{
 				Package package = (Package)element;
-				ownerUniqueID = ((Package)owner).UniqueID;
-				TreeNode node = new TreeNode(package.Name + " (" + package.ElementID + ")");
-				node.Tag = package.UniqueID;
+				ownerUniqueID = ((Package)owner).UniqueId;
+				TreeNode node = new TreeNode(package.Name + " (" + package.ElementId + ")");
+				node.Tag = package.UniqueId;
 				TreeNode ownerNode = this.FindNode(null,ownerUniqueID);
 				if(ownerNode != null)
 				{
@@ -363,7 +363,7 @@ namespace UseCaseMaker
 					tvModelBrowser.SelectedNode = node;
 					ownerNode = node;
 					node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),1,1);
-					node.Tag = package.UseCases.UniqueID;
+					node.Tag = package.UseCases.UniqueId;
 					ownerNode.Nodes.Add(node);
 				}
 			}
@@ -371,14 +371,14 @@ namespace UseCaseMaker
 			{
 				UseCase useCase = (UseCase)element;
 				Package package = (Package)owner;
-				TreeNode node = new TreeNode(useCase.Name + " (" + useCase.ElementID + ")",2,2);
-				node.Tag = useCase.UniqueID;
-				TreeNode ownerNode = this.FindNode(null,package.UniqueID);
+				TreeNode node = new TreeNode(useCase.Name + " (" + useCase.ElementId + ")",2,2);
+				node.Tag = useCase.UniqueId;
+				TreeNode ownerNode = this.FindNode(null,package.UniqueId);
 				if(ownerNode != null)
 				{
 					foreach(TreeNode subNode in ownerNode.Nodes)
 					{
-						if((String)subNode.Tag == package.UseCases.UniqueID)
+						if((String)subNode.Tag == package.UseCases.UniqueId)
 						{
 							subNode.Nodes.Add(node);
 							tvModelBrowser.SelectedNode = node;

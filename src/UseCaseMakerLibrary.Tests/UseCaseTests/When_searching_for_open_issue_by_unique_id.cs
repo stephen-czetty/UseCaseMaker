@@ -13,7 +13,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
             };
 
         private It Should_return_correct_open_issue =
-            () => UseCase.FindOpenIssueByUniqueID(_openIssue.UniqueID).ShouldEqual(_openIssue);
+            () => UseCase.FindOpenIssueByUniqueID(_openIssue.UniqueId).ShouldEqual(_openIssue);
 
         private static OpenIssue _openIssue;
     }

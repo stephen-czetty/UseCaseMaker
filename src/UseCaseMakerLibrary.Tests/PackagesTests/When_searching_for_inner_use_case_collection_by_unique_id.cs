@@ -7,6 +7,6 @@ namespace UseCaseMakerLibrary.Tests.PackagesTests
     {
         private It Should_return_the_inner_use_case_collection =
             () =>
-            PackageContainer.FindElementByUniqueID(InnerPackage.UseCases.UniqueID).ShouldEqual(InnerPackage.UseCases);
+            PackageContainer.FindElementByUniqueID(InnerPackage.UseCases.UniqueId).ShouldEqual(InnerPackage.UseCases);
     }
 }

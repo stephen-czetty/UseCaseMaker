@@ -11,7 +11,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
 
         private It Should_create_index_at_index_one = () => _issueIndex.ShouldEqual(1);
 
-        private It Should_set_issue_id_to_two = () => ((OpenIssue)UseCase.OpenIssues[_issueIndex]).ID.ShouldEqual(2);
+        private It Should_set_issue_id_to_two = () => ((OpenIssue)UseCase.OpenIssues[_issueIndex]).Id.ShouldEqual(2);
 
         private static int _issueIndex;
     }

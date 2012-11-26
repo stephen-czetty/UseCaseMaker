@@ -12,7 +12,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
                 _stepToRemove = (Step)UseCase.Steps[0];
                 UseCase.AddStep(_stepToRemove, Step.StepType.Default, "", null, DependencyItem.ReferenceType.None);
                 _stepToKeep = (Step)UseCase.Steps[1];
-                _stepToKeep.ID.ShouldEqual(2);
+                _stepToKeep.Id.ShouldEqual(2);
             };
 
         private Because Of = () => UseCase.RemoveStep(_stepToRemove);
@@ -21,7 +21,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
 
         private It Should_keep_the_other_step = () => UseCase.Steps.ShouldContain(_stepToKeep);
 
-        private It Should_set_kept_step_id_to_one = () => _stepToKeep.ID.ShouldEqual(1);
+        private It Should_set_kept_step_id_to_one = () => _stepToKeep.Id.ShouldEqual(1);
 
         private static Step _stepToRemove;
         private static Step _stepToKeep;

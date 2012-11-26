@@ -24,7 +24,7 @@ namespace UseCaseMakerLibrary.Tests.Services.DotNetXmlSerializer
 
         private It Should_return_model = () => _model.ShouldNotBeNull();
 
-        private It Should_set_model_unique_id_correctly = () => _model.UniqueID.ShouldEqual("32e43cb0-8050-4597-8a61-dcba1496888d");
+        private It Should_set_model_unique_id_correctly = () => _model.UniqueId.ShouldEqual("32e43cb0-8050-4597-8a61-dcba1496888d");
 
         private static TextReader _textReader;
         private static ISerializer<IModel> _serializer;

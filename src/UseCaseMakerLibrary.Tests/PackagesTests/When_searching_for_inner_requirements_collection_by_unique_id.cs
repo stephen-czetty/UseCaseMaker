@@ -7,7 +7,7 @@ namespace UseCaseMakerLibrary.Tests.PackagesTests
     {
         private It Should_return_the_inner_requirements_collection =
             () =>
-            PackageContainer.FindElementByUniqueID(InnerPackage.Requirements.UniqueID).ShouldEqual(
+            PackageContainer.FindElementByUniqueID(InnerPackage.Requirements.UniqueId).ShouldEqual(
                 InnerPackage.Requirements);
     }
 }

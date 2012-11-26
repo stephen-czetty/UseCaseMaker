@@ -20,7 +20,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
                                  };
 
         private It Should_remove_the_reference_in_the_second_use_case =
-            () => _useCase2.Steps[0].Dependency.PartnerUniqueID.ShouldNotEqual(_useCase1.UniqueID);
+            () => _useCase2.Steps[0].Dependency.PartnerUniqueID.ShouldNotEqual(_useCase1.UniqueId);
 
         private It Should_remove_the_use_case = () => Package.UseCases.ShouldNotContain(_useCase1);
         

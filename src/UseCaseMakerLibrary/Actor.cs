@@ -55,11 +55,11 @@ namespace UseCaseMakerLibrary
 
 		    if(index == 0)
 			{
-				goal.ID = 1;
+				goal.Id = 1;
 			}
 			else
 			{
-				goal.ID = goals[index - 1].ID + 1;
+				goal.Id = goals[index - 1].Id + 1;
 			}
 
 			goals.Add(goal);
@@ -71,9 +71,9 @@ namespace UseCaseMakerLibrary
 		{
 			foreach(Goal tmpGoal in this.goals)
 			{
-				if(tmpGoal.ID > goals.ID)
+				if(tmpGoal.Id > goals.Id)
 				{
-					tmpGoal.ID -= 1;
+					tmpGoal.Id -= 1;
 				}
 			}
 			this.goals.Remove(goal);
@@ -85,7 +85,7 @@ namespace UseCaseMakerLibrary
 
 			foreach(Goal tmpGoal in this.goals)
 			{
-				if(tmpGoal.UniqueID == uniqueID)
+				if(tmpGoal.UniqueId == uniqueID)
 				{
 					goal = tmpGoal;
 				}
@@ -103,7 +103,7 @@ namespace UseCaseMakerLibrary
 		            ActiveActor tmpAActor = null;
 		            foreach(ActiveActor aactor in uc.ActiveActors)
 		            {
-		                if(aactor.ActorUniqueID == UniqueID)
+		                if(aactor.ActorUniqueID == this.UniqueId)
 		                {
 		                    tmpAActor = aactor;
 		                }

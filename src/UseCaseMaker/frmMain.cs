@@ -2856,7 +2856,7 @@ namespace UseCaseMaker
 
 					tabUseCase.TabPages.Add(pgPGeneral);
 					lblPOwner.Text = String.Empty;
-					lblPID.Text = model.ElementID;
+					lblPID.Text = model.ElementId;
 					lblPName.Text = model.Name;
 
 					tabUseCase.TabPages.Add(pgAttributes);
@@ -2939,7 +2939,7 @@ namespace UseCaseMaker
 
 					tabUseCase.TabPages.Add(pgPGeneral);
 					lblPOwner.Text = package.Owner.Name;
-					lblPID.Text = package.ElementID;
+					lblPID.Text = package.ElementId;
 					lblPName.Text = package.Name;
 
 					tabUseCase.TabPages.Add(pgAttributes);
@@ -3107,7 +3107,7 @@ namespace UseCaseMaker
 
 					tabUseCase.TabPages.Add(pgAGeneral);
 					lblAOwner.Text = actor.Owner.Name;
-					lblAID.Text = actor.ElementID;
+					lblAID.Text = actor.ElementId;
 					lblAName.Text = actor.Name;
 					AGList.DataSource = actor.Goals;
 					AGList.IndexDataField = "Name";
@@ -3174,7 +3174,7 @@ namespace UseCaseMaker
 
 					tabUseCase.TabPages.Add(pgUCGeneral);
 					lblUCOwner.Text = useCase.Owner.Name;
-					lblUCID.Text = useCase.ElementID;
+					lblUCID.Text = useCase.ElementId;
 					lblUCName.Text = useCase.Name;
 					tbPreconditions.Text = useCase.Preconditions;
 					tbPreconditions.ParseNow();
@@ -3387,16 +3387,16 @@ namespace UseCaseMaker
 			{
 				Model model = (Model)element;
 				tvModelBrowser.Nodes.Clear();
-				TreeNode node = new TreeNode(model.Name + " (" + model.ElementID + ")");
-				node.Tag = model.UniqueID;
+				TreeNode node = new TreeNode(model.Name + " (" + model.ElementId + ")");
+				node.Tag = model.UniqueId;
 				tvModelBrowser.Nodes.Add(node);
 				tvModelBrowser.SelectedNode = node;
 				TreeNode ownerNode = node;
 				node = new TreeNode(this.localizationService.GetValue("Globals","Actors"),1,1);
-				node.Tag = model.Actors.UniqueID;
+				node.Tag = model.Actors.UniqueId;
 				ownerNode.Nodes.Add(node);
 				node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),2,2);
-				node.Tag = model.UseCases.UniqueID;
+				node.Tag = model.UseCases.UniqueId;
 				ownerNode.Nodes.Add(node);
 				sub = "\"" + model.Path + "\"";
 				sub = sub.Replace(" ","\t");
@@ -3413,13 +3413,13 @@ namespace UseCaseMaker
 			if(element.GetType() == typeof(Package))
 			{
 				Package package = (Package)element;
-				ownerUniqueID = ((Package)owner).UniqueID;
+				ownerUniqueID = ((Package)owner).UniqueId;
 				if(addToParent)
 				{
 					((Package)owner).AddPackage(package);
 				}
-				TreeNode node = new TreeNode(package.Name + " (" + package.ElementID + ")");
-				node.Tag = package.UniqueID;
+				TreeNode node = new TreeNode(package.Name + " (" + package.ElementId + ")");
+				node.Tag = package.UniqueId;
 				TreeNode ownerNode = this.FindNode(null,ownerUniqueID);
 				if(ownerNode != null)
 				{
@@ -3427,10 +3427,10 @@ namespace UseCaseMaker
 					tvModelBrowser.SelectedNode = node;
 					ownerNode = node;
 					node = new TreeNode(this.localizationService.GetValue("Globals","Actors"),1,1);
-					node.Tag = package.Actors.UniqueID;
+					node.Tag = package.Actors.UniqueId;
 					ownerNode.Nodes.Add(node);
 					node = new TreeNode(this.localizationService.GetValue("Globals","UseCases"),2,2);
-					node.Tag = package.UseCases.UniqueID;
+					node.Tag = package.UseCases.UniqueId;
 					ownerNode.Nodes.Add(node);
 				}
 				sub = "\"" + package.Path + "\"";
@@ -3453,14 +3453,14 @@ namespace UseCaseMaker
 				{
 					package.AddActor(actor);
 				}
-				TreeNode node = new TreeNode(actor.Name + " (" + actor.ElementID + ")",3,3);
-				node.Tag = actor.UniqueID;
-				TreeNode ownerNode = this.FindNode(null,package.UniqueID);
+				TreeNode node = new TreeNode(actor.Name + " (" + actor.ElementId + ")",3,3);
+				node.Tag = actor.UniqueId;
+				TreeNode ownerNode = this.FindNode(null,package.UniqueId);
 				if(ownerNode != null)
 				{
 					foreach(TreeNode subNode in ownerNode.Nodes)
 					{
-						if((String)subNode.Tag == package.Actors.UniqueID)
+						if((String)subNode.Tag == package.Actors.UniqueId)
 						{
 							subNode.Nodes.Add(node);
 							tvModelBrowser.SelectedNode = node;
@@ -3488,14 +3488,14 @@ namespace UseCaseMaker
 				{
 					package.AddUseCase(useCase);
 				}
-				TreeNode node = new TreeNode(useCase.Name + " (" + useCase.ElementID + ")",4,4);
-				node.Tag = useCase.UniqueID;
-				TreeNode ownerNode = this.FindNode(null,package.UniqueID);
+				TreeNode node = new TreeNode(useCase.Name + " (" + useCase.ElementId + ")",4,4);
+				node.Tag = useCase.UniqueId;
+				TreeNode ownerNode = this.FindNode(null,package.UniqueId);
 				if(ownerNode != null)
 				{
 					foreach(TreeNode subNode in ownerNode.Nodes)
 					{
-						if((String)subNode.Tag == package.UseCases.UniqueID)
+						if((String)subNode.Tag == package.UseCases.UniqueId)
 						{
 							subNode.Nodes.Add(node);
 							tvModelBrowser.SelectedNode = node;
@@ -4121,7 +4121,7 @@ namespace UseCaseMaker
 		{
 			IdentificableObject ia = (IdentificableObject)this.currentElement;
 			oldNameLabel.Text = this.ElementNameChange(ia);
-			tvModelBrowser.SelectedNode.Text = ia.Name + " (" + ia.ElementID + ")";
+			tvModelBrowser.SelectedNode.Text = ia.Name + " (" + ia.ElementId + ")";
 		}
 
 		private void ReorderElements()
@@ -4182,7 +4182,7 @@ namespace UseCaseMaker
 					{
 						Actor actor = (Actor)((Actors)this.currentElement).FindByName(orderedNames[counter]);
 						string oldPath = actor.Path;
-						actor.ID = counter + 1;
+						actor.Id = counter + 1;
 						model.ReplaceElementPath(
 							oldPath,
 							"#_" + counter.ToString() + "_#",
@@ -4195,7 +4195,7 @@ namespace UseCaseMaker
 					{
 						UseCase useCase = (UseCase)((UseCases)this.currentElement).FindByName(orderedNames[counter]);
 						string oldPath = useCase.Path;
-						useCase.ID = counter + 1;
+						useCase.Id = counter + 1;
 						model.ReplaceElementPath(
 							oldPath,
 							"#_" + counter.ToString() + "_#",
@@ -4912,7 +4912,7 @@ namespace UseCaseMaker
 
 				for(int counter = 0; counter < model.Glossary.Count; counter++)
 				{
-					if((string)GList.Items[counter].Tag == gi.UniqueID)
+					if((string)GList.Items[counter].Tag == gi.UniqueId)
 					{
 						GList.SelectedIndex = counter;
 					}
@@ -5106,7 +5106,7 @@ namespace UseCaseMaker
 			{
 				String actorName = (String)frm.lbActors.SelectedItem;
 				Actor actor = (Actor)model.FindElementByName(actorName);
-				if(useCase.ActiveActors.FindByUniqueID(actor.UniqueID) != null)
+				if(useCase.ActiveActors.FindByUniqueID(actor.UniqueId) != null)
 				{
 					// [Actor already present!]
 					MessageBox.Show(this,this.localizationService.GetValue("UserMessages","actorAlreadyPresent"));
@@ -5465,8 +5465,8 @@ namespace UseCaseMaker
 					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
-					if(((IIdentificableObject)dstElement).UniqueID ==
-						((IIdentificableObject)srcElement).UniqueID)
+					if(((IIdentificableObject)dstElement).UniqueId ==
+						((IIdentificableObject)srcElement).UniqueId)
 					{
 						return;
 					}
@@ -6166,7 +6166,7 @@ namespace UseCaseMaker
 			}
 			else
 			{
-				TreeNode node = this.FindNode(null,io.UniqueID);
+				TreeNode node = this.FindNode(null,io.UniqueId);
 				node.EnsureVisible();
 				tvModelBrowser.SelectedNode = node;
 			}
@@ -6498,8 +6498,8 @@ namespace UseCaseMaker
 				dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 				// Sorgente e destinazione sono lo stesso elemento
-				if(((IIdentificableObject)dstElement).UniqueID ==
-					((IIdentificableObject)srcElement).UniqueID)
+				if(((IIdentificableObject)dstElement).UniqueId ==
+					((IIdentificableObject)srcElement).UniqueId)
 				{
 					return;
 				}
@@ -6521,7 +6521,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.ID = dst.Packages.GetNextFreeID();
+						src.Id = dst.Packages.GetNextFreeID();
 						dst.AddPackage(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6536,7 +6536,7 @@ namespace UseCaseMaker
 						foreach(Actor actor in owner.Actors)
 						{
 							oldPath = actor.Path;
-							actor.ID = dst.Actors.GetNextFreeID();
+							actor.Id = dst.Actors.GetNextFreeID();
 							dst.AddActor(actor);
 							model.ReplaceElementPath(oldPath,"","","","",actor.Path);
 						}
@@ -6555,7 +6555,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.ID = dst.Actors.GetNextFreeID();
+						src.Id = dst.Actors.GetNextFreeID();
 						dst.AddActor(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6570,7 +6570,7 @@ namespace UseCaseMaker
 						foreach(UseCase useCase in owner.UseCases)
 						{
 							oldPath = useCase.Path;
-							useCase.ID = dst.UseCases.GetNextFreeID();
+							useCase.Id = dst.UseCases.GetNextFreeID();
 							dst.AddUseCase(useCase);
 							model.ReplaceElementPath(oldPath,"","","","",useCase.Path);
 						}
@@ -6589,7 +6589,7 @@ namespace UseCaseMaker
 							"",
 							"",
 							true);
-						src.ID = dst.UseCases.GetNextFreeID();
+						src.Id = dst.UseCases.GetNextFreeID();
 						dst.AddUseCase(src);
 						model.ReplaceElementPath(oldPath,"","","","",src.Path);
 					}
@@ -6664,8 +6664,8 @@ namespace UseCaseMaker
 					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
-					if(((IIdentificableObject)dstElement).UniqueID ==
-						((IIdentificableObject)srcElement).UniqueID)
+					if(((IIdentificableObject)dstElement).UniqueId ==
+						((IIdentificableObject)srcElement).UniqueId)
 					{
 						return;
 					}
@@ -6686,7 +6686,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.ID = dst.Packages.GetNextFreeID();
+							src.Id = dst.Packages.GetNextFreeID();
 							dst.AddPackage(src);
 							Clipboard.SetDataObject(new DataObject());
 						}
@@ -6700,7 +6700,7 @@ namespace UseCaseMaker
 							Package owner = src.Owner;
 							foreach(Actor actor in owner.Actors)
 							{
-								actor.ID = dst.Actors.GetNextFreeID();
+								actor.Id = dst.Actors.GetNextFreeID();
 								dst.AddActor(actor);
 							}
 							owner.Actors.Clear();
@@ -6718,7 +6718,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.ID = dst.Actors.GetNextFreeID();
+							src.Id = dst.Actors.GetNextFreeID();
 							dst.AddActor(src);
 							Clipboard.SetDataObject(new DataObject());
 						}
@@ -6732,7 +6732,7 @@ namespace UseCaseMaker
 							Package owner = src.Owner;
 							foreach(UseCase useCase in owner.UseCases)
 							{
-								useCase.ID = dst.UseCases.GetNextFreeID();
+								useCase.Id = dst.UseCases.GetNextFreeID();
 								dst.AddUseCase(useCase);
 							}
 							owner.UseCases.Clear();
@@ -6750,7 +6750,7 @@ namespace UseCaseMaker
 								"",
 								"",
 								true);
-							src.ID = dst.UseCases.GetNextFreeID();
+							src.Id = dst.UseCases.GetNextFreeID();
 							dst.AddUseCase(src);
 							Clipboard.SetDataObject(new DataObject());
 						}
@@ -6842,8 +6842,8 @@ namespace UseCaseMaker
 					dstElement = model.FindElementByUniqueId((String)dstNode.Tag);
 
 					// Sorgente e destinazione sono lo stesso elemento
-					if(((IIdentificableObject)dstElement).UniqueID ==
-						((IIdentificableObject)srcElement).UniqueID)
+					if(((IIdentificableObject)dstElement).UniqueId ==
+						((IIdentificableObject)srcElement).UniqueId)
 					{
 						mnuEditPaste.Enabled = false;;
 					}

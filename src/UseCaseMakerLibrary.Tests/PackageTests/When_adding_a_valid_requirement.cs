@@ -19,7 +19,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
         // TODO: This test is contrived
         private It Should_return_the_requirement_from_unique_id =
             () =>
-            Package.FindRequirementByUniqueID(Package.Requirements[0].UniqueID).ShouldEqual(
+            Package.FindRequirementByUniqueID(Package.Requirements[0].UniqueId).ShouldEqual(
                 Package.Requirements[0]);
 
 

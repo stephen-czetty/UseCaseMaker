@@ -13,7 +13,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                  };
 
         private It Should_return_correct_package =
-            () => Model.FindElementByUniqueId(_package.UniqueID).ShouldEqual(_package);
+            () => Model.FindElementByUniqueId(_package.UniqueId).ShouldEqual(_package);
         
 
         private static Package _package;

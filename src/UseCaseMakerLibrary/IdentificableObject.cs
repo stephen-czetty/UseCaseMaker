@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Serialization;
+using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary
 {
@@ -10,8 +11,8 @@ namespace UseCaseMakerLibrary
         {
             ObjectUserViewStatus = new UserViewStatus();
             Prefix = String.Empty;
-            ID = -1;
-            UniqueID = String.Empty;
+            this.Id = -1;
+            this.UniqueId = String.Empty;
             Name = String.Empty;
             Owner = null;
             MakeUniqueId();
@@ -20,22 +21,22 @@ namespace UseCaseMakerLibrary
 		internal IdentificableObject(String name, String prefix, Int32 id)
         {
 	        ObjectUserViewStatus = new UserViewStatus();
-	        UniqueID = String.Empty;
+	        this.UniqueId = String.Empty;
             Owner = null;
             MakeUniqueId();
             Name = name;
             Prefix = prefix;
-            ID = id;
+            this.Id = id;
         }
 
         internal IdentificableObject(String name, String prefix, Int32 id, Package owner)
         {
             ObjectUserViewStatus = new UserViewStatus();
-            UniqueID = String.Empty;
+            this.UniqueId = String.Empty;
             MakeUniqueId();
             Name = name;
             Prefix = prefix;
-            ID = id;
+            this.Id = id;
             Owner = owner;
         }
         #endregion
@@ -43,7 +44,7 @@ namespace UseCaseMakerLibrary
         #region Public Properties
 
         [XmlAttribute]
-	    public string UniqueID { get; set; }
+	    public string UniqueId { get; set; }
 
         [XmlIgnore]
 	    public Package Owner { get; set; }
@@ -52,7 +53,7 @@ namespace UseCaseMakerLibrary
 	    public virtual string Name { get; set; }
 
         [XmlAttribute]
-	    public int ID { get; set; }
+	    public int Id { get; set; }
 
         [XmlAttribute]
         public string Prefix { get; set; }
@@ -62,11 +63,11 @@ namespace UseCaseMakerLibrary
         {
             get
             {
-                string path = ElementID;
+                string path = this.ElementId;
                 IdentificableObject owner = Owner;
                 while(owner != null)
                 {
-                    path = owner.ElementID + "." + path;
+                    path = owner.ElementId + "." + path;
                     owner = owner.Owner;
                 }
                 return path;
@@ -74,11 +75,11 @@ namespace UseCaseMakerLibrary
         }
 
         [XmlIgnore]
-        public virtual String ElementID
+        public virtual String ElementId
         {
             get
             {
-				return Prefix + ID.ToString();
+				return Prefix + this.Id.ToString();
             }
         }
 
@@ -94,7 +95,7 @@ namespace UseCaseMakerLibrary
         private void MakeUniqueId()
         {
             Guid guid = Guid.NewGuid();
-            UniqueID = guid.ToString();
+            this.UniqueId = guid.ToString();
         }
         #endregion
     }

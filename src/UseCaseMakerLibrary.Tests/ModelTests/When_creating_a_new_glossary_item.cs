@@ -16,7 +16,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
 
         private It Should_set_the_name_to_glossaryName = () => _glossaryItem.Name.ShouldEqual(_glossaryName);
         private It Should_set_the_prefix_to_glossaryPrefix = () => _glossaryItem.Prefix.ShouldEqual(_glossaryPrefix);
-        private It Should_set_the_id_to_glossaryId = () => _glossaryItem.ID.ShouldEqual(_glossaryId);
+        private It Should_set_the_id_to_glossaryId = () => _glossaryItem.Id.ShouldEqual(_glossaryId);
         private It Should_set_the_owner_to_model = () => _glossaryItem.Owner.ShouldEqual(Model);
         
 

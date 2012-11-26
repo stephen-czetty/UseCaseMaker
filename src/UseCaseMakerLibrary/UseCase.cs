@@ -166,7 +166,7 @@ namespace UseCaseMakerLibrary
             if(referenceType != DependencyItem.ReferenceType.None)
             {
                 step.Dependency.Stereotype = stereotype;
-                step.Dependency.PartnerUniqueID = referencedUseCase.UniqueID;
+                step.Dependency.PartnerUniqueID = referencedUseCase.UniqueId;
                 step.Dependency.Type = referenceType;
                 step.Description = (step.Dependency.Stereotype != "") ? "<<" + step.Dependency.Stereotype + ">>" : "";
                 step.Description += " \"";
@@ -176,7 +176,7 @@ namespace UseCaseMakerLibrary
 
             if(previousStep == null)
             {
-                step.ID = 1;
+                step.Id = 1;
                 Steps.Add(step);
                 return Steps.Count - 1;
             }
@@ -186,8 +186,8 @@ namespace UseCaseMakerLibrary
                 case Step.StepType.Default:
                     if(previousStep.Type == Step.StepType.Default)
                     {
-                        step.ID = previousStep.ID;
-                        index = FindStepIndexByUniqueId(previousStep.UniqueID) + 1;
+                        step.Id = previousStep.Id;
+                        index = FindStepIndexByUniqueId(previousStep.UniqueId) + 1;
                         while(true)
                         {
                             if(index == Steps.Count)
@@ -196,28 +196,28 @@ namespace UseCaseMakerLibrary
                                 break;
                             }
                             Step tmpStep = Steps[index];
-                            if(tmpStep.ID != step.ID)
+                            if(tmpStep.Id != step.Id)
                             {
                                 previousStep = Steps[index - 1];
                                 break;
                             }
                             index += 1;
                         }
-                        step.ID = previousStep.ID + 1;
+                        step.Id = previousStep.Id + 1;
                         foreach(Step tmpStep in Steps)
                         {
-                            if(tmpStep.ID >= step.ID)
+                            if(tmpStep.Id >= step.Id)
                             {
-                                tmpStep.ID += 1;
+                                tmpStep.Id += 1;
                             }
                         }
                     }
                     else if(previousStep.Type == Step.StepType.Alternative)
                     {
-                        step.ID = previousStep.ID;
+                        step.Id = previousStep.Id;
                         step.Type = Step.StepType.Alternative;
 
-                        index = FindStepIndexByUniqueId(previousStep.UniqueID) + 1;
+                        index = FindStepIndexByUniqueId(previousStep.UniqueId) + 1;
                         while(true)
                         {
                             if(index == Steps.Count)
@@ -226,7 +226,7 @@ namespace UseCaseMakerLibrary
                                 break;
                             }
                             Step tmpStep = Steps[index];
-                            if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
+                            if(tmpStep.Id != step.Id || tmpStep.Prefix == String.Empty)
                             {
                                 previousStep = Steps[index - 1];
                                 break;
@@ -247,7 +247,7 @@ namespace UseCaseMakerLibrary
                         
                         foreach(Step tmpStep in Steps)
                         {
-                            if(tmpStep.ID == step.ID)
+                            if(tmpStep.Id == step.Id)
                             {
                                 if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
                                 {
@@ -261,10 +261,10 @@ namespace UseCaseMakerLibrary
                     else if(previousStep.Type == Step.StepType.AlternativeChild)
                     {
                         step.Type = Step.StepType.AlternativeChild;
-                        step.ID = previousStep.ID;
+                        step.Id = previousStep.Id;
                         step.Prefix = previousStep.Prefix;
 
-                        index = FindStepIndexByUniqueId(previousStep.UniqueID) + 1;
+                        index = FindStepIndexByUniqueId(previousStep.UniqueId) + 1;
                         while(true)
                         {
                             if(index == Steps.Count)
@@ -273,7 +273,7 @@ namespace UseCaseMakerLibrary
                                 break;
                             }
                             Step tmpStep = Steps[index];
-                            if(tmpStep.ID != step.ID || tmpStep.Prefix != step.Prefix)
+                            if(tmpStep.Id != step.Id || tmpStep.Prefix != step.Prefix)
                             {
                                 previousStep = Steps[index - 1];
                                 break;
@@ -288,10 +288,10 @@ namespace UseCaseMakerLibrary
                 case Step.StepType.Alternative:
                     if(previousStep.Type == Step.StepType.Default)
                     {
-                        step.ID = previousStep.ID;
+                        step.Id = previousStep.Id;
                         step.Type = Step.StepType.Alternative;
 
-                        index = this.FindStepIndexByUniqueId(previousStep.UniqueID) + 1;
+                        index = this.FindStepIndexByUniqueId(previousStep.UniqueId) + 1;
                         while(true)
                         {
                             if(index == Steps.Count)
@@ -300,7 +300,7 @@ namespace UseCaseMakerLibrary
                                 break;
                             }
                             Step tmpStep = Steps[index];
-                            if(tmpStep.ID != step.ID || tmpStep.Prefix == String.Empty)
+                            if(tmpStep.Id != step.Id || tmpStep.Prefix == String.Empty)
                             {
                                 previousStep = Steps[index - 1];
                                 break;
@@ -321,7 +321,7 @@ namespace UseCaseMakerLibrary
                         
                         foreach(Step tmpStep in Steps)
                         {
-                            if(tmpStep.ID == step.ID)
+                            if(tmpStep.Id == step.Id)
                             {
                                 if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
                                 {
@@ -335,14 +335,14 @@ namespace UseCaseMakerLibrary
                     else if(previousStep.Type == Step.StepType.Alternative)
                     {
                         step.Type = Step.StepType.AlternativeChild;
-                        step.ID = previousStep.ID;
+                        step.Id = previousStep.Id;
                         step.Prefix = previousStep.Prefix;
                         step.ChildID = 1;
                     }
                     break;
             }
 
-            index = FindStepIndexByUniqueId(previousStep.UniqueID) + 1;
+            index = FindStepIndexByUniqueId(previousStep.UniqueId) + 1;
             if(index == Steps.Count)
             {
                 Steps.Add(step);
@@ -369,7 +369,7 @@ namespace UseCaseMakerLibrary
             if(referenceType != DependencyItem.ReferenceType.None)
             {
                 step.Dependency.Stereotype = stereotype;
-                step.Dependency.PartnerUniqueID = referencedUseCase.UniqueID;
+                step.Dependency.PartnerUniqueID = referencedUseCase.UniqueId;
                 step.Dependency.Type = referenceType;
                 step.Description = (step.Dependency.Stereotype != "") ? "<<" + step.Dependency.Stereotype + ">>" : "";
                 step.Description += " \"";
@@ -379,12 +379,12 @@ namespace UseCaseMakerLibrary
 
             if(previousStep.Type == Step.StepType.Default)
             {
-                step.ID = previousStep.ID;
+                step.Id = previousStep.Id;
 				foreach(Step tmpStep in this.Steps)
                 {
-                    if(tmpStep.ID >= step.ID)
+                    if(tmpStep.Id >= step.Id)
                     {
-                        tmpStep.ID += 1;
+                        tmpStep.Id += 1;
                     }
                 }
             }
@@ -395,12 +395,12 @@ namespace UseCaseMakerLibrary
                 {
                     step.Prefix = "A";
                 }
-                step.ID = previousStep.ID;
+                step.Id = previousStep.Id;
                 step.Type = Step.StepType.Alternative;
 
                 foreach(Step tmpStep in Steps)
                 {
-                    if(tmpStep.ID == step.ID)
+                    if(tmpStep.Id == step.Id)
                     {
                         if(tmpStep.Prefix != String.Empty && tmpStep.Prefix.CompareTo(step.Prefix) >= 0)
                         {
@@ -414,12 +414,12 @@ namespace UseCaseMakerLibrary
             else if(previousStep.Type == Step.StepType.AlternativeChild)
             {
                 step.Type = Step.StepType.AlternativeChild;
-                step.ID = previousStep.ID;
+                step.Id = previousStep.Id;
                 step.Prefix = previousStep.Prefix;
                 step.ChildID = previousStep.ChildID;
                 foreach(Step tmpStep in Steps)
                 {
-                    if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+                    if(tmpStep.Id == step.Id && tmpStep.Prefix == step.Prefix)
                     {
                         if(tmpStep.ChildID >= step.ChildID)
                         {
@@ -429,7 +429,7 @@ namespace UseCaseMakerLibrary
                 }
             }
 
-            int index = FindStepIndexByUniqueId(previousStep.UniqueID);
+            int index = FindStepIndexByUniqueId(previousStep.UniqueId);
             Steps.Insert(index,step);
             ret = index;
 
@@ -444,17 +444,17 @@ namespace UseCaseMakerLibrary
                 switch(step.Type)
                 {
                     case Step.StepType.Default:
-                        if(tmpStep.ID == step.ID)
+                        if(tmpStep.Id == step.Id)
                         {
                             Steps.Remove(tmpStep);
                         }
-                        if(tmpStep.ID > step.ID)
+                        if(tmpStep.Id > step.Id)
                         {
-                            tmpStep.ID -= 1;
+                            tmpStep.Id -= 1;
                         }
                         break;
                     case Step.StepType.Alternative:
-                        if(tmpStep.ID == step.ID)
+                        if(tmpStep.Id == step.Id)
                         {
                             if(tmpStep.Prefix == step.Prefix)
                             {
@@ -469,7 +469,7 @@ namespace UseCaseMakerLibrary
                         }
                         break;
                     case Step.StepType.AlternativeChild:
-                        if(tmpStep.ID == step.ID && tmpStep.Prefix == step.Prefix)
+                        if(tmpStep.Id == step.Id && tmpStep.Prefix == step.Prefix)
                         {
                             if(tmpStep.ChildID == step.ChildID)
                             {
@@ -491,7 +491,7 @@ namespace UseCaseMakerLibrary
 
             foreach(Step tmpStep in Steps)
             {
-                if(tmpStep.UniqueID == uniqueID)
+                if(tmpStep.UniqueId == uniqueID)
                 {
                     step = tmpStep;
                 }
@@ -513,7 +513,7 @@ namespace UseCaseMakerLibrary
             for(index = Steps.Count - 1; index >= 0; index--)
             {
                 tmpStep = Steps[index];
-                if(tmpStep.UniqueID == step.UniqueID)
+                if(tmpStep.UniqueId == step.UniqueId)
                 {
                     break;
                 }
@@ -544,11 +544,11 @@ namespace UseCaseMakerLibrary
 
             if(index == 0)
             {
-                openIssue.ID = 1;
+                openIssue.Id = 1;
             }
             else
             {
-                openIssue.ID = OpenIssues[index - 1].ID + 1;
+                openIssue.Id = OpenIssues[index - 1].Id + 1;
             }
 
             OpenIssues.Add(openIssue);
@@ -560,9 +560,9 @@ namespace UseCaseMakerLibrary
         {
             foreach(OpenIssue tmpOpenIssue in OpenIssues)
             {
-                if(tmpOpenIssue.ID > openIssue.ID)
+                if(tmpOpenIssue.Id > openIssue.Id)
                 {
-                    tmpOpenIssue.ID -= 1;
+                    tmpOpenIssue.Id -= 1;
                 }
             }
             OpenIssues.Remove(openIssue);
@@ -574,7 +574,7 @@ namespace UseCaseMakerLibrary
 
             foreach(OpenIssue tmpOpenIssue in OpenIssues)
             {
-                if(tmpOpenIssue.UniqueID == uniqueID)
+                if(tmpOpenIssue.UniqueId == uniqueID)
                 {
                     openIssue = tmpOpenIssue;
                 }
@@ -588,14 +588,14 @@ namespace UseCaseMakerLibrary
         public void AddActiveActor(Actor actor)
         {
             ActiveActor aactor = new ActiveActor();
-            aactor.ActorUniqueID = actor.UniqueID;
+            aactor.ActorUniqueID = actor.UniqueId;
             aactor.IsPrimary = false;
             ActiveActors.Add(aactor);
         }
 
         public void RemoveActiveActor(Actor actor)
         {
-            ActiveActor aactor = ActiveActors.FindByUniqueID(actor.UniqueID);
+            ActiveActor aactor = ActiveActors.FindByUniqueID(actor.UniqueId);
             if(aactor != null)
             {
                 ActiveActors.Remove(aactor);
@@ -628,7 +628,7 @@ namespace UseCaseMakerLibrary
 
             for(int i = 0; i < this.Steps.Count; i++)
             {
-                if(Steps[i].UniqueID == uniqueID)
+                if(Steps[i].UniqueId == uniqueID)
                 {
                     ret = i;
                 }
@@ -675,7 +675,7 @@ namespace UseCaseMakerLibrary
             {
                 foreach (Step step in uc.Steps)
                 {
-                    if (step.Dependency.PartnerUniqueID == UniqueID)
+                    if (step.Dependency.PartnerUniqueID == this.UniqueId)
                     {
                         step.Dependency.Type = DependencyItem.ReferenceType.None;
                         step.Dependency.PartnerUniqueID = "";

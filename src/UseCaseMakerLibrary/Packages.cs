@@ -1,4 +1,5 @@
 using System;
+using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary
 {
@@ -13,19 +14,19 @@ namespace UseCaseMakerLibrary
 		{
 			IIdentificableObject element = null;
 
-			if(this.UniqueID == uniqueID)
+			if(this.UniqueId == uniqueID)
 			{
 				return this;
 			}
 
 			foreach(Package child in this)
 			{
-				if(child.UniqueID == uniqueID)
+				if(child.UniqueId == uniqueID)
 				{
 					element = child;
 					break;
 				}
-				if(child.Actors.UniqueID == uniqueID)
+				if(child.Actors.UniqueId == uniqueID)
 				{
 					element = child.Actors;
 					break;
@@ -35,7 +36,7 @@ namespace UseCaseMakerLibrary
 				{
 					break;
 				}
-				if(child.UseCases.UniqueID == uniqueID)
+				if(child.UseCases.UniqueId == uniqueID)
 				{
 					element = child.UseCases;
 					break;
@@ -45,7 +46,7 @@ namespace UseCaseMakerLibrary
 				{
 					break;
 				}
-				if(child.Requirements.UniqueID == uniqueID)
+				if(child.Requirements.UniqueId == uniqueID)
 				{
 					element = child.Requirements;
 					break;

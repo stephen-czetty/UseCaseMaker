@@ -20,7 +20,7 @@ namespace UseCaseMakerLibrary.Tests.XmlSerializeTests
 
         private Because Of = () => XmlSerializer.XmlDeserialize(_document, "mainNode", "", "1.1", _model);
 
-        private It Should_populate_the_model = () => _model.UniqueID.ShouldEqual("8f4bd5c7-ba2a-492e-88bc-95ae7af37379");
+        private It Should_populate_the_model = () => _model.UniqueId.ShouldEqual("8f4bd5c7-ba2a-492e-88bc-95ae7af37379");
 
         private It Should_throw_exception_when_called_with_bad_root_node_name =
             () => Catch.Exception(() => XmlSerializer.XmlDeserialize(_document, "badNodeName", "", "1.0", _model)).ShouldBeOfType<XmlSerializerException>();

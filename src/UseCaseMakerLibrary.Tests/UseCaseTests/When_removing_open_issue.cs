@@ -11,7 +11,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
                 UseCase.AddOpenIssue();
                 UseCase.OpenIssues.Count.ShouldEqual(2);
                 _remainingIssue = (OpenIssue)UseCase.OpenIssues[1];
-                _remainingIssue.ID.ShouldEqual(2);
+                _remainingIssue.Id.ShouldEqual(2);
                 _openIssue = (OpenIssue)UseCase.OpenIssues[0];
             };
 
@@ -19,7 +19,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
 
         private It Should_not_contain_the_issue = () => UseCase.OpenIssues.ShouldNotContain(_openIssue);
 
-        private It Should_set_remaining_issue_id_to_one = () => _remainingIssue.ID.ShouldEqual(1);
+        private It Should_set_remaining_issue_id_to_one = () => _remainingIssue.Id.ShouldEqual(1);
 
         private static OpenIssue _openIssue;
         private static OpenIssue _remainingIssue;

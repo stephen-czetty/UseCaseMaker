@@ -11,7 +11,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
                                      _glossaryName = A.Random.String;
                                      _element = new GlossaryItem {Name = _glossaryName};
                                      Model.AddGlossaryItem(_element);
-                                     _path = Model.Prefix + Model.ID + "." + _element.Prefix + _element.ID;
+                                     _path = Model.Prefix + Model.Id + "." + _element.Prefix + _element.Id;
                                  };
 
         private It Should_return_the_element = () => Model.FindElementByPath(_path).ShouldEqual(_element);

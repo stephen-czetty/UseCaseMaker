@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Xml.Serialization;
+using UseCaseMakerLibrary.Contracts;
 
 namespace UseCaseMakerLibrary
 {
@@ -103,11 +104,11 @@ namespace UseCaseMakerLibrary
 		}
 
         [XmlIgnore]
-		public override String ElementID
+		public override String ElementId
 		{
 			get
 			{
-				return Owner.ElementID;
+				return Owner.ElementId;
 			}
 		}
 
@@ -171,7 +172,7 @@ namespace UseCaseMakerLibrary
 			T element = null;
 			foreach(T tmpElement in this)
 			{
-				if(tmpElement.UniqueID == uniqueID)
+				if(tmpElement.UniqueId == uniqueID)
 				{
 					element = tmpElement;
 				}
@@ -199,9 +200,9 @@ namespace UseCaseMakerLibrary
 			int id = 0;
 			foreach(T tmpElement in _items)
 			{
-				if(tmpElement.ID > id)
+				if(tmpElement.Id > id)
 				{
-					id = tmpElement.ID;
+					id = tmpElement.Id;
 				}
 			}
 

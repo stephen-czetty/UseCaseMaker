@@ -11,7 +11,7 @@ namespace UseCaseMakerLibrary.Tests.ActorTests
 
         private It Should_add_goal_to_goals_list = () => Actor.Goals[_returnIndex].ShouldBeOfType<Goal>();
 
-        private It Should_set_goal_id_to_one = () => ((Goal)Actor.Goals[_returnIndex]).ID.ShouldEqual(1);
+        private It Should_set_goal_id_to_one = () => ((Goal)Actor.Goals[_returnIndex]).Id.ShouldEqual(1);
 
         private static int _returnIndex;
     }

@@ -7,6 +7,6 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     {
         // ISSUE: API is clunky
         private It Should_return_the_requirement =
-            () => Model.FindElementByUniqueId(Model.Requirements.UniqueID).ShouldEqual(Model.Requirements);
+            () => Model.FindElementByUniqueId(Model.Requirements.UniqueId).ShouldEqual(Model.Requirements);
     }
 }

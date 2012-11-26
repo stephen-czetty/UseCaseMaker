@@ -307,7 +307,7 @@ namespace UseCaseMakerLibrary
             var requirement = new Requirement();
             int index = Requirements.Count;
 
-            requirement.ID = index == 0 ? 1 : this.Requirements[index - 1].ID + 1;
+            requirement.Id = index == 0 ? 1 : this.Requirements[index - 1].Id + 1;
 
             this.Requirements.Add(requirement);
 
@@ -322,8 +322,8 @@ namespace UseCaseMakerLibrary
         {
             foreach (
                 Requirement tmpRequirement in
-                    this.Requirements.Where(tmpRequirement => tmpRequirement.ID > requirement.ID))
-                tmpRequirement.ID -= 1;
+                    this.Requirements.Where(tmpRequirement => tmpRequirement.Id > requirement.Id))
+                tmpRequirement.Id -= 1;
 
             this.Requirements.Remove(requirement);
         }
@@ -339,7 +339,7 @@ namespace UseCaseMakerLibrary
 
             foreach (
                 Requirement tmpRequirement in
-                    this.Requirements.Where(tmpRequirement => tmpRequirement.UniqueID == uniqueId))
+                    this.Requirements.Where(tmpRequirement => tmpRequirement.UniqueId == uniqueId))
                 requirement = tmpRequirement;
 
             return requirement;
@@ -572,7 +572,7 @@ namespace UseCaseMakerLibrary
             if (actor == null)
                 throw new NullReferenceException("Actor cannot be null");
 
-            if (actor.ID == -1)
+            if (actor.Id == -1)
                 throw new InvalidOperationException("Actor must have a valid ID");
         }
 

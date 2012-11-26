@@ -171,6 +171,7 @@
     <Compile Include="Annotations\StringFormatMethodAttribute.cs" />
     <Compile Include="Annotations\TerminatesProgramAttribute.cs" />
     <Compile Include="Annotations\UsedImplicitlyAttribute.cs" />
+    <Compile Include="Contracts\IIdentificableObject.cs" />
     <Compile Include="Contracts\ILocalizationService.cs" />
     <Compile Include="Contracts\IModel.cs" />
     <Compile Include="Contracts\IModelRepository.cs" />
@@ -209,9 +210,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdentificableObjectCollection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="IIdentificableObject.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model.cs">

@@ -18,7 +18,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
 
         private It Should_have_set_use_case_name_correctly = () => _useCase.Name.ShouldEqual(_useCaseName);
         private It Should_set_use_case_prefix_correctly = () => _useCase.Prefix.ShouldEqual(_useCasePrefix);
-        private It Should_set_use_case_id_correctly = () => _useCase.ID.ShouldEqual(_useCaseId);
+        private It Should_set_use_case_id_correctly = () => _useCase.Id.ShouldEqual(_useCaseId);
 
 
         private static string _useCaseName;

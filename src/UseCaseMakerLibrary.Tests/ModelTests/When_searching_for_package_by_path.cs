@@ -8,9 +8,9 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     {
         private Because Of = () =>
                                  {
-                                     _package = new Package {ID = A.Random.Integer};
+                                     _package = new Package {Id = A.Random.Integer};
                                      Model.AddPackage(_package);
-                                     _path = Model.Prefix + Model.ID + "." + _package.Prefix + _package.ID;
+                                     _path = Model.Prefix + Model.Id + "." + _package.Prefix + _package.Id;
                                  };
 
         private It Should_return_the_correct_package = () => Model.FindElementByPath(_path).ShouldEqual(_package);

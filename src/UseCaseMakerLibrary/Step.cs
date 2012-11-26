@@ -39,7 +39,7 @@ namespace UseCaseMakerLibrary
         {
             get
             {
-                return this.ID +
+                return this.Id +
                     ((Prefix != "") ? "." + Prefix : "") +
                     ((ChildID != -1) ? "." + ChildID : "");
             }

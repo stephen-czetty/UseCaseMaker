@@ -97,8 +97,8 @@ namespace UseCaseMakerLibrary
                     false);
             }
 
-            foreach (GlossaryItem tmpGi in this.Glossary.Where(tmpGi => tmpGi.ID > gi.ID))
-                tmpGi.ID -= 1;
+            foreach (GlossaryItem tmpGi in this.Glossary.Where(tmpGi => tmpGi.Id > gi.Id))
+                tmpGi.Id -= 1;
 
             this.Glossary.Remove(gi);
         }
@@ -125,24 +125,24 @@ namespace UseCaseMakerLibrary
         /// </returns>
         public IIdentificableObject FindElementByUniqueId(string uniqueId)
         {
-            if (this.UniqueID == uniqueId)
+            if (this.UniqueId == uniqueId)
                 return this;
 
             IIdentificableObject element = this.Glossary.FindByUniqueID(uniqueId);
             if (element != null)
                 return element;
 
-            if (this.Requirements.UniqueID == uniqueId)
+            if (this.Requirements.UniqueId == uniqueId)
                 return this.Requirements;
 
-            if (this.Actors.UniqueID == uniqueId)
+            if (this.Actors.UniqueId == uniqueId)
                 return this.Actors;
 
             element = this.Actors.FindByUniqueID(uniqueId);
             if (element != null)
                 return element;
 
-            if (this.UseCases.UniqueID == uniqueId)
+            if (this.UseCases.UniqueId == uniqueId)
                 return this.UseCases;
 
             element = this.UseCases.FindByUniqueID(uniqueId);

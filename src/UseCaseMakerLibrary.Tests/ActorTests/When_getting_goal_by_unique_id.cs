@@ -11,7 +11,7 @@ namespace UseCaseMakerLibrary.Tests.ActorTests
                 _goal = (Goal)Actor.Goals[0];
             };
 
-        private It Should_return_the_goal = () => Actor.FindGoalByUniqueID(_goal.UniqueID).ShouldEqual(_goal);
+        private It Should_return_the_goal = () => Actor.FindGoalByUniqueID(_goal.UniqueId).ShouldEqual(_goal);
 
         private static Goal _goal;
     }

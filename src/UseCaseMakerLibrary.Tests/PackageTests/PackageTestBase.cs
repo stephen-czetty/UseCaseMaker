@@ -43,7 +43,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
      
         private It Should_have_set_actors_name_correctly = () => _actor.Name.ShouldEqual(_actorName);
         private It Should_set_actors_prefix_correctly = () => _actor.Prefix.ShouldEqual(_actorPrefix);
-        private It Should_set_actor_id_correctly = () => _actor.ID.ShouldEqual(_actorId);
+        private It Should_set_actor_id_correctly = () => _actor.Id.ShouldEqual(_actorId);
         
 
         private static string _actorName;

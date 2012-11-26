@@ -31,7 +31,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
 
         private It Should_keep_the_remaining_step = () => UseCase.Steps.ShouldContain(_stepToKeep);
 
-        private It Should_set_kept_step_id_to_one = () => _stepToKeep.ID.ShouldEqual(1);
+        private It Should_set_kept_step_id_to_one = () => _stepToKeep.Id.ShouldEqual(1);
 
         private It Should_keep_second_alternative_step = () => UseCase.Steps.ShouldContain(_secondAlternativeStep);
 

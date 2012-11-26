@@ -9,7 +9,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
 
         private It Should_create_issue_at_index_zero = () => _issueIndex.ShouldEqual(0);
 
-        private It Should_set_issue_id_to_one = () => ((OpenIssue)UseCase.OpenIssues[_issueIndex]).ID.ShouldEqual(1);
+        private It Should_set_issue_id_to_one = () => ((OpenIssue)UseCase.OpenIssues[_issueIndex]).Id.ShouldEqual(1);
 
         private static int _issueIndex;
     }

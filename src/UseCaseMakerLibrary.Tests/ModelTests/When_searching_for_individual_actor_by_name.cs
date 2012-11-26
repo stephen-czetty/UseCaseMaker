@@ -9,7 +9,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
         private Because Of = () =>
                                  {
                                      _randomName = A.Random.String;
-                                     _actor = new Actor { ID = 1, Name = _randomName };
+                                     _actor = new Actor { Id = 1, Name = _randomName };
                                      Model.AddActor(_actor);
                                  };
 

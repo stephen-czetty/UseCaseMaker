@@ -10,9 +10,9 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
         private Because Of = () =>
                                  {
                                      var id = A.Random.Integer;
-                                     _actor = new Actor{ID = id};
+                                     _actor = new Actor{Id = id};
                                      Model.AddActor(_actor);
-                                     _path = Model.Prefix + Model.ID + "." + _actor.Prefix + _actor.ID;
+                                     _path = Model.Prefix + Model.Id + "." + _actor.Prefix + _actor.Id;
                                  };
 
         private It Should_return_the_specific_actor = () => Model.FindElementByPath(_path).ShouldEqual(_actor);

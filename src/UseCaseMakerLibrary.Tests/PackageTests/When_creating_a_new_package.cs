@@ -18,7 +18,7 @@ namespace UseCaseMakerLibrary.Tests.PackageTests
 
         private It Should_set_package_name_correctly = () => _package.Name.ShouldEqual(_packageName);
         private It Should_set_package_prefix_correctly = () => _package.Prefix.ShouldEqual(_packagePrefix);
-        private It Should_set_package_id_correctly = () => _package.ID.ShouldEqual(_packageId);
+        private It Should_set_package_id_correctly = () => _package.Id.ShouldEqual(_packageId);
 
 
         private static string _packageName;

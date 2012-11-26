@@ -27,9 +27,9 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
         private Because Of = () =>
                                  {
                                      var id = A.Random.Integer;
-                                     _useCase = new UseCase {ID = id};
+                                     _useCase = new UseCase {Id = id};
                                      Model.AddUseCase(_useCase);
-                                     _path = Model.Prefix + Model.ID + "." + _useCase.Prefix + _useCase.ID;
+                                     _path = Model.Prefix + Model.Id + "." + _useCase.Prefix + _useCase.Id;
                                  };
 
         private It Should_return_the_specific_use_case = () => Model.FindElementByPath(_path).ShouldEqual(_useCase);

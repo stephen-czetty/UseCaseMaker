@@ -9,12 +9,12 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
         // ISSUE: Actor class does not assign its own ID
         private Because Of = () =>
                                  {
-                                     _actor = new Actor {ID = 1};
+                                     _actor = new Actor {Id = 1};
                                      Model.AddActor(_actor);
                                  };
 
         private It Should_return_the_specific_actor =
-            () => Model.FindElementByUniqueId(_actor.UniqueID).ShouldEqual(_actor);
+            () => Model.FindElementByUniqueId(_actor.UniqueId).ShouldEqual(_actor);
         
 
         private static Actor _actor;

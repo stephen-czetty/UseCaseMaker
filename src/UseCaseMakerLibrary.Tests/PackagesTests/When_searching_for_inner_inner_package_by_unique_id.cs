@@ -6,6 +6,6 @@ namespace UseCaseMakerLibrary.Tests.PackagesTests
     public class When_searching_for_inner_inner_package_by_unique_id : PackagesTestBase
     {
         private It Should_return_the_inner_inner_package =
-            () => PackageContainer.FindElementByUniqueID(InnerInnerPackage.UniqueID).ShouldEqual(InnerInnerPackage);
+            () => PackageContainer.FindElementByUniqueID(InnerInnerPackage.UniqueId).ShouldEqual(InnerInnerPackage);
     }
 }

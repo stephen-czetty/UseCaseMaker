@@ -8,6 +8,6 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     {
         // ISSUE: API is clunky
         private It Should_return_the_use_cases =
-            () => Model.FindElementByUniqueId(Model.UseCases.UniqueID).ShouldEqual(Model.UseCases);
+            () => Model.FindElementByUniqueId(Model.UseCases.UniqueId).ShouldEqual(Model.UseCases);
     }
 }

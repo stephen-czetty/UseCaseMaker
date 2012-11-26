@@ -12,7 +12,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
             };
 
         private It Should_return_correct_step =
-            () => UseCase.FindStepByUniqueID(_stepToFind.UniqueID).ShouldEqual(_stepToFind);
+            () => UseCase.FindStepByUniqueID(_stepToFind.UniqueId).ShouldEqual(_stepToFind);
         
         private static Step _stepToFind;
     }

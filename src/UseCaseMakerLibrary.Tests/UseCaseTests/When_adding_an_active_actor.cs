@@ -10,7 +10,7 @@ namespace UseCaseMakerLibrary.Tests.UseCaseTests
         private Because Of = () => UseCase.AddActiveActor(_actor);
 
         private It Should_contain_active_actor_representing_actor =
-            () => ((ActiveActor)UseCase.ActiveActors[0]).ActorUniqueID.ShouldEqual(_actor.UniqueID);
+            () => ((ActiveActor)UseCase.ActiveActors[0]).ActorUniqueID.ShouldEqual(_actor.UniqueId);
 
         private It Should_set_is_primary_to_false =
             () => ((ActiveActor)UseCase.ActiveActors[0]).IsPrimary.ShouldBeFalse();

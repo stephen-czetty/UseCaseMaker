@@ -10,7 +10,7 @@ namespace UseCaseMakerLibrary.Tests.ModelTests
     {
         private Because Of = () =>
                                  {
-                                     _path = Model.Prefix + Model.ID + "." + Model.Actors.Prefix + Model.Actors.ID;
+                                     _path = Model.Prefix + Model.Id + "." + Model.Actors.Prefix + Model.Actors.Id;
                                  };
 
         [Ignore("Test Fails")]
