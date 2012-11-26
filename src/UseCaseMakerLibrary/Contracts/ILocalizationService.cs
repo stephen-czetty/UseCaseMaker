@@ -1,5 +1,4 @@
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.XPath;
 
 namespace UseCaseMakerLibrary.Contracts
@@ -9,11 +8,6 @@ namespace UseCaseMakerLibrary.Contracts
     /// </summary>
     public interface ILocalizationService
     {
-        /// <summary>
-        /// Gets the language document.
-        /// </summary>
-        XmlDocument LanguageDocument { get; }
-
         /// <summary>
         /// Loads the specified language file path.
         /// </summary>

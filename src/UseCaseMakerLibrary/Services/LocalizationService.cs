@@ -15,9 +15,9 @@ namespace UseCaseMakerLibrary.Services
         #region Public Properties
 
         /// <summary>
-        /// Gets the language document.
+        /// The document containing language definitions.
         /// </summary>
-        public XmlDocument LanguageDocument { get; private set; }
+        private XmlDocument _languageDocument;
 
         #endregion
 
@@ -28,8 +28,8 @@ namespace UseCaseMakerLibrary.Services
         /// <param name="languageFilePath">The language file path.</param>
         public void Load(string languageFilePath)
         {
-            this.LanguageDocument = new XmlDocument();
-            this.LanguageDocument.Load(languageFilePath);
+            _languageDocument = new XmlDocument();
+            _languageDocument.Load(languageFilePath);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace UseCaseMakerLibrary.Services
         /// </returns>
         public string GetValue(string section, string name)
         {
-            XmlNode node = LanguageDocument.SelectSingleNode("//" + section + "/" + name);
+            XmlNode node = _languageDocument.SelectSingleNode("//" + section + "/" + name);
             return node == null ? string.Empty : node.InnerText;
         }
 
@@ -56,7 +56,7 @@ namespace UseCaseMakerLibrary.Services
         /// </returns>
         public XPathNodeIterator GetNodeSet(string parentName, string childsName)
         {
-            XPathNavigator nav = this.LanguageDocument.CreateNavigator();
+            XPathNavigator nav = _languageDocument.CreateNavigator();
             XPathNodeIterator ni = nav.Select("//" + parentName + "/" + childsName);
             return ni;
         }
@@ -67,7 +67,7 @@ namespace UseCaseMakerLibrary.Services
         /// <param name="form">The form.</param>
         public void LocalizeControls(Form form)
         {
-            XmlNode controlsNode = this.LanguageDocument.SelectSingleNode("//" + form.Name + "/Controls");
+            XmlNode controlsNode = _languageDocument.SelectSingleNode("//" + form.Name + "/Controls");
             if (controlsNode == null)
                 return;
 
