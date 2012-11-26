@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace UseCaseMakerLibrary
 {
     [XmlInclude(typeof(RelatedDocument))]
-    public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable
+    public class RelatedDocuments : ICollection<RelatedDocument>, IXMLNodeSerializable, ICollection, IXmlCollectionSerializable<RelatedDocument>
     {
         private readonly IList<RelatedDocument> _items = new List<RelatedDocument>();
         private readonly object _syncRoot = new object();
@@ -76,21 +76,13 @@ namespace UseCaseMakerLibrary
         }
 
         [XmlIgnore]
-        public object this[int index]
+        public RelatedDocument this[int index]
         {
             get
             {
                 return _items[index];
             }
             set { }
-        }
-
-        public void Add(object item)
-        {
-            var obj = item as RelatedDocument;
-            if (obj == null)
-                throw new ArgumentException();
-            Add(obj);
         }
 
         public void Add(RelatedDocument item)

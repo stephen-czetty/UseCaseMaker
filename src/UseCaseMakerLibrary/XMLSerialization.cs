@@ -11,10 +11,11 @@ namespace UseCaseMakerLibrary
 	{
 	}
 
-    public interface IXmlCollectionSerializable
+    public interface IXmlCollectionSerializable<T>
     {
-        void Add(object item);
-        object this[int idx] { get; set; }
+        void Add(T item);
+
+        T this[int idx] { get; set; }
     }
 
     public class XmlSerializerException : Exception
