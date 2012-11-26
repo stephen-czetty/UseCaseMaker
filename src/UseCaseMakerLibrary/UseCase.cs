@@ -47,46 +47,11 @@ namespace UseCaseMakerLibrary
 
         #region Constructors
         internal UseCase()
-            : base()
+            :this (string.Empty, string.Empty, -1)
         {
-		    Status = StatusValue.Named;
-		    Level = LevelValue.Summary;
-		    Implementation = ImplementationValue.Scheduled;
-		    Complexity = ComplexityValue.Low;
-		    Priority = 1;
-		    AssignedTo = String.Empty;
-		    Release = String.Empty;
-		    Postconditions = String.Empty;
-		    Preconditions = String.Empty;
-		    Prose = String.Empty;
-		    ActiveActors = new ActiveActors();
-		    HistoryItems = new HistoryItems();
-		    OpenIssues = new OpenIssues();
-		    Steps = new Steps();
-		    Attributes = new CommonAttributes();
         }
 
-		internal UseCase(String name, String prefix, Int32 id)
-            : base(name,prefix,id)
-		{
-	        Status = StatusValue.Named;
-	        Level = LevelValue.Summary;
-	        Implementation = ImplementationValue.Scheduled;
-	        Complexity = ComplexityValue.Low;
-	        Priority = 1;
-	        AssignedTo = String.Empty;
-	        Release = String.Empty;
-	        Postconditions = String.Empty;
-	        Preconditions = String.Empty;
-	        Prose = String.Empty;
-	        ActiveActors = new ActiveActors();
-	        HistoryItems = new HistoryItems();
-	        OpenIssues = new OpenIssues();
-	        Steps = new Steps();
-	        Attributes = new CommonAttributes();
-		}
-
-		internal UseCase(String name, String prefix, Int32 id, Package owner)
+        internal UseCase(String name, String prefix, Int32 id, Package owner = null)
             : base(name,prefix,id,owner)
 		{
 	        Status = StatusValue.Named;

@@ -13,10 +13,8 @@ namespace UseCaseMakerLibrary
 	    #endregion
 
 		#region Constructors
-		internal GlossaryItem()
-			: base()
+		internal GlossaryItem() : this(string.Empty, string.Empty, -1, null)
 		{
-		    Description = String.Empty;
 		}
 
 	    internal GlossaryItem(String name, String prefix, Int32 id, Package owner)

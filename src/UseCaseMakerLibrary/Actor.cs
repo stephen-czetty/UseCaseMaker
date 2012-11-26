@@ -11,16 +11,11 @@ namespace UseCaseMakerLibrary
 
 		#region Constructors
 		internal Actor()
-			: base()
+			: this(string.Empty, string.Empty, -1)
 		{
 		}
 
-		internal Actor(String name, String prefix, Int32 id)
-			: base(name,prefix,id)
-		{
-		}
-
-		internal Actor(String name, String prefix, Int32 id, Package owner)
+		internal Actor(String name, String prefix, Int32 id, Package owner = null)
 			: base(name,prefix,id,owner)
 		{
 		}

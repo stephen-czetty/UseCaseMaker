@@ -15,29 +15,8 @@ namespace UseCaseMakerLibrary
         /// <summary>
         /// Initializes a new instance of the <see cref="Package"/> class.
         /// </summary>
-        internal Package()
+        internal Package() : this(string.Empty, string.Empty, -1)
         {
-            Attributes = new CommonAttributes();
-            Requirements = new Requirements();
-            Actors = new Actors(this);
-            Packages = new Packages(this);
-            UseCases = new UseCases(this);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Package"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="prefix">The prefix.</param>
-        /// <param name="id">The id.</param>
-        internal Package(string name, string prefix, int id)
-            : base(name, prefix, id)
-        {
-            Attributes = new CommonAttributes();
-            Requirements = new Requirements();
-            Actors = new Actors(this);
-            Packages = new Packages(this);
-            UseCases = new UseCases(this);
         }
 
         /// <summary>
@@ -47,7 +26,7 @@ namespace UseCaseMakerLibrary
         /// <param name="prefix">The prefix.</param>
         /// <param name="id">The id.</param>
         /// <param name="owner">The owner.</param>
-        private Package(string name, string prefix, int id, Package owner)
+        internal Package(string name, string prefix, int id, Package owner = null)
             : base(name, prefix, id, owner)
         {
             Attributes = new CommonAttributes();

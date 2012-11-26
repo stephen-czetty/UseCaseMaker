@@ -13,9 +13,8 @@ namespace UseCaseMakerLibrary
         /// <summary>
         /// Initializes a new instance of the <see cref="Model"/> class.
         /// </summary>
-        public Model()
+        public Model() : this(string.Empty, string.Empty, -1)
         {
-            this.Glossary = new GlossaryItems(this);
         }
 
         /// <summary>
