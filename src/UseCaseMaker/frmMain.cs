@@ -3690,7 +3690,7 @@ namespace UseCaseMaker
 				this.Cursor = Cursors.WaitCursor;
 				try
 				{
-				    model = IocContainer.Instance.Resolve<ISavedDataService>().Load(openModelFileDialog.FileName);
+				    model = _modelRepository.LoadModel(openModelFileDialog.FileName);
 					BuildView(model);
 				}
 				catch(XmlException e)
@@ -3805,7 +3805,7 @@ namespace UseCaseMaker
 			this.Cursor = Cursors.WaitCursor;
 			try
 			{
-			    model = IocContainer.Instance.Resolve<ISavedDataService>().Load(modelFilePath);
+			    model = _modelRepository.LoadModel(modelFilePath);
 				BuildView(model);
 			}
 			catch(XmlException e)
@@ -3859,7 +3859,7 @@ namespace UseCaseMaker
 					this.appSettings.AddToRecentFileList(saveModelFileDialog.FileName);
 					this.UpdateRecentFileList();
 
-				    IocContainer.Instance.Resolve<ISavedDataService>().Save(model, saveModelFileDialog.FileName);
+				    _modelRepository.SaveModel(model, saveModelFileDialog.FileName);
 					this.appSettings.ModelFilePath = Path.GetDirectoryName(saveModelFileDialog.FileName);
 					this.modelFilePath = Path.GetDirectoryName(saveModelFileDialog.FileName);
 					this.modelFileName = Path.GetFileName(saveModelFileDialog.FileName);
@@ -3868,7 +3868,7 @@ namespace UseCaseMaker
 			}
 			else
 			{
-			    IocContainer.Instance.Resolve<ISavedDataService>().Save(model, saveModelFileDialog.FileName);
+			    _modelRepository.SaveModel(model, saveModelFileDialog.FileName);
 				this.SetModified(false);
 			}
 
