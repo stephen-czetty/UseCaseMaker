@@ -29,7 +29,7 @@ namespace UseCaseMakerLibrary.Tests.Services.DotNetXmlSerializer
 
         // ReSharper disable PossibleNullReferenceException
         private It Should_serialize_model_element_with_correct_unique_id =
-            () => _xmlDocument.GetElementsByTagName("Model")[0].Attributes["UniqueID"].Value.ShouldEqual(_model.UniqueId);
+            () => _xmlDocument.GetElementsByTagName("Model")[0].Attributes["UniqueId"].Value.ShouldEqual(_model.UniqueId);
 
         private It Should_serialize_document_with_correct_version = () => _xmlDocument.GetElementsByTagName("UCM-Document")[0].Attributes["Version"].Value.ShouldEqual("1.1");
         // ReSharper restore PossibleNullReferenceException

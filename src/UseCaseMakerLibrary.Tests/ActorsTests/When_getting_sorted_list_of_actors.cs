@@ -17,5 +17,10 @@ namespace UseCaseMakerLibrary.Tests.ActorsTests
 
         private It Should_have_actor_a_in_first_position_in_sorted_state =
             () => Actors.Sorted("Name")[0].Name.ShouldEqual("A");
+
+        private It Should_correctly_sort_when_sorting_by_id_in_all_caps =
+            () => Actors.Sorted("ID")[0].Name.ShouldEqual("B");
+
+
     }
 }

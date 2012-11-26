@@ -25,6 +25,10 @@ namespace UseCaseMakerLibrary.Tests.Services.LegacyXmlSerializer
 
         private It Should_return_valid_model = () => _model.ShouldNotBeNull();
 
+        private It Should_return_correct_unique_id = () => _model.UniqueId.ShouldEqual("32e43cb0-8050-4597-8a61-dcba1496888d");
+
+        private It Should_return_correct_id = () => _model.Id.ShouldEqual(1);
+
         private static TextReader _textReader;
         private static ISerializer<IModel> _serializer;
         private static Exception _exception;

@@ -77,7 +77,9 @@ namespace UseCaseMakerLibrary
 				if (pi[i].IsDefined(typeof (XmlIgnoreAttribute), false))
 					continue;
 
-				XmlElement propertyNode = document.CreateElement(string.Empty,pi[i].Name,namespaceURI);
+			    string name = pi[i].Name == "UniqueId" ? "UniqueID" : pi[i].Name;
+			    name = name == "Id" ? "ID" : name;
+				XmlElement propertyNode = document.CreateElement(string.Empty,name,namespaceURI);
 				if(typeof(IXMLNodeSerializable).IsAssignableFrom(pi[i].PropertyType)
 				   && pi[i].GetValue(instance,null) != null)
 				{
@@ -120,7 +122,7 @@ namespace UseCaseMakerLibrary
 				{
 					if(pi[i].IsDefined(typeof(XmlAttributeAttribute),false))
 					{
-						XmlAttribute xmlAttribute = document.CreateAttribute(pi[i].Name);
+						XmlAttribute xmlAttribute = document.CreateAttribute(name);
 						xmlAttribute.Value = pi[i].GetValue(instance,null).ToString();
 						mainNode.SetAttributeNode(xmlAttribute);
 					}
@@ -185,69 +187,74 @@ namespace UseCaseMakerLibrary
 
 			foreach(XmlNode node in fromNode.ChildNodes)
 			{
-				if (node.Attributes["Type"] == null)
-					throw new XmlSerializerException("Type attribute not found!");
+			    if (node.Attributes["Type"] == null)
+			        throw new XmlSerializerException("Type attribute not found!");
 
-				try
-				{
-					PropertyInfo pi = instance.GetType().GetProperty(node.Name,Type.GetType(node.Attributes["Type"].Value));
-					if(typeof(ICollection).IsAssignableFrom(pi.PropertyType))
-					{
-						foreach(XmlNode itemNode in node.ChildNodes)
-						{
-							if (itemNode.GetType() == typeof(XmlElement))
-							{
-								if (itemNode.Attributes["Type"] == null)
-									throw new XmlSerializerException("Type attribute not found!");
+			    try
+			    {
+			        PropertyInfo pi = instance.GetType().GetProperty(node.Name, Type.GetType(node.Attributes["Type"].Value));
+			        if (typeof(ICollection).IsAssignableFrom(pi.PropertyType))
+			        {
+			            foreach (XmlNode itemNode in node.ChildNodes)
+			            {
+			                if (itemNode.GetType() == typeof(XmlElement))
+			                {
+			                    if (itemNode.Attributes["Type"] == null)
+			                        throw new XmlSerializerException("Type attribute not found!");
 
-								Type itemType = instance.GetType().Assembly.GetType(itemNode.Attributes["Type"].Value);
-								ConstructorInfo ctor = itemType.GetConstructor(
-									BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-									null,
-									Type.EmptyTypes,
-									null);
-								object item = ctor.Invoke(new object[0]); // Default constructor
-								XmlDeserialize(itemNode, item);
+			                    Type itemType = instance.GetType().Assembly.GetType(itemNode.Attributes["Type"].Value);
+			                    ConstructorInfo ctor =
+			                        itemType.GetConstructor(
+			                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+			                            null,
+			                            Type.EmptyTypes,
+			                            null);
+			                    object item = ctor.Invoke(new object[0]); // Default constructor
+			                    XmlDeserialize(itemNode, item);
 
-							    MethodInfo add = pi.PropertyType.GetMethod("Add", new[] {itemType});
-								object[] addParameters = new Object[1];
-								addParameters[0] = item;
-								add.Invoke(pi.GetValue(instance, null), addParameters);
+			                    MethodInfo add = pi.PropertyType.GetMethod("Add", new[] { itemType });
+			                    object[] addParameters = new Object[1];
+			                    addParameters[0] = item;
+			                    add.Invoke(pi.GetValue(instance, null), addParameters);
 
-							}
-						}
-					}
+			                }
+			            }
+			        }
 
-					if (!typeof(IXMLNodeSerializable).IsAssignableFrom(pi.PropertyType))
-					{
-						foreach(XmlNode nodeValue in node.ChildNodes)
-						{
-							if (nodeValue.GetType() == typeof (XmlText) && nodeValue.Value != null)
-								pi.SetValue(instance,
-								            pi.PropertyType.IsEnum
-								            	? Enum.Parse(pi.PropertyType, nodeValue.Value, true)
-								            	: Convert.ChangeType(nodeValue.Value, pi.PropertyType), null);
-						}
-					}
-					else
-					{
-						if (pi.GetValue(instance, null) == null)
-							pi.SetValue(instance, Convert.ChangeType(node.Value, pi.PropertyType), null);
+			        if (!typeof(IXMLNodeSerializable).IsAssignableFrom(pi.PropertyType))
+			        {
+			            foreach (XmlNode nodeValue in node.ChildNodes)
+			            {
+			                if (nodeValue.GetType() == typeof(XmlText) && nodeValue.Value != null)
+			                    pi.SetValue(
+			                        instance,
+			                        pi.PropertyType.IsEnum
+			                            ? Enum.Parse(pi.PropertyType, nodeValue.Value, true)
+			                            : Convert.ChangeType(nodeValue.Value, pi.PropertyType),
+			                        null);
+			            }
+			        }
+			        else
+			        {
+			            if (pi.GetValue(instance, null) == null)
+			                pi.SetValue(instance, Convert.ChangeType(node.Value, pi.PropertyType), null);
 
-						if (node.HasChildNodes)
-							XmlDeserialize(node, pi.GetValue(instance, null));
-					}
-				}
-				catch(NullReferenceException)
-				{
-					return;
-				}
-
-				foreach(XmlAttribute attr in fromNode.Attributes)
+			            if (node.HasChildNodes)
+			                XmlDeserialize(node, pi.GetValue(instance, null));
+			        }
+			    }
+			    catch (NullReferenceException)
+			    {
+			        return;
+			    }
+			}
+		    foreach(XmlAttribute attr in fromNode.Attributes)
 				{
 					try
 					{
-						PropertyInfo pi = instance.GetType().GetProperty(attr.Name);
+					    string name = attr.Name == "UniqueID" ? "UniqueId" : attr.Name;
+					    name = name == "ID" ? "Id" : name;
+						PropertyInfo pi = instance.GetType().GetProperty(name);
 						if (pi.CanWrite && pi.IsDefined(typeof (XmlAttributeAttribute), false))
 							pi.SetValue(instance, Convert.ChangeType(attr.Value, pi.PropertyType), null);
 					}
@@ -255,7 +262,7 @@ namespace UseCaseMakerLibrary
 					{
 					}
 				}
-			}
+			
 		}
 	}
 }
