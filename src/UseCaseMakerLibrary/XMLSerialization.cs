@@ -150,6 +150,7 @@ namespace UseCaseMakerLibrary
 		{
 			Contract.Requires<NullReferenceException>(document != null);
 			Contract.Requires<NullReferenceException>(instance != null);
+		    Contract.Requires<NullReferenceException>(namespaceURI != null);
 
 			// Check document and instance
 			XmlNamespaceManager nsmgr = new XmlNamespaceManager(document.NameTable);

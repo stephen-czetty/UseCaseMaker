@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Contracts;
 using System.Xml.Serialization;
 
 namespace UseCaseMakerLibrary
@@ -778,6 +779,7 @@ namespace UseCaseMakerLibrary
         /// <param name="index">The index.</param>
         public void RemoveHistoryItem(int index)
         {
+            Contract.Requires(index >= 0);
             HistoryItems.RemoveAt(index);
         }
         #endregion
